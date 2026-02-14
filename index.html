@@ -6,340 +6,358 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>SM Technician - Full Estimate</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --primary:#111;           /* Dark background */
-  --accent:#FFD700;         /* Electric yellow */
-  --accent2:#FFEA00;        /* Lighter yellow highlight */
-  --success:#10b981;
-  --danger:#ef4444;
-  --glass:rgba(255,255,255,0.05);
+  <style>
+    :root {
+      --primary: #111;
+      /* Dark background */
+      --accent: #FFD700;
+      /* Electric yellow */
+      --accent2: #FFEA00;
+      /* Lighter yellow highlight */
+      --success: #10b981;
+      --danger: #ef4444;
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: #111;
+      color: #fff;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1150px;
+      margin: 25px auto;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    /* HEADER */
+    .header {
+      background: #111;
+      padding: 30px 15px;
+      text-align: center;
+      position: relative;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .header h1 {
+      font-size: 2.3rem;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+
+    .header-logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+      border: 2px solid var(--accent);
+    }
+
+    /* INFO SECTION */
+    .info {
+      padding: 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .info label {
+      font-weight: 500;
+      margin-bottom: 6px;
+      display: block;
+      color: var(--accent2);
+    }
+
+    .info input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #444;
+      background: #222;
+      color: #FFD;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .info input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      background: #333;
+    }
+
+    /* BIG TITLE */
+    .big-title {
+      text-align: center;
+      padding: 18px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      background: #222;
+      border-left: 6px solid var(--accent);
+      margin: 20px 0 12px;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+
+    /* ACCORDION HEADER */
+    .acc-header {
+      margin: 10px 18px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      background: #222;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 500;
+      color: var(--accent2);
+      border-left: 4px solid var(--accent);
+    }
+
+    .acc-header:hover {
+      background: #111;
+      transform: translateY(-2px);
+    }
+
+    /* CONTENT */
+    .acc-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      padding: 0 18px;
+    }
+
+    .acc-content.open {
+      max-height: 9000px;
+      padding: 18px;
+    }
+
+    /* ITEM ROW */
+    .item {
+      display: grid;
+      grid-template-columns: 2fr 80px 100px 70px;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      align-items: center;
+    }
+
+    .item span {
+      font-weight: 500;
+      color: #FFD;
+    }
+
+    .item input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      text-align: center;
+      background: #222;
+      color: #FFD;
+    }
+
+    @media(max-width:600px) {
+      .item {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* BUTTONS */
+    
+    button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-weight: 600;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body{
-  font-family:'Poppins',sans-serif;
-  min-height:100vh;
-  background:#111;
-  color:#fff;
-}
-
-/* MAIN CONTAINER */
-.container{
-  max-width:1150px;
-  margin:25px auto;
-  background:rgba(0,0,0,0.8);
-  backdrop-filter:blur(12px);
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 0 30px rgba(0,0,0,0.8);
-  border:1px solid rgba(255,215,0,0.3);
-}
-
-/* HEADER */
-.header{
-  background:#111;
-  padding:30px 15px;
-  text-align:center;
-  position:relative;
-  border-bottom:2px solid var(--accent);
-}
-
-.header h1{
-  font-size:2.3rem;
-  letter-spacing:1px;
-  color:var(--accent);
-}
-
-.header-logo{
-  width:110px;
-  height:110px;
-  border-radius:50%;
-  margin-bottom:10px;
-  box-shadow:0 10px 25px rgba(255,215,0,0.5);
-  border:2px solid var(--accent);
-}
-
-/* INFO SECTION */
-.info{
-  padding:25px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:20px;
-}
-
-.info label{
-  font-weight:500;
-  margin-bottom:6px;
-  display:block;
-  color:var(--accent2);
-}
-
-.info input{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #444;
-  background:#222;
-  color:#FFD;
-  outline:none;
-  transition:0.3s;
-}
-
-.info input:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 10px var(--accent);
-  background:#333;
-}
-
-/* BIG TITLE */
-.big-title{
-  text-align:center;
-  padding:18px;
-  font-size:1.3rem;
-  font-weight:600;
-  background:#222;
-  border-left:6px solid var(--accent);
-  margin:20px 0 12px;
-  letter-spacing:1px;
-  color:var(--accent);
-}
-
-/* ACCORDION HEADER */
-.acc-header{
-  margin:10px 18px;
-  padding:16px 20px;
-  border-radius:14px;
-  background:#222;
-  cursor:pointer;
-  transition:0.3s;
-  font-weight:500;
-  color:var(--accent2);
-  border-left:4px solid var(--accent);
-}
-
-.acc-header:hover{
-  background:#111;
-  transform:translateY(-2px);
-}
-
-/* CONTENT */
-.acc-content{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height 0.5s ease;
-  padding:0 18px;
-}
-
-.acc-content.open{
-  max-height:9000px;
-  padding:18px;
-}
-
-/* ITEM ROW */
-.item{
-  display:grid;
-  grid-template-columns:2fr 80px 100px 70px;
-  gap:15px;
-  padding:12px 0;
-  border-bottom:1px solid rgba(255,215,0,0.2);
-  align-items:center;
-}
-
-.item span{
-  font-weight:500;
-  color:#FFD;
-}
-
-.item input{
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #444;
-  text-align:center;
-  background:#222;
-  color:#FFD;
-}
-
-@media(max-width:600px){
-  .item{
-    grid-template-columns:1fr;
-  }
-}
-
-/* BUTTONS */
-button{
-  cursor:pointer;
-  border:none;
-  border-radius:10px;
-  transition:0.3s;
-  font-weight:600;
-}
-
-.edit{
-  background:#FFD700;
-  color:#111;
-  padding:8px 10px;
-}
-
-.edit:hover{
-  transform:scale(1.05);
-}
-
-.add-btn{
-  display:block;
-  margin:18px auto;
-  padding:12px 24px;
-  background:#FFEA00;
-  color:#111;
-  font-size:14px;
-}
-
-.add-btn:hover{
-  background:#FFD700;
-}
-
-/* GENERATE BILL */
-#generateBillBtn{
-  display:block;
-  margin:40px auto;
-  padding:16px 45px;
-  font-size:18px;
-  font-weight:600;
-  background:var(--accent);
-  color:#111;
-  border-radius:14px;
-  box-shadow:0 10px 30px rgba(255,215,0,0.6);
-}
-
-#generateBillBtn:hover{
-  transform:scale(1.05);
-  box-shadow:0 12px 35px rgba(255,215,0,0.8);
-}
-
-/* MODAL */
-#billContent, .historyContent{
-  background:#111;
-  color:#FFD;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 0 50px rgba(255,215,0,0.5);
-  border:2px solid var(--accent);
-}
-
-#billContent h2, .historyContent h2{
-  color:var(--accent);
-  text-align:center;
-}
-
-#billContent table, .historyContent table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:15px;
-}
-
-#billContent th{
-  background:#222;
-  color:var(--accent);
-  padding:10px;
-}
-
-#billContent td{
-  padding:10px;
-  text-align:center;
-  border-bottom:1px solid rgba(255,215,0,0.2);
-  color:#FFD;
-}
-
-#billContent tr:hover{
-  background:rgba(255,215,0,0.1);
-}
-
-#billContent h3{
-  color:#FFEA00;
-  font-size:20px;
-  text-align:right;
-}
-
-#billContent button, #historyModal button{
-  margin-top:20px;
-  padding:10px 25px;
-  border:none;
-  border-radius:10px;
-  background:var(--accent);
-  color:#111;
-  cursor:pointer;
-  font-weight:600;
-}
-
-#billContent button:hover, #historyModal button:hover{
-  transform:scale(1.05);
-  background:#FFD700;
-}
-
-/* SEARCH BAR */
-.top-search-container{
-  padding:20px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  background:#222;
-}
-
-.top-search{
-  padding:14px 18px;
-  border-radius:14px;
-  border:1px solid #444;
-  font-size:15px;
-  background:#111;
-  color:#FFD;
-}
-
-.top-search::placeholder{
-  color:#FFEA00;
-}
-
-.top-search:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 10px var(--accent);
-  background:#222;
-}
-
-/* HISTORY BUTTON */
-#historyBtn{
-  position:absolute;
-  top:20px;
-  right:20px;
-  padding:10px 20px;
-  border-radius:8px;
-  background:var(--accent);
-  color:#111;
-  font-weight:600;
-  cursor:pointer;
-  box-shadow:0 5px 15px rgba(255,215,0,0.5);
-}
-
-#historyBtn:hover{
-  transform:scale(1.05);
-  box-shadow:0 8px 25px rgba(255,215,0,0.7);
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  font-size:14px;
-  background:#111;
-  border-top:2px solid var(--accent);
-  color:var(--accent2);
+button:hover {
+  transform: translateY(-3px) scale(1.05);
 }
 
 
-</style>
+
+    .edit {
+      background: #FFD700;
+      color: #111;
+      padding: 8px 10px;
+    }
+
+    .edit:hover {
+      transform: scale(1.05);
+    }
+
+    .add-btn {
+      display: block;
+      margin: 18px auto;
+      padding: 12px 24px;
+      background: #FFEA00;
+      color: #111;
+      font-size: 14px;
+    }
+
+    .add-btn:hover {
+      background: #FFD700;
+    }
+
+    /* GENERATE BILL */
+    #generateBillBtn {
+      display: block;
+      margin: 40px auto;
+      padding: 16px 45px;
+      font-size: 18px;
+      font-weight: 600;
+      background: var(--accent);
+      color: #111;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
+    }
+
+    #generateBillBtn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 35px rgba(255, 215, 0, 0.8);
+    }
+
+    /* MODAL */
+    #billContent,
+    .historyContent {
+      background: #111;
+      color: #FFD;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+      border: 2px solid var(--accent);
+    }
+
+    #billContent h2,
+    .historyContent h2 {
+      color: var(--accent);
+      text-align: center;
+    }
+
+    #billContent table,
+    .historyContent table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    #billContent th {
+      background: #222;
+      color: var(--accent);
+      padding: 10px;
+    }
+
+    #billContent td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      color: #FFD;
+    }
+
+    #billContent tr:hover {
+      background: rgba(255, 215, 0, 0.1);
+    }
+
+    #billContent h3 {
+      color: #FFEA00;
+      font-size: 20px;
+      text-align: right;
+    }
+
+    #billContent button,
+    #historyModal button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #111;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    #billContent button:hover,
+    #historyModal button:hover {
+      transform: scale(1.05);
+      background: #FFD700;
+    }
+
+    /* SEARCH BAR */
+    .top-search-container {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      background: #222;
+    }
+
+    .top-search {
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid #444;
+      font-size: 15px;
+      background: #111;
+      color: #FFD;
+    }
+
+    .top-search::placeholder {
+      color: #FFEA00;
+    }
+
+    .top-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      background: #222;
+    }
+
+    /* HISTORY BUTTON */
+    #historyBtn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #111;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+    }
+
+    #historyBtn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.7);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      background: #111;
+      border-top: 2px solid var(--accent);
+      color: var(--accent2);
+    }
+
+
+    
+
+    
+  </style>
 
 </head>
 
@@ -373,7 +391,7 @@ cursor:pointer;
 
     <div class="top-search-container">
       <input type="text" id="materialSearch" class="top-search" placeholder="🔍 Search Material Name...">
-     
+
     </div>
 
 
@@ -555,7 +573,7 @@ cursor:pointer;
 
   </div>
 
-<button id="generateBillBtn" style="
+  <button id="generateBillBtn" style="
 display:block;
 margin:30px auto;
 padding:15px 40px;
@@ -566,54 +584,57 @@ border:none;
 border-radius:10px;
 cursor:pointer;
 ">
-Generate Bill
-</button>
+    Generate Bill
+  </button>
 
 
-<div id="billModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);overflow:auto;">
-   <div id="billContent">
+  <div id="billModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);overflow:auto;">
+    <div id="billContent">
 
-    
-    <div style="text-align:center;">
-      <img src="logo.png" style="width:80px;">
-      <h2>SM Technician</h2>
-      <div>Mobile No: 8935883863</div>
-    </div>
 
-    <div style="display:flex;justify-content:space-between;margin:10px 0;">
-      <div id="billLeftInfo"></div>
-    </div>
+      <div style="text-align:center;">
+        <img src="logo.png" style="width:80px;">
+        <h2>SM Technician</h2>
+        <div>Mobile No: 8935883863</div>
+      </div>
 
-    <table border="1" width="100%" cellspacing="0" cellpadding="5">
-      <thead>
-        <tr>
-          <th>Sl No</th>
-          <th>Item</th>
-          <th>Qty</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody id="billTableBody"></tbody>
-    </table>
+      <div style="display:flex;justify-content:space-between;margin:10px 0;">
+        <div id="billLeftInfo"></div>
+      </div>
 
-    <h3 style="text-align:right;margin-top:2px;">Total: ₹<span id="billTotal"></span></h3>
+      <table border="1" width="100%" cellspacing="0" cellpadding="5">
+        <thead>
+          <tr>
+            <th>Sl No</th>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Rate</th>
+            <th>Price</th>
+          </tr>
+        </thead>
 
-    <div style="text-align:center;margin-top:20px;">
-      <button onclick="downloadBill()">Download JPG</button>
+        <tbody id="billTableBody"></tbody>
+      </table>
 
-       <button onclick="closeBill()">Close</button>
+      <h3 style="text-align:right;margin-top:2px;">Total: ₹<span id="billTotal"></span></h3>
+
+      <div style="text-align:center;margin-top:20px;">
+        <button onclick="downloadBill()">Download JPG</button>
+        <button onclick="downloadBillPDF()">Download PDF</button>
+        <button onclick="closeBill()">Close</button>
+
+      </div>
     </div>
   </div>
-</div>
 
 
-<div id="historyModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);overflow:auto;">
-  <div class="historyContent">
-    <h2 style="text-align:center;">Bill History</h2>
-    <div id="historyList"></div>
-    <button onclick="closeHistory()">Close</button>
+  <div id="historyModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);overflow:auto;">
+    <div class="historyContent">
+      <h2 style="text-align:center;">Bill History</h2>
+      <div id="historyList"></div>
+      <button onclick="closeHistory()">Close</button>
+    </div>
   </div>
-</div>
 
 
   <footer>SM Technician • 8935883863</footer>
@@ -761,53 +782,389 @@ Generate Bill
 
 
 
-// ===== GLOBAL MATERIAL SEARCH =====
-document.getElementById("materialSearch").addEventListener("input", function () {
-  const value = this.value.toLowerCase().trim();
+    // ===== GLOBAL MATERIAL SEARCH =====
+    document.getElementById("materialSearch").addEventListener("input", function () {
+      const value = this.value.toLowerCase().trim();
 
-  const allAccordions = document.querySelectorAll(".acc-content");
+      const allAccordions = document.querySelectorAll(".acc-content");
 
-  // Agar search empty hai → sab close karo
-  if (value === "") {
-    document.querySelectorAll(".item").forEach(item => {
-      item.style.display = "grid";
+      // Agar search empty hai → sab close karo
+      if (value === "") {
+        document.querySelectorAll(".item").forEach(item => {
+          item.style.display = "grid";
+        });
+
+        allAccordions.forEach(acc => {
+          acc.classList.remove("open");
+        });
+
+        return;
+      }
+
+      // Agar search me kuch likha hai
+      document.querySelectorAll(".item").forEach(item => {
+        const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+        const name = nameEl ? (nameEl.value || nameEl.textContent).toLowerCase() : "";
+
+        if (name.includes(value)) {
+          item.style.display = "grid";
+
+          const accContent = item.closest(".acc-content");
+          if (accContent) accContent.classList.add("open");
+        } else {
+          item.style.display = "none";
+        }
+      });
     });
-
-    allAccordions.forEach(acc => {
-      acc.classList.remove("open");
-    });
-
-    return;
-  }
-
-  // Agar search me kuch likha hai
-  document.querySelectorAll(".item").forEach(item => {
-    const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-    const name = nameEl ? (nameEl.value || nameEl.textContent).toLowerCase() : "";
-
-    if (name.includes(value)) {
-      item.style.display = "grid";
-
-      const accContent = item.closest(".acc-content");
-      if (accContent) accContent.classList.add("open");
-    } else {
-      item.style.display = "none";
-    }
-  });
-});
 
 
 
 
 
     document.getElementById("generateBillBtn").onclick = generateBill;
-document.getElementById("historyBtn").onclick = showHistory;
+    document.getElementById("historyBtn").onclick = showHistory;
 
-function generateBill() {
+    function generateBill() {
+      const items = document.querySelectorAll(".item");
+      const tbody = document.getElementById("billTableBody");
+      tbody.innerHTML = "";
+
+      let total = 0;
+      let count = 1;
+
+      items.forEach(item => {
+        const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+        const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+        const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+        const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+
+        if (qty > 0 && rate > 0) {
+          const price = qty * rate;
+          total += price;
+
+          tbody.innerHTML += `
+<tr>
+  <td>${count++}</td>
+  <td>${name}</td>
+  <td>${qty}</td>
+  <td>${rate}</td>
+  <td>${price}</td>
+</tr>
+`;
+
+        }
+      });
+
+      const now = new Date();
+
+      const day = now.getDate().toString().padStart(2, "0");
+      const month = (now.getMonth() + 1).toString().padStart(2, "0");
+      const year = now.getFullYear();
+
+      let hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, "0");
+
+      const ampm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+
+      const formattedDate = `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
+
+
+      document.getElementById("billLeftInfo").innerHTML =
+        "Date: " + formattedDate + "<br>" +
+        "Customer: " + document.getElementById("custName").value;
+
+      document.getElementById("billTotal").textContent = total.toFixed(2);
+
+      document.getElementById("billModal").style.display = "block";
+
+      saveHistory(formattedDate, total);
+    }
+
+    function closeBill() {
+      document.getElementById("billModal").style.display = "none";
+    }
+
+
+
+    function saveHistory(date, total) {
+      const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+
+      const itemsData = [];
+      document.querySelectorAll(".item").forEach(item => {
+        const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+        const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+        const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+        const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+
+        if (qty > 0 && rate > 0) {
+          itemsData.push({
+            name: name,
+            qty: qty,
+            rate: rate,
+            price: qty * rate
+          });
+        }
+      });
+
+      history.push({
+        date: date,
+        customer: document.getElementById("custName").value,
+        address: document.getElementById("custAddress").value,
+        mobile: document.getElementById("phone").value,
+        total: total,
+        items: itemsData
+      });
+
+      localStorage.setItem("smHistory", JSON.stringify(history));
+    }
+
+
+
+    function showHistory() {
+      const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+      const list = document.getElementById("historyList");
+      list.innerHTML = "";
+
+      history.forEach((h, i) => {
+        list.innerHTML += `
+<div style="
+border:1px solid #FFD700;
+padding:20px;
+margin:15px 0;
+background:#111;
+color:#FFD;
+border-radius:15px;
+box-shadow:0 0 20px rgba(255,215,0,0.3);
+text-align:center;
+">
+
+  <img src="logo.png" width="70" style="margin-bottom:10px;"><br>
+  <h3 style="color:#FFD700;margin-bottom:10px;">SM Technician</h3>
+
+  <div style="text-align:left;margin-top:10px;">
+    <b>Date:</b> ${h.date}<br>
+    <b>Customer:</b> ${h.customer}<br>
+    <b>Mobile:</b> ${h.mobile || ''}<br>
+    <b>Address:</b> ${h.address}<br>
+    <b>Total:</b> ₹${h.total}
+  </div>
+
+  <div style="margin-top:15px;">
+   <button onclick="downloadHistoryBill(${i})">Download JPG</button>
+<button onclick="downloadHistoryPDF(${i})">Download PDF</button>
+<button onclick="downloadMaterialListPDF(${i})">Material List</button>
+<button onclick="deleteHistory(${i})">Delete</button>
+
+
+  </div>
+
+</div>`;
+      });
+
+      document.getElementById("historyModal").style.display = "block";
+    }
+
+
+    function closeHistory() {
+      document.getElementById("historyModal").style.display = "none";
+    }
+
+    function deleteHistory(index) {
+      const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+      history.splice(index, 1);
+      localStorage.setItem("smHistory", JSON.stringify(history));
+      showHistory();
+    }
+
+
+    function downloadBill() {
+      const bill = document.getElementById("billContent");
+
+      html2canvas(bill, {
+        scale: 2
+      }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "SM_Technician_Bill.jpg";
+        link.href = canvas.toDataURL("image/jpeg", 1.0);
+        link.click();
+      });
+    }
+
+    function downloadHistoryBill(index) {
+      const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+      const h = history[index];
+
+      const tempDiv = document.createElement("div");
+      tempDiv.id = "tempHistoryBill";
+      tempDiv.style.padding = "25px";
+      tempDiv.style.background = "#111";
+      tempDiv.style.color = "#FFD";
+      tempDiv.style.width = "600px";
+      tempDiv.style.margin = "auto";
+
+      let rows = "";
+      let count = 1;
+
+      h.items.forEach(item => {
+        rows += `
+      <tr>
+        <td>${count++}</td>
+        <td>${item.name}</td>
+        <td>${item.qty}</td>
+        <td>${item.price}</td>
+      </tr>
+    `;
+      });
+
+      tempDiv.innerHTML = `
+    <div style="text-align:center;">
+      <img src="logo.png" style="width:80px;">
+      <h2 style="color:#FFD700;">SM Technician</h2>
+      <div>Mobile No: 8935883863</div>
+    </div>
+
+    <div style="margin:15px 0;">
+      Date: ${h.date}<br>
+      Customer: ${h.customer}<br>
+      Address: ${h.address}<br>
+      Mobile: ${h.mobile}
+    </div>
+
+    <table border="1" width="100%" cellspacing="0" cellpadding="8" style="border-collapse:collapse;text-align:center;">
+      <thead>
+  <tr>
+    <th>Sl No</th>
+    <th>Item</th>
+    <th>Qty</th>
+    <th>Rate</th>
+    <th>Price</th>
+  </tr>
+</thead>
+
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+
+    <h3 style="text-align:right;margin-top:15px;color:#FFEA00;">
+      Total: ₹${h.total}
+    </h3>
+  `;
+
+      document.body.appendChild(tempDiv);
+
+      html2canvas(tempDiv, { scale: 2 }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "SM_Technician_History_Bill.jpg";
+        link.href = canvas.toDataURL("image/jpeg", 1.0);
+        link.click();
+        document.body.removeChild(tempDiv);
+      });
+    }
+
+    function downloadHistoryPDF(index) {
+      const { jsPDF } = window.jspdf;
+
+      const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+      const h = history[index];
+
+      const tempDiv = document.createElement("div");
+      tempDiv.style.padding = "25px";
+      tempDiv.style.background = "#fff";
+      tempDiv.style.color = "#000";
+      tempDiv.style.width = "800px";
+
+      let rows = "";
+      let count = 1;
+
+    h.items.forEach(item => {
+  rows += `
+    <tr>
+      <td>${count++}</td>
+      <td>${item.name}</td>
+      <td>${item.qty}</td>
+      <td>${item.rate}</td>
+      <td>${item.price}</td>
+    </tr>
+  `;
+});
+
+
+      tempDiv.innerHTML = `
+    <div style="text-align:center;margin-bottom:10px;">
+  <img src="logo.png" style="width:80px;"><br>
+  <h2>SM Technician</h2>
+  <div>Mobile No: 8935883863</div>
+</div>
+
+    <div style="margin:15px 0;">
+      Date: ${h.date}<br>
+      Customer: ${h.customer}<br>
+      Address: ${h.address}<br>
+      Mobile: ${h.mobile}
+    </div>
+
+    <table border="1" width="100%" cellspacing="0" cellpadding="8" style="border-collapse:collapse;text-align:center;">
+    <thead>
+  <tr>
+    <th>Sl No</th>
+    <th>Item</th>
+    <th>Qty</th>
+    <th>Rate</th>
+    <th>Price</th>
+  </tr>
+</thead>
+
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+
+    <h3 style="text-align:right;margin-top:15px;">
+      Total: ₹${h.total}
+    </h3>
+  `;
+
+      document.body.appendChild(tempDiv);
+
+      html2canvas(tempDiv, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+
+        const pdf = new jsPDF("p", "mm", "a4");
+
+        const imgWidth = 190;
+        const pageHeight = 297;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        let heightLeft = imgHeight;
+
+        let position = 10;
+
+        pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight + 10;
+          pdf.addPage();
+          pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+
+        pdf.save("SM_Technician_History_Bill.pdf");
+        document.body.removeChild(tempDiv);
+      });
+    }
+
+
+
+
+    function downloadBillPDF() {
+  const { jsPDF } = window.jspdf;
+
   const items = document.querySelectorAll(".item");
-  const tbody = document.getElementById("billTableBody");
-  tbody.innerHTML = "";
 
+  let rows = "";
   let total = 0;
   let count = 1;
 
@@ -821,133 +1178,160 @@ function generateBill() {
       const price = qty * rate;
       total += price;
 
-      tbody.innerHTML += `
+      rows += `
         <tr>
           <td>${count++}</td>
           <td>${name}</td>
           <td>${qty}</td>
+          <td>${rate}</td>
           <td>${price}</td>
         </tr>
       `;
     }
   });
 
-  const date = new Date();
-  const formattedDate = date.getDate().toString().padStart(2,"0") + "/" + 
-                        (date.getMonth()+1).toString().padStart(2,"0");
-
-  document.getElementById("billLeftInfo").innerHTML =
-    "Date: " + formattedDate + "<br>" +
-    "Customer: " + document.getElementById("custName").value;
-
-  document.getElementById("billTotal").textContent = total.toFixed(2);
-
-  document.getElementById("billModal").style.display = "block";
-
-  saveHistory(formattedDate, total);
-}
-
-function closeBill(){
-  document.getElementById("billModal").style.display="none";
-}
-
-
-
-function saveHistory(date,total){
-  const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-  history.push({
-    date:date,
-    customer:document.getElementById("custName").value,
-    address:document.getElementById("custAddress").value,
-    mobile:document.getElementById("phone").value,
-    total:total
-  });
-  localStorage.setItem("smHistory",JSON.stringify(history));
-}
-
-
-function showHistory(){
-  const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-  const list = document.getElementById("historyList");
-  list.innerHTML="";
-
-  history.forEach((h,i)=>{
-  list.innerHTML+=`
-<div style="border:1px solid #ccc;padding:10px;margin:10px 0;background:#111;color:#FFD;">
-  <div><img src="logo.png" width="50"></div>
-  <b>SM Technician</b><br>
-  Date: ${h.date}<br>
-  Customer: ${h.customer}<br>
-  Mobile: ${h.mobile || ''}<br>
-  Address: ${h.address}<br>
-  Total: ₹${h.total}<br><br>
-  
-  <button onclick="downloadHistoryBill(${i})">Download JPG</button>
-  <button onclick="deleteHistory(${i})">Delete</button>
-</div>`;
-});
-
-
-  document.getElementById("historyModal").style.display="block";
-}
-
-function closeHistory(){
-  document.getElementById("historyModal").style.display="none";
-}
-
-function deleteHistory(index){
-  const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-  history.splice(index,1);
-  localStorage.setItem("smHistory",JSON.stringify(history));
-  showHistory();
-}
-
-
-function downloadBill() {
-  const bill = document.getElementById("billContent");
-
-  html2canvas(bill, {
-    scale: 2
-  }).then(canvas => {
-    const link = document.createElement("a");
-    link.download = "SM_Technician_Bill.jpg";
-    link.href = canvas.toDataURL("image/jpeg", 1.0);
-    link.click();
-  });
-}
-
-function downloadHistoryBill(index){
-  const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-  const h = history[index];
-
   const tempDiv = document.createElement("div");
-  tempDiv.style.padding="20px";
-  tempDiv.style.background="#111";
-  tempDiv.style.color="#FFD";
-  tempDiv.innerHTML=`
-    <h2 style="text-align:center;">SM Technician</h2>
-    Date: ${h.date}<br>
-    Customer: ${h.customer}<br>
-    Mobile: ${h.mobile || ''}<br>
-    Address: ${h.address}<br>
-    <h3>Total: ₹${h.total}</h3>
+  tempDiv.style.padding="25px";
+  tempDiv.style.background="#fff";
+  tempDiv.style.color="#000";
+  tempDiv.style.width="800px";
+
+  tempDiv.innerHTML = `
+    <div style="text-align:center;margin-bottom:10px;">
+  <img src="logo.png" style="width:80px;"><br>
+  <h2>SM Technician</h2>
+  <div>Mobile No: 8935883863</div>
+</div>
+
+
+    <div style="margin:15px 0;">
+      Date: ${new Date().toLocaleString()}<br>
+      Customer: ${document.getElementById("custName").value}<br>
+      Address: ${document.getElementById("custAddress").value}<br>
+      Mobile: ${document.getElementById("phone").value}
+    </div>
+
+    <table border="1" width="100%" cellspacing="0" cellpadding="8" style="border-collapse:collapse;text-align:center;">
+      <thead>
+        <tr>
+          <th>Sl No</th>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Rate</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+
+    <h3 style="text-align:right;margin-top:15px;">
+      Total: ₹${total.toFixed(2)}
+    </h3>
   `;
 
   document.body.appendChild(tempDiv);
 
   html2canvas(tempDiv,{scale:2}).then(canvas=>{
-    const link=document.createElement("a");
-    link.download="SM_Technician_History_Bill.jpg";
-    link.href=canvas.toDataURL("image/jpeg",1.0);
-    link.click();
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p","mm","a4");
+
+    const imgWidth = 190;
+    const pageHeight = 297;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+
+    let heightLeft = imgHeight;
+    let position = 10;
+
+    pdf.addImage(imgData,"PNG",10,position,imgWidth,imgHeight);
+    heightLeft -= pageHeight;
+
+    while(heightLeft > 0){
+      position = heightLeft - imgHeight + 10;
+      pdf.addPage();
+      pdf.addImage(imgData,"PNG",10,position,imgWidth,imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    pdf.save("SM_Technician_Bill.pdf");
+    document.body.removeChild(tempDiv);
+  });
+}
+
+function downloadMaterialListPDF(index) {
+  const { jsPDF } = window.jspdf;
+
+  const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+  const h = history[index];
+
+  const tempDiv = document.createElement("div");
+  tempDiv.style.background = "#fff";
+  tempDiv.style.color = "#000";
+  tempDiv.style.width = "800px";
+  tempDiv.style.padding = "15px";
+  tempDiv.style.fontSize = "12px";
+
+  let rows = "";
+  let count = 1;
+
+  h.items.forEach(item => {
+    rows += `
+      <tr>
+        <td style="padding:2px;border:1px solid #000;">${count++}</td>
+        <td style="padding:2px;border:1px solid #000;">${item.name}</td>
+        <td style="padding:2px;border:1px solid #000;">${item.qty}</td>
+      </tr>
+    `;
+  });
+
+  tempDiv.innerHTML = `
+    <div style="text-align:center;margin-bottom:10px;">
+      <img src="logo.png" style="width:60px;"><br>
+      <b style="font-size:18px;">SM Technician</b><br>
+      <span>Mobile No: 8935883863</span>
+    </div>
+
+    <table width="100%" cellspacing="0" cellpadding="0" 
+    style="border-collapse:collapse;text-align:center;margin:2px;">
+      <thead>
+        <tr>
+          <th style="padding:2px;border:1px solid #000;">Sl No</th>
+          <th style="padding:2px;border:1px solid #000;">Item</th>
+          <th style="padding:2px;border:1px solid #000;">Qty</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+  `;
+
+  document.body.appendChild(tempDiv);
+
+  html2canvas(tempDiv, { scale: 2 }).then(canvas => {
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const imgWidth = 190;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+
+    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+
+    pdf.save("SM_Technician_Material_List.pdf");
     document.body.removeChild(tempDiv);
   });
 }
 
 
+
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 
 </body>
 
