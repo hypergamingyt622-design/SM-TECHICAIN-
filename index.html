@@ -599,8 +599,9 @@ Generate Bill
     <h3 style="text-align:right;margin-top:2px;">Total: ₹<span id="billTotal"></span></h3>
 
     <div style="text-align:center;margin-top:20px;">
-      
-      <button onclick="closeBill()">Close</button>
+      <button onclick="downloadBill()">Download JPG</button>
+
+       <button onclick="closeBill()">Close</button>
     </div>
   </div>
 </div>
@@ -880,19 +881,21 @@ function showHistory(){
   list.innerHTML="";
 
   history.forEach((h,i)=>{
-    list.innerHTML+=`
-<div style="border:1px solid #ccc;padding:10px;margin:10px 0;">
+  list.innerHTML+=`
+<div style="border:1px solid #ccc;padding:10px;margin:10px 0;background:#111;color:#FFD;">
   <div><img src="logo.png" width="50"></div>
   <b>SM Technician</b><br>
   Date: ${h.date}<br>
   Customer: ${h.customer}<br>
   Mobile: ${h.mobile || ''}<br>
   Address: ${h.address}<br>
+  Total: ₹${h.total}<br><br>
   
+  <button onclick="downloadHistoryBill(${i})">Download JPG</button>
   <button onclick="deleteHistory(${i})">Delete</button>
 </div>`;
+});
 
-  });
 
   document.getElementById("historyModal").style.display="block";
 }
@@ -908,9 +911,53 @@ function deleteHistory(index){
   showHistory();
 }
 
+
+function downloadBill() {
+  const bill = document.getElementById("billContent");
+
+  html2canvas(bill, {
+    scale: 2
+  }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "SM_Technician_Bill.jpg";
+    link.href = canvas.toDataURL("image/jpeg", 1.0);
+    link.click();
+  });
+}
+
+function downloadHistoryBill(index){
+  const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+  const h = history[index];
+
+  const tempDiv = document.createElement("div");
+  tempDiv.style.padding="20px";
+  tempDiv.style.background="#111";
+  tempDiv.style.color="#FFD";
+  tempDiv.innerHTML=`
+    <h2 style="text-align:center;">SM Technician</h2>
+    Date: ${h.date}<br>
+    Customer: ${h.customer}<br>
+    Mobile: ${h.mobile || ''}<br>
+    Address: ${h.address}<br>
+    <h3>Total: ₹${h.total}</h3>
+  `;
+
+  document.body.appendChild(tempDiv);
+
+  html2canvas(tempDiv,{scale:2}).then(canvas=>{
+    const link=document.createElement("a");
+    link.download="SM_Technician_History_Bill.jpg";
+    link.href=canvas.toDataURL("image/jpeg",1.0);
+    link.click();
+    document.body.removeChild(tempDiv);
+  });
+}
+
+
   </script>
 
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </body>
 
 </html>
