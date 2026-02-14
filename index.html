@@ -373,7 +373,7 @@ cursor:pointer;
 
     <div class="top-search-container">
       <input type="text" id="materialSearch" class="top-search" placeholder="🔍 Search Material Name...">
-      <input type="text" id="sectionSearch" class="top-search" placeholder="🔍 Search Category (Light, Wire, PVC...)">
+     
     </div>
 
 
@@ -761,52 +761,43 @@ Generate Bill
 
 
 
-    // ===== GLOBAL MATERIAL SEARCH =====
-    document.getElementById("materialSearch").addEventListener("input", function () {
-      const value = this.value.toLowerCase();
+// ===== GLOBAL MATERIAL SEARCH =====
+document.getElementById("materialSearch").addEventListener("input", function () {
+  const value = this.value.toLowerCase().trim();
 
-      document.querySelectorAll(".item").forEach(item => {
-        const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-        const name = nameEl ? (nameEl.value || nameEl.textContent).toLowerCase() : "";
+  const allAccordions = document.querySelectorAll(".acc-content");
 
-        if (name.includes(value)) {
-          item.style.display = "grid";
-          // auto open accordion
-          const accContent = item.closest(".acc-content");
-          if (accContent) accContent.classList.add("open");
-        } else {
-          item.style.display = "none";
-        }
-      });
+  // Agar search empty hai → sab close karo
+  if (value === "") {
+    document.querySelectorAll(".item").forEach(item => {
+      item.style.display = "grid";
     });
 
-
-    // ===== SECTION SEARCH =====
-    document.getElementById("sectionSearch").addEventListener("input", function () {
-      const value = this.value.toLowerCase();
-
-      document.querySelectorAll(".acc-header").forEach(header => {
-        const text = header.textContent.toLowerCase();
-        const content = header.nextElementSibling;
-
-        if (text.includes(value)) {
-          header.style.display = "block";
-          content.style.display = "block";
-          content.classList.add("open");
-        } else {
-          header.style.display = "none";
-          content.style.display = "none";
-        }
-      });
-
-      // Reset if empty
-      if (value === "") {
-        document.querySelectorAll(".acc-header").forEach(header => {
-          header.style.display = "block";
-          header.nextElementSibling.style.display = "block";
-        });
-      }
+    allAccordions.forEach(acc => {
+      acc.classList.remove("open");
     });
+
+    return;
+  }
+
+  // Agar search me kuch likha hai
+  document.querySelectorAll(".item").forEach(item => {
+    const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+    const name = nameEl ? (nameEl.value || nameEl.textContent).toLowerCase() : "";
+
+    if (name.includes(value)) {
+      item.style.display = "grid";
+
+      const accContent = item.closest(".acc-content");
+      if (accContent) accContent.classList.add("open");
+    } else {
+      item.style.display = "none";
+    }
+  });
+});
+
+
+
 
 
     document.getElementById("generateBillBtn").onclick = generateBill;
