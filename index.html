@@ -443,12 +443,132 @@
     }
 }
 
+/* Hamburger Icon */
+/* ===== HAMBURGER BUTTON ===== */
+/* ===== HAMBURGER BUTTON ===== */
+.hamburger {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(145deg, #111, #1a1a1a);
+    border: 2px solid #FFD700;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 0 15px rgba(255,215,0,0.4),
+        inset 0 0 10px rgba(255,215,0,0.2);
+}
+
+/* Hover Effect */
+.hamburger:hover {
+    transform: scale(1.08);
+    box-shadow: 
+        0 0 25px rgba(255,215,0,0.8),
+        inset 0 0 12px rgba(255,215,0,0.4);
+}
+
+/* Hamburger Lines */
+.hamburger div {
+    width: 22px;
+    height: 3px;
+    background: #FFD700;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animation when Active */
+.hamburger.active div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active div:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+
+.hamburger div {
+    width: 30px;
+    height: 3px;
+    background: #FFD700;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+/* Sidebar Menu */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 260px;
+    height: 100%;
+    background: linear-gradient(180deg, #111, #222);
+    box-shadow: -5px 0 25px rgba(255, 215, 0, 0.3);
+    padding-top: 80px;
+    transition: 0.4s;
+    z-index: 1000;
+    border-left: 2px solid #FFD700;
+}
+
+.sidebar a {
+    display: block;
+    padding: 15px 25px;
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: rgba(255, 215, 0, 0.1);
+    padding-left: 35px;
+}
+
+/* Active Sidebar */
+.sidebar.active {
+    right: 0;
+}
+
+
 
   </style>
 
 </head>
 
 <body>
+
+  <!-- Hamburger Icon -->
+<div class="header">
+
+<div class="hamburger" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+
+
+<!-- Sidebar Menu -->
+<div class="sidebar" id="sidebarMenu">
+    <a href="#">🏠 Home</a>
+    <a href="#" onclick="openPointCalculator()">🧮 Point Calculator</a>
+    <a href="#">💡 Installation Price</a>
+    <a href="#">🔧 Repairing Price</a>
+    <a href="#">🏗 Building Work Price</a>
+    <a href="#">📜 Rule</a>
+</div>
+
 
   <div class="container">
     <div class="header">
@@ -470,8 +590,8 @@ cursor:pointer;
 
 <button id="logoutBtn" style="
 position:absolute;
-top:20px;
-left:20px;
+top:21px;
+left:5px;
 padding:8px 18px;
 border:none;
 border-radius:8px;
@@ -481,6 +601,7 @@ cursor:pointer;
 ">
 Logout
 </button>
+
 
 
 
@@ -739,6 +860,41 @@ cursor:pointer;
       <button onclick="closeHistory()">Close</button>
     </div>
   </div>
+
+
+  <!-- ================= POINT CALCULATOR ================= -->
+<div id="pointModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:5000;overflow:auto;">
+  <div style="
+    max-width:900px;
+    margin:50px auto;
+    background:#111;
+    padding:30px;
+    border-radius:20px;
+    border:2px solid #FFD700;
+    box-shadow:0 0 40px rgba(255,215,0,0.5);
+    color:#FFD;">
+
+    <h2 style="text-align:center;color:#FFD700;margin-bottom:20px;">
+      🧮 Point Calculator
+    </h2>
+
+    <div id="pointList"></div>
+
+    <h3 style="text-align:right;margin-top:20px;color:#FFEA00;">
+      Total Points: <span id="totalPoints">0</span>
+    </h3>
+
+    <div style="text-align:center;margin-top:20px;">
+      <button onclick="closePointCalculator()" style="
+        padding:10px 25px;
+        background:#ef4444;
+        color:white;
+        border:none;
+        border-radius:8px;">Close</button>
+    </div>
+
+  </div>
+</div>
 
 
   <footer>SM Technician • 8935883863</footer>
@@ -1426,12 +1582,96 @@ function toggleAccordion(header) {
   header.classList.toggle("active");
 }
 
+function toggleMenu() {
+    const sidebar = document.getElementById("sidebarMenu");
+    const burger = document.querySelector(".hamburger");
+
+    sidebar.classList.toggle("active");
+    burger.classList.toggle("active");
+}
+
+// ===== EXACT PDF POINT LIST =====
+const pointData = [
+  { name: "Bulb holder / ceiling rose / panel light / COB light", point: 1 },
+  { name: "Two way switch", point: 2 },
+  { name: "Regulator with switch", point: 2 },
+  { name: "Fan switch", point: 1 },
+  { name: "6Amp socket with switch", point: 1 },
+  { name: "16Amp socket with switch", point: 2 },
+  { name: "Indicator", point: 1 },
+  { name: "Bell switch", point: 1 },
+  { name: "DP switch", point: 2 },
+  { name: "USB", point: 1 },
+  { name: "MCB", point: 2 },
+  { name: "2pole MCB", point: 4 },
+  { name: "4pole MCB / MCCB", point: 8 },
+  { name: "Isolator", point: 2 },
+  { name: "4pole Isolator", point: 8 },
+  { name: "2pole RCCB / ELCB / RCBO", point: 4 },
+  { name: "4pole RCCB / ELCB / RCBO", point: 8 },
+  { name: "1Phase + 1Neutral circuit wiring (switch board to MCB)", point: 5 },
+  { name: "1earthing wiring (switch board to MCB)", point: 1 },
+  { name: "1Inverter wiring (switch board to MCB)", point: 1 },
+  { name: "1Dish TV wiring (switch board to MCB)", point: 4 }
+];
+
+// OPEN MODAL
+function openPointCalculator() {
+  const container = document.getElementById("pointList");
+  container.innerHTML = "";
+
+  pointData.forEach(item => {
+    const row = document.createElement("div");
+    row.style.display = "grid";
+    row.style.gridTemplateColumns = "2fr 80px 80px";
+    row.style.gap = "10px";
+    row.style.marginBottom = "10px";
+    row.style.padding = "8px";
+    row.style.borderBottom = "1px solid rgba(255,215,0,0.2)";
+
+    row.innerHTML = `
+      <span>${item.name}</span>
+      <input type="number" min="0" value="0" class="pointQty" data-point="${item.point}">
+      <span style="color:#FFD700;font-weight:bold;">${item.point} pt</span>
+    `;
+
+    container.appendChild(row);
+  });
+
+  document.querySelectorAll(".pointQty").forEach(input => {
+    input.addEventListener("input", calculateTotalPoints);
+  });
+
+  document.getElementById("pointModal").style.display = "block";
+}
+
+// CALCULATE
+function calculateTotalPoints() {
+  let total = 0;
+
+  document.querySelectorAll(".pointQty").forEach(input => {
+    const qty = parseFloat(input.value) || 0;
+    const point = parseFloat(input.dataset.point);
+    total += qty * point;
+  });
+
+  document.getElementById("totalPoints").innerText = total;
+}
+
+// CLOSE
+function closePointCalculator() {
+  document.getElementById("pointModal").style.display = "none";
+}
 
 
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+
+
 
 
 <!-- Aapka pura website ka code upar rahega -->
