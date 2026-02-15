@@ -175,18 +175,18 @@
     }
 
     /* BUTTONS */
-    
-    button {
-  cursor: pointer;
-  border: none;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-}
 
-button:hover {
-  transform: translateY(-3px) scale(1.05);
-}
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.05);
+    }
 
 
 
@@ -354,9 +354,74 @@ button:hover {
     }
 
 
-    
 
-    
+
+    /* ===== PAGE LOAD ANIMATION ===== */
+.container {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== ACCORDION ARROW ROTATION ===== */
+.acc-header span {
+  float: right;
+  transition: transform 0.3s ease;
+}
+
+.acc-header.active span {
+  transform: rotate(180deg);
+}
+
+/* ===== ACCORDION SMOOTH SLIDE ===== */
+.acc-content {
+  transition: max-height 0.5s ease, padding 0.4s ease;
+}
+
+/* ===== ITEM HOVER LIFT ===== */
+.item {
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.item:hover {
+  transform: translateX(5px);
+  background: rgba(255, 215, 0, 0.05);
+}
+
+/* ===== BUTTON GLOW PULSE ===== */
+#generateBillBtn {
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 10px rgba(255,215,0,0.5); }
+  50% { box-shadow: 0 0 25px rgba(255,215,0,1); }
+  100% { box-shadow: 0 0 10px rgba(255,215,0,0.5); }
+}
+
+/* ===== MODAL SMOOTH OPEN ===== */
+#billContent, .historyContent {
+  animation: zoomIn 0.4s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
   </style>
 
 </head>
@@ -397,58 +462,58 @@ cursor:pointer;
 
     <!-- ALL SECTIONS FROM data.pdf (100% SERIAL) -->
     <div class="big-title">LIGHTING ESTIMATE</div>
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">LIGHT <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">LIGHT <span>▼</span></div>
     <div class="acc-content" id="lightSec">
       <div class="items" id="lightItems"></div><button class="add-btn" onclick="addExtra('lightItems')">+ Extra
         Light</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">STRIP LIGHT <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">STRIP LIGHT <span>▼</span></div>
     <div class="acc-content" id="stripSec">
       <div class="items" id="stripItems"></div><button class="add-btn" onclick="addExtra('stripItems')">+ Extra
         Strip</button>
     </div>
 
     <div class="big-title">WIRING ESTIMATE</div>
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">WIRE <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">WIRE <span>▼</span></div>
     <div class="acc-content" id="wireSec">
       <div class="items" id="wireItems"></div><button class="add-btn" onclick="addExtra('wireItems')">+ Extra
         Wire</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">EARTHING <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">EARTHING <span>▼</span></div>
     <div class="acc-content" id="earthingSec">
       <div class="items" id="earthingItems"></div><button class="add-btn" onclick="addExtra('earthingItems')">+ Extra
         Earthing</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">FAN HOOK <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">FAN HOOK <span>▼</span></div>
     <div class="acc-content" id="fanhookSec">
       <div class="items" id="fanhookItems"></div><button class="add-btn" onclick="addExtra('fanhookItems')">+ Extra Fan
         Hook</button>
     </div>
 
     <div class="big-title">WALL PIPING ESTIMATES</div>
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">PVC CONDUIT PIPE <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">PVC CONDUIT PIPE <span>▼</span>
     </div>
     <div class="acc-content" id="pvcSec">
       <div class="items" id="pvcItems"></div><button class="add-btn" onclick="addExtra('pvcItems')">+ Extra PVC
         Pipe</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">JUNCTION BOX <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">JUNCTION BOX <span>▼</span></div>
     <div class="acc-content" id="junctionSec">
       <div class="items" id="junctionItems"></div><button class="add-btn" onclick="addExtra('junctionItems')">+ Extra
         Junction Box</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">METAL BOX <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">METAL BOX <span>▼</span></div>
     <div class="acc-content" id="metalSec">
       <div class="items" id="metalItems"></div><button class="add-btn" onclick="addExtra('metalItems')">+ Extra Metal
         Box</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">EXTRA MATERIAL <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
     </div>
     <div class="acc-content" id="wallExtraSec">
       <div class="items" id="wallExtraItems"></div><button class="add-btn" onclick="addExtra('wallExtraItems')">+ Extra
@@ -456,20 +521,20 @@ cursor:pointer;
     </div>
 
     <div class="big-title">LENTAR PIPING ESTIMATE</div>
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">PVC CONDUIT PIPE <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">PVC CONDUIT PIPE <span>▼</span>
     </div>
     <div class="acc-content" id="lentarpvcSec">
       <div class="items" id="lentarpvcItems"></div><button class="add-btn" onclick="addExtra('lentarpvcItems')">+ Extra
         PVC</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">BOX & BEND <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">BOX & BEND <span>▼</span></div>
     <div class="acc-content" id="boxbendSec">
       <div class="items" id="boxbendItems"></div><button class="add-btn" onclick="addExtra('boxbendItems')">+ Extra Box
         & Bend</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">EXTRA MATERIAL <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
     </div>
     <div class="acc-content" id="lentarExtraSec">
       <div class="items" id="lentarExtraItems"></div><button class="add-btn" onclick="addExtra('lentarExtraItems')">+
@@ -477,32 +542,32 @@ cursor:pointer;
     </div>
 
     <div class="big-title">MODULAR SWITCH BOARD ESTIMATE</div>
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">SWITCH & SOCKET <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">SWITCH & SOCKET <span>▼</span>
     </div>
     <div class="acc-content" id="switchSec">
       <div class="items" id="switchItems"></div><button class="add-btn" onclick="addExtra('switchItems')">+ Extra
         Switch</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">MODULAR PLATE <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">MODULAR PLATE <span>▼</span>
     </div>
     <div class="acc-content" id="plateSec">
       <div class="items" id="plateItems"></div><button class="add-btn" onclick="addExtra('plateItems')">+ Extra
         Plate</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">MCB's <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">MCB's <span>▼</span></div>
     <div class="acc-content" id="mcbSec">
       <div class="items" id="mcbItems"></div><button class="add-btn" onclick="addExtra('mcbItems')">+ Extra MCB</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">SCREWS <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">SCREWS <span>▼</span></div>
     <div class="acc-content" id="screwsSec">
       <div class="items" id="screwsItems"></div><button class="add-btn" onclick="addExtra('screwsItems')">+ Extra
         Screw</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">EXTRA MATERIAL <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
     </div>
     <div class="acc-content" id="modularExtraSec">
       <div class="items" id="modularExtraItems"></div><button class="add-btn" onclick="addExtra('modularExtraItems')">+
@@ -510,39 +575,39 @@ cursor:pointer;
     </div>
 
     <div class="big-title">FALL CEILING WIRING ESTIMATES</div>
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">MATERIAL <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">MATERIAL <span>▼</span></div>
     <div class="acc-content" id="fallMaterialSec">
       <div class="items" id="fallMaterialItems"></div><button class="add-btn" onclick="addExtra('fallMaterialItems')">+
         Extra Material</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">WIRE <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">WIRE <span>▼</span></div>
     <div class="acc-content" id="fallWireSec">
       <div class="items" id="fallWireItems"></div><button class="add-btn" onclick="addExtra('fallWireItems')">+ Extra
         Wire</button>
     </div>
 
     <div class="big-title">CASING CAPPING</div>
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">Material <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">Material <span>▼</span></div>
     <div class="acc-content" id="casingSec">
       <div class="items" id="casingItems"></div><button class="add-btn" onclick="addExtra('casingItems')">+ Extra
         Casing</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">SURFACE BOARD's <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">SURFACE BOARD's <span>▼</span>
     </div>
     <div class="acc-content" id="surfaceSec">
       <div class="items" id="surfaceItems"></div><button class="add-btn" onclick="addExtra('surfaceItems')">+ Extra
         Surface Board</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">MCB's <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">MCB's <span>▼</span></div>
     <div class="acc-content" id="fallMcbSec">
       <div class="items" id="fallMcbItems"></div><button class="add-btn" onclick="addExtra('fallMcbItems')">+ Extra
         MCB</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">SWITCH & SOCKET <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">SWITCH & SOCKET <span>▼</span>
     </div>
     <div class="acc-content" id="fallSwitchSec">
       <div class="items" id="fallSwitchItems"></div><button class="add-btn" onclick="addExtra('fallSwitchItems')">+
@@ -550,20 +615,20 @@ cursor:pointer;
     </div>
 
     <div class="big-title">WIRE MATERIAL</div>
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">WIRE MATERIAL <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">WIRE MATERIAL <span>▼</span>
     </div>
     <div class="acc-content" id="wireMaterialSec">
       <div class="items" id="wireMaterialItems"></div><button class="add-btn" onclick="addExtra('wireMaterialItems')">+
         Extra Wire</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">SCREWS <span>▼</span></div>
+    <div class="acc-header" onclick="toggleAccordion(this)">SCREWS <span>▼</span></div>
     <div class="acc-content" id="fallScrewsSec">
       <div class="items" id="fallScrewsItems"></div><button class="add-btn" onclick="addExtra('fallScrewsItems')">+
         Extra Screw</button>
     </div>
 
-    <div class="acc-header" onclick="this.nextElementSibling.classList.toggle('open')">EXTRA MATERIAL <span>▼</span>
+    <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
     </div>
     <div class="acc-content" id="fallExtraSec">
       <div class="items" id="fallExtraItems"></div><button class="add-btn" onclick="addExtra('fallExtraItems')">+ Extra
@@ -980,238 +1045,79 @@ text-align:center;
 
 
     function downloadBill() {
-      const bill = document.getElementById("billContent");
+  const bill = document.getElementById("billContent");
 
-      html2canvas(bill, {
-        scale: 2
-      }).then(canvas => {
-        const link = document.createElement("a");
-        link.download = "SM_Technician_Bill.jpg";
-        link.href = canvas.toDataURL("image/jpeg", 1.0);
-        link.click();
-      });
-    }
+  const tempDiv = bill.cloneNode(true);
+  tempDiv.style.background = "#ffffff";
+  tempDiv.style.color = "#000000";
+  tempDiv.style.width = "800px";
+  tempDiv.style.padding = "30px";
+  tempDiv.style.fontFamily = "Arial";
+
+  // Force all text black
+  tempDiv.querySelectorAll("*").forEach(el => {
+    el.style.color = "#000000";
+    el.style.background = "transparent";
+  });
+
+  document.body.appendChild(tempDiv);
+
+  html2canvas(tempDiv, {
+    scale: 3,
+    backgroundColor: "#ffffff",
+    useCORS: true
+  }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "SM_Technician_Bill.jpg";
+    link.href = canvas.toDataURL("image/jpeg", 1.0);
+    link.click();
+    document.body.removeChild(tempDiv);
+  });
+}
+
 
     function downloadHistoryBill(index) {
-      const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-      const h = history[index];
+  const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+  const h = history[index];
 
-      const tempDiv = document.createElement("div");
-      tempDiv.id = "tempHistoryBill";
-      tempDiv.style.padding = "25px";
-      tempDiv.style.background = "#111";
-      tempDiv.style.color = "#FFD";
-      tempDiv.style.width = "600px";
-      tempDiv.style.margin = "auto";
+  const tempDiv = document.createElement("div");
+  tempDiv.style.padding = "30px";
+  tempDiv.style.background = "#ffffff";
+  tempDiv.style.color = "#000000";
+  tempDiv.style.width = "800px";
+  tempDiv.style.fontFamily = "Arial";
 
-      let rows = "";
-      let count = 1;
+  let rows = "";
+  let count = 1;
 
-      h.items.forEach(item => {
-        rows += `
+  h.items.forEach(item => {
+    rows += `
       <tr>
         <td>${count++}</td>
         <td>${item.name}</td>
         <td>${item.qty}</td>
+        <td>${item.rate}</td>
         <td>${item.price}</td>
       </tr>
     `;
-      });
+  });
 
-      tempDiv.innerHTML = `
+  tempDiv.innerHTML = `
     <div style="text-align:center;">
-      <img src="logo.png" style="width:80px;">
-      <h2 style="color:#FFD700;">SM Technician</h2>
+      <img src="logo.png" style="width:90px;"><br>
+      <h2 style="margin:5px 0;">SM Technician</h2>
       <div>Mobile No: 8935883863</div>
     </div>
 
     <div style="margin:15px 0;">
-      Date: ${h.date}<br>
-      Customer: ${h.customer}<br>
-      Address: ${h.address}<br>
-      Mobile: ${h.mobile}
+      <b>Date:</b> ${h.date}<br>
+      <b>Customer:</b> ${h.customer}<br>
+      <b>Address:</b> ${h.address}<br>
+      <b>Mobile:</b> ${h.mobile}
     </div>
 
-    <table border="1" width="100%" cellspacing="0" cellpadding="8" style="border-collapse:collapse;text-align:center;">
-      <thead>
-  <tr>
-    <th>Sl No</th>
-    <th>Item</th>
-    <th>Qty</th>
-    <th>Rate</th>
-    <th>Price</th>
-  </tr>
-</thead>
-
-      <tbody>
-        ${rows}
-      </tbody>
-    </table>
-
-    <h3 style="text-align:right;margin-top:15px;color:#FFEA00;">
-      Total: ₹${h.total}
-    </h3>
-  `;
-
-      document.body.appendChild(tempDiv);
-
-      html2canvas(tempDiv, { scale: 2 }).then(canvas => {
-        const link = document.createElement("a");
-        link.download = "SM_Technician_History_Bill.jpg";
-        link.href = canvas.toDataURL("image/jpeg", 1.0);
-        link.click();
-        document.body.removeChild(tempDiv);
-      });
-    }
-
-    function downloadHistoryPDF(index) {
-      const { jsPDF } = window.jspdf;
-
-      const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-      const h = history[index];
-
-      const tempDiv = document.createElement("div");
-      tempDiv.style.padding = "25px";
-      tempDiv.style.background = "#fff";
-      tempDiv.style.color = "#000";
-      tempDiv.style.width = "800px";
-
-      let rows = "";
-      let count = 1;
-
-    h.items.forEach(item => {
-  rows += `
-    <tr>
-      <td>${count++}</td>
-      <td>${item.name}</td>
-      <td>${item.qty}</td>
-      <td>${item.rate}</td>
-      <td>${item.price}</td>
-    </tr>
-  `;
-});
-
-
-      tempDiv.innerHTML = `
-    <div style="text-align:center;margin-bottom:10px;">
-  <img src="logo.png" style="width:80px;"><br>
-  <h2>SM Technician</h2>
-  <div>Mobile No: 8935883863</div>
-</div>
-
-    <div style="margin:15px 0;">
-      Date: ${h.date}<br>
-      Customer: ${h.customer}<br>
-      Address: ${h.address}<br>
-      Mobile: ${h.mobile}
-    </div>
-
-    <table border="1" width="100%" cellspacing="0" cellpadding="8" style="border-collapse:collapse;text-align:center;">
-    <thead>
-  <tr>
-    <th>Sl No</th>
-    <th>Item</th>
-    <th>Qty</th>
-    <th>Rate</th>
-    <th>Price</th>
-  </tr>
-</thead>
-
-      <tbody>
-        ${rows}
-      </tbody>
-    </table>
-
-    <h3 style="text-align:right;margin-top:15px;">
-      Total: ₹${h.total}
-    </h3>
-  `;
-
-      document.body.appendChild(tempDiv);
-
-      html2canvas(tempDiv, { scale: 2 }).then(canvas => {
-        const imgData = canvas.toDataURL("image/png");
-
-        const pdf = new jsPDF("p", "mm", "a4");
-
-        const imgWidth = 190;
-        const pageHeight = 297;
-        const imgHeight = canvas.height * imgWidth / canvas.width;
-        let heightLeft = imgHeight;
-
-        let position = 10;
-
-        pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-
-        while (heightLeft >= 0) {
-          position = heightLeft - imgHeight + 10;
-          pdf.addPage();
-          pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
-          heightLeft -= pageHeight;
-        }
-
-        pdf.save("SM_Technician_History_Bill.pdf");
-        document.body.removeChild(tempDiv);
-      });
-    }
-
-
-
-
-    function downloadBillPDF() {
-  const { jsPDF } = window.jspdf;
-
-  const items = document.querySelectorAll(".item");
-
-  let rows = "";
-  let total = 0;
-  let count = 1;
-
-  items.forEach(item => {
-    const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
-    const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
-    const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-    const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
-
-    if (qty > 0 && rate > 0) {
-      const price = qty * rate;
-      total += price;
-
-      rows += `
-        <tr>
-          <td>${count++}</td>
-          <td>${name}</td>
-          <td>${qty}</td>
-          <td>${rate}</td>
-          <td>${price}</td>
-        </tr>
-      `;
-    }
-  });
-
-  const tempDiv = document.createElement("div");
-  tempDiv.style.padding="25px";
-  tempDiv.style.background="#fff";
-  tempDiv.style.color="#000";
-  tempDiv.style.width="800px";
-
-  tempDiv.innerHTML = `
-    <div style="text-align:center;margin-bottom:10px;">
-  <img src="logo.png" style="width:80px;"><br>
-  <h2>SM Technician</h2>
-  <div>Mobile No: 8935883863</div>
-</div>
-
-
-    <div style="margin:15px 0;">
-      Date: ${new Date().toLocaleString()}<br>
-      Customer: ${document.getElementById("custName").value}<br>
-      Address: ${document.getElementById("custAddress").value}<br>
-      Mobile: ${document.getElementById("phone").value}
-    </div>
-
-    <table border="1" width="100%" cellspacing="0" cellpadding="8" style="border-collapse:collapse;text-align:center;">
+    <table border="1" width="100%" cellspacing="0" cellpadding="8" 
+      style="border-collapse:collapse;text-align:center;">
       <thead>
         <tr>
           <th>Sl No</th>
@@ -1227,102 +1133,258 @@ text-align:center;
     </table>
 
     <h3 style="text-align:right;margin-top:15px;">
-      Total: ₹${total.toFixed(2)}
+      Total: ₹${h.total}
     </h3>
   `;
 
   document.body.appendChild(tempDiv);
 
-  html2canvas(tempDiv,{scale:2}).then(canvas=>{
-    const imgData = canvas.toDataURL("image/png");
+  html2canvas(tempDiv, {
+    scale: 3,
+    backgroundColor: "#ffffff",
+    useCORS: true
+  }).then(canvas => {
 
-    const pdf = new jsPDF("p","mm","a4");
+    const link = document.createElement("a");
+    link.download = "SM_Technician_History_Bill.jpg";
+    link.href = canvas.toDataURL("image/jpeg", 1.0);
+    link.click();
 
-    const imgWidth = 190;
-    const pageHeight = 297;
-    const imgHeight = canvas.height * imgWidth / canvas.width;
-
-    let heightLeft = imgHeight;
-    let position = 10;
-
-    pdf.addImage(imgData,"PNG",10,position,imgWidth,imgHeight);
-    heightLeft -= pageHeight;
-
-    while(heightLeft > 0){
-      position = heightLeft - imgHeight + 10;
-      pdf.addPage();
-      pdf.addImage(imgData,"PNG",10,position,imgWidth,imgHeight);
-      heightLeft -= pageHeight;
-    }
-
-    pdf.save("SM_Technician_Bill.pdf");
     document.body.removeChild(tempDiv);
   });
 }
 
-function downloadMaterialListPDF(index) {
+   function downloadHistoryPDF(index) {
   const { jsPDF } = window.jspdf;
-
   const history = JSON.parse(localStorage.getItem("smHistory")) || [];
   const h = history[index];
 
-  const tempDiv = document.createElement("div");
-  tempDiv.style.background = "#fff";
-  tempDiv.style.color = "#000";
-  tempDiv.style.width = "800px";
-  tempDiv.style.padding = "15px";
-  tempDiv.style.fontSize = "12px";
+  const pdf = new jsPDF("p", "mm", "a4");
 
-  let rows = "";
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  let y = 15;
+  const pageHeight = 280;
+
+  // ===== SAME HEADER =====
+
+  pdf.addImage("logo.png", "PNG", pageWidth / 2 - 12, y, 24, 24);
+  y += 30;
+
+  // ===== COMPANY NAME =====
+  pdf.setFontSize(18);
+  pdf.text("SM Technician", pageWidth / 2, y, { align: "center" });
+  y += 8;
+
+  pdf.setFontSize(11);
+  pdf.text("Mobile No: 8935883863", pageWidth / 2, y, { align: "center" });
+
+  y += 10;
+  pdf.line(15, y, pageWidth - 15, y);
+  y += 10;
+
+  // ===== BILL INFO =====
+
+  pdf.setFontSize(11);
+  pdf.text("Date: " + h.date, 20, y);
+  y += 6;
+  pdf.text("Customer: " + h.customer, 20, y);
+  y += 6;
+  pdf.text("Address: " + h.address, 20, y);
+  y += 6;
+  pdf.text("Mobile: " + h.mobile, 20, y);
+  y += 12;
+
+  // ===== TABLE =====
+
+  pdf.setFontSize(12);
+  pdf.text("Sl", 20, y);
+  pdf.text("Item", 35, y);
+  pdf.text("Qty", 135, y);
+  pdf.text("Rate", 155, y);
+  pdf.text("Amount", 175, y);
+  y += 8;
+
   let count = 1;
 
   h.items.forEach(item => {
-    rows += `
-      <tr>
-        <td style="padding:2px;border:1px solid #000;">${count++}</td>
-        <td style="padding:2px;border:1px solid #000;">${item.name}</td>
-        <td style="padding:2px;border:1px solid #000;">${item.qty}</td>
-      </tr>
-    `;
+
+    if (y > pageHeight) {
+      pdf.addPage();
+      y = 20;
+    }
+
+    pdf.text(String(count), 20, y);
+    pdf.text(item.name.substring(0, 50), 35, y);
+    pdf.text(String(item.qty), 135, y);
+    pdf.text(String(item.rate), 155, y);
+    pdf.text(String(item.price), 175, y);
+
+    y += 7;
+    count++;
   });
 
-  tempDiv.innerHTML = `
-    <div style="text-align:center;margin-bottom:10px;">
-      <img src="logo.png" style="width:60px;"><br>
-      <b style="font-size:18px;">SM Technician</b><br>
-      <span>Mobile No: 8935883863</span>
-    </div>
+  y += 10;
+  pdf.setFontSize(14);
+  pdf.text("Total: Rs. " + h.total, pageWidth - 60, y);
 
-    <table width="100%" cellspacing="0" cellpadding="0" 
-    style="border-collapse:collapse;text-align:center;margin:2px;">
-      <thead>
-        <tr>
-          <th style="padding:2px;border:1px solid #000;">Sl No</th>
-          <th style="padding:2px;border:1px solid #000;">Item</th>
-          <th style="padding:2px;border:1px solid #000;">Qty</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${rows}
-      </tbody>
-    </table>
-  `;
+  pdf.save("SM_Technician_Bill.pdf");
+}
 
-  document.body.appendChild(tempDiv);
 
-  html2canvas(tempDiv, { scale: 2 }).then(canvas => {
-    const imgData = canvas.toDataURL("image/png");
 
-    const pdf = new jsPDF("p", "mm", "a4");
+function downloadBillPDF() {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF("p", "mm", "a4");
 
-    const imgWidth = 190;
-    const imgHeight = canvas.height * imgWidth / canvas.width;
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  let y = 15;
+  const pageHeight = 280;
 
-    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+  // ===== LOGO CENTER SMALL =====
+  pdf.addImage("logo.png", "PNG", pageWidth / 2 - 12, y, 24, 24);
+  y += 30;
 
-    pdf.save("SM_Technician_Material_List.pdf");
-    document.body.removeChild(tempDiv);
+  // ===== COMPANY NAME =====
+  pdf.setFontSize(18);
+  pdf.text("SM Technician", pageWidth / 2, y, { align: "center" });
+  y += 8;
+
+  pdf.setFontSize(11);
+  pdf.text("Mobile No: 8935883863", pageWidth / 2, y, { align: "center" });
+
+  y += 10;
+  pdf.line(15, y, pageWidth - 15, y);
+  y += 10;
+
+  // ===== CUSTOMER DETAILS =====
+  pdf.setFontSize(11);
+  pdf.text("Date: " + new Date().toLocaleString(), 15, y);
+  y += 6;
+  pdf.text("Customer: " + document.getElementById("custName").value, 15, y);
+  y += 6;
+  pdf.text("Address: " + document.getElementById("custAddress").value, 15, y);
+  y += 6;
+  pdf.text("Mobile: " + document.getElementById("phone").value, 15, y);
+  y += 10;
+
+  // ===== TABLE HEADER BOX =====
+  pdf.setFontSize(12);
+  pdf.rect(15, y, 180, 10); // outer box
+
+  pdf.text("Sl", 18, y + 7);
+  pdf.text("Item", 30, y + 7);
+  pdf.text("Qty", 125, y + 7);
+  pdf.text("Rate", 145, y + 7);
+  pdf.text("Amount", 165, y + 7);
+
+  y += 10;
+
+  let total = 0;
+  let count = 1;
+
+  document.querySelectorAll(".item").forEach(item => {
+    const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+    const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+    const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+    const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+
+    if (qty > 0 && rate > 0) {
+
+      if (y > pageHeight) {
+        pdf.addPage();
+        y = 20;
+      }
+
+      const price = qty * rate;
+      total += price;
+
+      pdf.rect(15, y, 180, 8);
+
+      pdf.text(String(count), 18, y + 6);
+      pdf.text(name.substring(0, 40), 30, y + 6);
+      pdf.text(String(qty), 125, y + 6);
+      pdf.text(String(rate), 145, y + 6);
+      pdf.text(String(price.toFixed(2)), 165, y + 6);
+
+      y += 8;
+      count++;
+    }
   });
+
+  y += 10;
+
+  // ===== TOTAL BOX =====
+  pdf.setFontSize(14);
+  pdf.rect(115, y - 6, 80, 10);
+  pdf.text("Total: Rs. " + total.toFixed(2), 125, y);
+
+  pdf.save("SM_Technician_Bill.pdf");
+}
+
+
+    function downloadMaterialListPDF(index) {
+  const { jsPDF } = window.jspdf;
+  const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+  const h = history[index];
+
+  const pdf = new jsPDF("p", "mm", "a4");
+
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  let y = 15;
+  const pageHeight = 280;
+
+  // ===== SAME SMALL CENTER LOGO =====
+  pdf.addImage("logo.png", "PNG", pageWidth / 2 - 12, y, 24, 24);
+  y += 30;
+
+  // ===== COMPANY NAME =====
+  pdf.setFontSize(18);
+  pdf.text("SM Technician", pageWidth / 2, y, { align: "center" });
+  y += 8;
+
+  pdf.setFontSize(11);
+  pdf.text("Mobile No: 8935883863", pageWidth / 2, y, { align: "center" });
+
+  y += 10;
+  pdf.line(15, y, pageWidth - 15, y);
+  y += 12;
+
+  // ===== TABLE HEADER BOX =====
+  pdf.setFontSize(12);
+  pdf.rect(15, y, 180, 10);
+
+  pdf.text("Sl", 18, y + 7);
+  pdf.text("Item", 30, y + 7);
+  pdf.text("Qty", 165, y + 7);
+
+  y += 10;
+
+  let count = 1;
+
+  h.items.forEach(item => {
+
+    if (y > pageHeight) {
+      pdf.addPage();
+      y = 20;
+    }
+
+    pdf.rect(15, y, 180, 8);
+
+    pdf.text(String(count), 18, y + 6);
+    pdf.text(item.name.substring(0, 45), 30, y + 6);
+    pdf.text(String(item.qty), 165, y + 6);
+
+    y += 8;
+    count++;
+  });
+
+  pdf.save("SM_Technician_Material_List.pdf");
+}
+
+function toggleAccordion(header) {
+  const content = header.nextElementSibling;
+  content.classList.toggle("open");
+  header.classList.toggle("active");
 }
 
 
