@@ -3,6 +3,7 @@
 
 <head>
 
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>SM Technician - Full Estimate</title>
@@ -450,6 +451,23 @@ background:#16a34a;
 color:white;
 cursor:pointer;
 ">History</button>
+
+
+<button id="logoutBtn" style="
+position:absolute;
+top:20px;
+left:20px;
+padding:8px 18px;
+border:none;
+border-radius:8px;
+background:#16a34a;
+color:white;
+cursor:pointer;
+">
+Logout
+</button>
+
+
 
       </div>
     </div>
@@ -1422,6 +1440,16 @@ onAuthStateChanged(auth, (user) => {
     window.location.href = "login.html";
   }
 });
+
+// Logout Function
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  auth.signOut().then(() => {
+    window.location.href = "login.html";
+  });
+});
+
+
+
 </script>
 
 </body>
