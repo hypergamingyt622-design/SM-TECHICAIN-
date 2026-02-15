@@ -186,84 +186,128 @@
         <div id="successMsg" class="success"></div>
     </div>
 
-    <script type="module">
-        // Firebase config
-        const firebaseConfig = {
-            apiKey: "AIzaSyBYTLHO7jZW1dHEHlW55Axpjs2duSiDMs4",
-            authDomain: "sm-technician-d4b8d.firebaseapp.com",
-            projectId: "sm-technician-d4b8d",
-            appId: "1:716505252423:web:fd557961c7c8eef03f6762"
-        };
+   <script type="module">
+    // Firebase config (आपका पुराना config)
+    const firebaseConfig = {
+        apiKey: "AIzaSyBYTLHO7jZW1dHEHlW55Axpjs2duSiDMs4",
+        authDomain: "sm-technician-d4b8d.firebaseapp.com",
+        projectId: "sm-technician-d4b8d",
+        appId: "1:716505252423:web:fd557961c7c8eef03f6762"
+    };
 
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    // Firebase imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { 
+        getAuth, 
+        signInWithPopup, 
+        GoogleAuthProvider, 
+        onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    
+    // Firestore imports
+    import { 
+        getFirestore, 
+        doc, 
+        setDoc, 
+        getDoc 
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);          // ← Firestore initialize किया
+    const provider = new GoogleAuthProvider();
 
-        // Auto-redirect if already logged in
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                window.location.href = "index.html";
-            }
-        });
+    // Auto-redirect if already logged in
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            window.location.href = "index.html";
+        }
+    });
 
-        window.googleLogin = function() {
-            const button = document.querySelector('button');
-            const buttonText = document.getElementById('buttonText');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const errorMsg = document.getElementById('errorMsg');
-            const successMsg = document.getElementById('successMsg');
+    window.googleLogin = async function() {     // ← async function बनाया
+        const button = document.querySelector('button');
+        const buttonText = document.getElementById('buttonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const errorMsg = document.getElementById('errorMsg');
+        const successMsg = document.getElementById('successMsg');
 
-            // Reset messages
-            errorMsg.style.display = 'none';
-            successMsg.style.display = 'none';
+        // Reset messages
+        errorMsg.style.display = 'none';
+        successMsg.style.display = 'none';
 
-            // Show loading
-            buttonText.style.opacity = '0.5';
-            loadingSpinner.style.display = 'block';
-            button.disabled = true;
+        // Show loading
+        buttonText.style.opacity = '0.5';
+        loadingSpinner.style.display = 'block';
+        button.disabled = true;
 
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    // Success
-                    successMsg.textContent = `Welcome back, ${result.user.displayName}! Redirecting...`;
-                    successMsg.style.display = 'block';
-                    setTimeout(() => {
-                        window.location.href = "index.html";
-                    }, 1500);
-                })
-                .catch((error) => {
-                    // Enhanced error handling
-                    let errorMessage = 'Login failed. Please try again.';
-                    if (error.code === 'auth/popup-closed-by-user') {
-                        errorMessage = 'Login cancelled. Please try again.';
-                    } else if (error.code === 'auth/network-request-failed') {
-                        errorMessage = 'Network error. Check your connection.';
-                    } else if (error.code === 'auth/too-many-requests') {
-                        errorMessage = 'Too many attempts. Try again later.';
-                    } else {
-                        errorMessage = error.message;
-                    }
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
 
-                    errorMsg.textContent = errorMessage;
-                    errorMsg.style.display = 'block';
-                })
-                .finally(() => {
-                    // Hide loading
-                    buttonText.style.opacity = '1';
-                    loadingSpinner.style.display = 'none';
-                    button.disabled = false;
+            // Firestore में यूज़र डॉक्यूमेंट चेक + क्रिएट/अपडेट
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
+
+            if (!userSnap.exists()) {
+                // नया यूज़र → पहली बार लॉगिन → नया डॉक्यूमेंट बनाओ
+                await setDoc(userRef, {
+                    uid: user.uid,
+                    displayName: user.displayName || "Unknown",
+                    email: user.email,
+                    photoURL: user.photoURL || null,
+                    createdAt: new Date().toISOString(),
+                    lastLogin: new Date().toISOString(),
+                    // आप और फील्ड्स ऐड कर सकते हैं जैसे phone, role, technicianId आदि
+                    // role: "technician",
+                    // status: "active"
                 });
-        };
-
-        // Keyboard shortcut for accessibility
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && e.target === document.body) {
-                googleLogin();
+                console.log("New user document created in Firestore");
+            } else {
+                // पुराना यूज़र → सिर्फ lastLogin अपडेट कर सकते हो (ऑप्शनल)
+                await setDoc(userRef, {
+                    lastLogin: new Date().toISOString()
+                }, { merge: true });
+                console.log("Existing user — last login updated");
             }
-        });
-    </script>
+
+            // Success message
+            successMsg.textContent = `Welcome${user.displayName ? ', ' + user.displayName : ''}! Redirecting...`;
+            successMsg.style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1500);
+
+        } catch (error) {
+            let errorMessage = 'Login failed. Please try again.';
+            
+            if (error.code === 'auth/popup-closed-by-user') {
+                errorMessage = 'Login cancelled. Please try again.';
+            } else if (error.code === 'auth/network-request-failed') {
+                errorMessage = 'Network error. Check your connection.';
+            } else if (error.code === 'auth/too-many-requests') {
+                errorMessage = 'Too many attempts. Try again later.';
+            } else {
+                errorMessage = error.message;
+            }
+
+            errorMsg.textContent = errorMessage;
+            errorMsg.style.display = 'block';
+            console.error("Auth/Firestore error:", error);
+        } finally {
+            // Hide loading
+            buttonText.style.opacity = '1';
+            loadingSpinner.style.display = 'none';
+            button.disabled = false;
+        }
+    };
+
+    // Keyboard shortcut
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.target === document.body) {
+            googleLogin();
+        }
+    });
+</script>
 </body>
 </html>
