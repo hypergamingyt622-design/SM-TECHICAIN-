@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>SM Technician - Electrician Installation Price List</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #111;
+      --accent: #FFD700;
+      --accent2: #FFEA00;
+      --success: #10b981;
+      --danger: #ef4444;
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: #111;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 25px auto;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HEADER with Back Button */
+    .header {
+      background: #111;
+      padding: 40px 15px 20px;
+      text-align: center;
+      position: relative;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: #111;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+      z-index: 10;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.7);
+      background: var(--accent2);
+    }
+
+    .back-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .logo-wrapper {
+      margin-bottom: 15px;
+    }
+
+    .header-logo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+      animation: pulseGlow 2.5s infinite alternate;
+      transition: transform 0.4s ease;
+    }
+
+    .header-logo:hover {
+      transform: scale(1.08);
+    }
+
+    @keyframes pulseGlow {
+      from { box-shadow: 0 0 20px rgba(255,215,0,0.5); }
+      to   { box-shadow: 0 0 50px rgba(255,215,0,0.9); }
+    }
+
+    .header h1 {
+      font-size: 2.4rem;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      color: var(--accent2);
+      opacity: 0.9;
+    }
+
+    /* TABLE SECTION */
+    .table-section {
+      padding: 40px 25px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #222;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      min-width: 600px;
+    }
+
+    th, td {
+      padding: 15px 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    th {
+      background: #111;
+      color: var(--accent2);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    tr {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideInUp 0.6s ease forwards;
+    }
+
+    @keyframes slideInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    tr:nth-child(odd)  { animation-delay: 0.1s; }
+    tr:nth-child(even) { animation-delay: 0.2s; }
+
+    tr:hover {
+      background: rgba(255, 215, 0, 0.12);
+      transform: scale(1.005);
+    }
+
+    td {
+      color: #FFD;
+      font-size: 0.95rem;
+    }
+
+    .rate {
+      font-weight: 600;
+      color: var(--accent);
+      text-align: center;
+    }
+
+    .note {
+      padding: 25px;
+      background: #222;
+      text-align: center;
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      color: var(--accent2);
+      font-size: 0.95rem;
+    }
+
+    .note strong {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .header-logo { width: 110px; height: 110px; }
+      .header h1 { font-size: 2rem; }
+      .back-btn { 
+        top: 20px; 
+        left: 15px; 
+        padding: 8px 14px; 
+        font-size: 0.9rem; 
+      }
+      .table-section { padding: 25px 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <button class="back-btn" onclick="window.history.back()">
+        ← Back
+      </button>
+
+      <div class="logo-wrapper">
+        <img src="logo.png" alt="SM Technician Logo" class="header-logo" onerror="this.src='https://via.placeholder.com/140/FFD700/111?text=SM'">
+      </div>
+
+      <h1>Electrician Installation Price List</h1>
+      <p>Rural & Urban Rates (Installation Charges - Nos Unit)</p>
+    </div>
+
+    <div class="table-section">
+      <table>
+        <thead>
+          <tr>
+            <th>Material Description</th>
+            <th>Unit</th>
+            <th>Rural Rate</th>
+            <th>Urban Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>COB / Panel / Light Fitting</td><td>Nos</td><td class="rate">₹100</td><td class="rate">₹150</td></tr>
+          <tr><td>Tube Light Fitting</td><td>Nos</td><td class="rate">₹100</td><td class="rate">₹150</td></tr>
+          <tr><td>Street Light Fitting with Pipe</td><td>Nos</td><td class="rate">₹150</td><td class="rate">₹200</td></tr>
+          <tr><td>Hanger Light Installation</td><td>Nos</td><td class="rate">₹150</td><td class="rate">₹200</td></tr>
+          <tr><td>Surface Light Installation</td><td>Nos</td><td class="rate">₹100</td><td class="rate">₹150</td></tr>
+          <tr><td>Gate Light Fitting</td><td>Nos</td><td class="rate">₹200</td><td class="rate">₹300</td></tr>
+          <tr><td>Garden Light Installation</td><td>Nos</td><td class="rate">₹100</td><td class="rate">₹150</td></tr>
+          <tr><td>Foot Light Installation</td><td>Nos</td><td class="rate">₹100</td><td class="rate">₹150</td></tr>
+          <tr><td>Wall Lamp Installation</td><td>Nos</td><td class="rate">₹100</td><td class="rate">₹150</td></tr>
+          <tr><td>Fan Hook Anchor Installation</td><td>Nos</td><td class="rate">₹150</td><td class="rate">₹200</td></tr>
+          <tr><td>Ceiling Fan Installation</td><td>Nos</td><td class="rate">₹150</td><td class="rate">₹200</td></tr>
+          <tr><td>Wall Fan Installation</td><td>Nos</td><td class="rate">₹150</td><td class="rate">₹200</td></tr>
+          <tr><td>Exhaust Fan Installation</td><td>Nos</td><td class="rate">₹200</td><td class="rate">₹300</td></tr>
+          <tr><td>TV Installation</td><td>Nos</td><td class="rate">₹500</td><td class="rate">₹800</td></tr>
+          <tr><td>Geyser Installation</td><td>Nos</td><td class="rate">₹500</td><td class="rate">₹700</td></tr>
+          <tr><td>Ceiling Speaker Installation</td><td>Nos</td><td class="rate">₹100</td><td class="rate">₹150</td></tr>
+          <tr><td>Single Phase Meter Fitting</td><td>Nos</td><td class="rate">₹200</td><td class="rate">₹300</td></tr>
+          <tr><td>Three Phase Meter Fitting</td><td>Nos</td><td class="rate">₹350</td><td class="rate">₹500</td></tr>
+          <tr><td>AC Board Fitting with Wiring</td><td>Nos</td><td class="rate">₹800</td><td class="rate">₹1000</td></tr>
+          <tr><td>Only Inverter Fitting</td><td>Nos</td><td class="rate">₹800</td><td class="rate">₹1200</td></tr>
+          <tr><td>Inverter Fitting & Board Connection</td><td>Nos</td><td class="rate">₹1500</td><td class="rate">₹2000</td></tr>
+          <tr><td>Earthing with Pit Hole</td><td>Nos</td><td class="rate">₹2000</td><td class="rate">₹3000</td></tr>
+          <tr><td>RCCB Single Phase</td><td>Nos</td><td class="rate">₹500</td><td class="rate">₹700</td></tr>
+          <tr><td>RCCB Three Phase</td><td>Nos</td><td class="rate">₹800</td><td class="rate">₹1000</td></tr>
+          <tr><td>Motor Starter Fitting</td><td>Nos</td><td class="rate">₹200</td><td class="rate">₹300</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Note:</strong> Prices are indicative. May vary by location, material quality & complexity. Contact SM Technician for exact quote.
+    </div>
+  </div>
+
+  <script>
+    // Fade in container on load
+    window.addEventListener('load', () => {
+      document.querySelector('.container').style.opacity = '1';
+      document.querySelector('.container').style.transform = 'translateY(0)';
+    });
+  </script>
+
+</body>
+</html>

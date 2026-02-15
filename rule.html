@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>SM Technician - Switch Heights Guide</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #111;
+      --accent: #FFD700;
+      --accent2: #FFEA00;
+      --success: #10b981;
+      --danger: #ef4444;
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: #111;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1150px;
+      margin: 25px auto;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+      position: relative;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* HEADER with Back Button */
+    .header {
+      background: #111;
+      padding: 30px 15px 20px;
+      text-align: center;
+      position: relative;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: #111;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+      z-index: 10;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.7);
+      background: var(--accent2);
+    }
+
+    .back-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .header-logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+      border: 2px solid var(--accent);
+      animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(255,215,0,0.5); }
+      50% { box-shadow: 0 0 40px rgba(255,215,0,1); }
+    }
+
+    .header h1 {
+      font-size: 2.3rem;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-top: 10px;
+    }
+
+    /* CARDS SECTION */
+    .cards {
+      padding: 40px 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #222;
+      border-radius: 14px;
+      padding: 25px;
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      background: #111;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      display: block;
+      text-align: center;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--accent2);
+      margin-bottom: 15px;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    .height {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-align: center;
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .small-text {
+      color: #FFD;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .small-text strong {
+      color: var(--accent2);
+    }
+
+    /* NOTE SECTION */
+    .note {
+      padding: 25px;
+      background: #222;
+      text-align: center;
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      color: var(--accent2);
+      font-size: 0.95rem;
+    }
+
+    .note strong {
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .cards {
+        grid-template-columns: 1fr;
+        padding: 20px 15px;
+      }
+      .height {
+        font-size: 1.8rem;
+      }
+      .back-btn {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <button class="back-btn" onclick="window.history.back()">
+        ← Back
+      </button>
+      <img src="logo.png" alt="SM Technician Logo" class="header-logo" onerror="this.style.display='none'">
+      <h1>Switch Heights Guide</h1>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">💡</div>
+        <h3>General Light Switches / Modular Boards</h3>
+        <div class="height"><span class="count" data-target="1200">1200</span> – <span class="count" data-target="1350">1350</span> mm</div>
+        <p class="small-text">Most common: <strong>1250–1300 mm</strong><br>For lights, fans in rooms</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🛏️</div>
+        <h3>Bedside / 2-Way Switches</h3>
+        <div class="height"><span class="count" data-target="750">750</span> mm</div>
+        <p class="small-text">Some layouts use 600–900 mm<br>Near bed for light control</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Main Switchboard / Meter / DB</h3>
+        <div class="height"><span class="count" data-target="1500">1500</span> mm</div>
+        <p class="small-text">1.5 meters – often to top or center</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🔌</div>
+        <h3>Power Sockets / Plug Points</h3>
+        <div class="height"><span class="count" data-target="300">300</span> – <span class="count" data-target="450">450</span> mm</div>
+        <p class="small-text">12–18 inches from floor<br>For appliances & furniture</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🍳</div>
+        <h3>Kitchen Switch Boards</h3>
+        <div class="height"><span class="count" data-target="1200">1200</span> – <span class="count" data-target="1350">1350</span> mm</div>
+        <p class="small-text">4–6 inches above counter top</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🚪</div>
+        <h3>Entrance / Main Door Board</h3>
+        <div class="height"><span class="count" data-target="1000">1000</span> – <span class="count" data-target="1200">1200</span> mm</div>
+        <p class="small-text">For easy access when entering</p>
+      </div>
+
+    </div>
+
+    <div class="note">
+      <strong>Note:</strong> As per BIS / IS 732 / NEC SP 30. Always confirm with licensed electrician for local rules.
+    </div>
+  </div>
+
+  <script>
+    // Fade in cards on scroll
+    const cards = document.querySelectorAll('.card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => observer.observe(card));
+
+    // Number counting animation
+    const counters = document.querySelectorAll('.count');
+
+    const countUp = (el) => {
+      const target = parseInt(el.getAttribute('data-target'));
+      let count = 0;
+      const increment = target / 60;
+
+      const updateCount = () => {
+        count += increment;
+        if (count < target) {
+          el.textContent = Math.ceil(count);
+          requestAnimationFrame(updateCount);
+        } else {
+          el.textContent = target;
+        }
+      };
+
+      updateCount();
+    };
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          countUp(entry.target);
+          countObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => countObserver.observe(counter));
+  </script>
+
+</body>
+</html>
