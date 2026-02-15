@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>SM Technician Login</title>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
 <style>
 body{
   font-family: Arial;
@@ -58,7 +57,7 @@ window.googleLogin = function(){
   signInWithPopup(auth, provider)
   .then((result) => {
     alert("Login Successful: " + result.user.displayName);
-    window.location.href="index.html";
+    window.location.href = "index.html";
   })
   .catch((error) => {
     alert(error.message);
