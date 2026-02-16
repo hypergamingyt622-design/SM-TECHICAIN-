@@ -577,11 +577,105 @@
     .overlay.active {
       display: block;
     }
+
+
+
+
+
+    /* ===== CUSTOM POPUP ===== */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 5000;
+    }
+
+    .popup-box {
+      background: linear-gradient(135deg, #111, #222);
+      padding: 30px;
+      width: 320px;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px solid #FFD700;
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+      animation: popupZoom 0.4s ease;
+    }
+
+    @keyframes popupZoom {
+      from {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .popup-box h2 {
+      color: #FFD700;
+      margin-bottom: 15px;
+    }
+
+    .popup-box p {
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .popup-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .popup-confirm {
+      flex: 1;
+      background: #FFD700;
+      color: #111;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .popup-cancel {
+      flex: 1;
+      background: #ef4444;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .popup-confirm:hover,
+    .popup-cancel:hover {
+      transform: scale(1.05);
+    }
   </style>
 
 </head>
 
 <body>
+
+  <!-- Custom Popup -->
+  <div id="customPopup" class="popup-overlay">
+    <div class="popup-box">
+      <h2>SM Technician</h2>
+      <p id="popupMessage">Are you sure?</p>
+      <div class="popup-buttons">
+        <button onclick="confirmAction()" class="popup-confirm">Yes</button>
+        <button onclick="closePopup()" class="popup-cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+
 
   <!-- Hamburger Icon -->
   <div class="header">
@@ -1257,7 +1351,13 @@ cursor:pointer;
 
       async function deleteHistory(index) {
 
-        if (!confirm("Delete karna hai?")) return;
+        showPopup("Delete karna hai?", () => {
+          window.billHistory.splice(index, 1);
+          localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+          showHistory();
+        });
+        return;
+
 
         // Remove from array
         window.billHistory.splice(index, 1);
@@ -1663,6 +1763,24 @@ cursor:pointer;
 
 
 
+      let popupCallback = null;
+
+      function showPopup(message, callback) {
+        document.getElementById("popupMessage").textContent = message;
+        document.getElementById("customPopup").style.display = "flex";
+        popupCallback = callback;
+      }
+
+      function closePopup() {
+        document.getElementById("customPopup").style.display = "none";
+      }
+
+      function confirmAction() {
+        if (popupCallback) popupCallback();
+        closePopup();
+      }
+
+
 
     </script>
 
@@ -1739,15 +1857,13 @@ cursor:pointer;
 
       // ===== LOGOUT FUNCTION =====
       window.logoutUser = function () {
-        if (confirm("Kya aap sach mein logout karna chahte hain?")) {
-          signOut(auth)
-            .then(() => {
-              window.location.href = "login.html";
-            })
-            .catch(err => {
-              alert("Logout error: " + err.message);
-            });
-        }
+        showPopup("Logout karna chahte hain?", () => {
+  signOut(auth).then(() => {
+    window.location.href = "login.html";
+  });
+});
+return;
+
       };
 
     </script>
