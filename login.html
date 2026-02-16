@@ -161,10 +161,14 @@
             font-size: 14px;
         }
 
-        @media (max-width: 480px) {
+       @media (max-width: 480px) {
     .box {
-        padding: 45px 25px;
+        padding: 50px 25px;
         margin: 15px;
+        min-height: 500px;   /* 👈 Height badhane ke liye */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     h2 {
@@ -172,17 +176,16 @@
     }
 
     .logo {
-    width: 30%;
-    max-width: 120px;
-    height: auto;
-}
-
+        width: 90px;
+        height: 90px;
+    }
 
     button {
-        padding: 12px 20px;
+        padding: 14px 20px;
         font-size: 14px;
     }
 }
+
 
     </style>
 </head>
