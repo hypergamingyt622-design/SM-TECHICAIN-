@@ -1155,6 +1155,20 @@
       backdrop-filter: blur(8px);
       background: rgba(0, 0, 0, 0.72);
     }
+
+    /* When any modal-like thing is open using .overlay */
+.overlay.active {
+    display: block;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* Make sure history modal content stays crisp */
+.historyContent {
+    background: rgba(17, 17, 17, 0.94);
+    backdrop-filter: none;     /* ← important: don't blur inside content */
+}
   </style>
 
 </head>
@@ -1185,7 +1199,7 @@
 
   <!-- Hamburger Icon -->
 
-  <div class="header">
+  <div class="header"></div>
 
     <div class="hamburger" onclick="toggleMenu()">
 
@@ -2051,7 +2065,7 @@ cursor:pointer;
           "Customer: " + document.getElementById("custName").value;
 
         document.getElementById("billTotal").textContent = total.toFixed(2);
-
+        
         document.getElementById("billModal").style.display = "block";
         document.body.classList.add("modal-active");
 
@@ -2226,20 +2240,31 @@ cursor:pointer;
         });
 
        const modal = document.getElementById("historyModal");
-modal.style.display = "flex";
-modal.classList.add("active");
-document.body.classList.add("modal-active");
+    const overlay = document.getElementById("overlay");
 
-      }
+    // Show both overlay and modal
+    overlay.classList.add("active");
+    modal.style.display = "flex";
+    modal.classList.add("active");
+
+    // Freeze body scroll (same as sidebar)
+    document.body.classList.add("modal-active");
+    // Optional: extra safety
+    document.body.style.overflow = "hidden";
+}
 
       function closeHistory() {
+    const modal = document.getElementById("historyModal");
+    const overlay = document.getElementById("overlay");
 
-        const modal = document.getElementById("historyModal");
-        modal.style.display = "none";
-        modal.classList.remove("active");
-        document.body.classList.remove("modal-active");
+    modal.style.display = "none";
+    modal.classList.remove("active");
 
-      }
+    overlay.classList.remove("active");
+
+    document.body.classList.remove("modal-active");
+    document.body.style.overflow = "auto";   // restore scroll
+}
 
 
 
