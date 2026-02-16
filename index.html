@@ -17,7 +17,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-
     :root {
 
       --primary: #111;
@@ -1108,6 +1107,54 @@
 
     }
 
+
+
+
+
+    /* Freeze body scrolling when any modal is open */
+    body.modal-active {
+      overflow: hidden;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* History modal background with blur + dark overlay */
+    #historyModal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px 10px;
+      overflow-y: auto;
+      background: rgba(0, 0, 0, 0.65);
+      /* dark overlay */
+      backdrop-filter: blur(6px);
+      /* main blur effect */
+      -webkit-backdrop-filter: blur(6px);
+      /* Safari */
+    }
+
+    /* Make sure content stays above the blurred background */
+    .historyContent {
+      position: relative;
+      z-index: 2;
+      background: rgba(17, 17, 17, 0.94);
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      border-radius: 16px;
+      max-width: 960px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Optional: stronger blur when modal is open */
+    #historyModal.active {
+      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.72);
+    }
   </style>
 
 </head>
@@ -1405,7 +1452,6 @@
       <div class="acc-content" id="modularExtraSec">
 
         <div class="items" id="modularExtraItems"></div><button class="add-btn"
-
           onclick="addExtra('modularExtraItems')">+
 
           Extra Material</button>
@@ -1419,7 +1465,6 @@
       <div class="acc-content" id="fallMaterialSec">
 
         <div class="items" id="fallMaterialItems"></div><button class="add-btn"
-
           onclick="addExtra('fallMaterialItems')">+
 
           Extra Material</button>
@@ -1491,7 +1536,6 @@
       <div class="acc-content" id="wireMaterialSec">
 
         <div class="items" id="wireMaterialItems"></div><button class="add-btn"
-
           onclick="addExtra('wireMaterialItems')">+
 
           Extra Wire</button>
@@ -2009,6 +2053,7 @@ cursor:pointer;
         document.getElementById("billTotal").textContent = total.toFixed(2);
 
         document.getElementById("billModal").style.display = "block";
+        document.body.classList.add("modal-active");
 
         saveHistory(formattedDate, total);
 
@@ -2017,6 +2062,7 @@ cursor:pointer;
       function closeBill() {
 
         document.getElementById("billModal").style.display = "none";
+        document.body.classList.remove("modal-active");
 
       }
 
@@ -2126,7 +2172,10 @@ cursor:pointer;
 
           list.innerHTML = `<p style="text-align:center; color:#aaa; padding:40px;">Abhi tak koi bill nahi bana hai</p>`;
 
-          document.getElementById("historyModal").style.display = "block";
+          const modal = document.getElementById("historyModal");
+          modal.style.display = "flex";           // flex use kar rahe hain centering ke liye
+          modal.classList.add("active");          // blur/dark effect ke liye class
+          document.body.classList.add("modal-active");   // background freeze + no scroll
 
           return;
 
@@ -2184,7 +2233,10 @@ cursor:pointer;
 
       function closeHistory() {
 
-        document.getElementById("historyModal").style.display = "none";
+        const modal = document.getElementById("historyModal");
+        modal.style.display = "none";
+        modal.classList.remove("active");
+        document.body.classList.remove("modal-active");
 
       }
 
@@ -2948,15 +3000,15 @@ cursor:pointer;
 
         showPopup("Logout karna chahte hain?", () => {
 
-  signOut(auth).then(() => {
+          signOut(auth).then(() => {
 
-    window.location.href = "login.html";
+            window.location.href = "login.html";
 
-  });
+          });
 
-});
+        });
 
-return;
+        return;
 
       };
 
@@ -2964,4 +3016,4 @@ return;
 
 </body>
 
-</html>      
+</html>
