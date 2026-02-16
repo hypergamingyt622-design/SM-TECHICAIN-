@@ -1169,64 +1169,57 @@ cursor:pointer;
     window.billHistory.push(newBill);
     localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
 
-    // Firestore mein save
-    if (typeof saveToFirestore === 'function') {
-        saveToFirestore('history');
-    }
+    saveToFirestore('history');   // ← already hai
 
-    console.log("Bill saved! Total bills now:", window.billHistory.length);
+    console.log("✅ Bill saved! Total bills now:", window.billHistory.length);
 }
 
 
 
       function showHistory() {
-       console.log("Showing history, total bills:", window.billHistory.length);
-        const list = document.getElementById("historyList");
-        list.innerHTML = "";
+    console.log("History showing, total bills:", window.billHistory.length);
 
-        window.billHistory.forEach((h, i) => {
-          list.innerHTML += `
-<div style="
-border:1px solid #FFD700;
-padding:20px;
-margin:15px 0;
-background:#111;
-color:#FFD;
-border-radius:15px;
-box-shadow:0 0 20px rgba(255,215,0,0.3);
-text-align:center;
-">
+    const list = document.getElementById("historyList");
+    list.innerHTML = "";
 
-  <img src="logo.png" width="70" style="margin-bottom:10px;"><br>
-  <h3 style="color:#FFD700;margin-bottom:10px;">SM Technician</h3>
-
-  <div style="text-align:left;margin-top:10px;">
-    <b>Date:</b> ${h.date}<br>
-    <b>Customer:</b> ${h.customer}<br>
-    <b>Mobile:</b> ${h.mobile || ''}<br>
-    <b>Address:</b> ${h.address}<br>
-    <b>Total:</b> ₹${h.total}
-  </div>
-
-  <div style="margin-top:15px;">
-   <button onclick="downloadHistoryBill(${i})">Download JPG</button>
-<button onclick="downloadHistoryPDF(${i})">Download PDF</button>
-<button onclick="downloadMaterialListPDF(${i})">Material List</button>
-<button onclick="deleteHistory(${i})">Delete</button>
-
-
-  </div>
-
-</div>`;
-        });
-        if (window.billHistory.length === 0) {
-          list.innerHTML = '<p style="text-align:center;color:#aaa;">Koi bill nahi hai</p>';
-        }
-
-
+    if (window.billHistory.length === 0) {
+        list.innerHTML = `<p style="text-align:center; color:#aaa; padding:40px;">Abhi tak koi bill nahi bana hai</p>`;
         document.getElementById("historyModal").style.display = "block";
-      }
+        return;
+    }
 
+    window.billHistory.forEach((h, i) => {
+        list.innerHTML += `
+            <div style="border:2px solid #FFD700; padding:25px; margin:20px 0; background:#111; border-radius:18px; box-shadow:0 10px 30px rgba(255,215,0,0.2);">
+                
+                <!-- Logo + Title -->
+                <div style="text-align:center; margin-bottom:15px;">
+                    <img src="logo.png" width="65" style="margin-bottom:8px;">
+                    <h3 style="color:#FFD700; margin:0;">SM Technician</h3>
+                </div>
+
+                <!-- Details -->
+                <div style="text-align:left; line-height:1.8; color:#ddd;">
+                    <b>Date:</b> ${h.date}<br>
+                    <b>Customer:</b> ${h.customer || 'Unknown'}<br>
+                    <b>Mobile:</b> ${h.mobile || '-'}<br>
+                    <b>Address:</b> ${h.address || '-'}<br>
+                    <b style="color:#FFEA00;">Total: ₹${h.total}</b>
+                </div>
+
+                <!-- Buttons -->
+                <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+                    <button onclick="downloadHistoryBill(${i})" style="background:#FFD700; color:#111; padding:10px 18px; border:none; border-radius:8px; font-weight:600;">📥 JPG</button>
+                    <button onclick="downloadHistoryPDF(${i})" style="background:#FFD700; color:#111; padding:10px 18px; border:none; border-radius:8px; font-weight:600;">📄 PDF</button>
+                    <button onclick="downloadMaterialListPDF(${i})" style="background:#222; color:#FFEA00; padding:10px 18px; border:1px solid #FFD700; border-radius:8px; font-weight:600;">📋 Material List</button>
+                    <button onclick="deleteHistory(${i})" style="background:#ef4444; color:white; padding:10px 18px; border:none; border-radius:8px; font-weight:600;">🗑 Delete</button>
+                </div>
+            </div>
+        `;
+    });
+
+    document.getElementById("historyModal").style.display = "block";
+}
 
       function closeHistory() {
         document.getElementById("historyModal").style.display = "none";
