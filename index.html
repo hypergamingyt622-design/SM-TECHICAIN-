@@ -922,10 +922,13 @@ cursor:pointer;
       };
 
       // ←←← YE LINE ADD KARO (commented wali hata do)
-      const savedRates = JSON.parse(localStorage.getItem('smRates')) || {};
+     
 
-      let billHistory = JSON.parse(localStorage.getItem("smHistory")) || [];
-      window.billHistory = billHistory;
+      window.savedRates = JSON.parse(localStorage.getItem('smRates')) || {};
+      window.billHistory = JSON.parse(localStorage.getItem("smHistory")) || [];
+
+      // let billHistory = JSON.parse(localStorage.getItem("smHistory")) || [];
+      // window.billHistory = billHistory;
 
       // Populate all items
       Object.keys(data).forEach(key => {
@@ -945,17 +948,17 @@ cursor:pointer;
     `;
           container.appendChild(div);
 
-          div.querySelector('.rate').addEventListener('input', async (e) => {
-            savedRates[name] = e.target.value;
-            localStorage.setItem('smRates', JSON.stringify(savedRates));
+         div.querySelector('.rate').addEventListener('input', async (e) => {
+    window.savedRates[name] = e.target.value;
+    localStorage.setItem('smRates', JSON.stringify(window.savedRates));
 
-            // Firestore mein save
-            if (window.currentUserUid && window.db) {
-              const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
-              const userRef = doc(window.db, "users", window.currentUserUid);
-              await setDoc(userRef, { rates: savedRates }, { merge: true });
-            }
-          });
+    // Firestore mein save
+    if (window.currentUserUid && window.db) {
+        const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+        const userRef = doc(window.db, "users", window.currentUserUid);
+        await setDoc(userRef, { rates: window.savedRates }, { merge: true });
+    }
+});
 
         });
       });
@@ -1172,14 +1175,13 @@ cursor:pointer;
     window.billHistory.push(newBill);
     localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
 
-    // Firestore save
+    // Firestore mein save (ab sahi se call hoga)
     if (typeof saveToFirestore === 'function') {
         saveToFirestore('history');
     }
 
-    console.log("✅ Bill saved! Total bills now:", window.billHistory.length);
+    console.log("✅ Bill successfully saved! Total bills now:", window.billHistory.length);
 }
-
 
 
       function showHistory() {
