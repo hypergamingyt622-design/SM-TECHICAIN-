@@ -1079,7 +1079,6 @@ cursor:pointer;
 
 
       document.getElementById("generateBillBtn").onclick = generateBill;
-      document.getElementById("historyBtn").onclick = showHistory;
 
       function generateBill() {
         const items = document.querySelectorAll(".item");
@@ -1146,35 +1145,42 @@ cursor:pointer;
 
 
       function saveHistory(date, total) {
-        const itemsData = [];
-        document.querySelectorAll(".item").forEach(item => {
-          const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
-          const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
-          const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-          const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+    const itemsData = [];
+    document.querySelectorAll(".item").forEach(item => {
+        const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+        const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+        const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+        const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
 
-          if (qty > 0 && rate > 0) {
+        if (qty > 0 && rate > 0) {
             itemsData.push({ name, qty, rate, price: qty * rate });
-          }
-        });
+        }
+    });
 
-        const newBill = {
-          date, customer: document.getElementById("custName").value,
-          address: document.getElementById("custAddress").value,
-          mobile: document.getElementById("phone").value,
-          total, items: itemsData
-        };
+    const newBill = {
+        date: date,
+        customer: document.getElementById("custName").value || "Unknown",
+        address: document.getElementById("custAddress").value || "",
+        mobile: document.getElementById("phone").value || "",
+        total: total,
+        items: itemsData
+    };
 
-        window.billHistory.push(newBill);
-        localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+    window.billHistory.push(newBill);
+    localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
 
-        saveToFirestore('history');   // ← yeh line add kiya
-      }
+    // Firestore mein save
+    if (typeof saveToFirestore === 'function') {
+        saveToFirestore('history');
+    }
+
+    console.log("Bill saved! Total bills now:", window.billHistory.length);
+}
 
 
 
       function showHistory() {
-        // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+       console.log("Showing history, total bills:", window.billHistory.length);
         const list = document.getElementById("historyList");
         list.innerHTML = "";
 
