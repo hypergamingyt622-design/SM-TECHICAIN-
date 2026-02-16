@@ -556,95 +556,7 @@
     display: block;
 }
 
-/* Custom Modal for Logout Confirm - Theme Match */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(8px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 3000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
 
-.modal.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    background: rgba(34, 34, 34, 0.95);
-    border: 2px solid var(--accent);
-    border-radius: 16px;
-    padding: 30px 25px;
-    max-width: 380px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.25);
-    transform: scale(0.85);
-    transition: transform 0.3s ease;
-}
-
-.modal.show .modal-content {
-    transform: scale(1);
-}
-
-.modal-content h3 {
-    color: var(--accent);
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-    letter-spacing: 0.5px;
-}
-
-.modal-content p {
-    color: #ddd;
-    margin-bottom: 25px;
-    font-size: 1.1rem;
-}
-
-.modal-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.btn-confirm, .btn-cancel {
-    padding: 12px 28px;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-
-.btn-confirm {
-    background: var(--danger);          /* red for danger action */
-    color: white;
-}
-
-.btn-confirm:hover {
-    background: #dc2626;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
-}
-
-.btn-cancel {
-    background: #444;
-    color: var(--accent2);
-}
-
-.btn-cancel:hover {
-    background: #555;
-    transform: translateY(-2px);
-}
 
   </style>
 
@@ -945,18 +857,6 @@ cursor:pointer;
     </div>
   </div>
 
-<!-- Custom Logout Confirm Modal -->
-<div id="logoutModal" class="modal" style="display:none;">
-    <div class="modal-content">
-        <h3>Logout Confirm</h3>
-        <p>Kya aap sach mein logout karna chahte hain?</p>
-        <div class="modal-buttons">
-            <button id="confirmLogout" class="btn-confirm">Haan, Logout</button>
-            <button id="cancelLogout" class="btn-cancel">Cancel</button>
-        </div>
-    </div>
-</div>
-
 
   <footer>SM Technician • 8935883863</footer>
 
@@ -993,15 +893,6 @@ cursor:pointer;
       fallExtraItems: ["Angle holder", "Batten holder", "Pendant holder", "Ceiling rose", "Round damy sheet", "Fan damy sheet", "Insulation tape", "Indicator bulb"]
     };
 
-
-
-    
-    // ================== USER DATA (Firestore se sync) ==================
-    let billHistory = [];           // ← Bill history ab yahan rahega
-    let currentUserUid = null;      // ← Login user ka UID
-
-
-
     // ================== LOAD SAVED RATES ==================
     const savedRates = JSON.parse(localStorage.getItem('smRates')) || {};
 
@@ -1023,17 +914,10 @@ cursor:pointer;
     `;
         container.appendChild(div);
 
-        div.querySelector('.rate').addEventListener('input', async (e) => {
-    savedRates[name] = e.target.value;
-    localStorage.setItem('smRates', JSON.stringify(savedRates));
-
-    // 🔥 Firestore mein save
-    if (window.currentUserUid && window.db) {
-        const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
-        const userRef = doc(window.db, "users", window.currentUserUid);
-        await setDoc(userRef, { rates: savedRates }, { merge: true });
-    }
-});
+        div.querySelector('.rate').addEventListener('input', e => {
+          savedRates[name] = e.target.value;
+          localStorage.setItem('smRates', JSON.stringify(savedRates));
+        });
       });
     });
 
@@ -1226,83 +1110,95 @@ cursor:pointer;
 
 
     function saveHistory(date, total) {
-    const itemsData = [];
-    document.querySelectorAll(".item").forEach(item => {
+      const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+
+      const itemsData = [];
+      document.querySelectorAll(".item").forEach(item => {
         const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
         const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
         const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
         const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
 
         if (qty > 0 && rate > 0) {
-            itemsData.push({ name, qty, rate, price: qty * rate });
+          itemsData.push({
+            name: name,
+            qty: qty,
+            rate: rate,
+            price: qty * rate
+          });
         }
-    });
+      });
 
-    const newBill = {
+      history.push({
         date: date,
         customer: document.getElementById("custName").value,
         address: document.getElementById("custAddress").value,
         mobile: document.getElementById("phone").value,
         total: total,
         items: itemsData
-    };
+      });
 
-    billHistory.push(newBill);
-    localStorage.setItem("smHistory", JSON.stringify(billHistory));   // backup
-
-    // 🔥 Firestore mein save
-    saveHistoryToFirestore();
-}
-
-
-
-   function showHistory() {
-    const list = document.getElementById("historyList");
-    if (!list) return;
-
-    list.innerHTML = "";
-
-    billHistory.forEach((h, i) => {
-        list.innerHTML += `
-            <div style="border:1px solid #FFD700;padding:20px;margin:15px 0;background:#111;color:#FFD;border-radius:15px;">
-                <strong>${h.date}</strong><br>
-                ${h.customer || 'Unknown'} • ${h.mobile || '-'}<br>
-                <small>Total: ₹${h.total}</small>
-                
-                <div style="margin-top:15px;">
-                    <button onclick="downloadHistoryBill(${i})">Download JPG</button>
-                    <button onclick="downloadHistoryPDF(${i})">Download PDF</button>
-                    <button onclick="deleteHistory(${i})" style="background:#ef4444;color:white;">Delete</button>
-                </div>
-            </div>`;
-    });
-
-    if (billHistory.length === 0) {
-        list.innerHTML = '<p style="text-align:center;color:#aaa;">Abhi tak koi bill nahi bana</p>';
+      localStorage.setItem("smHistory", JSON.stringify(history));
     }
-}
+
+
+
+    function showHistory() {
+      const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+      const list = document.getElementById("historyList");
+      list.innerHTML = "";
+
+      history.forEach((h, i) => {
+        list.innerHTML += `
+<div style="
+border:1px solid #FFD700;
+padding:20px;
+margin:15px 0;
+background:#111;
+color:#FFD;
+border-radius:15px;
+box-shadow:0 0 20px rgba(255,215,0,0.3);
+text-align:center;
+">
+
+  <img src="logo.png" width="70" style="margin-bottom:10px;"><br>
+  <h3 style="color:#FFD700;margin-bottom:10px;">SM Technician</h3>
+
+  <div style="text-align:left;margin-top:10px;">
+    <b>Date:</b> ${h.date}<br>
+    <b>Customer:</b> ${h.customer}<br>
+    <b>Mobile:</b> ${h.mobile || ''}<br>
+    <b>Address:</b> ${h.address}<br>
+    <b>Total:</b> ₹${h.total}
+  </div>
+
+  <div style="margin-top:15px;">
+   <button onclick="downloadHistoryBill(${i})">Download JPG</button>
+<button onclick="downloadHistoryPDF(${i})">Download PDF</button>
+<button onclick="downloadMaterialListPDF(${i})">Material List</button>
+<button onclick="deleteHistory(${i})">Delete</button>
+
+
+  </div>
+
+</div>`;
+      });
+
+      document.getElementById("historyModal").style.display = "block";
+    }
+
 
     function closeHistory() {
       document.getElementById("historyModal").style.display = "none";
     }
 
     function deleteHistory(index) {
-    if (!confirm("Is bill ko permanently delete karna chahte ho?")) {
-        return;
+      const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+      history.splice(index, 1);
+      localStorage.setItem("smHistory", JSON.stringify(history));
+      showHistory();
     }
 
-    // Local array se hatao
-    billHistory.splice(index, 1);
-
-    // Local backup bhi update (safety ke liye)
-    localStorage.setItem("smHistory", JSON.stringify(billHistory));
-
-    // Firestore mein bhi update kar do
-    saveHistoryToFirestore();
-
-    // UI refresh
-    showHistory();
-}
 
     function downloadBill() {
   const bill = document.getElementById("billContent");
@@ -1337,10 +1233,8 @@ cursor:pointer;
 
 
     function downloadHistoryBill(index) {
-      const h = billHistory[index];   // ← yeh line add karo
-// aur purani line hata do: const history = JSON.parse... 
   const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-  
+  const h = history[index];
 
   const tempDiv = document.createElement("div");
   tempDiv.style.padding = "30px";
@@ -1417,11 +1311,9 @@ cursor:pointer;
 }
 
    function downloadHistoryPDF(index) {
-    const h = billHistory[index];   // ← yeh line add karo
-// aur purani line hata do: const history = JSON.parse... 
   const { jsPDF } = window.jspdf;
   const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-  
+  const h = history[index];
 
   const pdf = new jsPDF("p", "mm", "a4");
 
@@ -1587,11 +1479,9 @@ function downloadBillPDF() {
 
 
     function downloadMaterialListPDF(index) {
-      const h = billHistory[index];   // ← yeh line add karo
-// aur purani line hata do: const history = JSON.parse... 
   const { jsPDF } = window.jspdf;
   const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-  
+  const h = history[index];
 
   const pdf = new jsPDF("p", "mm", "a4");
 
@@ -1702,11 +1592,9 @@ function openHistoryFromMenu() {
 
 
 <!-- Aapka pura website ka code upar rahega -->
-
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyBYTLHO7jZW1dHEHlW55Axpjs2duSiDMs4",
@@ -1717,123 +1605,29 @@ function openHistoryFromMenu() {
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getFirestore(app);
 
-    // ←←← YE LINE ADD KARO (db ko global bana diya)
-    window.db = db;
-
-    // Auto redirect + data load
-    onAuthStateChanged(auth, async (user) => {
+    // Auto redirect if not logged in
+    onAuthStateChanged(auth, (user) => {
         if (!user) {
             window.location.href = "login.html";
-            return;
         }
-
-        window.currentUserUid = user.uid;
-        await loadUserData(user.uid);
     });
 
-    // ... baaki functions (loadUserData, updateRatesInDOM, saveRatesToFirestore, saveHistoryToFirestore) same rakh do ...
+    // Global logout function (window pe attach kar diya)
+    window.logoutUser = function() {
+        if (confirm("Kya aap sach mein logout karna chahte hain?")) {
+            signOut(auth)
+                .then(() => {
+                    console.log("✅ Logout successful");
+                    window.location.href = "login.html";
+                })
+                .catch((error) => {
+                    console.error("Logout error:", error);
+                    alert("Logout mein problem aa rahi hai.\nPage refresh karke try karo.");
+                });
+        }
+    };
 </script>
-
-
-
-
-<!-- <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-    const firebaseConfig = { ...same as before... };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);   // ← yeh zaroori hai
-
-    // Auto redirect + data load
-    onAuthStateChanged(auth, async (user) => {
-        if (!user) {
-            window.location.href = "login.html";
-            return;
-        }
-
-        window.currentUserUid = user.uid;   // global banaya
-        await loadUserData(user.uid);
-    });
-
-    // ================== DATA LOAD FROM FIRESTORE ==================
-    async function loadUserData(uid) {
-        const userRef = doc(db, "users", uid);
-        const snap = await getDoc(userRef);
-
-        if (snap.exists()) {
-            const u = snap.data();
-
-            // Rates load
-            if (u.rates) {
-                Object.assign(savedRates, u.rates);
-                localStorage.setItem('smRates', JSON.stringify(savedRates));
-                updateRatesInDOM();
-            }
-
-            // History load
-            if (u.history) {
-                billHistory = u.history;
-                localStorage.setItem("smHistory", JSON.stringify(billHistory));
-            }
-        } else {
-            // Naya user → empty data create
-            await setDoc(userRef, {
-                uid: uid,
-                rates: {},
-                history: []
-            }, { merge: true });
-        }
-    }
-
-    // DOM mein rates set karo (fixed items ke liye)
-    function updateRatesInDOM() {
-        document.querySelectorAll('.item').forEach(item => {
-            const nameEl = item.querySelector('span');
-            if (nameEl) {
-                const name = nameEl.textContent.trim();
-                if (savedRates[name] !== undefined) {
-                    const rateInput = item.querySelector('.rate');
-                    if (rateInput) rateInput.value = savedRates[name];
-                }
-            }
-        });
-    }
-
-    // ================== FIRESTORE SAVE FUNCTIONS ==================
-    async function saveRatesToFirestore() {
-        if (!window.currentUserUid) return;
-        const userRef = doc(db, "users", window.currentUserUid);
-        try {
-            await setDoc(userRef, { rates: savedRates }, { merge: true });
-        } catch (e) { console.error("Rates save error", e); }
-    }
-
-    async function saveHistoryToFirestore() {
-    if (!window.currentUserUid) {
-        console.warn("User not logged in → history Firestore mein save nahi hoga");
-        return;
-    }
-
-    try {
-        const userRef = doc(db, "users", window.currentUserUid);
-        await setDoc(userRef, { history: billHistory }, { merge: true });
-        console.log("History Firestore mein save ho gaya");
-    } catch (err) {
-        console.error("Firestore history save fail:", err);
-        // Optional: user ko alert dikha sakte ho
-        // alert("Data save mein problem aa rahi hai. Internet check karein.");
-    }
-}
-
-    // Logout (already hai, bas confirm wala)
-    window.logoutUser = function() { ...same as before... };
-</script> -->
 
 </body>
 
