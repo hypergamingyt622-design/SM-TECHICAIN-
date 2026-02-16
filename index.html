@@ -2844,21 +2844,29 @@ document.body.classList.add("modal-active");
 
 
       // ================== DELETE BUTTON HANDLER (Event Delegation) ==================
+// ================== DELETE BUTTON HANDLER (Fixed + Reliable) ==================
 document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('delete-history-btn')) {
-        const index = parseInt(e.target.dataset.index);
+    // ←←← Yeh line important hai (text/emoji par click bhi catch karega)
+    const deleteBtn = e.target.closest('.delete-history-btn');
+    
+    if (deleteBtn) {
+        const index = parseInt(deleteBtn.dataset.index);
+        
+        if (isNaN(index)) return;
+
+        console.log("✅ Delete button clicked → Index:", index);   // debugging ke liye
 
         showPopup("Kya aap is bill ko permanently delete karna chahte hain?", () => {
-            // Delete from array
+            // Delete karo
             window.billHistory.splice(index, 1);
 
-            // Save in localStorage
+            // LocalStorage update
             localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
 
-            // Save in Firestore
+            // Firestore update
             saveHistoryToFirestore();
 
-            // Refresh history list
+            // List refresh
             showHistory();
         });
     }
