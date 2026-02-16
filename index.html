@@ -285,6 +285,34 @@
       text-align: right;
     }
 
+
+
+     #historyModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 4000;
+  overflow-y: auto;
+}
+
+
+body.modal-open {
+  overflow: hidden;              /* Scroll band */
+}
+
+body.modal-open .container,
+body.modal-open .header,
+body.modal-open footer {
+  filter: blur(6px);             /* Background blur */
+  transition: 0.3s ease;
+  pointer-events: none;          /* Click disable */
+}
+
+
+
+   
     #billContent button,
     #historyModal button {
       margin-top: 20px;
@@ -1314,6 +1342,8 @@ cursor:pointer;
         if (window.billHistory.length === 0) {
           list.innerHTML = `<p style="text-align:center; color:#aaa; padding:40px;">Abhi tak koi bill nahi bana hai</p>`;
           document.getElementById("historyModal").style.display = "block";
+document.body.classList.add("modal-open");
+
           return;
         }
 
@@ -1344,10 +1374,15 @@ cursor:pointer;
         });
 
         document.getElementById("historyModal").style.display = "block";
+document.body.classList.add("modal-open");
+
       }
+      
       function closeHistory() {
-        document.getElementById("historyModal").style.display = "none";
-      }
+  document.getElementById("historyModal").style.display = "none";
+  document.body.classList.remove("modal-open");
+}
+
 
       async function deleteHistory(index) {
 
