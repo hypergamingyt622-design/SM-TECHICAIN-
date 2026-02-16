@@ -2,372 +2,468 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>SM Technician - Point Calculator</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>SM Technician • Point Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <style>
     :root {
       --primary: #111;
       --accent: #FFD700;
       --accent2: #FFEA00;
-      --glass: rgba(255, 255, 255, 0.05);
+      --glass: rgba(255,255,255,0.06);
       --dark: #222;
+      --border: rgba(255,215,0,0.3);
     }
-
     * { margin:0; padding:0; box-sizing:border-box; }
-
     body {
       font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
+      min-height: 100dvh;
       background: #111;
       color: #fff;
+      padding: 12px;
     }
-
     .container {
       max-width: 1150px;
       margin: 25px auto;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(14px);
+      border-radius: 22px;
       overflow: hidden;
-      box-shadow: 0 0 30px rgba(0,0,0,0.8);
-      border: 1px solid rgba(255,215,0,0.3);
+      box-shadow: 0 0 40px rgba(0,0,0,0.9);
+      border: 1px solid var(--border);
+      animation: fadeInUp 0.9s ease forwards;
+      opacity: 0;
     }
-
-    .header {
-  background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-  padding: 30px 20px 20px;
-  text-align: center;
-  position: relative;
-  border-bottom: 3px solid var(--accent);
-}
-
-
-.logo {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #FFD700;
-  box-shadow:
-    0 0 20px rgba(255,215,0,0.6),
-    0 0 45px rgba(255,215,0,0.4);
-  animation: floatLogo 3s ease-in-out infinite;
-  transition: 0.4s;
-}
-
-.logo:hover {
-  transform: scale(1.08);
-}
-
-@keyframes floatLogo {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
-}
-
-
-
-
-
-
-    .header h1 {
-      font-size: 2.3rem;
-      color: var(--accent);
-      margin: 5px 0;
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(40px); }
+      to { opacity:1; transform:translateY(0); }
     }
-
-    .header h2 {
-      color: var(--accent2);
-      font-size: 1.4rem;
-      margin-top: 5px;
-    }
-
-    .reset-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 10px 22px;
-  background: linear-gradient(135deg, #ef4444, #b91c1c);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 0.95rem;
-  box-shadow: 0 6px 20px rgba(239,68,68,0.5);
-  transition: 0.3s;
-}
-
-.reset-btn:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(239,68,68,0.8);
-}
-
-
-
-
-    .big-title {
+    header {
+      background: #111;
+      padding: 32px 20px;
       text-align: center;
-      padding: 18px;
-      font-size: 1.4rem;
-      font-weight: 600;
-      background: #222;
-      border-left: 6px solid var(--accent);
-      margin: 15px 18px;
+      position: relative;
+      border-bottom: 3px solid var(--accent);
+    }
+    .logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 30px rgba(255,215,0,0.6);
+      margin-bottom: 12px;
+      animation: floatLogo 3.5s ease-in-out infinite;
+    }
+    @keyframes floatLogo {
+      0%,100% { transform:translateY(0); }
+      50% { transform:translateY(-10px); }
+    }
+    h1 {
+      font-size: 2.45rem;
+      font-weight: 700;
       color: var(--accent);
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
-
-    .total-card {
-  margin: 0 18px 30px;
-  background: linear-gradient(145deg, rgba(255,215,0,0.12), rgba(0,0,0,0.7));
-  border: 2px solid var(--accent);
-  border-radius: 20px;
-  padding: 30px;
-  text-align: center;
-  box-shadow: inset 0 0 20px rgba(255,215,0,0.25);
-}
-
-
-    .total-card h2 { color: var(--accent2); margin-bottom: 10px; font-size: 1.5rem; }
-
-    #totalPoints {
-      font-size: 4.5rem;
-      font-weight: 700;
-      color: #FFD700;
-      text-shadow: 0 0 25px rgba(255,215,0,0.7);
-      transition: all 0.4s;
+    h2 {
+      font-size: 1.35rem;
+      color: var(--accent2);
+      margin-top: 6px;
     }
-
-    .items { padding: 0 18px 40px; }
-
+    .controls {
+      position: absolute;
+      top: 22px;
+      display: flex;
+      gap: 12px;
+    }
+    .controls.left { left: 22px; }
+    .controls.right { right: 22px; }
+    .btn {
+      padding: 11px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    .btn-back { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #111; }
+    .btn-reset { background: linear-gradient(135deg, #ef4444, #b91c1c); color: white; }
+    .btn:hover { transform: translateY(-3px) scale(1.04); }
+    .btn:active { transform: scale(0.94); }
+    .summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr 210px;
+      gap: 20px;
+      padding: 30px 24px;
+      background: #1a1a1a;
+    }
+    .summary-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 18px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+    }
+    .summary-card:hover { transform: translateY(-4px); }
+    .summary-card h3 {
+      color: var(--accent2);
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    #totalPoints, #totalAmount {
+      font-size: 3.7rem;
+      font-weight: 800;
+      line-height: 1;
+      transition: all 0.4s ease;
+    }
+    #totalPoints { color: var(--accent); }
+    #totalAmount { color: #34d399; }
+    #masterRate {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 12px;
+      color: var(--accent);
+    }
+    .items-list {
+      padding: 10px 24px 40px;
+    }
     .item {
-  display: grid;
-  grid-template-columns: 2.5fr 170px 120px 140px;
-  gap: 18px;
-  padding: 18px 0;
-  border-bottom: 1px dashed rgba(255,215,0,0.25);
-  align-items: center;
-}
-
-
-    .item span { font-weight: 500; color: #fff; font-size: 1.05rem; }
-
-    .point-value { color: var(--accent2); font-weight: 600; font-size: 1.1rem; }
-
-    .subtotal {
-      font-weight: 700;
-      color: #FFD700;
-      text-align: right;
-      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px dashed rgba(255,215,0,0.2);
+      gap: 20px;
+      opacity: 0;
+      animation: itemFadeIn 0.6s forwards;
+      transition: all 0.3s ease;
     }
-
+    .item:hover {
+      transform: translateX(8px);
+      background: rgba(255,215,0,0.03);
+    }
+    .item-name {
+      flex: 1;
+      font-size: 1.08rem;
+      font-weight: 500;
+    }
+    .point-value {
+      color: var(--accent2);
+      font-weight: 600;
+      min-width: 110px;
+      text-align: center;
+    }
     .counter {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-   .btn {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #FFD700, #FFEA00);
-  border: none;
-  color: #111;
-  font-size: 1.8rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow:
-    5px 5px 12px rgba(0,0,0,0.5),
-    -5px -5px 12px rgba(255,215,0,0.3);
-  transition: 0.2s ease;
-}
-
-.btn:hover {
-  transform: scale(1.15);
-  box-shadow:
-    0 0 15px rgba(255,215,0,0.8);
-}
-
-.btn:active {
-  transform: scale(0.95);
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
-}
-
-
-@media (max-width: 768px) {
-  .header h1 { font-size: 1.8rem; }
-  .header h2 { font-size: 1.2rem; }
-  .logo { width: 110px; }
-  .item { gap: 10px; }
-}
-
-
-
-    .qty {
-      width: 70px;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #444;
       background: #222;
-      color: #FFD;
+      border: 1px solid #444;
+      border-radius: 12px;
+      padding: 4px;
+    }
+    .counter-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #111;
+      border: none;
+      font-size: 1.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .counter-btn:active {
+      transform: scale(0.85);
+    }
+    .qty {
+      width: 74px;
       text-align: center;
-      font-size: 1.3rem;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.45rem;
+      font-weight: 600;
     }
-
+    .item-total {
+      font-weight: 600;
+      color: #fff;
+      min-width: 150px;
+      text-align: right;
+      font-size: 1.18rem;
+    }
+    .download-btn {
+      display: block;
+      margin: 30px auto 45px;
+      padding: 16px 52px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      background: var(--accent);
+      color: #111;
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(255,215,0,0.6);
+      cursor: pointer;
+      animation: pulseGlow 2.5s infinite;
+    }
+    .download-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 15px 40px rgba(255,215,0,0.8);
+    }
+    @keyframes itemFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(255,215,0,0.5); }
+      50% { box-shadow: 0 0 35px rgba(255,215,0,0.9); }
+    }
     @media (max-width: 768px) {
-      .logo { width: 110px; }
-      .header h1 { font-size: 2rem; }
-      .item { grid-template-columns: 1fr; gap: 12px; }
-      .subtotal { text-align: left; }
-      #totalPoints { font-size: 3.5rem; }
-      .qty { font-size: 1.4rem; padding: 12px; }
-      .btn { width: 55px; height: 55px; font-size: 1.8rem; }
+      .summary { grid-template-columns: 1fr; gap: 16px; }
+      .item { flex-direction: column; align-items: stretch; text-align: center; }
+      .point-value, .item-total { text-align: center; width: 100%; margin: 10px 0; }
+      .counter { margin: 12px auto; max-width: 300px; }
+      .logo { width: 92px; height: 92px; }
+      h1 { font-size: 2.1rem; }
     }
-
-    .back-btn {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 10px 22px;
-  background: linear-gradient(135deg, #FFD700, #FFEA00);
-  color: #111;
-  border: none;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 0.95rem;
-  box-shadow: 0 6px 20px rgba(255,215,0,0.5);
-  transition: 0.3s;
-}
-
-.back-btn:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(255,215,0,0.8);
-}
-
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="header">
-      <!-- Logo yahan add kiya gaya hai -->
-      <img src="logo.png" alt="SM Technician Logo" class="logo">
-      <!-- Agar logo local file hai to: src="logo.png" (same folder mein rakho) -->
-
-      <h1>SM Technician</h1>
-      <h2>Electrical Point Calculator ⚡</h2>
-      <button class="back-btn" onclick="goBack()">⬅ Back</button>
-      <button class="reset-btn" onclick="resetCalculator()">Reset All</button>
+<div class="container">
+  <header>
+    <img src="logo.png" alt="SM Technician" class="logo">
+    <h1>SM Technician</h1>
+    <h2>Electrical Point Calculator ⚡</h2>
+    <div class="controls left">
+      <button class="btn btn-back" onclick="history.back()">← Back</button>
     </div>
+    <div class="controls right">
+      <button class="btn btn-reset" onclick="resetAll()">Reset All</button>
+    </div>
+  </header>
 
-    <div class="big-title">POINT CALCULATION SYSTEM</div>
-
-    <div class="total-card">
-      <h2>TOTAL POINTS</h2>
+  <div class="summary">
+    <div class="summary-card">
+      <h3>Total Points</h3>
       <div id="totalPoints">0</div>
     </div>
-
-    <div class="items" id="itemsContainer"></div>
+    <div class="summary-card">
+      <h3>Total Amount</h3>
+      <div id="totalAmount">Rs. 0</div>
+    </div>
+    <div class="summary-card rate">
+      <h3>Rate per Point (Rs.)</h3>
+      <input type="number" id="masterRate" placeholder="0.00" min="0" step="0.01" onchange="calculateTotal()">
+    </div>
   </div>
 
-  <script>
-    const materials = [
-      { name: "Bulb holder / ceiling rose / panel light / COB light", point: 1 },
-      { name: "Two way switch", point: 2 },
-      { name: "Regulator with switch", point: 2 },
-      { name: "Regulator with switch (Fan)", point: 2 },
-      { name: "Fan switch", point: 1 },
-      { name: "6Amp socket with switch", point: 1 },
-      { name: "16Amp socket with switch", point: 2 },
-      { name: "Indicator", point: 1 },
-      { name: "Bell switch", point: 1 },
-      { name: "DP switch", point: 2 },
-      { name: "USB", point: 1 },
-      { name: "MCB", point: 2 },
-      { name: "2pole MCB", point: 4 },
-      { name: "4pole MCB / MCCB", point: 8 },
-      { name: "Isolator", point: 2 },
-      { name: "4pole Isolator", point: 8 },
-      { name: "2pole RCCB / ELCB / RCBO", point: 4 },
-      { name: "4pole RCCB / ELCB / RCBO", point: 8 },
-      { name: "1Phase + 1Neutral circuit wiring (switch board to MCB)", point: 5 },
-      { name: "1 Earthing wiring (switch board to MCB)", point: 1 },
-      { name: "1 Inverter wiring (switch board to MCB)", point: 1 },
-      { name: "1 Dish TV wiring (switch board to MCB)", point: 4 }
-    ];
+  <div class="items-list" id="items"></div>
 
-    const container = document.getElementById('itemsContainer');
-    const totalEl = document.getElementById('totalPoints');
+  <button class="download-btn" onclick="downloadPDF()">📄 Download PDF Report</button>
+</div>
 
-    materials.forEach((mat) => {
-      const itemDiv = document.createElement('div');
-      itemDiv.className = 'item';
-      itemDiv.innerHTML = `
-        <span>${mat.name}</span>
-        <div class="counter">
-          <button class="btn" onclick="changeQty(this, -1)">−</button>
-          <input type="number" class="qty" value="0" min="0" data-point="${mat.point}" oninput="calculateTotal()">
-          <button class="btn" onclick="changeQty(this, 1)">+</button>
-        </div>
-        <span class="point-value">${mat.point} point${mat.point > 1 ? 's' : ''}</span>
-        <span class="subtotal">0 points</span>
-      `;
-      container.appendChild(itemDiv);
-    });
+<script>
+const itemsData = [
+  { name: "Bulb holder / ceiling rose", point: 1 },
+  { name: "panel light / COB light", point: 1 },
+  { name: "Two way switch", point: 2 },
+  { name: "Regulator with switch", point: 2 },
+  { name: "Regulator with switch (Fan)", point: 2 },
+  { name: "Fan switch", point: 1 },
+  { name: "6 Amp socket with switch", point: 1 },
+  { name: "16 Amp socket with switch", point: 2 },
+  { name: "Indicator", point: 1 },
+  { name: "Bell switch", point: 1 },
+  { name: "DP switch", point: 2 },
+  { name: "USB socket", point: 1 },
+  { name: "MCB (single pole)", point: 2 },
+  { name: "2 pole MCB", point: 4 },
+  { name: "4 pole MCB / MCCB", point: 8 },
+  { name: "Isolator", point: 2 },
+  { name: "4 pole Isolator", point: 8 },
+  { name: "2 pole RCCB / ELCB / RCBO", point: 4 },
+  { name: "4 pole RCCB / ELCB / RCBO", point: 8 },
+  { name: "1Ø + 1N circuit wiring (switch board to MCB)", point: 5 },
+  { name: "1 Earthing wiring (switch board to MCB)", point: 1 },
+  { name: "1 Inverter wiring (switch board to MCB)", point: 1 },
+  { name: "1 Dish TV / DTH wiring (switch board to MCB)", point: 4 }
+];
 
-    function changeQty(btn, delta) {
-      const input = btn.parentElement.querySelector('.qty');
-      let val = parseInt(input.value) || 0;
-      val = Math.max(0, val + delta);
-      input.value = val;
-      calculateTotal();
-    }
+const container = document.getElementById('items');
+const totalPointsEl = document.getElementById('totalPoints');
+const totalAmountEl = document.getElementById('totalAmount');
+const rateInput = document.getElementById('masterRate');
 
-    function calculateTotal() {
-      let grandTotal = 0;
+itemsData.forEach((item, index) => {
+  const div = document.createElement('div');
+  div.className = 'item';
+  div.style.animationDelay = `${index * 60}ms`;
+  div.innerHTML = `
+    <div class="item-name">${item.name}</div>
+    <div class="point-value">${item.point} pt${item.point>1?'s':''}</div>
+    <div class="counter">
+      <button class="counter-btn" onclick="change(this,-1)">−</button>
+      <input type="number" class="qty" value="0" min="0" data-point="${item.point}" onchange="calculateTotal()">
+      <button class="counter-btn" onclick="change(this,1)">+</button>
+    </div>
+    <div class="item-total">Rs. 0.00</div>
+  `;
+  container.appendChild(div);
+});
 
-      document.querySelectorAll('.item').forEach(item => {
-        const qty = parseInt(item.querySelector('.qty').value) || 0;
-        const point = parseFloat(item.querySelector('.qty').dataset.point) || 0;
-        const sub = qty * point;
-
-        item.querySelector('.subtotal').textContent = `${sub} points`;
-        grandTotal += sub;
-      });
-
-      animateNumber(totalEl, parseInt(totalEl.textContent) || 0, grandTotal, 500);
-    }
-
-    function animateNumber(el, start, end, duration) {
-      let startTime = null;
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / duration, 1);
-        const current = Math.floor(progress * (end - start) + start);
-        el.textContent = current;
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-
-    function resetCalculator() {
-      document.querySelectorAll('.qty').forEach(input => input.value = 0);
-      calculateTotal();
-    }
-
-    function goBack() {
-  window.location.href = "index.html";
+function change(btn, delta) {
+  const input = btn.parentElement.querySelector('.qty');
+  let v = parseInt(input.value) || 0;
+  input.value = Math.max(0, v + delta);
+  calculateTotal();
 }
 
+function animateValue(el, start, end, duration) {
+  let startTime = null;
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const current = Math.floor(progress * (end - start) + start);
+    el.textContent = current;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
 
-    calculateTotal();
-  </script>
+function calculateTotal() {
+  const rate = parseFloat(rateInput.value) || 0;
+  let pointsSum = 0;
+  let moneySum = 0;
+
+  document.querySelectorAll('.item').forEach(item => {
+    const qty = parseInt(item.querySelector('.qty').value) || 0;
+    const pt = parseFloat(item.querySelector('.qty').dataset.point) || 0;
+    const money = qty * pt * rate;
+    item.querySelector('.item-total').textContent = `Rs. ${money.toFixed(2)}`;
+    pointsSum += qty * pt;
+    moneySum += money;
+  });
+
+  animateValue(totalPointsEl, parseInt(totalPointsEl.textContent) || 0, pointsSum, 600);
+  animateValue(totalAmountEl, 0, moneySum, 700);
+}
+
+function resetAll() {
+  document.querySelectorAll('.qty').forEach(el => el.value = '0');
+  rateInput.value = '';
+  calculateTotal();
+}
+
+function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF("p", "mm", "a4");
+  const pageWidth = doc.internal.pageSize.getWidth();
+  let y = 15;
+
+  // Logo center
+  try {
+    doc.addImage("logo.png", "PNG", pageWidth / 2 - 18, y, 36, 36);
+  } catch (e) {}
+
+  y += 45;
+
+  // Company name
+  doc.setFontSize(18);
+  doc.text("SM Technician", pageWidth / 2, y, { align: "center" });
+
+  y += 8;
+
+  // Mobile
+  doc.setFontSize(12);
+  doc.text("Mobile No: 8935883863", pageWidth / 2, y, { align: "center" });
+
+  y += 12;
+
+  // Line
+  doc.line(20, y, pageWidth - 20, y);
+
+  y += 15;
+
+  // Rate per Point
+  const rate = parseFloat(rateInput.value) || 0;
+  doc.setFontSize(11);
+  doc.text("Rate per Point: Rs. " + rate.toFixed(2), 20, y);
+
+  y += 12;
+
+  // Table header
+  doc.setFontSize(12);
+  doc.text("Sl", 25, y);
+  doc.text("Item", 45, y);
+  doc.text("Point", 165, y);
+
+  y += 8;
+
+  // Underline
+  doc.line(20, y, pageWidth - 20, y);
+
+  y += 10;
+
+  let sl = 1;
+  let totalPoint = 0;
+  let grandTotal = 0;
+  let hasData = false;
+
+  document.querySelectorAll('.item').forEach(item => {
+    const qty = parseInt(item.querySelector('.qty').value) || 0;
+    if (qty <= 0) return;
+
+    hasData = true;
+    const name = item.querySelector('.item-name').textContent;
+    const pt = parseFloat(item.querySelector('.qty').dataset.point) || 0;
+
+    if (y > 270) {
+      doc.addPage();
+      y = 20;
+    }
+
+    doc.setFontSize(11);
+    doc.text(sl.toString(), 25, y);
+    doc.text(name, 45, y);
+    doc.text(qty.toString(), 165, y);
+
+    totalPoint += qty;
+    grandTotal += qty * pt * rate;
+
+    sl++;
+    y += 10;
+  });
+
+  // Footer totals
+  if (hasData) {
+    y += 12;
+    doc.setFontSize(11);
+    doc.text("Total Points:", 25, y);
+    doc.text(totalPoint.toString(), 165, y);
+
+    y += 10;
+    doc.setFontSize(13);
+    doc.text("Grand Total:", 25, y);
+    doc.text("Rs. " + grandTotal.toLocaleString('en-IN', {minimumFractionDigits:2}), pageWidth - 30, y, { align: "right" });
+  } else {
+    y += 12;
+    doc.setFontSize(11);
+    doc.text("No items with quantity > 0", 25, y);
+  }
+
+  doc.save("SM_Technician_Point_Report.pdf");
+}
+
+// Initial calculation
+calculateTotal();
+</script>
 </body>
 </html>
