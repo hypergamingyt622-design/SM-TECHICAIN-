@@ -922,7 +922,7 @@ cursor:pointer;
       };
 
       // ================== LOAD SAVED RATES ==================
-      const savedRates = JSON.parse(localStorage.getItem('smRates')) || {};
+      // const savedRates = JSON.parse(localStorage.getItem('smRates')) || {};
 
       // Populate all items
       Object.keys(data).forEach(key => {
@@ -942,20 +942,15 @@ cursor:pointer;
     `;
           container.appendChild(div);
 
-          div.querySelector('.rate').addEventListener('input', async e => {
+          div.querySelector('.rate').addEventListener('input', async (e) => {
+    savedRates[name] = e.target.value;
+    localStorage.setItem('smRates', JSON.stringify(savedRates));
 
-            const value = e.target.value;
-
-            // Local storage hata bhi sakte ho baad me
-            savedRates[name] = value;
-
-            if (currentUser) {
-              await setDoc(doc(db, "users", currentUser.uid), {
-                rates: savedRates
-              }, { merge: true });
-            }
-
-          });
+    // Firestore mein save
+    if (window.currentUserUid) {
+        saveToFirestore('rates');
+    }
+});
 
         });
       });
@@ -1149,45 +1144,39 @@ cursor:pointer;
 
 
       function saveHistory(date, total) {
-        const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+    const itemsData = [];
+    document.querySelectorAll(".item").forEach(item => {
+        const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+        const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+        const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+        const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
 
-        const itemsData = [];
-        document.querySelectorAll(".item").forEach(item => {
-          const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
-          const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
-          const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-          const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+        if (qty > 0 && rate > 0) {
+            itemsData.push({ name, qty, rate, price: qty * rate });
+        }
+    });
 
-          if (qty > 0 && rate > 0) {
-            itemsData.push({
-              name: name,
-              qty: qty,
-              rate: rate,
-              price: qty * rate
-            });
-          }
-        });
+    const newBill = {
+        date, customer: document.getElementById("custName").value,
+        address: document.getElementById("custAddress").value,
+        mobile: document.getElementById("phone").value,
+        total, items: itemsData
+    };
 
-        history.push({
-          date: date,
-          customer: document.getElementById("custName").value,
-          address: document.getElementById("custAddress").value,
-          mobile: document.getElementById("phone").value,
-          total: total,
-          items: itemsData
-        });
+    window.billHistory.push(newBill);
+    localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
 
-        localStorage.setItem("smHistory", JSON.stringify(history));
-      }
+    saveToFirestore('history');   // ← yeh line add kiya
+}
 
 
 
       function showHistory() {
-        const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+        // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
         const list = document.getElementById("historyList");
         list.innerHTML = "";
-
-        history.forEach((h, i) => {
+        
+        window.billHistory.forEach((h, i) => {
           list.innerHTML += `
 <div style="
 border:1px solid #FFD700;
@@ -1222,6 +1211,10 @@ text-align:center;
 
 </div>`;
         });
+        if (window.billHistory.length === 0) {
+        list.innerHTML = '<p style="text-align:center;color:#aaa;">Koi bill nahi hai</p>';
+    }
+
 
         document.getElementById("historyModal").style.display = "block";
       }
@@ -1232,11 +1225,12 @@ text-align:center;
       }
 
       function deleteHistory(index) {
-        const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-        history.splice(index, 1);
-        localStorage.setItem("smHistory", JSON.stringify(history));
-        showHistory();
-      }
+    if (!confirm("Delete karna hai?")) return;
+    window.billHistory.splice(index, 1);
+    localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+    saveToFirestore('history');
+    showHistory();
+}
 
 
       function downloadBill() {
@@ -1272,8 +1266,8 @@ text-align:center;
 
 
       function downloadHistoryBill(index) {
-        const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-        const h = history[index];
+        // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+        const h = window.billHistory[index];
 
         const tempDiv = document.createElement("div");
         tempDiv.style.padding = "30px";
@@ -1351,8 +1345,8 @@ text-align:center;
 
       function downloadHistoryPDF(index) {
         const { jsPDF } = window.jspdf;
-        const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-        const h = history[index];
+        // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+        const h = window.billHistory[index];
 
         const pdf = new jsPDF("p", "mm", "a4");
 
@@ -1519,8 +1513,8 @@ text-align:center;
 
       function downloadMaterialListPDF(index) {
         const { jsPDF } = window.jspdf;
-        const history = JSON.parse(localStorage.getItem("smHistory")) || [];
-        const h = history[index];
+        // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+        const h = window.billHistory[index];
 
         const pdf = new jsPDF("p", "mm", "a4");
 
@@ -1632,115 +1626,102 @@ text-align:center;
 
     <!-- Aapka pura website ka code upar rahega -->
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-      import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-
-      const firebaseConfig = {
+    const firebaseConfig = {
         apiKey: "AIzaSyBYTLHO7jZW1dHEHlW55Axpjs2duSiDMs4",
         authDomain: "sm-technician-d4b8d.firebaseapp.com",
         projectId: "sm-technician-d4b8d",
         appId: "1:716505252423:web:fd557961c7c8eef03f6762"
-      };
+    };
 
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-      window.saveRateToFirestore = async function () {
+    // Global banaya taaki normal script access kar sake
+    window.db = db;
+    window.currentUserUid = null;
+    window.billHistory = [];
 
-        const rateValue = document.getElementById("rateInput").value;
-
-        if (!currentUser) {
-          alert("User not logged in!");
-          return;
-        }
-
-        await setDoc(doc(db, "users", currentUser.uid), {
-          rate: rateValue
-        }, { merge: true });
-
-        alert("Rate Saved Successfully!");
-      };
-
-
-      async function loadRateFromFirestore() {
-
-        if (!currentUser) return;
-
-        const docRef = doc(db, "users", currentUser.uid);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-
-          if (data.rates) {
-            Object.assign(savedRates, data.rates);
-
-            document.querySelectorAll(".item").forEach(item => {
-              const nameEl = item.querySelector("span");
-              const rateInput = item.querySelector(".rate");
-
-              if (nameEl && rateInput) {
-                const itemName = nameEl.textContent;
-                if (data.rates[itemName]) {
-                  rateInput.value = data.rates[itemName];
-                }
-              }
-            });
-          }
-        }
-      }
-
-
-
-
-      let currentUser = null;
-
-      onAuthStateChanged(auth, (user) => {
-
-        if (user) {
-          currentUser = user;
-          console.log("Logged in as:", user.email);
-
-
-          // 🔥 YEH ADD KARO
-          loadRateFromFirestore();
-          // Yaha Firestore data load functions call karna
-          // loadRatesFromFirestore();
-          // loadHistoryFromFirestore();
-
-        } else {
-          window.location.href = "login.html";
-        }
-
-      });
-
-
-
-      // Auto redirect if not logged in
-      onAuthStateChanged(auth, (user) => {
+    // Auto redirect + data load
+    onAuthStateChanged(auth, async (user) => {
         if (!user) {
-          window.location.href = "login.html";
+            window.location.href = "login.html";
+            return;
         }
-      });
 
-      // Global logout function (window pe attach kar diya)
-      window.logoutUser = function () {
-        if (confirm("Kya aap sach mein logout karna chahte hain?")) {
-          signOut(auth)
-            .then(() => {
-              console.log("✅ Logout successful");
-              window.location.href = "login.html";
-            })
-            .catch((error) => {
-              console.error("Logout error:", error);
-              alert("Logout mein problem aa rahi hai.\nPage refresh karke try karo.");
-            });
+        window.currentUserUid = user.uid;
+        await loadUserData(user.uid);
+    });
+
+    // ================== FIRESTORE SE DATA LOAD ==================
+    async function loadUserData(uid) {
+        const userRef = doc(db, "users", uid);
+        const snap = await getDoc(userRef);
+
+        if (snap.exists()) {
+            const data = snap.data();
+
+            // Rates load
+            if (data.rates) {
+                Object.assign(savedRates, data.rates);
+                localStorage.setItem('smRates', JSON.stringify(savedRates));
+                updateRatesInDOM();
+            }
+
+            // History load
+            if (data.history) {
+                window.billHistory = data.history;
+                localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+            }
+        } else {
+            // Naya user
+            await setDoc(userRef, { rates: {}, history: [] }, { merge: true });
         }
-      };
-    </script>
+    }
+
+    function updateRatesInDOM() {
+        document.querySelectorAll('.item').forEach(item => {
+            const nameEl = item.querySelector('span');
+            if (nameEl) {
+                const name = nameEl.textContent.trim();
+                if (savedRates[name] !== undefined) {
+                    const rateInput = item.querySelector('.rate');
+                    if (rateInput) rateInput.value = savedRates[name];
+                }
+            }
+        });
+    }
+
+    // ================== FIRESTORE SAVE ==================
+    async function saveToFirestore(type) {
+        if (!window.currentUserUid) return;
+
+        const userRef = doc(db, "users", window.currentUserUid);
+        try {
+            if (type === 'rates') {
+                await setDoc(userRef, { rates: savedRates }, { merge: true });
+            } else if (type === 'history') {
+                await setDoc(userRef, { history: window.billHistory }, { merge: true });
+            }
+            console.log(type + " saved to Firestore");
+        } catch (e) {
+            console.error("Firestore save error:", e);
+        }
+    }
+
+    // Logout
+    window.logoutUser = function() {
+        if (confirm("Kya aap sach mein logout karna chahte hain?")) {
+            signOut(auth).then(() => {
+                window.location.href = "login.html";
+            }).catch(err => alert("Logout error: " + err.message));
+        }
+    };
+</script>
 
 </body>
 
