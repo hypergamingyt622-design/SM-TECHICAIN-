@@ -1662,7 +1662,7 @@ cursor:pointer;
 
         <div id="historyList"></div>
 
-        <button onclick="closeHistory(); event.stopImmediatePropagation();">Close</button>
+        <button onclick="closeHistory()">Close</button>
 
       </div>
 
@@ -2843,9 +2843,10 @@ document.body.classList.add("modal-active");
 
 
 
+
 // ================== DELETE BUTTON HANDLER (Fixed + Reliable) ==================
-// ================== DELETE BUTTON HANDLER (Only inside History Modal) ==================
-document.getElementById('historyModal').addEventListener('click', function (e) {
+document.addEventListener('click', function (e) {
+    // ←←← Yeh line important hai (text/emoji par click bhi catch karega)
     const deleteBtn = e.target.closest('.delete-history-btn');
     
     if (deleteBtn) {
@@ -2853,11 +2854,20 @@ document.getElementById('historyModal').addEventListener('click', function (e) {
         
         if (isNaN(index)) return;
 
+        console.log("✅ Delete button clicked → Index:", index);   // debugging ke liye
+
         showPopup("Kya aap is bill ko permanently delete karna chahte hain?", () => {
+            // Delete karo
             window.billHistory.splice(index, 1);
+
+            // LocalStorage update
             localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+
+            // Firestore update
             saveHistoryToFirestore();
-            showHistory();        // list refresh
+
+            // List refresh
+            showHistory();
         });
     }
 });
