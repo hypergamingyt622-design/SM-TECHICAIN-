@@ -942,13 +942,15 @@ cursor:pointer;
     `;
           container.appendChild(div);
 
-          div.querySelector('.rate').addEventListener('input', async (e) => {
+        div.querySelector('.rate').addEventListener('input', async (e) => {
     savedRates[name] = e.target.value;
     localStorage.setItem('smRates', JSON.stringify(savedRates));
 
-    // Firestore mein save
-    if (window.currentUserUid) {
-        saveToFirestore('rates');
+    // Firestore save (safe version)
+    if (window.currentUserUid && window.db) {
+        const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+        const userRef = doc(window.db, "users", window.currentUserUid);
+        await setDoc(userRef, { rates: savedRates }, { merge: true });
     }
 });
 
@@ -1625,7 +1627,7 @@ text-align:center;
 
 
     <!-- Aapka pura website ka code upar rahega -->
-    <script type="module">
+   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -1641,12 +1643,12 @@ text-align:center;
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // Global banaya taaki normal script access kar sake
+    // Global variables (normal script ke liye)
     window.db = db;
     window.currentUserUid = null;
     window.billHistory = [];
 
-    // Auto redirect + data load
+    // Auth state + data load
     onAuthStateChanged(auth, async (user) => {
         if (!user) {
             window.location.href = "login.html";
@@ -1657,29 +1659,32 @@ text-align:center;
         await loadUserData(user.uid);
     });
 
-    // ================== FIRESTORE SE DATA LOAD ==================
+    // Load data from Firestore
     async function loadUserData(uid) {
-        const userRef = doc(db, "users", uid);
-        const snap = await getDoc(userRef);
+        try {
+            const userRef = doc(db, "users", uid);
+            const snap = await getDoc(userRef);
 
-        if (snap.exists()) {
-            const data = snap.data();
+            if (snap.exists()) {
+                const data = snap.data();
 
-            // Rates load
-            if (data.rates) {
-                Object.assign(savedRates, data.rates);
-                localStorage.setItem('smRates', JSON.stringify(savedRates));
-                updateRatesInDOM();
+                // Rates
+                if (data.rates) {
+                    Object.assign(savedRates, data.rates);
+                    localStorage.setItem('smRates', JSON.stringify(savedRates));
+                    updateRatesInDOM();
+                }
+
+                // History
+                if (data.history) {
+                    window.billHistory = data.history;
+                    localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+                }
+            } else {
+                await setDoc(userRef, { rates: {}, history: [] }, { merge: true });
             }
-
-            // History load
-            if (data.history) {
-                window.billHistory = data.history;
-                localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
-            }
-        } else {
-            // Naya user
-            await setDoc(userRef, { rates: {}, history: [] }, { merge: true });
+        } catch (e) {
+            console.error("Load error:", e);
         }
     }
 
@@ -1696,20 +1701,18 @@ text-align:center;
         });
     }
 
-    // ================== FIRESTORE SAVE ==================
+    // Save to Firestore
     async function saveToFirestore(type) {
         if (!window.currentUserUid) return;
-
-        const userRef = doc(db, "users", window.currentUserUid);
         try {
+            const userRef = doc(db, "users", window.currentUserUid);
             if (type === 'rates') {
                 await setDoc(userRef, { rates: savedRates }, { merge: true });
             } else if (type === 'history') {
                 await setDoc(userRef, { history: window.billHistory }, { merge: true });
             }
-            console.log(type + " saved to Firestore");
         } catch (e) {
-            console.error("Firestore save error:", e);
+            console.error("Save error:", e);
         }
     }
 
