@@ -214,7 +214,9 @@
         getAuth, 
         signInWithPopup, 
         GoogleAuthProvider, 
-        onAuthStateChanged 
+        onAuthStateChanged,
+        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     
     // Firestore imports
@@ -314,6 +316,34 @@
             button.disabled = false;
         }
     };
+
+    // Email Signup
+window.signup = async function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const userCred = await createUserWithEmailAndPassword(auth, email, password);
+        alert("Account Created!");
+        window.location.href = "index.html";
+    } catch (error) {
+        alert(error.message);
+    }
+};
+
+// Email Login
+window.login = async function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = "index.html";
+    } catch (error) {
+        alert(error.message);
+    }
+};
+
 
     // Keyboard shortcut
     document.addEventListener('keydown', (e) => {
