@@ -921,8 +921,8 @@ cursor:pointer;
         fallExtraItems: ["Angle holder", "Batten holder", "Pendant holder", "Ceiling rose", "Round damy sheet", "Fan damy sheet", "Insulation tape", "Indicator bulb"]
       };
 
-      // ================== LOAD SAVED RATES ==================
-      // const savedRates = JSON.parse(localStorage.getItem('smRates')) || {};
+      // ←←← YE LINE ADD KARO (commented wali hata do)
+      const savedRates = JSON.parse(localStorage.getItem('smRates')) || {};
 
       // Populate all items
       Object.keys(data).forEach(key => {
@@ -942,17 +942,17 @@ cursor:pointer;
     `;
           container.appendChild(div);
 
-        div.querySelector('.rate').addEventListener('input', async (e) => {
-    savedRates[name] = e.target.value;
-    localStorage.setItem('smRates', JSON.stringify(savedRates));
+          div.querySelector('.rate').addEventListener('input', async (e) => {
+            savedRates[name] = e.target.value;
+            localStorage.setItem('smRates', JSON.stringify(savedRates));
 
-    // Firestore save (safe version)
-    if (window.currentUserUid && window.db) {
-        const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
-        const userRef = doc(window.db, "users", window.currentUserUid);
-        await setDoc(userRef, { rates: savedRates }, { merge: true });
-    }
-});
+            // Firestore mein save
+            if (window.currentUserUid && window.db) {
+              const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+              const userRef = doc(window.db, "users", window.currentUserUid);
+              await setDoc(userRef, { rates: savedRates }, { merge: true });
+            }
+          });
 
         });
       });
@@ -1146,30 +1146,30 @@ cursor:pointer;
 
 
       function saveHistory(date, total) {
-    const itemsData = [];
-    document.querySelectorAll(".item").forEach(item => {
-        const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
-        const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
-        const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-        const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+        const itemsData = [];
+        document.querySelectorAll(".item").forEach(item => {
+          const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+          const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+          const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+          const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
 
-        if (qty > 0 && rate > 0) {
+          if (qty > 0 && rate > 0) {
             itemsData.push({ name, qty, rate, price: qty * rate });
-        }
-    });
+          }
+        });
 
-    const newBill = {
-        date, customer: document.getElementById("custName").value,
-        address: document.getElementById("custAddress").value,
-        mobile: document.getElementById("phone").value,
-        total, items: itemsData
-    };
+        const newBill = {
+          date, customer: document.getElementById("custName").value,
+          address: document.getElementById("custAddress").value,
+          mobile: document.getElementById("phone").value,
+          total, items: itemsData
+        };
 
-    window.billHistory.push(newBill);
-    localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+        window.billHistory.push(newBill);
+        localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
 
-    saveToFirestore('history');   // ← yeh line add kiya
-}
+        saveToFirestore('history');   // ← yeh line add kiya
+      }
 
 
 
@@ -1177,7 +1177,7 @@ cursor:pointer;
         // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
         const list = document.getElementById("historyList");
         list.innerHTML = "";
-        
+
         window.billHistory.forEach((h, i) => {
           list.innerHTML += `
 <div style="
@@ -1214,8 +1214,8 @@ text-align:center;
 </div>`;
         });
         if (window.billHistory.length === 0) {
-        list.innerHTML = '<p style="text-align:center;color:#aaa;">Koi bill nahi hai</p>';
-    }
+          list.innerHTML = '<p style="text-align:center;color:#aaa;">Koi bill nahi hai</p>';
+        }
 
 
         document.getElementById("historyModal").style.display = "block";
@@ -1227,12 +1227,12 @@ text-align:center;
       }
 
       function deleteHistory(index) {
-    if (!confirm("Delete karna hai?")) return;
-    window.billHistory.splice(index, 1);
-    localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
-    saveToFirestore('history');
-    showHistory();
-}
+        if (!confirm("Delete karna hai?")) return;
+        window.billHistory.splice(index, 1);
+        localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+        saveToFirestore('history');
+        showHistory();
+      }
 
 
       function downloadBill() {
@@ -1627,105 +1627,99 @@ text-align:center;
 
 
     <!-- Aapka pura website ka code upar rahega -->
-   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+      import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    const firebaseConfig = {
+      const firebaseConfig = {
         apiKey: "AIzaSyBYTLHO7jZW1dHEHlW55Axpjs2duSiDMs4",
         authDomain: "sm-technician-d4b8d.firebaseapp.com",
         projectId: "sm-technician-d4b8d",
         appId: "1:716505252423:web:fd557961c7c8eef03f6762"
-    };
+      };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
 
-    // Global variables (normal script ke liye)
-    window.db = db;
-    window.currentUserUid = null;
-    window.billHistory = [];
+      // Global banaya taaki main script use kar sake
+      window.db = db;
+      window.currentUserUid = null;
+      window.billHistory = [];
 
-    // Auth state + data load
-    onAuthStateChanged(auth, async (user) => {
+      // Auth + Data Load
+      onAuthStateChanged(auth, async (user) => {
         if (!user) {
-            window.location.href = "login.html";
-            return;
+          window.location.href = "login.html";
+          return;
         }
-
         window.currentUserUid = user.uid;
         await loadUserData(user.uid);
-    });
+      });
 
-    // Load data from Firestore
-    async function loadUserData(uid) {
+      async function loadUserData(uid) {
         try {
-            const userRef = doc(db, "users", uid);
-            const snap = await getDoc(userRef);
+          const userRef = doc(db, "users", uid);
+          const snap = await getDoc(userRef);
 
-            if (snap.exists()) {
-                const data = snap.data();
+          if (snap.exists()) {
+            const data = snap.data();
 
-                // Rates
-                if (data.rates) {
-                    Object.assign(savedRates, data.rates);
-                    localStorage.setItem('smRates', JSON.stringify(savedRates));
-                    updateRatesInDOM();
-                }
-
-                // History
-                if (data.history) {
-                    window.billHistory = data.history;
-                    localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
-                }
-            } else {
-                await setDoc(userRef, { rates: {}, history: [] }, { merge: true });
+            // Rates load
+            if (data.rates) {
+              Object.assign(savedRates, data.rates);
+              localStorage.setItem('smRates', JSON.stringify(savedRates));
+              updateRatesInDOM();
             }
+
+            // History load
+            if (data.history) {
+              window.billHistory = data.history;
+              localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+            }
+          } else {
+            await setDoc(userRef, { rates: {}, history: [] }, { merge: true });
+          }
         } catch (e) {
-            console.error("Load error:", e);
+          console.error("Load error:", e);
         }
-    }
+      }
 
-    function updateRatesInDOM() {
+      function updateRatesInDOM() {
         document.querySelectorAll('.item').forEach(item => {
-            const nameEl = item.querySelector('span');
-            if (nameEl) {
-                const name = nameEl.textContent.trim();
-                if (savedRates[name] !== undefined) {
-                    const rateInput = item.querySelector('.rate');
-                    if (rateInput) rateInput.value = savedRates[name];
-                }
+          const nameEl = item.querySelector('span');
+          if (nameEl) {
+            const name = nameEl.textContent.trim();
+            if (savedRates[name] !== undefined) {
+              const rateInput = item.querySelector('.rate');
+              if (rateInput) rateInput.value = savedRates[name];
             }
+          }
         });
-    }
+      }
 
-    // Save to Firestore
-    async function saveToFirestore(type) {
+      async function saveToFirestore(type) {
         if (!window.currentUserUid) return;
         try {
-            const userRef = doc(db, "users", window.currentUserUid);
-            if (type === 'rates') {
-                await setDoc(userRef, { rates: savedRates }, { merge: true });
-            } else if (type === 'history') {
-                await setDoc(userRef, { history: window.billHistory }, { merge: true });
-            }
+          const userRef = doc(db, "users", window.currentUserUid);
+          if (type === 'rates') {
+            await setDoc(userRef, { rates: savedRates }, { merge: true });
+          } else if (type === 'history') {
+            await setDoc(userRef, { history: window.billHistory }, { merge: true });
+          }
         } catch (e) {
-            console.error("Save error:", e);
+          console.error("Save error:", e);
         }
-    }
+      }
 
-    // Logout
-    window.logoutUser = function() {
+      window.logoutUser = function () {
         if (confirm("Kya aap sach mein logout karna chahte hain?")) {
-            signOut(auth).then(() => {
-                window.location.href = "login.html";
-            }).catch(err => alert("Logout error: " + err.message));
+          signOut(auth).then(() => window.location.href = "login.html")
+            .catch(err => alert("Logout error: " + err.message));
         }
-    };
-</script>
-
+      };
+    </script>
 </body>
 
 </html>
