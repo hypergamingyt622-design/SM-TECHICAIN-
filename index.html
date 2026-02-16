@@ -922,7 +922,7 @@ cursor:pointer;
       };
 
       // ←←← YE LINE ADD KARO (commented wali hata do)
-     
+
 
       window.savedRates = JSON.parse(localStorage.getItem('smRates')) || {};
       window.billHistory = JSON.parse(localStorage.getItem("smHistory")) || [];
@@ -948,17 +948,17 @@ cursor:pointer;
     `;
           container.appendChild(div);
 
-         div.querySelector('.rate').addEventListener('input', async (e) => {
-    window.savedRates[name] = e.target.value;
-    localStorage.setItem('smRates', JSON.stringify(window.savedRates));
+          div.querySelector('.rate').addEventListener('input', async (e) => {
+            window.savedRates[name] = e.target.value;
+            localStorage.setItem('smRates', JSON.stringify(window.savedRates));
 
-    // Firestore mein save
-    if (window.currentUserUid && window.db) {
-        const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
-        const userRef = doc(window.db, "users", window.currentUserUid);
-        await setDoc(userRef, { rates: window.savedRates }, { merge: true });
-    }
-});
+            // Firestore mein save
+            if (window.currentUserUid && window.db) {
+              const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+              const userRef = doc(window.db, "users", window.currentUserUid);
+              await setDoc(userRef, { rates: window.savedRates }, { merge: true });
+            }
+          });
 
         });
       });
@@ -1150,60 +1150,81 @@ cursor:pointer;
 
 
 
-      function saveHistory(date, total) {
-    const itemsData = [];
-    document.querySelectorAll(".item").forEach(item => {
-        const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
-        const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
-        const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-        const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+      async function saveHistory(date, total) {
 
-        if (qty > 0 && rate > 0) {
-            itemsData.push({ name, qty, rate, price: qty * rate });
+        const itemsData = [];
+
+        document.querySelectorAll(".item").forEach(item => {
+          const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+          const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+          const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+          const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+
+          if (qty > 0 && rate > 0) {
+            itemsData.push({
+              name,
+              qty,
+              rate,
+              price: qty * rate
+            });
+          }
+        });
+
+        const newBill = {
+          date,
+          customer: document.getElementById("custName").value || "Unknown",
+          address: document.getElementById("custAddress").value || "",
+          mobile: document.getElementById("phone").value || "",
+          total,
+          items: itemsData
+        };
+
+        // Add to array
+        window.billHistory.push(newBill);
+
+        // Save in localStorage
+        localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+
+        // 🔥 Firestore save
+        if (window.currentUserUid && window.db) {
+          try {
+            const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+
+            const userRef = doc(window.db, "users", window.currentUserUid);
+
+            await setDoc(userRef, {
+              history: window.billHistory
+            }, { merge: true });
+
+            console.log("✅ History saved in Firestore");
+          } catch (e) {
+            console.error("❌ Firestore history save error:", e);
+          }
         }
-    });
+      }
 
-    const newBill = {
-        date: date,
-        customer: document.getElementById("custName").value || "Unknown",
-        address: document.getElementById("custAddress").value || "",
-        mobile: document.getElementById("phone").value || "",
-        total: total,
-        items: itemsData
-    };
-
-    window.billHistory.push(newBill);
-    localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
-
-    // Firestore mein save (ab sahi se call hoga)
-    if (typeof saveToFirestore === 'function') {
-        saveToFirestore('history');
-    }
-
-    console.log("✅ Bill successfully saved! Total bills now:", window.billHistory.length);
-}
 
 
       function showHistory() {
-    console.log("History showing, total bills:", window.billHistory.length);
+        console.log("History showing, total bills:", window.billHistory.length);
 
-    const list = document.getElementById("historyList");
-    list.innerHTML = "";
+        const list = document.getElementById("historyList");
+        list.innerHTML = "";
 
-    // Fallback if Firestore load slow hai
-    if (window.billHistory.length === 0) {
-        const local = JSON.parse(localStorage.getItem("smHistory")) || [];
-        window.billHistory = local;
-    }
+        // Fallback if Firestore load slow hai
+        if (window.billHistory.length === 0) {
+          const local = JSON.parse(localStorage.getItem("smHistory")) || [];
+          window.billHistory = local;
+        }
 
-    if (window.billHistory.length === 0) {
-        list.innerHTML = `<p style="text-align:center; color:#aaa; padding:40px;">Abhi tak koi bill nahi bana hai</p>`;
-        document.getElementById("historyModal").style.display = "block";
-        return;
-    }
+        if (window.billHistory.length === 0) {
+          list.innerHTML = `<p style="text-align:center; color:#aaa; padding:40px;">Abhi tak koi bill nahi bana hai</p>`;
+          document.getElementById("historyModal").style.display = "block";
+          return;
+        }
 
-    window.billHistory.forEach((h, i) => {
-        list.innerHTML += `
+        window.billHistory.forEach((h, i) => {
+          list.innerHTML += `
             <div style="border:2px solid #FFD700; padding:25px; margin:20px 0; background:#111; border-radius:18px; box-shadow:0 10px 30px rgba(255,215,0,0.2);">
                 <div style="text-align:center; margin-bottom:15px;">
                     <img src="logo.png" width="65" style="margin-bottom:8px;">
@@ -1226,10 +1247,10 @@ cursor:pointer;
                 </div>
             </div>
         `;
-    });
+        });
 
-    document.getElementById("historyModal").style.display = "block";
-}
+        document.getElementById("historyModal").style.display = "block";
+      }
       function closeHistory() {
         document.getElementById("historyModal").style.display = "none";
       }
@@ -1654,7 +1675,6 @@ cursor:pointer;
       // Global banaya taaki main script use kar sake
       window.db = db;
       window.currentUserUid = null;
-      window.billHistory = [];
 
       // Auth + Data Load
       onAuthStateChanged(auth, async (user) => {
@@ -1682,51 +1702,69 @@ cursor:pointer;
             }
 
             // History load
-            if (data.history) {
+
+
+
+
+            // History load
+            if (data.history && Array.isArray(data.history)) {
               window.billHistory = data.history;
               localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+            } else {
+              window.billHistory = [];
             }
-          } else {
-            await setDoc(userRef, { rates: {}, history: [] }, { merge: true });
-          }
-        } catch (e) {
-          console.error("Load error:", e);
-        }
-      }
 
-      function updateRatesInDOM() {
-        document.querySelectorAll('.item').forEach(item => {
-          const nameEl = item.querySelector('span');
-          if (nameEl) {
-            const name = nameEl.textContent.trim();
-            if (savedRates[name] !== undefined) {
-              const rateInput = item.querySelector('.rate');
-              if (rateInput) rateInput.value = savedRates[name];
+
+
+
+
+
+
+            //     if (data.history) {
+            //       window.billHistory = data.history;
+            //       localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+            //     }
+            //   } else {
+            //     await setDoc(userRef, { rates: {}, history: [] }, { merge: true });
+            //   }
+            // } catch (e) {
+            //   console.error("Load error:", e);
+            // }
+          }
+
+          function updateRatesInDOM() {
+            document.querySelectorAll('.item').forEach(item => {
+              const nameEl = item.querySelector('span');
+              if (nameEl) {
+                const name = nameEl.textContent.trim();
+                if (savedRates[name] !== undefined) {
+                  const rateInput = item.querySelector('.rate');
+                  if (rateInput) rateInput.value = savedRates[name];
+                }
+              }
+            });
+          }
+
+          async function saveToFirestore(type) {
+            if (!window.currentUserUid) return;
+            try {
+              const userRef = doc(db, "users", window.currentUserUid);
+              if (type === 'rates') {
+                await setDoc(userRef, { rates: savedRates }, { merge: true });
+              } else if (type === 'history') {
+                await setDoc(userRef, { history: window.billHistory }, { merge: true });
+              }
+            } catch (e) {
+              console.error("Save error:", e);
             }
           }
-        });
-      }
 
-      async function saveToFirestore(type) {
-        if (!window.currentUserUid) return;
-        try {
-          const userRef = doc(db, "users", window.currentUserUid);
-          if (type === 'rates') {
-            await setDoc(userRef, { rates: savedRates }, { merge: true });
-          } else if (type === 'history') {
-            await setDoc(userRef, { history: window.billHistory }, { merge: true });
-          }
-        } catch (e) {
-          console.error("Save error:", e);
-        }
-      }
-
-      window.logoutUser = function () {
-        if (confirm("Kya aap sach mein logout karna chahte hain?")) {
-          signOut(auth).then(() => window.location.href = "login.html")
-            .catch(err => alert("Logout error: " + err.message));
-        }
-      };
+          window.logoutUser = function () {
+            if (confirm("Kya aap sach mein logout karna chahte hain?")) {
+              signOut(auth).then(() => window.location.href = "login.html")
+                .catch(err => alert("Logout error: " + err.message));
+            }
+          };
     </script>
 </body>
 
