@@ -556,7 +556,95 @@
     display: block;
 }
 
+/* Custom Modal for Logout Confirm - Theme Match */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
 
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: rgba(34, 34, 34, 0.95);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 30px 25px;
+    max-width: 380px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.25);
+    transform: scale(0.85);
+    transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h3 {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.modal-content p {
+    color: #ddd;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-confirm, .btn-cancel {
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-confirm {
+    background: var(--danger);          /* red for danger action */
+    color: white;
+}
+
+.btn-confirm:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+}
+
+.btn-cancel {
+    background: #444;
+    color: var(--accent2);
+}
+
+.btn-cancel:hover {
+    background: #555;
+    transform: translateY(-2px);
+}
 
   </style>
 
@@ -856,6 +944,18 @@ cursor:pointer;
       <button onclick="closeHistory()">Close</button>
     </div>
   </div>
+
+<!-- Custom Logout Confirm Modal -->
+<div id="logoutModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <h3>Logout Confirm</h3>
+        <p>Kya aap sach mein logout karna chahte hain?</p>
+        <div class="modal-buttons">
+            <button id="confirmLogout" class="btn-confirm">Haan, Logout</button>
+            <button id="cancelLogout" class="btn-cancel">Cancel</button>
+        </div>
+    </div>
+</div>
 
 
   <footer>SM Technician • 8935883863</footer>
@@ -1615,18 +1715,39 @@ function openHistoryFromMenu() {
 
     // Global logout function (window pe attach kar diya)
     window.logoutUser = function() {
-        if (confirm("Kya aap sach mein logout karna chahte hain?")) {
-            signOut(auth)
-                .then(() => {
-                    console.log("✅ Logout successful");
-                    window.location.href = "login.html";
-                })
-                .catch((error) => {
-                    console.error("Logout error:", error);
-                    alert("Logout mein problem aa rahi hai.\nPage refresh karke try karo.");
-                });
+    const modal = document.getElementById("logoutModal");
+    modal.classList.add("show");
+    modal.style.display = "flex";
+
+    // Confirm button
+    document.getElementById("confirmLogout").onclick = function() {
+        signOut(auth)
+            .then(() => {
+                console.log("Logout successful");
+                window.location.href = "login.html";
+            })
+            .catch((error) => {
+                console.error("Logout error:", error);
+                alert("Logout fail ho gaya – page refresh karke try karo");
+            });
+        modal.classList.remove("show");
+        setTimeout(() => { modal.style.display = "none"; }, 300);
+    };
+
+    // Cancel button
+    document.getElementById("cancelLogout").onclick = function() {
+        modal.classList.remove("show");
+        setTimeout(() => { modal.style.display = "none"; }, 300);
+    };
+
+    // Background click to close (optional)
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.classList.remove("show");
+            setTimeout(() => { modal.style.display = "none"; }, 300);
         }
     };
+};
 </script>
 
 </body>
