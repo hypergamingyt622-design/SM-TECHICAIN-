@@ -585,9 +585,9 @@
 
     <hr style="margin:20px 0;border-color:#FFD700;">
 
-    <a href="login.html" style="color:#ef4444;font-weight:bold;">
-        🔓 Logout
-    </a>
+    <a href="#" onclick="logoutUser()" style="color:#ef4444;font-weight:bold;">
+    🔓 Logout
+</a>
 </div>
 
 
@@ -1625,8 +1625,40 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
 </script>
 
 
+<script>
+    // Logout function (global banaya taaki onclick call ho sake)
+    function logoutUser() {
+        const auth = getAuth();   // already initialized hai upar
+
+        auth.signOut().then(() => {
+            // Sign out ho gaya → ab login page pe bhej do
+            window.location.href = "login.html";
+        }).catch((error) => {
+            console.error("Logout error:", error);
+            alert("Logout mein problem aa rahi hai. Refresh karke try karo.");
+        });
+    }
+</script>
 
 
+<script>
+    function logoutUser() {
+        // Optional: User se confirm karwao (bahut achha practice hai)
+        if (confirm("Kya aap sach mein logout karna chahte hain?")) {
+            const auth = getAuth();  // yeh already upar firebase script mein defined hai
+
+            auth.signOut()
+                .then(() => {
+                    console.log("User successfully logged out");
+                    window.location.href = "login.html";
+                })
+                .catch((error) => {
+                    console.error("Logout error:", error);
+                    alert("Logout mein dikkat aa rahi hai. Page refresh karke try karo.");
+                });
+        }
+    }
+</script>
 
 </body>
 
