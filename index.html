@@ -1660,6 +1660,8 @@ cursor:pointer;
 
           <button onclick="downloadBillPDF()">Download PDF</button>
 
+          <button onclick="shareMaterialListOnWhatsApp()">Share on WhatsApp</button>
+
           <button onclick="closeBill()">Close</button>
 
         </div>
@@ -2785,6 +2787,80 @@ cursor:pointer;
         pdf.save("SM_Technician_Material_List.pdf");
 
       }
+
+
+
+
+
+
+
+
+async function shareMaterialListOnWhatsApp() {
+    const phone = document.getElementById("phone").value.trim();
+    
+    if (!phone || phone.length < 9) {
+        alert("Customer ka mobile number daaliye (kam se kam 9-10 digit)");
+        return;
+    }
+
+    // International format mein convert (India ke liye +91 add)
+    let whatsappNumber = phone;
+    if (!phone.startsWith("+")) {
+        if (phone.startsWith("0")) {
+            whatsappNumber = "+91" + phone.substring(1);
+        } else {
+            whatsappNumber = "+91" + phone;
+        }
+    }
+
+    // Material list collect karo (sirf item + qty)
+    const items = [];
+    document.querySelectorAll(".item").forEach(item => {
+        const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+        if (qty <= 0) return;
+
+        const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+        const name = nameEl ? (nameEl.value || nameEl.textContent).trim() : "";
+        
+        if (name) {
+            items.push(`${name} × ${qty}`);
+        }
+    });
+
+    if (items.length === 0) {
+        alert("Koi material select nahi kiya gaya hai!");
+        return;
+    }
+
+    // Simple text message format
+    const customerName = document.getElementById("custName").value.trim() || "Customer";
+    const message = 
+        `*SM Technician Estimate*\n\n` +
+        `Dear ${customerName},\n\n` +
+        `Yeh hai aapka material list:\n` +
+        items.map((line, i) => `${i+1}. ${line}`).join("\n") +
+        `\n\nTotal items: ${items.length}\n` +
+        `Koi change chahiye to batayein.\n` +
+        `Thanks! 🙏\n` +
+        `SM Technician - 8935883863`;
+
+    // WhatsApp web / app link
+    const waLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    // Try to open WhatsApp
+    try {
+        window.open(waLink, "_blank");
+    } catch (e) {
+        alert("WhatsApp link khul nahi pa raha. Number check karein ya browser allow karein.");
+    }
+}
+
+
+
+
+
+
+
 
       function toggleAccordion(header) {
 
