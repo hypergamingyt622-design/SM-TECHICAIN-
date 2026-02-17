@@ -1255,6 +1255,16 @@
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 12px 30px rgba(239, 68, 68, 0.6) !important;
         }
+
+
+
+        #userBadge:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 3px rgba(255,215,0,0.3);
+    transition: all 0.2s ease;
+}
+
+
     </style>
 
 </head>
@@ -1331,18 +1341,26 @@
                 <!-- ┌──────────────────────────────┐ -->
                 <!-- │     USER EMAIL BADGE         │ -->
                 <!-- └──────────────────────────────┘ -->
-                <div id="userBadge" style="position: absolute; top: 15px; right: 15px; 
-                background: rgba(255,215,0,0.15); 
-                color: #FFEA00; 
-                padding: 8px 14px; 
-                border-radius: 30px; 
-                font-size: 0.9rem; 
-                font-weight: 500; 
-                border: 1px solid #FFD70044;
-                backdrop-filter: blur(6px);
-                display: none;">
-                    <span id="userEmailDisplay">user@example.com</span>
-                    <span style="margin-left:8px; opacity:0.7; font-size:0.85em;">(You)</span>
+                <div id="userBadge" style="position: absolute; top: 12px; right: 15px; 
+            width: 42px; height: 42px; 
+            border-radius: 50%; 
+            overflow: hidden; 
+            border: 2px solid #FFD70066; 
+            background: #222; 
+            display: none; 
+            cursor: help;" title="Logged in as: unknown@example.com">
+
+                    <!-- Profile picture -->
+                    <img id="userAvatar" src="" alt="User"
+                        style="width:100%; height:100%; object-fit: cover; display:none;">
+
+                    <!-- Fallback: first letter -->
+                    <div id="userInitial" style="width:100%; height:100%; 
+              display:flex; align-items:center; justify-content:center; 
+              font-size:1.3rem; font-weight:bold; color:#FFEA00; 
+              background: linear-gradient(135deg, #FFD70022, #222);">
+                        ?
+                    </div>
                 </div>
                 <img src="logo.png" alt="SM Technician Logo" class="header-logo" onerror="this.style.display='none'">
                 <h1>SM Technician</h1>
@@ -3210,21 +3228,38 @@ cursor:pointer;
 
             window.currentUserUid = user.uid;
 
-               // ── Show user email in top-right ────────────────────────────────
-  const emailDisplay = document.getElementById("userEmailDisplay");
-  const badge = document.getElementById("userBadge");
+            // ── Show user avatar / initial in top-right ────────────────────────────────
+    const badge      = document.getElementById("userBadge");
+    const avatarImg  = document.getElementById("userAvatar");
+    const initialDiv = document.getElementById("userInitial");
 
-  if (user.email) {
-    // Shorten it (show only part before @ for cleaner look)
-    let shortEmail = user.email.split("@")[0];  // e.g., "hyper" from "hyper@example.com"
-    
-    // Optional: Limit length if email is too long
-    // if (shortEmail.length > 12) shortEmail = shortEmail.substring(0, 12) + "...";
+    if (user.email) {
+        // Full email in tooltip
+        badge.title = "Logged in as: " + user.email;
 
-    emailDisplay.textContent = shortEmail;
-    badge.style.display = "inline-flex";  // Show the badge
-    badge.title = "Logged in as: " + user.email;  // Full email on hover
-  }
+        // 1. Try to use profile picture from Firebase (Google, Facebook, etc.)
+        if (user.photoURL) {
+            avatarImg.src = user.photoURL;
+            avatarImg.style.display = "block";
+            initialDiv.style.display = "none";
+        }
+        // 2. Fallback → show first letter of email or display name
+        else {
+            let displayChar = "U"; // default
+
+            if (user.displayName && user.displayName.trim()) {
+                displayChar = user.displayName.trim().charAt(0).toUpperCase();
+            } else if (user.email) {
+                displayChar = user.email.charAt(0).toUpperCase();
+            }
+
+            initialDiv.textContent = displayChar;
+            initialDiv.style.display = "flex";
+            avatarImg.style.display = "none";
+        }
+
+        badge.style.display = "block";
+    }
 
             await loadUserData(user.uid);
 
@@ -3233,7 +3268,7 @@ cursor:pointer;
 
 
 
-     
+
 
         // ===== LOAD USER DATA =====
 
