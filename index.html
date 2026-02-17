@@ -4,1286 +4,1296 @@
 
 <head>
 
-  <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  <title>SM Technician - Full Estimate</title>
+    <title>SM Technician - Full Estimate</title>
 
-  <!-- Favicon -->
+    <!-- Favicon -->
 
-  <link rel="icon" type="image/png" href="logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
+    <style>
+        :root {
 
-      --primary: #111;
+            --primary: #111;
 
-      /* Dark background */
+            /* Dark background */
 
-      --accent: #FFD700;
+            --accent: #FFD700;
 
-      /* Electric yellow */
+            /* Electric yellow */
 
-      --accent2: #FFEA00;
+            --accent2: #FFEA00;
 
-      /* Lighter yellow highlight */
+            /* Lighter yellow highlight */
 
-      --success: #10b981;
+            --success: #10b981;
 
-      --danger: #ef4444;
+            --danger: #ef4444;
 
-      --glass: rgba(255, 255, 255, 0.05);
+            --glass: rgba(255, 255, 255, 0.05);
 
-    }
+        }
 
-    * {
+        * {
 
-      margin: 0;
+            margin: 0;
 
-      padding: 0;
+            padding: 0;
 
-      box-sizing: border-box;
+            box-sizing: border-box;
 
-    }
+        }
 
-    body {
+        body {
 
-      font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins', sans-serif;
 
-      min-height: 100vh;
+            min-height: 100vh;
 
-      background: #111;
+            background: #111;
 
-      color: #fff;
+            color: #fff;
 
-    }
+        }
 
-    /* MAIN CONTAINER */
+        /* MAIN CONTAINER */
 
-    .container {
+        .container {
 
-      max-width: 1150px;
+            max-width: 1150px;
 
-      margin: 25px auto;
+            margin: 25px auto;
 
-      background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.8);
 
-      backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
 
-      border-radius: 20px;
+            border-radius: 20px;
 
-      overflow: hidden;
+            overflow: hidden;
 
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
 
-      border: 1px solid rgba(255, 215, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3);
 
-    }
+        }
 
-    /* HEADER */
+        /* HEADER */
 
-    .header {
+        .header {
 
-      background: #111;
+            background: #111;
 
-      padding: 30px 15px;
+            padding: 30px 15px;
 
-      text-align: center;
+            text-align: center;
 
-      position: relative;
+            position: relative;
 
-      border-bottom: 2px solid var(--accent);
+            border-bottom: 2px solid var(--accent);
 
-    }
+        }
 
-    .header h1 {
+        .header h1 {
 
-      font-size: 2.3rem;
+            font-size: 2.3rem;
 
-      letter-spacing: 1px;
+            letter-spacing: 1px;
 
-      color: var(--accent);
+            color: var(--accent);
 
-    }
+        }
 
-    .header-logo {
+        .header-logo {
 
-      width: 110px;
+            width: 110px;
 
-      height: 110px;
+            height: 110px;
 
-      border-radius: 50%;
+            border-radius: 50%;
 
-      margin-bottom: 10px;
+            margin-bottom: 10px;
 
-      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
 
-      border: 2px solid var(--accent);
+            border: 2px solid var(--accent);
 
-    }
+        }
 
-    /* INFO SECTION */
+        /* INFO SECTION */
 
-    .info {
+        .info {
 
-      padding: 25px;
+            padding: 25px;
 
-      display: grid;
+            display: grid;
 
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 
-      gap: 20px;
+            gap: 20px;
 
-    }
+        }
 
-    .info label {
+        .info label {
 
-      font-weight: 500;
+            font-weight: 500;
 
-      margin-bottom: 6px;
+            margin-bottom: 6px;
 
-      display: block;
+            display: block;
 
-      color: var(--accent2);
+            color: var(--accent2);
 
-    }
+        }
 
-    .info input {
+        .info input {
 
-      width: 100%;
+            width: 100%;
 
-      padding: 14px;
+            padding: 14px;
 
-      border-radius: 12px;
+            border-radius: 12px;
 
-      border: 1px solid #444;
+            border: 1px solid #444;
 
-      background: #222;
+            background: #222;
 
-      color: #FFD;
+            color: #FFD;
 
-      outline: none;
+            outline: none;
 
-      transition: 0.3s;
+            transition: 0.3s;
 
-    }
+        }
 
-    .info input:focus {
+        .info input:focus {
 
-      border-color: var(--accent);
+            border-color: var(--accent);
 
-      box-shadow: 0 0 10px var(--accent);
+            box-shadow: 0 0 10px var(--accent);
 
-      background: #333;
+            background: #333;
 
-    }
+        }
 
-    /* BIG TITLE */
+        /* BIG TITLE */
 
-    .big-title {
+        .big-title {
 
-      text-align: center;
+            text-align: center;
 
-      padding: 18px;
+            padding: 18px;
 
-      font-size: 1.3rem;
+            font-size: 1.3rem;
 
-      font-weight: 600;
+            font-weight: 600;
 
-      background: #222;
+            background: #222;
 
-      border-left: 6px solid var(--accent);
+            border-left: 6px solid var(--accent);
 
-      margin: 20px 0 12px;
+            margin: 20px 0 12px;
 
-      letter-spacing: 1px;
+            letter-spacing: 1px;
 
-      color: var(--accent);
+            color: var(--accent);
 
-    }
+        }
 
-    /* ACCORDION HEADER */
+        /* ACCORDION HEADER */
 
-    .acc-header {
+        .acc-header {
 
-      margin: 10px 18px;
+            margin: 10px 18px;
 
-      padding: 16px 20px;
+            padding: 16px 20px;
 
-      border-radius: 14px;
+            border-radius: 14px;
 
-      background: #222;
+            background: #222;
 
-      cursor: pointer;
+            cursor: pointer;
 
-      transition: 0.3s;
+            transition: 0.3s;
 
-      font-weight: 500;
+            font-weight: 500;
 
-      color: var(--accent2);
+            color: var(--accent2);
 
-      border-left: 4px solid var(--accent);
+            border-left: 4px solid var(--accent);
 
-    }
+        }
 
-    .acc-header:hover {
+        .acc-header:hover {
 
-      background: #111;
+            background: #111;
 
-      transform: translateY(-2px);
+            transform: translateY(-2px);
 
-    }
+        }
 
-    /* CONTENT */
+        /* CONTENT */
 
-    .acc-content {
+        .acc-content {
 
-      max-height: 0;
+            max-height: 0;
 
-      overflow: hidden;
+            overflow: hidden;
 
-      transition: max-height 0.5s ease;
+            transition: max-height 0.5s ease;
 
-      padding: 0 18px;
+            padding: 0 18px;
 
-    }
+        }
 
-    .acc-content.open {
+        .acc-content.open {
 
-      max-height: 9000px;
+            max-height: 9000px;
 
-      padding: 18px;
+            padding: 18px;
 
-    }
+        }
 
-    /* ITEM ROW */
+        /* ITEM ROW */
 
-    .item {
+        .item {
 
-      display: grid;
+            display: grid;
 
-      grid-template-columns: 2fr 80px 100px 70px;
+            grid-template-columns: 2fr 80px 100px 70px;
 
-      gap: 15px;
+            gap: 15px;
 
-      padding: 12px 0;
+            padding: 12px 0;
 
-      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
 
-      align-items: center;
+            align-items: center;
 
-    }
+        }
 
-    .item span {
+        .item span {
 
-      font-weight: 500;
+            font-weight: 500;
 
-      color: #FFD;
+            color: #FFD;
 
-    }
+        }
 
-    .item input {
+        .item input {
 
-      padding: 10px;
+            padding: 10px;
 
-      border-radius: 8px;
+            border-radius: 8px;
 
-      border: 1px solid #444;
+            border: 1px solid #444;
 
-      text-align: center;
+            text-align: center;
 
-      background: #222;
+            background: #222;
 
-      color: #FFD;
+            color: #FFD;
 
-    }
+        }
 
-    @media(max-width:600px) {
+        @media(max-width:600px) {
 
-      .item {
+            .item {
 
-        grid-template-columns: 1fr;
+                grid-template-columns: 1fr;
 
-      }
+            }
 
-    }
+        }
 
-    /* BUTTONS */
+        /* BUTTONS */
 
-    button {
+        button {
 
-      cursor: pointer;
+            cursor: pointer;
 
-      border: none;
+            border: none;
 
-      border-radius: 10px;
+            border-radius: 10px;
 
-      transition: all 0.3s ease;
+            transition: all 0.3s ease;
 
-      font-weight: 600;
+            font-weight: 600;
 
-    }
+        }
 
-    button:hover {
+        button:hover {
 
-      transform: translateY(-3px) scale(1.05);
+            transform: translateY(-3px) scale(1.05);
 
-    }
+        }
 
-    .edit {
+        .edit {
 
-      background: #FFD700;
+            background: #FFD700;
 
-      color: #111;
+            color: #111;
 
-      padding: 8px 10px;
+            padding: 8px 10px;
 
-    }
+        }
 
-    .edit:hover {
+        .edit:hover {
 
-      transform: scale(1.05);
+            transform: scale(1.05);
 
-    }
+        }
 
-    .add-btn {
+        .add-btn {
 
-      display: block;
+            display: block;
 
-      margin: 18px auto;
+            margin: 18px auto;
 
-      padding: 12px 24px;
+            padding: 12px 24px;
 
-      background: #FFEA00;
+            background: #FFEA00;
 
-      color: #111;
+            color: #111;
 
-      font-size: 14px;
+            font-size: 14px;
 
-    }
+        }
 
-    .add-btn:hover {
+        .add-btn:hover {
 
-      background: #FFD700;
+            background: #FFD700;
 
-    }
+        }
 
-    /* GENERATE BILL */
+        /* GENERATE BILL */
 
-    #generateBillBtn {
+        #generateBillBtn {
 
-      display: block;
+            display: block;
 
-      margin: 40px auto;
+            margin: 40px auto;
 
-      padding: 16px 45px;
+            padding: 16px 45px;
 
-      font-size: 18px;
+            font-size: 18px;
 
-      font-weight: 600;
+            font-weight: 600;
 
-      background: var(--accent);
+            background: var(--accent);
 
-      color: #111;
+            color: #111;
 
-      border-radius: 14px;
+            border-radius: 14px;
 
-      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
 
-    }
+        }
 
-    #generateBillBtn:hover {
+        #generateBillBtn:hover {
 
-      transform: scale(1.05);
+            transform: scale(1.05);
 
-      box-shadow: 0 12px 35px rgba(255, 215, 0, 0.8);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.8);
 
-    }
+        }
 
-    /* MODAL */
+        /* MODAL */
 
-    #billContent,
+        #billContent,
 
-    .historyContent {
+        .historyContent {
 
-      background: #111;
+            background: #111;
 
-      color: #FFD;
+            color: #FFD;
 
-      border-radius: 20px;
+            border-radius: 20px;
 
-      padding: 25px;
+            padding: 25px;
 
-      box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
 
-      border: 2px solid var(--accent);
+            border: 2px solid var(--accent);
 
-    }
+        }
 
-    #billContent h2,
+        #billContent h2,
 
-    .historyContent h2 {
+        .historyContent h2 {
 
-      color: var(--accent);
+            color: var(--accent);
 
-      text-align: center;
+            text-align: center;
 
-    }
+        }
 
-    #billContent table,
+        #billContent table,
 
-    .historyContent table {
+        .historyContent table {
 
-      width: 100%;
+            width: 100%;
 
-      border-collapse: collapse;
+            border-collapse: collapse;
 
-      margin-top: 15px;
+            margin-top: 15px;
 
-    }
+        }
 
-    #billContent th {
+        #billContent th {
 
-      background: #222;
+            background: #222;
 
-      color: var(--accent);
+            color: var(--accent);
 
-      padding: 10px;
+            padding: 10px;
 
-    }
+        }
 
-    #billContent td {
+        #billContent td {
 
-      padding: 10px;
+            padding: 10px;
 
-      text-align: center;
+            text-align: center;
 
-      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
 
-      color: #FFD;
+            color: #FFD;
 
-    }
+        }
 
-    #billContent tr:hover {
+        #billContent tr:hover {
 
-      background: rgba(255, 215, 0, 0.1);
+            background: rgba(255, 215, 0, 0.1);
 
-    }
+        }
 
-    #billContent h3 {
+        #billContent h3 {
 
-      color: #FFEA00;
+            color: #FFEA00;
 
-      font-size: 20px;
+            font-size: 20px;
 
-      text-align: right;
+            text-align: right;
 
-    }
+        }
 
-    #billContent button,
+        #billContent button,
 
-    #historyModal button {
+        #historyModal button {
 
-      margin-top: 20px;
+            margin-top: 20px;
 
-      padding: 10px 25px;
+            padding: 10px 25px;
 
-      border: none;
+            border: none;
 
-      border-radius: 10px;
+            border-radius: 10px;
 
-      background: var(--accent);
+            background: var(--accent);
 
-      color: #111;
+            color: #111;
 
-      cursor: pointer;
+            cursor: pointer;
 
-      font-weight: 600;
+            font-weight: 600;
 
-    }
+        }
 
-    #billContent button:hover,
+        #billContent button:hover,
 
-    #historyModal button:hover {
+        #historyModal button:hover {
 
-      transform: scale(1.05);
+            transform: scale(1.05);
 
-      background: #FFD700;
+            background: #FFD700;
 
-    }
+        }
 
-    /* SEARCH BAR */
+        /* SEARCH BAR */
 
-    .top-search-container {
+        .top-search-container {
 
-      padding: 20px;
+            padding: 20px;
 
-      display: grid;
+            display: grid;
 
-      grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
 
-      gap: 15px;
+            gap: 15px;
 
-      background: #222;
+            background: #222;
 
-    }
+        }
 
-    .top-search {
+        .top-search {
 
-      padding: 14px 18px;
+            padding: 14px 18px;
 
-      border-radius: 14px;
+            border-radius: 14px;
 
-      border: 1px solid #444;
+            border: 1px solid #444;
 
-      font-size: 15px;
+            font-size: 15px;
 
-      background: #111;
+            background: #111;
 
-      color: #FFD;
+            color: #FFD;
 
-    }
+        }
 
-    .top-search::placeholder {
+        .top-search::placeholder {
 
-      color: #FFEA00;
+            color: #FFEA00;
 
-    }
+        }
 
-    .top-search:focus {
+        .top-search:focus {
 
-      border-color: var(--accent);
+            border-color: var(--accent);
 
-      box-shadow: 0 0 10px var(--accent);
+            box-shadow: 0 0 10px var(--accent);
 
-      background: #222;
+            background: #222;
 
-    }
+        }
 
-    /* HISTORY BUTTON */
+        /* HISTORY BUTTON */
 
-    #historyBtn {
+        #historyBtn {
 
-      position: absolute;
+            position: absolute;
 
-      top: 20px;
+            top: 20px;
 
-      right: 20px;
+            right: 20px;
 
-      padding: 10px 20px;
+            padding: 10px 20px;
 
-      border-radius: 8px;
+            border-radius: 8px;
 
-      background: var(--accent);
+            background: var(--accent);
 
-      color: #111;
+            color: #111;
 
-      font-weight: 600;
+            font-weight: 600;
 
-      cursor: pointer;
+            cursor: pointer;
 
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
 
-    }
+        }
 
-    #historyBtn:hover {
+        #historyBtn:hover {
 
-      transform: scale(1.05);
+            transform: scale(1.05);
 
-      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.7);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.7);
 
-    }
+        }
 
-    /* FOOTER */
+        /* FOOTER */
 
-    footer {
+        footer {
 
-      text-align: center;
+            text-align: center;
 
-      padding: 20px;
+            padding: 20px;
 
-      font-size: 14px;
+            font-size: 14px;
 
-      background: #111;
+            background: #111;
 
-      border-top: 2px solid var(--accent);
+            border-top: 2px solid var(--accent);
 
-      color: var(--accent2);
+            color: var(--accent2);
 
-    }
+        }
 
-    /* ===== PAGE LOAD ANIMATION ===== */
+        /* ===== PAGE LOAD ANIMATION ===== */
 
-    .container {
+        .container {
 
-      animation: fadeInUp 0.8s ease forwards;
+            animation: fadeInUp 0.8s ease forwards;
 
-      opacity: 0;
+            opacity: 0;
 
-      transform: translateY(30px);
+            transform: translateY(30px);
 
-    }
+        }
 
-    @keyframes fadeInUp {
+        @keyframes fadeInUp {
 
-      to {
+            to {
 
-        opacity: 1;
+                opacity: 1;
 
-        transform: translateY(0);
+                transform: translateY(0);
 
-      }
+            }
 
-    }
+        }
 
-    /* ===== ACCORDION ARROW ROTATION ===== */
+        /* ===== ACCORDION ARROW ROTATION ===== */
 
-    .acc-header span {
+        .acc-header span {
 
-      float: right;
+            float: right;
 
-      transition: transform 0.3s ease;
+            transition: transform 0.3s ease;
 
-    }
+        }
 
-    .acc-header.active span {
+        .acc-header.active span {
 
-      transform: rotate(180deg);
+            transform: rotate(180deg);
 
-    }
+        }
 
-    /* ===== ACCORDION SMOOTH SLIDE ===== */
+        /* ===== ACCORDION SMOOTH SLIDE ===== */
 
-    .acc-content {
+        .acc-content {
 
-      transition: max-height 0.5s ease, padding 0.4s ease;
+            transition: max-height 0.5s ease, padding 0.4s ease;
 
-    }
+        }
 
-    /* ===== ITEM HOVER LIFT ===== */
+        /* ===== ITEM HOVER LIFT ===== */
 
-    .item {
+        .item {
 
-      transition: transform 0.3s ease, background 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
 
-    }
+        }
 
-    .item:hover {
+        .item:hover {
 
-      transform: translateX(5px);
+            transform: translateX(5px);
 
-      background: rgba(255, 215, 0, 0.05);
+            background: rgba(255, 215, 0, 0.05);
 
-    }
+        }
 
-    /* ===== BUTTON GLOW PULSE ===== */
+        /* ===== BUTTON GLOW PULSE ===== */
 
-    #generateBillBtn {
+        #generateBillBtn {
 
-      animation: pulseGlow 2s infinite;
+            animation: pulseGlow 2s infinite;
 
-    }
+        }
 
-    @keyframes pulseGlow {
+        @keyframes pulseGlow {
 
-      0% {
+            0% {
 
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 
-      }
+            }
 
-      50% {
+            50% {
 
-        box-shadow: 0 0 25px rgba(255, 215, 0, 1);
+                box-shadow: 0 0 25px rgba(255, 215, 0, 1);
 
-      }
+            }
 
-      100% {
+            100% {
 
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 
-      }
+            }
 
-    }
+        }
 
-    /* ===== MODAL SMOOTH OPEN ===== */
+        /* ===== MODAL SMOOTH OPEN ===== */
 
-    #billContent,
+        #billContent,
 
-    .historyContent {
+        .historyContent {
 
-      animation: zoomIn 0.4s ease;
+            animation: zoomIn 0.4s ease;
 
-    }
+        }
 
-    @keyframes zoomIn {
+        @keyframes zoomIn {
 
-      from {
+            from {
 
-        transform: scale(0.85);
+                transform: scale(0.85);
 
-        opacity: 0;
+                opacity: 0;
 
-      }
+            }
 
-      to {
+            to {
 
-        transform: scale(1);
+                transform: scale(1);
 
-        opacity: 1;
+                opacity: 1;
 
-      }
+            }
 
-    }
+        }
 
-    .header-logo {
+        .header-logo {
 
-      border-radius: 50%;
+            border-radius: 50%;
 
-      border: 3px solid #FFD700;
+            border: 3px solid #FFD700;
 
-      animation: pulseGlow 2s infinite;
+            animation: pulseGlow 2s infinite;
 
-    }
+        }
 
-    @keyframes pulseGlow {
+        @keyframes pulseGlow {
 
-      0%,
+            0%,
 
-      100% {
+            100% {
 
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 
-      }
+            }
 
-      50% {
+            50% {
 
-        box-shadow: 0 0 40px rgba(255, 215, 0, 1);
+                box-shadow: 0 0 40px rgba(255, 215, 0, 1);
 
-      }
+            }
 
-    }
+        }
 
-    /* Hamburger Icon */
+        /* Hamburger Icon */
 
-    /* ===== HAMBURGER (LEFT TOP) ===== */
+        /* ===== HAMBURGER (LEFT TOP) ===== */
 
-    .hamburger {
+        .hamburger {
 
-      position: absolute;
+            position: absolute;
 
-      top: 20px;
+            top: 20px;
 
-      left: 20px;
+            left: 20px;
 
-      width: 45px;
+            width: 45px;
 
-      height: 45px;
+            height: 45px;
 
-      background: #FFD700;
+            background: #FFD700;
 
-      border-radius: 10px;
+            border-radius: 10px;
 
-      display: flex;
+            display: flex;
 
-      justify-content: center;
+            justify-content: center;
 
-      align-items: center;
+            align-items: center;
 
-      cursor: pointer;
+            cursor: pointer;
 
-      z-index: 2001;
+            z-index: 2001;
 
-    }
+        }
 
-    .hamburger div {
+        .hamburger div {
 
-      width: 22px;
+            width: 22px;
 
-      height: 3px;
+            height: 3px;
 
-      background: #111;
+            background: #111;
 
-      position: relative;
+            position: relative;
 
-    }
+        }
 
-    .hamburger div::before,
+        .hamburger div::before,
 
-    .hamburger div::after {
+        .hamburger div::after {
 
-      content: "";
+            content: "";
 
-      position: absolute;
+            position: absolute;
 
-      width: 22px;
+            width: 22px;
 
-      height: 3px;
+            height: 3px;
 
-      background: #111;
+            background: #111;
 
-      transition: 0.3s;
+            transition: 0.3s;
 
-    }
+        }
 
-    .hamburger div::before {
+        .hamburger div::before {
 
-      top: -7px;
+            top: -7px;
 
-    }
+        }
 
-    .hamburger div::after {
+        .hamburger div::after {
 
-      top: 7px;
+            top: 7px;
 
-    }
+        }
 
-    .hamburger.active div {
+        .hamburger.active div {
 
-      background: transparent;
+            background: transparent;
 
-    }
+        }
 
-    .hamburger.active div::before {
+        .hamburger.active div::before {
 
-      transform: rotate(45deg);
+            transform: rotate(45deg);
 
-      top: 0;
+            top: 0;
 
-    }
+        }
 
-    .hamburger.active div::after {
+        .hamburger.active div::after {
 
-      transform: rotate(-45deg);
+            transform: rotate(-45deg);
 
-      top: 0;
+            top: 0;
 
-    }
+        }
 
-    /* ===== SIDEBAR BOTTOM SLIDE ===== */
+        /* ===== SIDEBAR BOTTOM SLIDE ===== */
 
-    .sidebar {
+        .sidebar {
 
-      position: fixed;
+            position: fixed;
 
-      bottom: -100%;
+            bottom: -100%;
 
-      left: 0;
+            left: 0;
 
-      width: 100%;
+            width: 100%;
 
-      height: 75%;
+            height: 75%;
 
-      background: linear-gradient(180deg, #111, #222);
+            background: linear-gradient(180deg, #111, #222);
 
-      border-top-left-radius: 25px;
+            border-top-left-radius: 25px;
 
-      border-top-right-radius: 25px;
+            border-top-right-radius: 25px;
 
-      box-shadow: 0 -10px 30px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 -10px 30px rgba(255, 215, 0, 0.3);
 
-      transition: 0.4s ease;
+            transition: 0.4s ease;
 
-      z-index: 2000;
+            z-index: 2000;
 
-      overflow-y: auto;
+            overflow-y: auto;
 
-      padding: 40px 20px;
+            padding: 40px 20px;
 
-    }
+        }
 
-    .sidebar.active {
+        .sidebar.active {
 
-      bottom: 0;
+            bottom: 0;
 
-    }
+        }
 
-    /* Scrollbar style */
+        /* Scrollbar style */
 
-    .sidebar::-webkit-scrollbar {
+        .sidebar::-webkit-scrollbar {
 
-      width: 6px;
+            width: 6px;
 
-    }
+        }
 
-    .sidebar::-webkit-scrollbar-thumb {
+        .sidebar::-webkit-scrollbar-thumb {
 
-      background: #FFD700;
+            background: #FFD700;
 
-      border-radius: 10px;
+            border-radius: 10px;
 
-    }
+        }
 
-    /* Menu links */
+        /* Menu links */
 
-    .sidebar a {
+        .sidebar a {
 
-      display: block;
+            display: block;
 
-      padding: 12px 15px;
+            padding: 12px 15px;
 
-      /* kam padding */
+            /* kam padding */
 
-      margin: 4px 0;
+            margin: 4px 0;
 
-      /* kam space */
+            /* kam space */
 
-      text-align: center;
+            text-align: center;
 
-      font-size: 17px;
+            font-size: 17px;
 
-      color: #FFD700;
+            color: #FFD700;
 
-      text-decoration: none;
+            text-decoration: none;
 
-      border-radius: 8px;
+            border-radius: 8px;
 
-      transition: 0.3s;
+            transition: 0.3s;
 
-    }
+        }
 
-    .sidebar a:hover {
+        .sidebar a:hover {
 
-      background: rgba(255, 215, 0, 0.1);
+            background: rgba(255, 215, 0, 0.1);
 
-    }
+        }
 
-    /* Overlay */
+        /* Overlay */
 
-    .overlay {
+        .overlay {
 
-      position: fixed;
+            position: fixed;
 
-      inset: 0;
+            inset: 0;
 
-      background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.4);
 
-      backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
 
-      display: none;
+            display: none;
 
-      z-index: 1500;
+            z-index: 1500;
 
-    }
+        }
 
-    .overlay.active {
+        .overlay.active {
 
-      display: block;
+            display: block;
 
-    }
+        }
 
-    /* ===== CUSTOM POPUP ===== */
+        /* ===== CUSTOM POPUP ===== */
 
-    .popup-overlay {
+        .popup-overlay {
 
-      position: fixed;
+            position: fixed;
 
-      inset: 0;
+            inset: 0;
 
-      background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.7);
 
-      backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
 
-      display: none;
+            display: none;
 
-      justify-content: center;
+            justify-content: center;
 
-      align-items: center;
+            align-items: center;
 
-      z-index: 15000;
+            z-index: 15000;
 
-    }
+        }
 
-    .popup-box {
+        .popup-box {
 
-      background: linear-gradient(135deg, #111, #222);
+            background: linear-gradient(135deg, #111, #222);
 
-      padding: 30px;
+            padding: 30px;
 
-      width: 320px;
+            width: 320px;
 
-      border-radius: 20px;
+            border-radius: 20px;
 
-      text-align: center;
+            text-align: center;
 
-      border: 2px solid #FFD700;
+            border: 2px solid #FFD700;
 
-      box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
 
-      animation: popupZoom 0.4s ease;
+            animation: popupZoom 0.4s ease;
 
-    }
+        }
 
-    @keyframes popupZoom {
+        @keyframes popupZoom {
 
-      from {
+            from {
 
-        transform: scale(0.7);
+                transform: scale(0.7);
 
-        opacity: 0;
+                opacity: 0;
 
-      }
+            }
 
-      to {
+            to {
 
-        transform: scale(1);
+                transform: scale(1);
 
-        opacity: 1;
+                opacity: 1;
 
-      }
+            }
 
-    }
+        }
 
-    .popup-box h2 {
+        .popup-box h2 {
 
-      color: #FFD700;
+            color: #FFD700;
 
-      margin-bottom: 15px;
+            margin-bottom: 15px;
 
-    }
+        }
 
-    .popup-box p {
+        .popup-box p {
 
-      margin-bottom: 20px;
+            margin-bottom: 20px;
 
-      color: #fff;
+            color: #fff;
 
-    }
+        }
 
-    .popup-buttons {
+        .popup-buttons {
 
-      display: flex;
+            display: flex;
 
-      justify-content: space-between;
+            justify-content: space-between;
 
-      gap: 10px;
+            gap: 10px;
 
-    }
+        }
 
-    .popup-confirm {
+        .popup-confirm {
 
-      flex: 1;
+            flex: 1;
 
-      background: #FFD700;
+            background: #FFD700;
 
-      color: #111;
+            color: #111;
 
-      padding: 10px;
+            padding: 10px;
 
-      border: none;
+            border: none;
 
-      border-radius: 8px;
+            border-radius: 8px;
 
-      font-weight: 600;
+            font-weight: 600;
 
-    }
+        }
 
-    .popup-cancel {
+        .popup-cancel {
 
-      flex: 1;
+            flex: 1;
 
-      background: #ef4444;
+            background: #ef4444;
 
-      color: white;
+            color: white;
 
-      padding: 10px;
+            padding: 10px;
 
-      border: none;
+            border: none;
 
-      border-radius: 8px;
+            border-radius: 8px;
 
-      font-weight: 600;
+            font-weight: 600;
 
-    }
+        }
 
-    .popup-confirm:hover,
+        .popup-confirm:hover,
 
-    .popup-cancel:hover {
+        .popup-cancel:hover {
 
-      transform: scale(1.05);
+            transform: scale(1.05);
 
-    }
+        }
 
 
 
 
 
-    /* Freeze body scrolling when any modal is open */
-    body.modal-active {
-      overflow: hidden;
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
+        /* Freeze body scrolling when any modal is open */
+        body.modal-active {
+            overflow: hidden;
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
 
-    /* History modal background with blur + dark overlay */
-    #historyModal {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      display: none;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 20px 10px;
-      overflow-y: auto;
-      background: rgba(0, 0, 0, 0.65);
-      /* dark overlay */
-      backdrop-filter: blur(6px);
-      /* main blur effect */
-      -webkit-backdrop-filter: blur(6px);
-      /* Safari */
-    }
+        /* History modal background with blur + dark overlay */
+        #historyModal {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px 10px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.65);
+            /* dark overlay */
+            backdrop-filter: blur(6px);
+            /* main blur effect */
+            -webkit-backdrop-filter: blur(6px);
+            /* Safari */
+        }
 
-    /* Make sure content stays above the blurred background */
-    .historyContent {
-      position: relative;
-      z-index: 2;
-      background: rgba(17, 17, 17, 0.94);
-      border: 1px solid rgba(255, 215, 0, 0.35);
-      border-radius: 16px;
-      max-width: 960px;
-      width: 100%;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-    }
+        /* Make sure content stays above the blurred background */
+        .historyContent {
+            position: relative;
+            z-index: 2;
+            background: rgba(17, 17, 17, 0.94);
+            border: 1px solid rgba(255, 215, 0, 0.35);
+            border-radius: 16px;
+            max-width: 960px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
 
-    /* Optional: stronger blur when modal is open */
-    #historyModal.active {
-      backdrop-filter: blur(8px);
-      background: rgba(0, 0, 0, 0.72);
-    }
+        /* Optional: stronger blur when modal is open */
+        #historyModal.active {
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.72);
+        }
 
-    /* When any modal-like thing is open using .overlay */
-.overlay.active {
-    display: block;
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-}
+        /* When any modal-like thing is open using .overlay */
+        .overlay.active {
+            display: block;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
 
-/* Make sure history modal content stays crisp */
-.historyContent {
-    background: rgba(17, 17, 17, 0.94);
-    backdrop-filter: none;     /* ← important: don't blur inside content */
-}
+        /* Make sure history modal content stays crisp */
+        .historyContent {
+            background: rgba(17, 17, 17, 0.94);
+            backdrop-filter: none;
+            /* ← important: don't blur inside content */
+        }
 
 
-/* ================== WHATSAPP BUTTON ================== */
-.whatsapp-btn {
-    background: #25D366;
-    color: #fff;
-    padding: 12px 28px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 15px;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
+        /* ================== WHATSAPP BUTTON ================== */
+        .whatsapp-btn {
+            background: #25D366;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-.whatsapp-btn:hover {
-    background: #20ba5a;
-    transform: translateY(-4px) scale(1.08);
-    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
-}
+        .whatsapp-btn:hover {
+            background: #20ba5a;
+            transform: translateY(-4px) scale(1.08);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+        }
 
-.whatsapp-btn svg {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.3s;
-}
+        .whatsapp-btn svg {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s;
+        }
 
-.whatsapp-btn:hover svg {
-    transform: scale(1.2) rotate(12deg);
-}
+        .whatsapp-btn:hover svg {
+            transform: scale(1.2) rotate(12deg);
+        }
 
-.whatsapp-btn:active {
-    animation: whatsappSend 0.6s ease;
-}
+        .whatsapp-btn:active {
+            animation: whatsappSend 0.6s ease;
+        }
 
-@keyframes whatsappSend {
-    0%   { transform: scale(1); }
-    40%  { transform: scale(0.9) rotate(-8deg); }
-    70%  { transform: scale(1.15) rotate(8deg); }
-    100% { transform: scale(1); }
-}
+        @keyframes whatsappSend {
+            0% {
+                transform: scale(1);
+            }
 
-/* Close button alag styling */
-.close-btn {
-    background: #ef4444 !important;
-    color: white !important;
-    padding: 14px 50px !important;
-    font-size: 17px !important;
-    border-radius: 12px !important;
-    margin-top: 25px !important;
-    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
-}
+            40% {
+                transform: scale(0.9) rotate(-8deg);
+            }
 
+            70% {
+                transform: scale(1.15) rotate(8deg);
+            }
 
+            100% {
+                transform: scale(1);
+            }
+        }
 
-/* ===== COMMON CLOSE BUTTON (Bill + History) ===== */
-.close-btn {
-    background: #ef4444 !important;
-    color: white !important;
-    padding: 14px 50px !important;
-    font-size: 17px !important;
-    border-radius: 12px !important;
-    margin-top: 35px !important;
-    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4) !important;
-    font-weight: 600;
-}
+        /* Close button alag styling */
+        .close-btn {
+            background: #ef4444 !important;
+            color: white !important;
+            padding: 14px 50px !important;
+            font-size: 17px !important;
+            border-radius: 12px !important;
+            margin-top: 25px !important;
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
 
-.close-btn:hover {
-    background: #dc2626 !important;
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(239, 68, 68, 0.6) !important;
-}
 
 
-  </style>
+        /* ===== COMMON CLOSE BUTTON (Bill + History) ===== */
+        .close-btn {
+            background: #ef4444 !important;
+            color: white !important;
+            padding: 14px 50px !important;
+            font-size: 17px !important;
+            border-radius: 12px !important;
+            margin-top: 35px !important;
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4) !important;
+            font-weight: 600;
+        }
+
+        .close-btn:hover {
+            background: #dc2626 !important;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(239, 68, 68, 0.6) !important;
+        }
+    </style>
 
 </head>
 
 <body>
 
-  <!-- Custom Popup -->
+    <!-- Custom Popup -->
 
-  <div id="customPopup" class="popup-overlay">
+    <div id="customPopup" class="popup-overlay">
 
-    <div class="popup-box">
+        <div class="popup-box">
 
-      <h2>SM Technician</h2>
+            <h2>SM Technician</h2>
 
-      <p id="popupMessage">Are you sure?</p>
+            <p id="popupMessage">Are you sure?</p>
 
-      <div class="popup-buttons">
+            <div class="popup-buttons">
 
-        <button onclick="confirmAction()" class="popup-confirm">Yes</button>
+                <button onclick="confirmAction()" class="popup-confirm">Yes</button>
 
-        <button onclick="closePopup()" class="popup-cancel">Cancel</button>
+                <button onclick="closePopup()" class="popup-cancel">Cancel</button>
 
-      </div>
+            </div>
+
+        </div>
 
     </div>
 
-  </div>
+    <!-- Hamburger Icon -->
 
-  <!-- Hamburger Icon -->
-
-  <div class="header"></div>
+    <div class="header"></div>
 
     <div class="hamburger" onclick="toggleMenu()">
 
-      <div></div>
+        <div></div>
 
-      <div></div>
+        <div></div>
 
-      <div></div>
+        <div></div>
 
     </div>
 
@@ -1291,370 +1301,393 @@
 
     <div class="sidebar" id="sidebarMenu">
 
-      <a href="#" onclick="closeMenu()">🏠 Home</a>
+        <a href="#" onclick="closeMenu()">🏠 Home</a>
 
-      <a href="cal.html">🧮 Point Calculator</a>
+        <a href="cal.html">🧮 Point Calculator</a>
 
-      <a href="inst.html">💡 Installation Price</a>
+        <a href="inst.html">💡 Installation Price</a>
 
-      <a href="rep.html">🔧 Repairing Price</a>
+        <a href="rep.html">🔧 Repairing Price</a>
 
-      <a href="rule.html">📜 Rule</a>
+        <a href="rule.html">📜 Rule</a>
 
-      <a href="#" onclick="openHistoryFromMenu()">📜 History</a>
+        <a href="#" onclick="openHistoryFromMenu()">📜 History</a>
 
-      <hr style="margin:20px 0;border-color:#FFD700;">
+        <hr style="margin:20px 0;border-color:#FFD700;">
 
-      <a href="#" onclick="logoutUser()" style="color:#ef4444;font-weight:bold;">
+        <a href="#" onclick="logoutUser()" style="color:#ef4444;font-weight:bold;">
 
-        🔓 Logout
+            🔓 Logout
 
-      </a>
+        </a>
 
     </div>
 
     <div class="container">
 
-      <div class="header">
+        <div class="header">
+            <div style="text-align:center; position:relative;">
+                <!-- Add position:relative; here if not already present -->
+                <!-- ┌──────────────────────────────┐ -->
+                <!-- │     USER EMAIL BADGE         │ -->
+                <!-- └──────────────────────────────┘ -->
+                <div id="userBadge" style="position: absolute; top: 15px; right: 15px; 
+                background: rgba(255,215,0,0.15); 
+                color: #FFEA00; 
+                padding: 8px 14px; 
+                border-radius: 30px; 
+                font-size: 0.9rem; 
+                font-weight: 500; 
+                border: 1px solid #FFD70044;
+                backdrop-filter: blur(6px);
+                display: none;">
+                    <span id="userEmailDisplay">user@example.com</span>
+                    <span style="margin-left:8px; opacity:0.7; font-size:0.85em;">(You)</span>
+                </div>
+                <img src="logo.png" alt="SM Technician Logo" class="header-logo" onerror="this.style.display='none'">
+                <h1>SM Technician</h1>
+            </div>
+        </div>
 
-        <div style="text-align:center;">
+        <div class="info">
 
-          <img src="logo.png" alt="SM Technician Logo" class="header-logo" onerror="this.style.display='none'">
+            <div><label>Customer Name</label><input id="custName" type="text"></div>
 
-          <h1>SM Technician</h1>
+            <div><label>Address</label><input id="custAddress" type="text"></div>
+
+            <div><label>Mobile Number</label><input id="phone" type="tel" placeholder="Enter mobile number"></div>
 
         </div>
 
-      </div>
+        <div class="top-search-container">
 
-      <div class="info">
+            <input type="text" id="materialSearch" class="top-search" placeholder="🔍 Search Material Name...">
 
-        <div><label>Customer Name</label><input id="custName" type="text"></div>
+        </div>
 
-        <div><label>Address</label><input id="custAddress" type="text"></div>
+        <!-- ALL SECTIONS FROM data.pdf (100% SERIAL) -->
 
-        <div><label>Mobile Number</label><input id="phone" type="tel" placeholder="Enter mobile number"></div>
+        <div class="big-title">LIGHTING ESTIMATE</div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">LIGHT <span>▼</span></div>
 
-      <div class="top-search-container">
+        <div class="acc-content" id="lightSec">
 
-        <input type="text" id="materialSearch" class="top-search" placeholder="🔍 Search Material Name...">
+            <div class="items" id="lightItems"></div><button class="add-btn" onclick="addExtra('lightItems')">+ Extra
 
-      </div>
+                Light</button>
 
-      <!-- ALL SECTIONS FROM data.pdf (100% SERIAL) -->
+        </div>
 
-      <div class="big-title">LIGHTING ESTIMATE</div>
+        <div class="acc-header" onclick="toggleAccordion(this)">STRIP LIGHT <span>▼</span></div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">LIGHT <span>▼</span></div>
+        <div class="acc-content" id="stripSec">
 
-      <div class="acc-content" id="lightSec">
+            <div class="items" id="stripItems"></div><button class="add-btn" onclick="addExtra('stripItems')">+ Extra
 
-        <div class="items" id="lightItems"></div><button class="add-btn" onclick="addExtra('lightItems')">+ Extra
+                Strip</button>
 
-          Light</button>
+        </div>
 
-      </div>
+        <div class="big-title">WIRING ESTIMATE</div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">STRIP LIGHT <span>▼</span></div>
+        <div class="acc-header" onclick="toggleAccordion(this)">WIRE <span>▼</span></div>
 
-      <div class="acc-content" id="stripSec">
+        <div class="acc-content" id="wireSec">
 
-        <div class="items" id="stripItems"></div><button class="add-btn" onclick="addExtra('stripItems')">+ Extra
+            <div class="items" id="wireItems"></div><button class="add-btn" onclick="addExtra('wireItems')">+ Extra
 
-          Strip</button>
+                Wire</button>
 
-      </div>
+        </div>
 
-      <div class="big-title">WIRING ESTIMATE</div>
+        <div class="acc-header" onclick="toggleAccordion(this)">EARTHING <span>▼</span></div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">WIRE <span>▼</span></div>
+        <div class="acc-content" id="earthingSec">
 
-      <div class="acc-content" id="wireSec">
+            <div class="items" id="earthingItems"></div><button class="add-btn" onclick="addExtra('earthingItems')">+
+                Extra
 
-        <div class="items" id="wireItems"></div><button class="add-btn" onclick="addExtra('wireItems')">+ Extra
+                Earthing</button>
 
-          Wire</button>
+        </div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">FAN HOOK <span>▼</span></div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">EARTHING <span>▼</span></div>
+        <div class="acc-content" id="fanhookSec">
 
-      <div class="acc-content" id="earthingSec">
+            <div class="items" id="fanhookItems"></div><button class="add-btn" onclick="addExtra('fanhookItems')">+
+                Extra
 
-        <div class="items" id="earthingItems"></div><button class="add-btn" onclick="addExtra('earthingItems')">+ Extra
+                Fan
 
-          Earthing</button>
+                Hook</button>
 
-      </div>
+        </div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">FAN HOOK <span>▼</span></div>
+        <div class="big-title">WALL PIPING ESTIMATES</div>
 
-      <div class="acc-content" id="fanhookSec">
+        <div class="acc-header" onclick="toggleAccordion(this)">PVC CONDUIT PIPE <span>▼</span>
 
-        <div class="items" id="fanhookItems"></div><button class="add-btn" onclick="addExtra('fanhookItems')">+ Extra
+        </div>
 
-          Fan
+        <div class="acc-content" id="pvcSec">
 
-          Hook</button>
+            <div class="items" id="pvcItems"></div><button class="add-btn" onclick="addExtra('pvcItems')">+ Extra PVC
 
-      </div>
+                Pipe</button>
 
-      <div class="big-title">WALL PIPING ESTIMATES</div>
+        </div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">PVC CONDUIT PIPE <span>▼</span>
+        <div class="acc-header" onclick="toggleAccordion(this)">JUNCTION BOX <span>▼</span></div>
 
-      </div>
+        <div class="acc-content" id="junctionSec">
 
-      <div class="acc-content" id="pvcSec">
+            <div class="items" id="junctionItems"></div><button class="add-btn" onclick="addExtra('junctionItems')">+
+                Extra
 
-        <div class="items" id="pvcItems"></div><button class="add-btn" onclick="addExtra('pvcItems')">+ Extra PVC
+                Junction Box</button>
 
-          Pipe</button>
+        </div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">METAL BOX <span>▼</span></div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">JUNCTION BOX <span>▼</span></div>
+        <div class="acc-content" id="metalSec">
 
-      <div class="acc-content" id="junctionSec">
+            <div class="items" id="metalItems"></div><button class="add-btn" onclick="addExtra('metalItems')">+ Extra
+                Metal
 
-        <div class="items" id="junctionItems"></div><button class="add-btn" onclick="addExtra('junctionItems')">+ Extra
+                Box</button>
 
-          Junction Box</button>
+        </div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">METAL BOX <span>▼</span></div>
+        </div>
 
-      <div class="acc-content" id="metalSec">
+        <div class="acc-content" id="wallExtraSec">
 
-        <div class="items" id="metalItems"></div><button class="add-btn" onclick="addExtra('metalItems')">+ Extra Metal
+            <div class="items" id="wallExtraItems"></div><button class="add-btn" onclick="addExtra('wallExtraItems')">+
 
-          Box</button>
+                Extra
 
-      </div>
+                Material</button>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
+        </div>
 
-      </div>
+        <div class="big-title">LENTAR PIPING ESTIMATE</div>
 
-      <div class="acc-content" id="wallExtraSec">
+        <div class="acc-header" onclick="toggleAccordion(this)">PVC CONDUIT PIPE <span>▼</span>
 
-        <div class="items" id="wallExtraItems"></div><button class="add-btn" onclick="addExtra('wallExtraItems')">+
+        </div>
 
-          Extra
+        <div class="acc-content" id="lentarpvcSec">
 
-          Material</button>
+            <div class="items" id="lentarpvcItems"></div><button class="add-btn" onclick="addExtra('lentarpvcItems')">+
 
-      </div>
+                Extra
 
-      <div class="big-title">LENTAR PIPING ESTIMATE</div>
+                PVC</button>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">PVC CONDUIT PIPE <span>▼</span>
+        </div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">BOX & BEND <span>▼</span></div>
 
-      <div class="acc-content" id="lentarpvcSec">
+        <div class="acc-content" id="boxbendSec">
 
-        <div class="items" id="lentarpvcItems"></div><button class="add-btn" onclick="addExtra('lentarpvcItems')">+
+            <div class="items" id="boxbendItems"></div><button class="add-btn" onclick="addExtra('boxbendItems')">+
+                Extra
 
-          Extra
+                Box
 
-          PVC</button>
+                & Bend</button>
 
-      </div>
+        </div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">BOX & BEND <span>▼</span></div>
+        <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
 
-      <div class="acc-content" id="boxbendSec">
+        </div>
 
-        <div class="items" id="boxbendItems"></div><button class="add-btn" onclick="addExtra('boxbendItems')">+ Extra
+        <div class="acc-content" id="lentarExtraSec">
 
-          Box
+            <div class="items" id="lentarExtraItems"></div><button class="add-btn"
+                onclick="addExtra('lentarExtraItems')">+
 
-          & Bend</button>
+                Extra Material</button>
 
-      </div>
+        </div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
+        <div class="big-title">MODULAR SWITCH BOARD ESTIMATE</div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">SWITCH & SOCKET <span>▼</span>
 
-      <div class="acc-content" id="lentarExtraSec">
+        </div>
 
-        <div class="items" id="lentarExtraItems"></div><button class="add-btn" onclick="addExtra('lentarExtraItems')">+
+        <div class="acc-content" id="switchSec">
 
-          Extra Material</button>
+            <div class="items" id="switchItems"></div><button class="add-btn" onclick="addExtra('switchItems')">+ Extra
 
-      </div>
+                Switch</button>
 
-      <div class="big-title">MODULAR SWITCH BOARD ESTIMATE</div>
+        </div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">SWITCH & SOCKET <span>▼</span>
+        <div class="acc-header" onclick="toggleAccordion(this)">MODULAR PLATE <span>▼</span>
 
-      </div>
+        </div>
 
-      <div class="acc-content" id="switchSec">
+        <div class="acc-content" id="plateSec">
 
-        <div class="items" id="switchItems"></div><button class="add-btn" onclick="addExtra('switchItems')">+ Extra
+            <div class="items" id="plateItems"></div><button class="add-btn" onclick="addExtra('plateItems')">+ Extra
 
-          Switch</button>
+                Plate</button>
 
-      </div>
+        </div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">MODULAR PLATE <span>▼</span>
+        <div class="acc-header" onclick="toggleAccordion(this)">MCB's <span>▼</span></div>
 
-      </div>
+        <div class="acc-content" id="mcbSec">
 
-      <div class="acc-content" id="plateSec">
+            <div class="items" id="mcbItems"></div><button class="add-btn" onclick="addExtra('mcbItems')">+ Extra
 
-        <div class="items" id="plateItems"></div><button class="add-btn" onclick="addExtra('plateItems')">+ Extra
+                MCB</button>
 
-          Plate</button>
+        </div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">SCREWS <span>▼</span></div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">MCB's <span>▼</span></div>
+        <div class="acc-content" id="screwsSec">
 
-      <div class="acc-content" id="mcbSec">
+            <div class="items" id="screwsItems"></div><button class="add-btn" onclick="addExtra('screwsItems')">+ Extra
 
-        <div class="items" id="mcbItems"></div><button class="add-btn" onclick="addExtra('mcbItems')">+ Extra
+                Screw</button>
 
-          MCB</button>
+        </div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">SCREWS <span>▼</span></div>
+        </div>
 
-      <div class="acc-content" id="screwsSec">
+        <div class="acc-content" id="modularExtraSec">
 
-        <div class="items" id="screwsItems"></div><button class="add-btn" onclick="addExtra('screwsItems')">+ Extra
+            <div class="items" id="modularExtraItems"></div><button class="add-btn"
+                onclick="addExtra('modularExtraItems')">+
 
-          Screw</button>
+                Extra Material</button>
 
-      </div>
+        </div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
+        <div class="big-title">FALL CEILING WIRING ESTIMATES</div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">MATERIAL <span>▼</span></div>
 
-      <div class="acc-content" id="modularExtraSec">
+        <div class="acc-content" id="fallMaterialSec">
 
-        <div class="items" id="modularExtraItems"></div><button class="add-btn"
-          onclick="addExtra('modularExtraItems')">+
+            <div class="items" id="fallMaterialItems"></div><button class="add-btn"
+                onclick="addExtra('fallMaterialItems')">+
 
-          Extra Material</button>
+                Extra Material</button>
 
-      </div>
+        </div>
 
-      <div class="big-title">FALL CEILING WIRING ESTIMATES</div>
+        <div class="acc-header" onclick="toggleAccordion(this)">WIRE <span>▼</span></div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">MATERIAL <span>▼</span></div>
+        <div class="acc-content" id="fallWireSec">
 
-      <div class="acc-content" id="fallMaterialSec">
+            <div class="items" id="fallWireItems"></div><button class="add-btn" onclick="addExtra('fallWireItems')">+
+                Extra
 
-        <div class="items" id="fallMaterialItems"></div><button class="add-btn"
-          onclick="addExtra('fallMaterialItems')">+
+                Wire</button>
 
-          Extra Material</button>
+        </div>
 
-      </div>
+        <div class="big-title">CASING CAPPING</div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">WIRE <span>▼</span></div>
+        <div class="acc-header" onclick="toggleAccordion(this)">Material <span>▼</span></div>
 
-      <div class="acc-content" id="fallWireSec">
+        <div class="acc-content" id="casingSec">
 
-        <div class="items" id="fallWireItems"></div><button class="add-btn" onclick="addExtra('fallWireItems')">+ Extra
+            <div class="items" id="casingItems"></div><button class="add-btn" onclick="addExtra('casingItems')">+ Extra
 
-          Wire</button>
+                Casing</button>
 
-      </div>
+        </div>
 
-      <div class="big-title">CASING CAPPING</div>
+        <div class="acc-header" onclick="toggleAccordion(this)">SURFACE BOARD's <span>▼</span>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">Material <span>▼</span></div>
+        </div>
 
-      <div class="acc-content" id="casingSec">
+        <div class="acc-content" id="surfaceSec">
 
-        <div class="items" id="casingItems"></div><button class="add-btn" onclick="addExtra('casingItems')">+ Extra
+            <div class="items" id="surfaceItems"></div><button class="add-btn" onclick="addExtra('surfaceItems')">+
+                Extra
 
-          Casing</button>
+                Surface Board</button>
 
-      </div>
+        </div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">SURFACE BOARD's <span>▼</span>
+        <div class="acc-header" onclick="toggleAccordion(this)">MCB's <span>▼</span></div>
 
-      </div>
+        <div class="acc-content" id="fallMcbSec">
 
-      <div class="acc-content" id="surfaceSec">
+            <div class="items" id="fallMcbItems"></div><button class="add-btn" onclick="addExtra('fallMcbItems')">+
+                Extra
 
-        <div class="items" id="surfaceItems"></div><button class="add-btn" onclick="addExtra('surfaceItems')">+ Extra
+                MCB</button>
 
-          Surface Board</button>
+        </div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">SWITCH & SOCKET <span>▼</span>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">MCB's <span>▼</span></div>
+        </div>
 
-      <div class="acc-content" id="fallMcbSec">
+        <div class="acc-content" id="fallSwitchSec">
 
-        <div class="items" id="fallMcbItems"></div><button class="add-btn" onclick="addExtra('fallMcbItems')">+ Extra
+            <div class="items" id="fallSwitchItems"></div><button class="add-btn"
+                onclick="addExtra('fallSwitchItems')">+
 
-          MCB</button>
+                Extra Switch</button>
 
-      </div>
+        </div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">SWITCH & SOCKET <span>▼</span>
+        <div class="big-title">WIRE MATERIAL</div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">WIRE MATERIAL <span>▼</span>
 
-      <div class="acc-content" id="fallSwitchSec">
+        </div>
 
-        <div class="items" id="fallSwitchItems"></div><button class="add-btn" onclick="addExtra('fallSwitchItems')">+
+        <div class="acc-content" id="wireMaterialSec">
 
-          Extra Switch</button>
+            <div class="items" id="wireMaterialItems"></div><button class="add-btn"
+                onclick="addExtra('wireMaterialItems')">+
 
-      </div>
+                Extra Wire</button>
 
-      <div class="big-title">WIRE MATERIAL</div>
+        </div>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">WIRE MATERIAL <span>▼</span>
+        <div class="acc-header" onclick="toggleAccordion(this)">SCREWS <span>▼</span></div>
 
-      </div>
+        <div class="acc-content" id="fallScrewsSec">
 
-      <div class="acc-content" id="wireMaterialSec">
+            <div class="items" id="fallScrewsItems"></div><button class="add-btn"
+                onclick="addExtra('fallScrewsItems')">+
 
-        <div class="items" id="wireMaterialItems"></div><button class="add-btn"
-          onclick="addExtra('wireMaterialItems')">+
+                Extra Screw</button>
 
-          Extra Wire</button>
+        </div>
 
-      </div>
+        <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">SCREWS <span>▼</span></div>
+        </div>
 
-      <div class="acc-content" id="fallScrewsSec">
+        <div class="acc-content" id="fallExtraSec">
 
-        <div class="items" id="fallScrewsItems"></div><button class="add-btn" onclick="addExtra('fallScrewsItems')">+
+            <div class="items" id="fallExtraItems"></div><button class="add-btn" onclick="addExtra('fallExtraItems')">+
 
-          Extra Screw</button>
+                Extra
 
-      </div>
+                Material</button>
 
-      <div class="acc-header" onclick="toggleAccordion(this)">EXTRA MATERIAL <span>▼</span>
-
-      </div>
-
-      <div class="acc-content" id="fallExtraSec">
-
-        <div class="items" id="fallExtraItems"></div><button class="add-btn" onclick="addExtra('fallExtraItems')">+
-
-          Extra
-
-          Material</button>
-
-      </div>
+        </div>
 
     </div>
 
@@ -1680,95 +1713,97 @@ cursor:pointer;
 
 ">
 
-      Generate Bill
+        Generate Bill
 
     </button>
 
     <div id="billModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);overflow:auto;">
 
-      <div id="billContent">
+        <div id="billContent">
 
-        <div style="text-align:center;">
+            <div style="text-align:center;">
 
-          <img src="logo.png" style="width:80px;">
+                <img src="logo.png" style="width:80px;">
 
-          <h2>SM Technician</h2>
+                <h2>SM Technician</h2>
 
-          <div>Mobile No: 8935883863</div>
+                <div>Mobile No: 8935883863</div>
+
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin:10px 0;">
+
+                <div id="billLeftInfo"></div>
+
+            </div>
+
+            <table border="1" width="100%" cellspacing="0" cellpadding="5">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Sl No</th>
+
+                        <th>Item</th>
+
+                        <th>Qty</th>
+
+                        <th>Rate</th>
+
+                        <th>Price</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="billTableBody"></tbody>
+
+            </table>
+
+            <h3 style="text-align:right;margin-top:2px;">Total: ₹<span id="billTotal"></span></h3>
+
+            <div style="text-align:center;margin-top:20px;">
+
+                <button onclick="downloadBill()">Download JPG</button>
+
+                <button onclick="downloadBillPDF()">Download PDF</button>
+
+                <button class="whatsapp-btn" onclick="shareMaterialListOnWhatsApp()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.485-.888-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                        <path
+                            d="M12 2C6.48 2 2 6.59 2 12.253c0 2.35.82 4.51 2.18 6.2L2 22l3.72-1.05c1.6.9 3.4 1.4 5.28 1.4 5.52 0 10-4.59 10-10.247C22 6.59 17.52 2 12 2zm0 18.2c-1.65 0-3.26-.45-4.65-1.3L4.5 20.3l1.35-3.95c-1.1-1.5-1.7-3.3-1.7-5.15C4.15 7.3 7.7 3.8 12 3.8c4.3 0 7.8 3.5 7.8 7.8 0 4.3-3.5 7.8-7.8 7.8z" />
+                    </svg>
+                    Share on WhatsApp
+                </button>
+
+            </div>
+
+            <!-- Close button - same style -->
+            <div style="text-align:center; margin-top:35px;">
+                <button onclick="closeBill()" class="close-btn">✕ Close</button>
+            </div>
 
         </div>
-
-        <div style="display:flex;justify-content:space-between;margin:10px 0;">
-
-          <div id="billLeftInfo"></div>
-
-        </div>
-
-        <table border="1" width="100%" cellspacing="0" cellpadding="5">
-
-          <thead>
-
-            <tr>
-
-              <th>Sl No</th>
-
-              <th>Item</th>
-
-              <th>Qty</th>
-
-              <th>Rate</th>
-
-              <th>Price</th>
-
-            </tr>
-
-          </thead>
-
-          <tbody id="billTableBody"></tbody>
-
-        </table>
-
-        <h3 style="text-align:right;margin-top:2px;">Total: ₹<span id="billTotal"></span></h3>
-
-        <div style="text-align:center;margin-top:20px;">
-
-          <button onclick="downloadBill()">Download JPG</button>
-
-          <button onclick="downloadBillPDF()">Download PDF</button>
-
-          <button class="whatsapp-btn" onclick="shareMaterialListOnWhatsApp()">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.485-.888-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                    <path d="M12 2C6.48 2 2 6.59 2 12.253c0 2.35.82 4.51 2.18 6.2L2 22l3.72-1.05c1.6.9 3.4 1.4 5.28 1.4 5.52 0 10-4.59 10-10.247C22 6.59 17.52 2 12 2zm0 18.2c-1.65 0-3.26-.45-4.65-1.3L4.5 20.3l1.35-3.95c-1.1-1.5-1.7-3.3-1.7-5.15C4.15 7.3 7.7 3.8 12 3.8c4.3 0 7.8 3.5 7.8 7.8 0 4.3-3.5 7.8-7.8 7.8z"/>
-                </svg>
-                Share on WhatsApp
-            </button>
-
-        </div>
-
-        <!-- Close button - same style -->
-        <div style="text-align:center; margin-top:35px;">
-          <button onclick="closeBill()" class="close-btn">✕ Close</button>
-        </div>
-
-      </div>
 
     </div>
 
     <div id="historyModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);overflow:auto;">
 
-      <div class="historyContent">
+        <div class="historyContent">
 
-        <h2 style="text-align:center;">Bill History</h2>
+            <h2 style="text-align:center;">Bill History</h2>
 
-        <div id="historyList"></div>
+            <div id="historyList"></div>
 
-        <!-- Close button - bilkul same jaise bill modal mein -->
-        <div style="text-align:center;">
-          <button onclick="closeHistory()" class="close-btn">✕ Close</button>
+            <!-- Close button - bilkul same jaise bill modal mein -->
+            <div style="text-align:center;">
+                <button onclick="closeHistory()" class="close-btn">✕ Close</button>
+            </div>
+
         </div>
-
-      </div>
 
     </div>
 
@@ -1776,93 +1811,93 @@ cursor:pointer;
 
     <script>
 
-      // ================== 100% DATA FROM data.pdf ==================
+        // ================== 100% DATA FROM data.pdf ==================
 
-      const data = {
+        const data = {
 
-        lightItems: ["Panel light", "COB light", "LED Bulb", "Tube light", "Rope light", "Rope light adaptor", "Foot light", "Surface light", "Insulation strip"],
+            lightItems: ["Panel light", "COB light", "LED Bulb", "Tube light", "Rope light", "Rope light adaptor", "Foot light", "Surface light", "Insulation strip"],
 
-        stripItems: ["Strip Channel", "Strip light", "Strip adaptor", "Strip jointer (shape)", "Strip jointer (straight)"],
+            stripItems: ["Strip Channel", "Strip light", "Strip adaptor", "Strip jointer (shape)", "Strip jointer (straight)"],
 
-        wireItems: ["Copper Wire 0.75mm", "Copper Wire 1mm", "Copper Wire 1.5mm", "Copper Wire 2.5mm", "Copper Wire 4mm", "Copper Wire 6mm", "Copper Wire 10mm", "Armoured cable 2 core", "Armoured cable 4 core", "DTH cable", "Speaker wire", "Camera wire", "Wire spring"],
+            wireItems: ["Copper Wire 0.75mm", "Copper Wire 1mm", "Copper Wire 1.5mm", "Copper Wire 2.5mm", "Copper Wire 4mm", "Copper Wire 6mm", "Copper Wire 10mm", "Armoured cable 2 core", "Armoured cable 4 core", "DTH cable", "Speaker wire", "Camera wire", "Wire spring"],
 
-        earthingItems: ["Earthing wire", "Earthing plate", "Brass nut bolt", "Charcoal", "Salt", "GI rod", "Copper rod", "Earthing chemical", "Cocopeat / soil enhancer"],
+            earthingItems: ["Earthing wire", "Earthing plate", "Brass nut bolt", "Charcoal", "Salt", "GI rod", "Copper rod", "Earthing chemical", "Cocopeat / soil enhancer"],
 
-        fanhookItems: ["Fan hook", "Fanner 8no.", "Araldite solvent"],
+            fanhookItems: ["Fan hook", "Fanner 8no.", "Araldite solvent"],
 
-        pvcItems: ["PVC pipe 25mm (1.5mm)", "PVC pipe 20mm (1.5mm)", "Flexible pipe 25mm", "Flexible pipe 20mm", "Coupling / socket"],
+            pvcItems: ["PVC pipe 25mm (1.5mm)", "PVC pipe 20mm (1.5mm)", "Flexible pipe 25mm", "Flexible pipe 20mm", "Coupling / socket"],
 
-        junctionItems: ["Junction box 25mm (1,2 way)", "Junction box 25mm (3,4 way)", "Junction box 20mm (1,2 way)", "Junction box 20mm (3,4 way)", "PVC bend 25mm", "PVC bend 20mm", "Insulation tape"],
+            junctionItems: ["Junction box 25mm (1,2 way)", "Junction box 25mm (3,4 way)", "Junction box 20mm (1,2 way)", "Junction box 20mm (3,4 way)", "PVC bend 25mm", "PVC bend 20mm", "Insulation tape"],
 
-        metalItems: ["Metal box 2M", "Metal box 3M", "Metal box 4M", "Metal box 6M", "Metal box 8M (Sq)", "Metal box 8M (rect)", "Metal box 12M", "Metal box 18M", "MCB box single door", "MCB box double door"],
+            metalItems: ["Metal box 2M", "Metal box 3M", "Metal box 4M", "Metal box 6M", "Metal box 8M (Sq)", "Metal box 8M (rect)", "Metal box 12M", "Metal box 18M", "MCB box single door", "MCB box double door"],
 
-        wallExtraItems: ["Saddle / kaju clip 20mm", "Saddle / kaju clip 25mm", "GI earthing wire (kg)", "Nail (2.5 inch)"],
+            wallExtraItems: ["Saddle / kaju clip 20mm", "Saddle / kaju clip 25mm", "GI earthing wire (kg)", "Nail (2.5 inch)"],
 
-        lentarpvcItems: ["PVC conduit pipe 25mm (2mm)", "PVC conduit pipe 20mm (2mm)"],
+            lentarpvcItems: ["PVC conduit pipe 25mm (2mm)", "PVC conduit pipe 20mm (2mm)"],
 
-        boxbendItems: ["Concealed box (1,2 way)", "Concealed box (3,4 way)", "Fan box 20mm", "Fan box 25mm", "Deep box 20mm (1,2 way)", "Deep box 20mm (3,4 way)", "Deep box 25mm (1,2 way)", "Deep box 25mm (3,4 way)", "PVC Bend 20mm", "PVC Bend 25mm"],
+            boxbendItems: ["Concealed box (1,2 way)", "Concealed box (3,4 way)", "Fan box 20mm", "Fan box 25mm", "Deep box 20mm (1,2 way)", "Deep box 20mm (3,4 way)", "Deep box 25mm (1,2 way)", "Deep box 25mm (3,4 way)", "PVC Bend 20mm", "PVC Bend 25mm"],
 
-        lentarExtraItems: ["Cpvc solvent", "Insulation tape", "End cap", "Coupling / socket 20mm (2mm)", "Coupling / socket 25mm (2mm)"],
+            lentarExtraItems: ["Cpvc solvent", "Insulation tape", "End cap", "Coupling / socket 20mm (2mm)", "Coupling / socket 25mm (2mm)"],
 
-        switchItems: ["Switch 6Amp", "Switch 16Amp", "DP switch", "5pin Socket 6Amp", "5pin Socket 16Amp", "2pin Socket", "Regulator", "Damy", "USB", "Bell switch", "Fuse switch", "Indicator", "Two way switch", "TV outlet"],
+            switchItems: ["Switch 6Amp", "Switch 16Amp", "DP switch", "5pin Socket 6Amp", "5pin Socket 16Amp", "2pin Socket", "Regulator", "Damy", "USB", "Bell switch", "Fuse switch", "Indicator", "Two way switch", "TV outlet"],
 
-        plateItems: ["Plate 1 module", "Plate 2 module", "Plate 3 module", "Plate 4 module", "Plate 6 module", "Plate 8 module (square)", "Plate 8 module (rectangular)", "Plate 12 module", "Plate 18 module"],
+            plateItems: ["Plate 1 module", "Plate 2 module", "Plate 3 module", "Plate 4 module", "Plate 6 module", "Plate 8 module (square)", "Plate 8 module (rectangular)", "Plate 12 module", "Plate 18 module"],
 
-        mcbItems: ["MCB 6Amp", "MCB 10Amp", "MCB 16Amp", "MCB 20Amp", "MCB 25Amp", "MCB 32Amp", "MCB 32Amp (___ pole)", "MCB (64Amp) (___ pole)", "MCCB (___ Amp) (___ pole)", "Isolator 32Amp (___ pole)", "Isolator 64Amp (___ pole)", "Isolator 100Amp (___ pole)", "RCCBO (___ Amp) (___ pole)", "RCCB (___ Amp) (___ pole)", "Kitkat Fuse (___ Amp)", "Terminal blocks (___ Amp)", "Bus bar DB (___ Amp)", "Changeover MCB (___ Amp) (___ pole)", "PVC cable Tie"],
+            mcbItems: ["MCB 6Amp", "MCB 10Amp", "MCB 16Amp", "MCB 20Amp", "MCB 25Amp", "MCB 32Amp", "MCB 32Amp (___ pole)", "MCB (64Amp) (___ pole)", "MCCB (___ Amp) (___ pole)", "Isolator 32Amp (___ pole)", "Isolator 64Amp (___ pole)", "Isolator 100Amp (___ pole)", "RCCBO (___ Amp) (___ pole)", "RCCB (___ Amp) (___ pole)", "Kitkat Fuse (___ Amp)", "Terminal blocks (___ Amp)", "Bus bar DB (___ Amp)", "Changeover MCB (___ Amp) (___ pole)", "PVC cable Tie"],
 
-        screwsItems: ["Star Screw (1.5 inch)", "Star Screw (1 inch)", "Star Screw (2 inch)", "Star Screw (2.5 inch)", "Star Screw (4 inch)", "3/16 Bolt (___ inch)"],
+            screwsItems: ["Star Screw (1.5 inch)", "Star Screw (1 inch)", "Star Screw (2 inch)", "Star Screw (2.5 inch)", "Star Screw (4 inch)", "3/16 Bolt (___ inch)"],
 
-        modularExtraItems: ["Angle holder", "Batten holder", "Pendant holder", "Ceiling rose", "Round damy sheet", "Fan damy sheet", "Insulation tape", "Indicator bulb"],
+            modularExtraItems: ["Angle holder", "Batten holder", "Pendant holder", "Ceiling rose", "Round damy sheet", "Fan damy sheet", "Insulation tape", "Indicator bulb"],
 
-        fallMaterialItems: ["PVC pipe 25mm (1.5mm)", "PVC pipe 20mm (1.5mm)", "Flexible pipe 25mm", "Flexible pipe 20mm", "Junction box 25mm (1,2 way)", "Junction box 25mm (3,4 way)", "Junction box 20mm (1,2 way)", "Junction box 20mm (3,4 way)", "PVC bend 25mm", "PVC bend 20mm", "Insulation tape"],
+            fallMaterialItems: ["PVC pipe 25mm (1.5mm)", "PVC pipe 20mm (1.5mm)", "Flexible pipe 25mm", "Flexible pipe 20mm", "Junction box 25mm (1,2 way)", "Junction box 25mm (3,4 way)", "Junction box 20mm (1,2 way)", "Junction box 20mm (3,4 way)", "PVC bend 25mm", "PVC bend 20mm", "Insulation tape"],
 
-        fallWireItems: ["Copper Wire 0.75mm", "Copper Wire 1mm", "Copper Wire 1.5mm", "Copper Wire 2.5mm", "Copper Wire 4mm", "Copper Wire 6mm", "Copper Wire 10mm", "DTH cable", "Speaker wire", "Fan hook", "Camera wire", "Wire spring", "Fastener 8 no.", "Saddle clip 25mm", "Special Saddle 25mm", "Rawal plug (____ mm)", "Screw (____ mm)", "PCV insulation tape"],
+            fallWireItems: ["Copper Wire 0.75mm", "Copper Wire 1mm", "Copper Wire 1.5mm", "Copper Wire 2.5mm", "Copper Wire 4mm", "Copper Wire 6mm", "Copper Wire 10mm", "DTH cable", "Speaker wire", "Fan hook", "Camera wire", "Wire spring", "Fastener 8 no.", "Saddle clip 25mm", "Special Saddle 25mm", "Rawal plug (____ mm)", "Screw (____ mm)", "PCV insulation tape"],
 
-        casingItems: ["Casing capping", "Coupling", "Elbow joint", "Tee joint", "Doctor joint", "Internal bend", "External bend", "Reducer", "Square box", "Junction box", "Round block", "Panel trunking", "Electrical gang box", "MCB board (___ way)", "MCB board metal (___ way)"],
+            casingItems: ["Casing capping", "Coupling", "Elbow joint", "Tee joint", "Doctor joint", "Internal bend", "External bend", "Reducer", "Square box", "Junction box", "Round block", "Panel trunking", "Electrical gang box", "MCB board (___ way)", "MCB board metal (___ way)"],
 
-        surfaceItems: ["Surface board (1 module)", "Surface board (2 module)", "Surface board (3 module)", "Surface board (4 module)", "Surface board (6 module)", "Surface board (8 module) (sqr)", "Surface board (8 module) (rect)", "Surface board (12 module)", "Surface board (18 module)"],
+            surfaceItems: ["Surface board (1 module)", "Surface board (2 module)", "Surface board (3 module)", "Surface board (4 module)", "Surface board (6 module)", "Surface board (8 module) (sqr)", "Surface board (8 module) (rect)", "Surface board (12 module)", "Surface board (18 module)"],
 
-        fallMcbItems: ["MCB 6Amp", "MCB 10Amp", "MCB 16Amp", "MCB 20Amp", "MCB 25Amp", "MCB 32Amp", "MCB 32Amp (___ pole)", "MCB (64Amp) (___ pole)", "MCCB (___ Amp) (___ pole)", "Isolator 32Amp (___ pole)", "Isolator 64Amp (___ pole)", "Isolator 100Amp (___ pole)", "RCCBO (___ Amp) (___ pole)", "RCCB (___ Amp) (___ pole)", "Kitkat Fuse (___ Amp)", "Terminal blocks (___ Amp)", "Bus bar DB (___ Amp)", "Changeover MCB (___ Amp) (___ pole)", "PVC cable Tie"],
+            fallMcbItems: ["MCB 6Amp", "MCB 10Amp", "MCB 16Amp", "MCB 20Amp", "MCB 25Amp", "MCB 32Amp", "MCB 32Amp (___ pole)", "MCB (64Amp) (___ pole)", "MCCB (___ Amp) (___ pole)", "Isolator 32Amp (___ pole)", "Isolator 64Amp (___ pole)", "Isolator 100Amp (___ pole)", "RCCBO (___ Amp) (___ pole)", "RCCB (___ Amp) (___ pole)", "Kitkat Fuse (___ Amp)", "Terminal blocks (___ Amp)", "Bus bar DB (___ Amp)", "Changeover MCB (___ Amp) (___ pole)", "PVC cable Tie"],
 
-        fallSwitchItems: ["Switch 6Amp", "Switch 16Amp", "DP switch", "5pin Socket 6Amp", "5pin Socket 16Amp", "2pin Socket", "Regulator", "Damy", "USB", "Bell switch", "Fuse switch", "Indicator", "Two way switch", "TV outlet"],
+            fallSwitchItems: ["Switch 6Amp", "Switch 16Amp", "DP switch", "5pin Socket 6Amp", "5pin Socket 16Amp", "2pin Socket", "Regulator", "Damy", "USB", "Bell switch", "Fuse switch", "Indicator", "Two way switch", "TV outlet"],
 
-        wireMaterialItems: ["Copper Wire 1mm", "Copper Wire 1.5mm", "Copper Wire 2.5mm", "Copper Wire 4mm", "Copper Wire 6mm", "Copper Wire 10mm", "Armoured cable 2core (......mm)", "Armoured cable 4core (......mm)", "DTH cable", "Speaker wire", "Camera wire", "Wire spring"],
+            wireMaterialItems: ["Copper Wire 1mm", "Copper Wire 1.5mm", "Copper Wire 2.5mm", "Copper Wire 4mm", "Copper Wire 6mm", "Copper Wire 10mm", "Armoured cable 2core (......mm)", "Armoured cable 4core (......mm)", "DTH cable", "Speaker wire", "Camera wire", "Wire spring"],
 
-        fallScrewsItems: ["Star Screw (1.5 inch)", "Star Screw (1 inch)", "Star Screw (2 inch)", "Star Screw (2.5 inch)", "Star Screw (4 inch)", "3/16 Bolt (____ inch)", "Rawal plug"],
+            fallScrewsItems: ["Star Screw (1.5 inch)", "Star Screw (1 inch)", "Star Screw (2 inch)", "Star Screw (2.5 inch)", "Star Screw (4 inch)", "3/16 Bolt (____ inch)", "Rawal plug"],
 
-        fallExtraItems: ["Angle holder", "Batten holder", "Pendant holder", "Ceiling rose", "Round damy sheet", "Fan damy sheet", "Insulation tape", "Indicator bulb"]
+            fallExtraItems: ["Angle holder", "Batten holder", "Pendant holder", "Ceiling rose", "Round damy sheet", "Fan damy sheet", "Insulation tape", "Indicator bulb"]
 
-      };
+        };
 
-      // ←←← YE LINE ADD KARO (commented wali hata do)
+        // ←←← YE LINE ADD KARO (commented wali hata do)
 
-      window.savedRates = JSON.parse(localStorage.getItem('smRates')) || {};
+        window.savedRates = JSON.parse(localStorage.getItem('smRates')) || {};
 
-      window.billHistory = JSON.parse(localStorage.getItem("smHistory")) || [];
+        window.billHistory = JSON.parse(localStorage.getItem("smHistory")) || [];
 
-      // let billHistory = JSON.parse(localStorage.getItem("smHistory")) || [];
+        // let billHistory = JSON.parse(localStorage.getItem("smHistory")) || [];
 
-      // window.billHistory = billHistory;
+        // window.billHistory = billHistory;
 
-      // Populate all items
+        // Populate all items
 
-      Object.keys(data).forEach(key => {
+        Object.keys(data).forEach(key => {
 
-        const container = document.getElementById(key);
+            const container = document.getElementById(key);
 
-        if (!container) return;
+            if (!container) return;
 
-        data[key].forEach(name => {
+            data[key].forEach(name => {
 
-          const div = document.createElement('div');
+                const div = document.createElement('div');
 
-          div.className = 'item';
+                div.className = 'item';
 
-          div.dataset.name = name;
+                div.dataset.name = name;
 
-          const savedRate = savedRates[name] || '';
+                const savedRate = savedRates[name] || '';
 
-          div.innerHTML = `
+                div.innerHTML = `
 
       <span>${name}</span>
 
@@ -1874,41 +1909,41 @@ cursor:pointer;
 
     `;
 
-          container.appendChild(div);
+                container.appendChild(div);
 
-          div.querySelector('.rate').addEventListener('input', async (e) => {
+                div.querySelector('.rate').addEventListener('input', async (e) => {
 
-            window.savedRates[name] = e.target.value;
+                    window.savedRates[name] = e.target.value;
 
-            localStorage.setItem('smRates', JSON.stringify(window.savedRates));
+                    localStorage.setItem('smRates', JSON.stringify(window.savedRates));
 
-            // Firestore mein save
+                    // Firestore mein save
 
-            if (window.currentUserUid && window.db) {
+                    if (window.currentUserUid && window.db) {
 
-              const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+                        const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
 
-              const userRef = doc(window.db, "users", window.currentUserUid);
+                        const userRef = doc(window.db, "users", window.currentUserUid);
 
-              await setDoc(userRef, { rates: window.savedRates }, { merge: true });
+                        await setDoc(userRef, { rates: window.savedRates }, { merge: true });
 
-            }
+                    }
 
-          });
+                });
+
+            });
 
         });
 
-      });
+        function addExtra(id) {
 
-      function addExtra(id) {
+            const container = document.getElementById(id);
 
-        const container = document.getElementById(id);
+            const div = document.createElement('div');
 
-        const div = document.createElement('div');
+            div.className = 'item';
 
-        div.className = 'item';
-
-        div.innerHTML = `
+            div.innerHTML = `
 
     <input type="text" placeholder="New Item Name" style="padding:8px;border:1px solid #ccc;border-radius:6px;">
 
@@ -1920,193 +1955,193 @@ cursor:pointer;
 
   `;
 
-        container.appendChild(div);
-
-      }
-
-      function editItem(btn) {
-
-        const item = btn.parentElement;
-
-        const nameEl = item.querySelector('span') || item.querySelector('input[type="text"]');
-
-        const rateEl = item.querySelector('.rate');
-
-        if (btn.textContent === "Edit") {
-
-          // Name unlock
-
-          if (nameEl.tagName === "SPAN") {
-
-            const input = document.createElement("input");
-
-            input.type = "text";
-
-            input.value = nameEl.textContent;
-
-            input.style.padding = "8px";
-
-            input.style.border = "1px solid #ccc";
-
-            input.style.borderRadius = "6px";
-
-            nameEl.replaceWith(input);
-
-          }
-
-          // Rate unlock
-
-          rateEl.removeAttribute("readonly");
-
-          btn.textContent = "Save";
-
-          btn.style.background = "#16a34a";
-
-        } else {
-
-          // Name lock
-
-          const nameInput = item.querySelector('input[type="text"]');
-
-          if (nameInput) {
-
-            const span = document.createElement("span");
-
-            span.textContent = nameInput.value;
-
-            item.insertBefore(span, nameInput);
-
-            nameInput.remove();
-
-          }
-
-          // Rate lock
-
-          rateEl.setAttribute("readonly", true);
-
-          btn.textContent = "Edit";
-
-          btn.style.background = "#f59e0b";
+            container.appendChild(div);
 
         }
 
-      }
+        function editItem(btn) {
 
-      // Quantity auto clear zero on focus
+            const item = btn.parentElement;
 
-      document.addEventListener("focusin", function (e) {
+            const nameEl = item.querySelector('span') || item.querySelector('input[type="text"]');
 
-        if (e.target.classList.contains("qty")) {
+            const rateEl = item.querySelector('.rate');
 
-          if (e.target.value === "0") {
+            if (btn.textContent === "Edit") {
 
-            e.target.value = "";
+                // Name unlock
 
-          }
+                if (nameEl.tagName === "SPAN") {
+
+                    const input = document.createElement("input");
+
+                    input.type = "text";
+
+                    input.value = nameEl.textContent;
+
+                    input.style.padding = "8px";
+
+                    input.style.border = "1px solid #ccc";
+
+                    input.style.borderRadius = "6px";
+
+                    nameEl.replaceWith(input);
+
+                }
+
+                // Rate unlock
+
+                rateEl.removeAttribute("readonly");
+
+                btn.textContent = "Save";
+
+                btn.style.background = "#16a34a";
+
+            } else {
+
+                // Name lock
+
+                const nameInput = item.querySelector('input[type="text"]');
+
+                if (nameInput) {
+
+                    const span = document.createElement("span");
+
+                    span.textContent = nameInput.value;
+
+                    item.insertBefore(span, nameInput);
+
+                    nameInput.remove();
+
+                }
+
+                // Rate lock
+
+                rateEl.setAttribute("readonly", true);
+
+                btn.textContent = "Edit";
+
+                btn.style.background = "#f59e0b";
+
+            }
 
         }
 
-      });
+        // Quantity auto clear zero on focus
 
-      document.addEventListener("focusout", function (e) {
+        document.addEventListener("focusin", function (e) {
 
-        if (e.target.classList.contains("qty")) {
+            if (e.target.classList.contains("qty")) {
 
-          if (e.target.value === "") {
+                if (e.target.value === "0") {
 
-            e.target.value = "0";
+                    e.target.value = "";
 
-          }
+                }
 
-        }
-
-      });
-
-      // ===== GLOBAL MATERIAL SEARCH =====
-
-      document.getElementById("materialSearch").addEventListener("input", function () {
-
-        const value = this.value.toLowerCase().trim();
-
-        const allAccordions = document.querySelectorAll(".acc-content");
-
-        // Agar search empty hai → sab close karo
-
-        if (value === "") {
-
-          document.querySelectorAll(".item").forEach(item => {
-
-            item.style.display = "grid";
-
-          });
-
-          allAccordions.forEach(acc => {
-
-            acc.classList.remove("open");
-
-          });
-
-          return;
-
-        }
-
-        // Agar search me kuch likha hai
-
-        document.querySelectorAll(".item").forEach(item => {
-
-          const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-
-          const name = nameEl ? (nameEl.value || nameEl.textContent).toLowerCase() : "";
-
-          if (name.includes(value)) {
-
-            item.style.display = "grid";
-
-            const accContent = item.closest(".acc-content");
-
-            if (accContent) accContent.classList.add("open");
-
-          } else {
-
-            item.style.display = "none";
-
-          }
+            }
 
         });
 
-      });
+        document.addEventListener("focusout", function (e) {
 
-      document.getElementById("generateBillBtn").onclick = generateBill;
+            if (e.target.classList.contains("qty")) {
 
-      function generateBill() {
+                if (e.target.value === "") {
 
-        const items = document.querySelectorAll(".item");
+                    e.target.value = "0";
 
-        const tbody = document.getElementById("billTableBody");
+                }
 
-        tbody.innerHTML = "";
+            }
 
-        let total = 0;
+        });
 
-        let count = 1;
+        // ===== GLOBAL MATERIAL SEARCH =====
 
-        items.forEach(item => {
+        document.getElementById("materialSearch").addEventListener("input", function () {
 
-          const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+            const value = this.value.toLowerCase().trim();
 
-          const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+            const allAccordions = document.querySelectorAll(".acc-content");
 
-          const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+            // Agar search empty hai → sab close karo
 
-          const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+            if (value === "") {
 
-          if (qty > 0 && rate > 0) {
+                document.querySelectorAll(".item").forEach(item => {
 
-            const price = qty * rate;
+                    item.style.display = "grid";
 
-            total += price;
+                });
 
-            tbody.innerHTML += `
+                allAccordions.forEach(acc => {
+
+                    acc.classList.remove("open");
+
+                });
+
+                return;
+
+            }
+
+            // Agar search me kuch likha hai
+
+            document.querySelectorAll(".item").forEach(item => {
+
+                const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+
+                const name = nameEl ? (nameEl.value || nameEl.textContent).toLowerCase() : "";
+
+                if (name.includes(value)) {
+
+                    item.style.display = "grid";
+
+                    const accContent = item.closest(".acc-content");
+
+                    if (accContent) accContent.classList.add("open");
+
+                } else {
+
+                    item.style.display = "none";
+
+                }
+
+            });
+
+        });
+
+        document.getElementById("generateBillBtn").onclick = generateBill;
+
+        function generateBill() {
+
+            const items = document.querySelectorAll(".item");
+
+            const tbody = document.getElementById("billTableBody");
+
+            tbody.innerHTML = "";
+
+            let total = 0;
+
+            let count = 1;
+
+            items.forEach(item => {
+
+                const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+
+                const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+
+                const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+
+                const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+
+                if (qty > 0 && rate > 0) {
+
+                    const price = qty * rate;
+
+                    total += price;
+
+                    tbody.innerHTML += `
 
 <tr>
 
@@ -2124,208 +2159,208 @@ cursor:pointer;
 
 `;
 
-          }
-
-        });
-
-        const now = new Date();
-
-        const day = now.getDate().toString().padStart(2, "0");
-
-        const month = (now.getMonth() + 1).toString().padStart(2, "0");
-
-        const year = now.getFullYear();
-
-        let hours = now.getHours();
-
-        const minutes = now.getMinutes().toString().padStart(2, "0");
-
-        const ampm = hours >= 12 ? "PM" : "AM";
-
-        hours = hours % 12;
-
-        hours = hours ? hours : 12;
-
-        const formattedDate = `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
-
-        document.getElementById("billLeftInfo").innerHTML =
-
-          "Date: " + formattedDate + "<br>" +
-
-          "Customer: " + document.getElementById("custName").value;
-
-        document.getElementById("billTotal").textContent = total.toFixed(2);
-        
-        document.getElementById("billModal").style.display = "block";
-        document.body.classList.add("modal-active");
-
-        saveHistory(formattedDate, total);
-
-      }
-
-      function closeBill() {
-
-        document.getElementById("billModal").style.display = "none";
-        document.body.classList.remove("modal-active");
-
-      }
-
-      async function saveHistory(date, total) {
-
-        const itemsData = [];
-
-        document.querySelectorAll(".item").forEach(item => {
-
-          const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
-
-          const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
-
-          const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-
-          const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
-
-          if (qty > 0 && rate > 0) {
-
-            itemsData.push({
-
-              name,
-
-              qty,
-
-              rate,
-
-              price: qty * rate
+                }
 
             });
 
-          }
+            const now = new Date();
 
-        });
+            const day = now.getDate().toString().padStart(2, "0");
 
-        const newBill = {
+            const month = (now.getMonth() + 1).toString().padStart(2, "0");
 
-          date,
+            const year = now.getFullYear();
 
-          customer: document.getElementById("custName").value || "Unknown",
+            let hours = now.getHours();
 
-          address: document.getElementById("custAddress").value || "",
+            const minutes = now.getMinutes().toString().padStart(2, "0");
 
-          mobile: document.getElementById("phone").value || "",
+            const ampm = hours >= 12 ? "PM" : "AM";
 
-          total,
+            hours = hours % 12;
 
-          items: itemsData
+            hours = hours ? hours : 12;
 
-        };
+            const formattedDate = `${day}/${month}/${year} ${hours}:${minutes} ${ampm}`;
 
-        // Add to array
+            document.getElementById("billLeftInfo").innerHTML =
 
-        window.billHistory.push(newBill);
+                "Date: " + formattedDate + "<br>" +
 
-        // Save in localStorage
+                "Customer: " + document.getElementById("custName").value;
 
-        localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+            document.getElementById("billTotal").textContent = total.toFixed(2);
 
-        // 🔥 Firestore save
+            document.getElementById("billModal").style.display = "block";
+            document.body.classList.add("modal-active");
 
-        // ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
-        saveHistoryToFirestore();   // ←←← Yeh line add kar do
-        // ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
-
-
-        // if (window.currentUserUid && window.db) {
-        //   try {
-        //     const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
-        //     const userRef = doc(window.db, "users", window.currentUserUid);
-        //     await setDoc(userRef, {
-        //       history: window.billHistory
-        //     }, { merge: true });
-        //     console.log("✅ History saved in Firestore");
-        //   } catch (e) {
-        //     console.error("❌ Firestore history save error:", e);
-        //   }
-        // }
-
-      }
-
-
-      // ================== WHATSAPP MATERIAL LIST SHARE ==================
-function shareMaterialListOnWhatsApp() {
-    const phone = document.getElementById("phone").value.trim();
-    if (!phone || phone.length < 9) {
-        alert("Customer ka mobile number sahi se daaliye (10 digit)");
-        return;
-    }
-
-    let waNumber = phone.replace(/\D/g, '');
-    if (waNumber.startsWith('0')) waNumber = waNumber.substring(1);
-    waNumber = '91' + waNumber;
-
-    const items = [];
-    document.querySelectorAll(".item").forEach(item => {
-        const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
-        if (qty <= 0) return;
-
-        const nameEl = item.querySelector("span") || item.querySelector('input[type="text"]');
-        const name = nameEl ? (nameEl.value || nameEl.textContent).trim() : "";
-        if (name) items.push(`• ${name} × ${qty}`);
-    });
-
-    if (items.length === 0) {
-        alert("Koi material select nahi kiya!");
-        return;
-    }
-
-    const custName = document.getElementById("custName").value.trim() || "Customer";
-
-    const message = 
-        `*SM Technician – Material List*\n\n` +
-        `Namaste ${custName} ji 👋\n\n` +
-        `Aapka estimate material list:\n\n` +
-        items.join("\n") + "\n\n" +
-        `Total items: ${items.length}\n` +
-        `Koi change chahiye to turant batayein.\n\n` +
-        `Thanks & Regards\n` +
-        `SM Technician\n8935883863`;
-
-    const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
-    window.open(waLink, "_blank");
-}
-
-      function showHistory() {
-
-        console.log("History showing, total bills:", window.billHistory.length);
-
-        const list = document.getElementById("historyList");
-
-        list.innerHTML = "";
-
-        // Fallback if Firestore load slow hai
-
-        if (window.billHistory.length === 0) {
-
-          const local = JSON.parse(localStorage.getItem("smHistory")) || [];
-
-          window.billHistory = local;
+            saveHistory(formattedDate, total);
 
         }
 
-        if (window.billHistory.length === 0) {
+        function closeBill() {
 
-          list.innerHTML = `<p style="text-align:center; color:#aaa; padding:40px;">Abhi tak koi bill nahi bana hai</p>`;
-
-          const modal = document.getElementById("historyModal");
-          modal.style.display = "flex";           // flex use kar rahe hain centering ke liye
-          modal.classList.add("active");          // blur/dark effect ke liye class
-          document.body.classList.add("modal-active");   // background freeze + no scroll
-
-          return;
+            document.getElementById("billModal").style.display = "none";
+            document.body.classList.remove("modal-active");
 
         }
 
-        window.billHistory.forEach((h, i) => {
+        async function saveHistory(date, total) {
 
-          list.innerHTML += `
+            const itemsData = [];
+
+            document.querySelectorAll(".item").forEach(item => {
+
+                const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+
+                const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+
+                const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+
+                const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+
+                if (qty > 0 && rate > 0) {
+
+                    itemsData.push({
+
+                        name,
+
+                        qty,
+
+                        rate,
+
+                        price: qty * rate
+
+                    });
+
+                }
+
+            });
+
+            const newBill = {
+
+                date,
+
+                customer: document.getElementById("custName").value || "Unknown",
+
+                address: document.getElementById("custAddress").value || "",
+
+                mobile: document.getElementById("phone").value || "",
+
+                total,
+
+                items: itemsData
+
+            };
+
+            // Add to array
+
+            window.billHistory.push(newBill);
+
+            // Save in localStorage
+
+            localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+
+            // 🔥 Firestore save
+
+            // ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
+            saveHistoryToFirestore();   // ←←← Yeh line add kar do
+            // ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
+
+
+            // if (window.currentUserUid && window.db) {
+            //   try {
+            //     const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+            //     const userRef = doc(window.db, "users", window.currentUserUid);
+            //     await setDoc(userRef, {
+            //       history: window.billHistory
+            //     }, { merge: true });
+            //     console.log("✅ History saved in Firestore");
+            //   } catch (e) {
+            //     console.error("❌ Firestore history save error:", e);
+            //   }
+            // }
+
+        }
+
+
+        // ================== WHATSAPP MATERIAL LIST SHARE ==================
+        function shareMaterialListOnWhatsApp() {
+            const phone = document.getElementById("phone").value.trim();
+            if (!phone || phone.length < 9) {
+                alert("Customer ka mobile number sahi se daaliye (10 digit)");
+                return;
+            }
+
+            let waNumber = phone.replace(/\D/g, '');
+            if (waNumber.startsWith('0')) waNumber = waNumber.substring(1);
+            waNumber = '91' + waNumber;
+
+            const items = [];
+            document.querySelectorAll(".item").forEach(item => {
+                const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+                if (qty <= 0) return;
+
+                const nameEl = item.querySelector("span") || item.querySelector('input[type="text"]');
+                const name = nameEl ? (nameEl.value || nameEl.textContent).trim() : "";
+                if (name) items.push(`• ${name} × ${qty}`);
+            });
+
+            if (items.length === 0) {
+                alert("Koi material select nahi kiya!");
+                return;
+            }
+
+            const custName = document.getElementById("custName").value.trim() || "Customer";
+
+            const message =
+                `*SM Technician – Material List*\n\n` +
+                `Namaste ${custName} ji 👋\n\n` +
+                `Aapka estimate material list:\n\n` +
+                items.join("\n") + "\n\n" +
+                `Total items: ${items.length}\n` +
+                `Koi change chahiye to turant batayein.\n\n` +
+                `Thanks & Regards\n` +
+                `SM Technician\n8935883863`;
+
+            const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+            window.open(waLink, "_blank");
+        }
+
+        function showHistory() {
+
+            console.log("History showing, total bills:", window.billHistory.length);
+
+            const list = document.getElementById("historyList");
+
+            list.innerHTML = "";
+
+            // Fallback if Firestore load slow hai
+
+            if (window.billHistory.length === 0) {
+
+                const local = JSON.parse(localStorage.getItem("smHistory")) || [];
+
+                window.billHistory = local;
+
+            }
+
+            if (window.billHistory.length === 0) {
+
+                list.innerHTML = `<p style="text-align:center; color:#aaa; padding:40px;">Abhi tak koi bill nahi bana hai</p>`;
+
+                const modal = document.getElementById("historyModal");
+                modal.style.display = "flex";           // flex use kar rahe hain centering ke liye
+                modal.classList.add("active");          // blur/dark effect ke liye class
+                document.body.classList.add("modal-active");   // background freeze + no scroll
+
+                return;
+
+            }
+
+            window.billHistory.forEach((h, i) => {
+
+                list.innerHTML += `
 
             <div style="border:2px solid #FFD700; padding:25px; margin:20px 0; background:#111; border-radius:18px; box-shadow:0 10px 30px rgba(255,215,0,0.2);">
 
@@ -2371,114 +2406,114 @@ function shareMaterialListOnWhatsApp() {
 
         `;
 
-        });
+            });
 
-       const modal = document.getElementById("historyModal");
-    const overlay = document.getElementById("overlay");
+            const modal = document.getElementById("historyModal");
+            const overlay = document.getElementById("overlay");
 
-    // Show both overlay and modal
-    overlay.classList.add("active");
-    modal.style.display = "flex";
-    modal.classList.add("active");
+            // Show both overlay and modal
+            overlay.classList.add("active");
+            modal.style.display = "flex";
+            modal.classList.add("active");
 
-    // Freeze body scroll (same as sidebar)
-    document.body.classList.add("modal-active");
-    // Optional: extra safety
-    document.body.style.overflow = "hidden";
-}
+            // Freeze body scroll (same as sidebar)
+            document.body.classList.add("modal-active");
+            // Optional: extra safety
+            document.body.style.overflow = "hidden";
+        }
 
-      function closeHistory() {
-    const modal = document.getElementById("historyModal");
-    const overlay = document.getElementById("overlay");
+        function closeHistory() {
+            const modal = document.getElementById("historyModal");
+            const overlay = document.getElementById("overlay");
 
-    modal.style.display = "none";
-    modal.classList.remove("active");
+            modal.style.display = "none";
+            modal.classList.remove("active");
 
-    overlay.classList.remove("active");
+            overlay.classList.remove("active");
 
-    document.body.classList.remove("modal-active");
-    document.body.style.overflow = "auto";   // restore scroll
-}
+            document.body.classList.remove("modal-active");
+            document.body.style.overflow = "auto";   // restore scroll
+        }
 
 
 
-      function downloadBill() {
+        function downloadBill() {
 
-        const bill = document.getElementById("billContent");
+            const bill = document.getElementById("billContent");
 
-        const tempDiv = bill.cloneNode(true);
+            const tempDiv = bill.cloneNode(true);
 
-        tempDiv.style.background = "#ffffff";
+            tempDiv.style.background = "#ffffff";
 
-        tempDiv.style.color = "#000000";
+            tempDiv.style.color = "#000000";
 
-        tempDiv.style.width = "800px";
+            tempDiv.style.width = "800px";
 
-        tempDiv.style.padding = "30px";
+            tempDiv.style.padding = "30px";
 
-        tempDiv.style.fontFamily = "Arial";
+            tempDiv.style.fontFamily = "Arial";
 
-        // Force all text black
+            // Force all text black
 
-        tempDiv.querySelectorAll("*").forEach(el => {
+            tempDiv.querySelectorAll("*").forEach(el => {
 
-          el.style.color = "#000000";
+                el.style.color = "#000000";
 
-          el.style.background = "transparent";
+                el.style.background = "transparent";
 
-        });
+            });
 
-        document.body.appendChild(tempDiv);
+            document.body.appendChild(tempDiv);
 
-        html2canvas(tempDiv, {
+            html2canvas(tempDiv, {
 
-          scale: 3,
+                scale: 3,
 
-          backgroundColor: "#ffffff",
+                backgroundColor: "#ffffff",
 
-          useCORS: true
+                useCORS: true
 
-        }).then(canvas => {
+            }).then(canvas => {
 
-          const link = document.createElement("a");
+                const link = document.createElement("a");
 
-          link.download = "SM_Technician_Bill.jpg";
+                link.download = "SM_Technician_Bill.jpg";
 
-          link.href = canvas.toDataURL("image/jpeg", 1.0);
+                link.href = canvas.toDataURL("image/jpeg", 1.0);
 
-          link.click();
+                link.click();
 
-          document.body.removeChild(tempDiv);
+                document.body.removeChild(tempDiv);
 
-        });
+            });
 
-      }
+        }
 
-      function downloadHistoryBill(index) {
+        function downloadHistoryBill(index) {
 
-        // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+            // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
 
-        const h = window.billHistory[index];
+            const h = window.billHistory[index];
 
-        const tempDiv = document.createElement("div");
+            const tempDiv = document.createElement("div");
 
-        tempDiv.style.padding = "30px";
+            tempDiv.style.padding = "30px";
 
-        tempDiv.style.background = "#ffffff";
+            tempDiv.style.background = "#ffffff";
 
-        tempDiv.style.color = "#000000";
+            tempDiv.style.color = "#000000";
 
-        tempDiv.style.width = "800px";
+            tempDiv.style.width = "800px";
 
-        tempDiv.style.fontFamily = "Arial";
+            tempDiv.style.fontFamily = "Arial";
 
-        let rows = "";
+            let rows = "";
 
-        let count = 1;
+            let count = 1;
 
-        h.items.forEach(item => {
+            h.items.forEach(item => {
 
-          rows += `
+                rows += `
 
       <tr>
 
@@ -2496,9 +2531,9 @@ function shareMaterialListOnWhatsApp() {
 
     `;
 
-        });
+            });
 
-        tempDiv.innerHTML = `
+            tempDiv.innerHTML = `
 
     <div style="text-align:center;">
 
@@ -2560,564 +2595,564 @@ function shareMaterialListOnWhatsApp() {
 
   `;
 
-        document.body.appendChild(tempDiv);
+            document.body.appendChild(tempDiv);
 
-        html2canvas(tempDiv, {
+            html2canvas(tempDiv, {
 
-          scale: 3,
+                scale: 3,
 
-          backgroundColor: "#ffffff",
+                backgroundColor: "#ffffff",
 
-          useCORS: true
+                useCORS: true
 
-        }).then(canvas => {
+            }).then(canvas => {
 
-          const link = document.createElement("a");
+                const link = document.createElement("a");
 
-          link.download = "SM_Technician_History_Bill.jpg";
+                link.download = "SM_Technician_History_Bill.jpg";
 
-          link.href = canvas.toDataURL("image/jpeg", 1.0);
+                link.href = canvas.toDataURL("image/jpeg", 1.0);
 
-          link.click();
+                link.click();
 
-          document.body.removeChild(tempDiv);
+                document.body.removeChild(tempDiv);
 
-        });
+            });
 
-      }
+        }
 
-      function downloadHistoryPDF(index) {
+        function downloadHistoryPDF(index) {
 
-        const { jsPDF } = window.jspdf;
+            const { jsPDF } = window.jspdf;
 
-        // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+            // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
 
-        const h = window.billHistory[index];
+            const h = window.billHistory[index];
 
-        const pdf = new jsPDF("p", "mm", "a4");
+            const pdf = new jsPDF("p", "mm", "a4");
 
-        const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageWidth = pdf.internal.pageSize.getWidth();
 
-        let y = 15;
+            let y = 15;
 
-        const pageHeight = 280;
+            const pageHeight = 280;
 
-        // ===== SAME HEADER =====
+            // ===== SAME HEADER =====
 
-        pdf.addImage("logo.png", "PNG", pageWidth / 2 - 12, y, 24, 24);
+            pdf.addImage("logo.png", "PNG", pageWidth / 2 - 12, y, 24, 24);
 
-        y += 30;
+            y += 30;
 
-        // ===== COMPANY NAME =====
+            // ===== COMPANY NAME =====
 
-        pdf.setFontSize(18);
+            pdf.setFontSize(18);
 
-        pdf.text("SM Technician", pageWidth / 2, y, { align: "center" });
-
-        y += 8;
-
-        pdf.setFontSize(11);
-
-        pdf.text("Mobile No: 8935883863", pageWidth / 2, y, { align: "center" });
-
-        y += 10;
-
-        pdf.line(15, y, pageWidth - 15, y);
-
-        y += 10;
-
-        // ===== BILL INFO =====
-
-        pdf.setFontSize(11);
-
-        pdf.text("Date: " + h.date, 20, y);
-
-        y += 6;
-
-        pdf.text("Customer: " + h.customer, 20, y);
-
-        y += 6;
-
-        pdf.text("Address: " + h.address, 20, y);
-
-        y += 6;
-
-        pdf.text("Mobile: " + h.mobile, 20, y);
-
-        y += 12;
-
-        // ===== TABLE =====
-
-        pdf.setFontSize(12);
-
-        pdf.text("Sl", 20, y);
-
-        pdf.text("Item", 35, y);
-
-        pdf.text("Qty", 135, y);
-
-        pdf.text("Rate", 155, y);
-
-        pdf.text("Amount", 175, y);
-
-        y += 8;
-
-        let count = 1;
-
-        h.items.forEach(item => {
-
-          if (y > pageHeight) {
-
-            pdf.addPage();
-
-            y = 20;
-
-          }
-
-          pdf.text(String(count), 20, y);
-
-          pdf.text(item.name.substring(0, 50), 35, y);
-
-          pdf.text(String(item.qty), 135, y);
-
-          pdf.text(String(item.rate), 155, y);
-
-          pdf.text(String(item.price), 175, y);
-
-          y += 7;
-
-          count++;
-
-        });
-
-        y += 10;
-
-        pdf.setFontSize(14);
-
-        pdf.text("Total: Rs. " + h.total, pageWidth - 60, y);
-
-        pdf.save("SM_Technician_Bill.pdf");
-
-      }
-
-      function downloadBillPDF() {
-
-        const { jsPDF } = window.jspdf;
-
-        const pdf = new jsPDF("p", "mm", "a4");
-
-        const pageWidth = pdf.internal.pageSize.getWidth();
-
-        let y = 15;
-
-        const pageHeight = 280;
-
-        // ===== LOGO CENTER SMALL =====
-
-        pdf.addImage("logo.png", "PNG", pageWidth / 2 - 12, y, 24, 24);
-
-        y += 30;
-
-        // ===== COMPANY NAME =====
-
-        pdf.setFontSize(18);
-
-        pdf.text("SM Technician", pageWidth / 2, y, { align: "center" });
-
-        y += 8;
-
-        pdf.setFontSize(11);
-
-        pdf.text("Mobile No: 8935883863", pageWidth / 2, y, { align: "center" });
-
-        y += 10;
-
-        pdf.line(15, y, pageWidth - 15, y);
-
-        y += 10;
-
-        // ===== CUSTOMER DETAILS =====
-
-        pdf.setFontSize(11);
-
-        pdf.text("Date: " + new Date().toLocaleString(), 15, y);
-
-        y += 6;
-
-        pdf.text("Customer: " + document.getElementById("custName").value, 15, y);
-
-        y += 6;
-
-        pdf.text("Address: " + document.getElementById("custAddress").value, 15, y);
-
-        y += 6;
-
-        pdf.text("Mobile: " + document.getElementById("phone").value, 15, y);
-
-        y += 10;
-
-        // ===== TABLE HEADER BOX =====
-
-        pdf.setFontSize(12);
-
-        pdf.rect(15, y, 180, 10); // outer box
-
-        pdf.text("Sl", 18, y + 7);
-
-        pdf.text("Item", 30, y + 7);
-
-        pdf.text("Qty", 125, y + 7);
-
-        pdf.text("Rate", 145, y + 7);
-
-        pdf.text("Amount", 165, y + 7);
-
-        y += 10;
-
-        let total = 0;
-
-        let count = 1;
-
-        document.querySelectorAll(".item").forEach(item => {
-
-          const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
-
-          const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
-
-          const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-
-          const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
-
-          if (qty > 0 && rate > 0) {
-
-            if (y > pageHeight) {
-
-              pdf.addPage();
-
-              y = 20;
-
-            }
-
-            const price = qty * rate;
-
-            total += price;
-
-            pdf.rect(15, y, 180, 8);
-
-            pdf.text(String(count), 18, y + 6);
-
-            pdf.text(name.substring(0, 40), 30, y + 6);
-
-            pdf.text(String(qty), 125, y + 6);
-
-            pdf.text(String(rate), 145, y + 6);
-
-            pdf.text(String(price.toFixed(2)), 165, y + 6);
+            pdf.text("SM Technician", pageWidth / 2, y, { align: "center" });
 
             y += 8;
 
-            count++;
+            pdf.setFontSize(11);
 
-          }
+            pdf.text("Mobile No: 8935883863", pageWidth / 2, y, { align: "center" });
 
-        });
+            y += 10;
 
-        y += 10;
+            pdf.line(15, y, pageWidth - 15, y);
 
-        // ===== TOTAL BOX =====
+            y += 10;
 
-        pdf.setFontSize(14);
+            // ===== BILL INFO =====
 
-        pdf.rect(115, y - 6, 80, 10);
+            pdf.setFontSize(11);
 
-        pdf.text("Total: Rs. " + total.toFixed(2), 125, y);
+            pdf.text("Date: " + h.date, 20, y);
 
-        pdf.save("SM_Technician_Bill.pdf");
+            y += 6;
 
-      }
+            pdf.text("Customer: " + h.customer, 20, y);
 
-      function downloadMaterialListPDF(index) {
+            y += 6;
 
-        const { jsPDF } = window.jspdf;
+            pdf.text("Address: " + h.address, 20, y);
 
-        // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
+            y += 6;
 
-        const h = window.billHistory[index];
+            pdf.text("Mobile: " + h.mobile, 20, y);
 
-        const pdf = new jsPDF("p", "mm", "a4");
+            y += 12;
 
-        const pageWidth = pdf.internal.pageSize.getWidth();
+            // ===== TABLE =====
 
-        let y = 15;
+            pdf.setFontSize(12);
 
-        const pageHeight = 280;
+            pdf.text("Sl", 20, y);
 
-        // ===== SAME SMALL CENTER LOGO =====
+            pdf.text("Item", 35, y);
 
-        pdf.addImage("logo.png", "PNG", pageWidth / 2 - 12, y, 24, 24);
+            pdf.text("Qty", 135, y);
 
-        y += 30;
+            pdf.text("Rate", 155, y);
 
-        // ===== COMPANY NAME =====
+            pdf.text("Amount", 175, y);
 
-        pdf.setFontSize(18);
+            y += 8;
 
-        pdf.text("SM Technician", pageWidth / 2, y, { align: "center" });
+            let count = 1;
 
-        y += 8;
+            h.items.forEach(item => {
 
-        pdf.setFontSize(11);
+                if (y > pageHeight) {
 
-        pdf.text("Mobile No: 8935883863", pageWidth / 2, y, { align: "center" });
+                    pdf.addPage();
 
-        y += 10;
+                    y = 20;
 
-        pdf.line(15, y, pageWidth - 15, y);
+                }
 
-        y += 12;
+                pdf.text(String(count), 20, y);
 
-        // ===== TABLE HEADER BOX =====
+                pdf.text(item.name.substring(0, 50), 35, y);
 
-        pdf.setFontSize(12);
+                pdf.text(String(item.qty), 135, y);
 
-        pdf.rect(15, y, 180, 10);
+                pdf.text(String(item.rate), 155, y);
 
-        pdf.text("Sl", 18, y + 7);
+                pdf.text(String(item.price), 175, y);
 
-        pdf.text("Item", 30, y + 7);
+                y += 7;
 
-        pdf.text("Qty", 165, y + 7);
+                count++;
 
-        y += 10;
+            });
 
-        let count = 1;
+            y += 10;
 
-        h.items.forEach(item => {
+            pdf.setFontSize(14);
 
-          if (y > pageHeight) {
+            pdf.text("Total: Rs. " + h.total, pageWidth - 60, y);
 
-            pdf.addPage();
+            pdf.save("SM_Technician_Bill.pdf");
 
-            y = 20;
-
-          }
-
-          pdf.rect(15, y, 180, 8);
-
-          pdf.text(String(count), 18, y + 6);
-
-          pdf.text(item.name.substring(0, 45), 30, y + 6);
-
-          pdf.text(String(item.qty), 165, y + 6);
-
-          y += 8;
-
-          count++;
-
-        });
-
-        pdf.save("SM_Technician_Material_List.pdf");
-
-      }
-
-
-
-
-
-
-
-
-async function shareMaterialListOnWhatsApp() {
-    const phone = document.getElementById("phone").value.trim();
-    
-    if (!phone || phone.length < 9) {
-        alert("Customer ka mobile number daaliye (kam se kam 9-10 digit)");
-        return;
-    }
-
-    // International format mein convert (India ke liye +91 add)
-    let whatsappNumber = phone;
-    if (!phone.startsWith("+")) {
-        if (phone.startsWith("0")) {
-            whatsappNumber = "+91" + phone.substring(1);
-        } else {
-            whatsappNumber = "+91" + phone;
         }
-    }
 
-    // Material list collect karo (sirf item + qty)
-    const items = [];
-    document.querySelectorAll(".item").forEach(item => {
-        const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
-        if (qty <= 0) return;
+        function downloadBillPDF() {
 
-        const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
-        const name = nameEl ? (nameEl.value || nameEl.textContent).trim() : "";
-        
-        if (name) {
-            items.push(`${name} × ${qty}`);
+            const { jsPDF } = window.jspdf;
+
+            const pdf = new jsPDF("p", "mm", "a4");
+
+            const pageWidth = pdf.internal.pageSize.getWidth();
+
+            let y = 15;
+
+            const pageHeight = 280;
+
+            // ===== LOGO CENTER SMALL =====
+
+            pdf.addImage("logo.png", "PNG", pageWidth / 2 - 12, y, 24, 24);
+
+            y += 30;
+
+            // ===== COMPANY NAME =====
+
+            pdf.setFontSize(18);
+
+            pdf.text("SM Technician", pageWidth / 2, y, { align: "center" });
+
+            y += 8;
+
+            pdf.setFontSize(11);
+
+            pdf.text("Mobile No: 8935883863", pageWidth / 2, y, { align: "center" });
+
+            y += 10;
+
+            pdf.line(15, y, pageWidth - 15, y);
+
+            y += 10;
+
+            // ===== CUSTOMER DETAILS =====
+
+            pdf.setFontSize(11);
+
+            pdf.text("Date: " + new Date().toLocaleString(), 15, y);
+
+            y += 6;
+
+            pdf.text("Customer: " + document.getElementById("custName").value, 15, y);
+
+            y += 6;
+
+            pdf.text("Address: " + document.getElementById("custAddress").value, 15, y);
+
+            y += 6;
+
+            pdf.text("Mobile: " + document.getElementById("phone").value, 15, y);
+
+            y += 10;
+
+            // ===== TABLE HEADER BOX =====
+
+            pdf.setFontSize(12);
+
+            pdf.rect(15, y, 180, 10); // outer box
+
+            pdf.text("Sl", 18, y + 7);
+
+            pdf.text("Item", 30, y + 7);
+
+            pdf.text("Qty", 125, y + 7);
+
+            pdf.text("Rate", 145, y + 7);
+
+            pdf.text("Amount", 165, y + 7);
+
+            y += 10;
+
+            let total = 0;
+
+            let count = 1;
+
+            document.querySelectorAll(".item").forEach(item => {
+
+                const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+
+                const rate = parseFloat(item.querySelector(".rate")?.value) || 0;
+
+                const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+
+                const name = nameEl ? (nameEl.value || nameEl.textContent) : "";
+
+                if (qty > 0 && rate > 0) {
+
+                    if (y > pageHeight) {
+
+                        pdf.addPage();
+
+                        y = 20;
+
+                    }
+
+                    const price = qty * rate;
+
+                    total += price;
+
+                    pdf.rect(15, y, 180, 8);
+
+                    pdf.text(String(count), 18, y + 6);
+
+                    pdf.text(name.substring(0, 40), 30, y + 6);
+
+                    pdf.text(String(qty), 125, y + 6);
+
+                    pdf.text(String(rate), 145, y + 6);
+
+                    pdf.text(String(price.toFixed(2)), 165, y + 6);
+
+                    y += 8;
+
+                    count++;
+
+                }
+
+            });
+
+            y += 10;
+
+            // ===== TOTAL BOX =====
+
+            pdf.setFontSize(14);
+
+            pdf.rect(115, y - 6, 80, 10);
+
+            pdf.text("Total: Rs. " + total.toFixed(2), 125, y);
+
+            pdf.save("SM_Technician_Bill.pdf");
+
         }
-    });
 
-    if (items.length === 0) {
-        alert("Koi material select nahi kiya gaya hai!");
-        return;
-    }
+        function downloadMaterialListPDF(index) {
 
-    // Simple text message format
-    const customerName = document.getElementById("custName").value.trim() || "Customer";
-    const message = 
-        `*SM Technician Estimate*\n\n` +
-        `Dear ${customerName},\n\n` +
-        `Yeh hai aapka material list:\n` +
-        items.map((line, i) => `${i+1}. ${line}`).join("\n") +
-        `\n\nTotal items: ${items.length}\n` +
-        `Sonu and Manoj Electrician 👷🛠️⚡☠ \n` +
-        `Thanks! 🙏\n` +
-        `SM Technician - 8935883863`;
+            const { jsPDF } = window.jspdf;
 
-    // WhatsApp web / app link
-    const waLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            // const history = JSON.parse(localStorage.getItem("smHistory")) || [];
 
-    // Try to open WhatsApp
-    try {
-        window.open(waLink, "_blank");
-    } catch (e) {
-        alert("WhatsApp link khul nahi pa raha. Number check karein ya browser allow karein.");
-    }
-}
+            const h = window.billHistory[index];
 
+            const pdf = new jsPDF("p", "mm", "a4");
 
+            const pageWidth = pdf.internal.pageSize.getWidth();
 
+            let y = 15;
 
+            const pageHeight = 280;
 
+            // ===== SAME SMALL CENTER LOGO =====
 
+            pdf.addImage("logo.png", "PNG", pageWidth / 2 - 12, y, 24, 24);
 
+            y += 30;
 
-      function toggleAccordion(header) {
+            // ===== COMPANY NAME =====
 
-        const content = header.nextElementSibling;
+            pdf.setFontSize(18);
 
-        content.classList.toggle("open");
+            pdf.text("SM Technician", pageWidth / 2, y, { align: "center" });
 
-        header.classList.toggle("active");
+            y += 8;
 
-      }
+            pdf.setFontSize(11);
 
-      function toggleMenu() {
+            pdf.text("Mobile No: 8935883863", pageWidth / 2, y, { align: "center" });
 
-        const sidebar = document.getElementById("sidebarMenu");
+            y += 10;
 
-        const burger = document.querySelector(".hamburger");
+            pdf.line(15, y, pageWidth - 15, y);
 
-        const overlay = document.getElementById("overlay");
+            y += 12;
 
-        sidebar.classList.toggle("active");
+            // ===== TABLE HEADER BOX =====
 
-        burger.classList.toggle("active");
+            pdf.setFontSize(12);
 
-        overlay.classList.toggle("active");
+            pdf.rect(15, y, 180, 10);
 
-        document.body.style.overflow = sidebar.classList.contains("active") ? "hidden" : "auto";
+            pdf.text("Sl", 18, y + 7);
 
-      }
+            pdf.text("Item", 30, y + 7);
 
-      function closeMenu() {
+            pdf.text("Qty", 165, y + 7);
 
-        const sidebar = document.getElementById("sidebarMenu");
+            y += 10;
 
-        const burger = document.querySelector(".hamburger");
+            let count = 1;
 
-        const overlay = document.getElementById("overlay");
+            h.items.forEach(item => {
 
-        sidebar.classList.remove("active");
+                if (y > pageHeight) {
 
-        burger.classList.remove("active");
+                    pdf.addPage();
 
-        overlay.classList.remove("active");
+                    y = 20;
 
-        document.body.style.overflow = "auto";
+                }
 
-      }
+                pdf.rect(15, y, 180, 8);
 
-      function openHistoryFromMenu() {
+                pdf.text(String(count), 18, y + 6);
 
-        closeMenu();   // pehle sidebar band karo
+                pdf.text(item.name.substring(0, 45), 30, y + 6);
 
-        showHistory(); // phir history open karo
+                pdf.text(String(item.qty), 165, y + 6);
 
-      }
+                y += 8;
 
-      let popupCallback = null;
+                count++;
 
-      function showPopup(message, callback) {
+            });
 
-        document.getElementById("popupMessage").textContent = message;
+            pdf.save("SM_Technician_Material_List.pdf");
 
-        document.getElementById("customPopup").style.display = "flex";
-
-        popupCallback = callback;
-
-      }
-
-      function closePopup() {
-
-        document.getElementById("customPopup").style.display = "none";
-
-      }
-
-      function confirmAction() {
-
-        if (popupCallback) popupCallback();
-
-        closePopup();
-
-      }
+        }
 
 
 
 
-// ================== DELETE BUTTON HANDLER (Fixed + Reliable) ==================
-document.addEventListener('click', function (e) {
-    // ←←← Yeh line important hai (text/emoji par click bhi catch karega)
-    const deleteBtn = e.target.closest('.delete-history-btn');
-    
-    if (deleteBtn) {
-        const index = parseInt(deleteBtn.dataset.index);
-        
-        if (isNaN(index)) return;
 
-        console.log("✅ Delete button clicked → Index:", index);   // debugging ke liye
 
-        showPopup("Kya aap is bill ko permanently delete karna chahte hain?", () => {
-            // Delete karo
-            window.billHistory.splice(index, 1);
 
-            // LocalStorage update
-            localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
 
-            // Firestore update
-            saveHistoryToFirestore();
+        async function shareMaterialListOnWhatsApp() {
+            const phone = document.getElementById("phone").value.trim();
 
-            // List refresh
-            showHistory();
+            if (!phone || phone.length < 9) {
+                alert("Customer ka mobile number daaliye (kam se kam 9-10 digit)");
+                return;
+            }
+
+            // International format mein convert (India ke liye +91 add)
+            let whatsappNumber = phone;
+            if (!phone.startsWith("+")) {
+                if (phone.startsWith("0")) {
+                    whatsappNumber = "+91" + phone.substring(1);
+                } else {
+                    whatsappNumber = "+91" + phone;
+                }
+            }
+
+            // Material list collect karo (sirf item + qty)
+            const items = [];
+            document.querySelectorAll(".item").forEach(item => {
+                const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+                if (qty <= 0) return;
+
+                const nameEl = item.querySelector("span") || item.querySelector("input[type='text']");
+                const name = nameEl ? (nameEl.value || nameEl.textContent).trim() : "";
+
+                if (name) {
+                    items.push(`${name} × ${qty}`);
+                }
+            });
+
+            if (items.length === 0) {
+                alert("Koi material select nahi kiya gaya hai!");
+                return;
+            }
+
+            // Simple text message format
+            const customerName = document.getElementById("custName").value.trim() || "Customer";
+            const message =
+                `*SM Technician Estimate*\n\n` +
+                `Dear ${customerName},\n\n` +
+                `Yeh hai aapka material list:\n` +
+                items.map((line, i) => `${i + 1}. ${line}`).join("\n") +
+                `\n\nTotal items: ${items.length}\n` +
+                `Sonu and Manoj Electrician 👷🛠️⚡☠ \n` +
+                `Thanks! 🙏\n` +
+                `SM Technician - 8935883863`;
+
+            // WhatsApp web / app link
+            const waLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+            // Try to open WhatsApp
+            try {
+                window.open(waLink, "_blank");
+            } catch (e) {
+                alert("WhatsApp link khul nahi pa raha. Number check karein ya browser allow karein.");
+            }
+        }
+
+
+
+
+
+
+
+
+        function toggleAccordion(header) {
+
+            const content = header.nextElementSibling;
+
+            content.classList.toggle("open");
+
+            header.classList.toggle("active");
+
+        }
+
+        function toggleMenu() {
+
+            const sidebar = document.getElementById("sidebarMenu");
+
+            const burger = document.querySelector(".hamburger");
+
+            const overlay = document.getElementById("overlay");
+
+            sidebar.classList.toggle("active");
+
+            burger.classList.toggle("active");
+
+            overlay.classList.toggle("active");
+
+            document.body.style.overflow = sidebar.classList.contains("active") ? "hidden" : "auto";
+
+        }
+
+        function closeMenu() {
+
+            const sidebar = document.getElementById("sidebarMenu");
+
+            const burger = document.querySelector(".hamburger");
+
+            const overlay = document.getElementById("overlay");
+
+            sidebar.classList.remove("active");
+
+            burger.classList.remove("active");
+
+            overlay.classList.remove("active");
+
+            document.body.style.overflow = "auto";
+
+        }
+
+        function openHistoryFromMenu() {
+
+            closeMenu();   // pehle sidebar band karo
+
+            showHistory(); // phir history open karo
+
+        }
+
+        let popupCallback = null;
+
+        function showPopup(message, callback) {
+
+            document.getElementById("popupMessage").textContent = message;
+
+            document.getElementById("customPopup").style.display = "flex";
+
+            popupCallback = callback;
+
+        }
+
+        function closePopup() {
+
+            document.getElementById("customPopup").style.display = "none";
+
+        }
+
+        function confirmAction() {
+
+            if (popupCallback) popupCallback();
+
+            closePopup();
+
+        }
+
+
+
+
+        // ================== DELETE BUTTON HANDLER (Fixed + Reliable) ==================
+        document.addEventListener('click', function (e) {
+            // ←←← Yeh line important hai (text/emoji par click bhi catch karega)
+            const deleteBtn = e.target.closest('.delete-history-btn');
+
+            if (deleteBtn) {
+                const index = parseInt(deleteBtn.dataset.index);
+
+                if (isNaN(index)) return;
+
+                console.log("✅ Delete button clicked → Index:", index);   // debugging ke liye
+
+                showPopup("Kya aap is bill ko permanently delete karna chahte hain?", () => {
+                    // Delete karo
+                    window.billHistory.splice(index, 1);
+
+                    // LocalStorage update
+                    localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+
+                    // Firestore update
+                    saveHistoryToFirestore();
+
+                    // List refresh
+                    showHistory();
+                });
+            }
         });
-    }
-});
 
-// Helper function to save history in Firestore
-async function saveHistoryToFirestore() {
-    if (!window.currentUserUid || !window.db) return;
+        // Helper function to save history in Firestore
+        async function saveHistoryToFirestore() {
+            if (!window.currentUserUid || !window.db) return;
 
-    try {
-        const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
-        const userRef = doc(window.db, "users", window.currentUserUid);
-        await setDoc(userRef, { history: window.billHistory }, { merge: true });
-        console.log("✅ History updated in Firestore after delete");
-    } catch (e) {
-        console.error("❌ Firestore delete error:", e);
-    }
-}
+            try {
+                const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+                const userRef = doc(window.db, "users", window.currentUserUid);
+                await setDoc(userRef, { history: window.billHistory }, { merge: true });
+                console.log("✅ History updated in Firestore after delete");
+            } catch (e) {
+                console.error("❌ Firestore delete error:", e);
+            }
+        }
 
 
 
@@ -3133,113 +3168,132 @@ async function saveHistoryToFirestore() {
 
     <script type="module">
 
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
-      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-      import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-      const firebaseConfig = {
+        const firebaseConfig = {
 
-        apiKey: "AIzaSyBYTLHO7jZW1dHEHlW55Axpjs2duSiDMs4",
+            apiKey: "AIzaSyBYTLHO7jZW1dHEHlW55Axpjs2duSiDMs4",
 
-        authDomain: "sm-technician-d4b8d.firebaseapp.com",
+            authDomain: "sm-technician-d4b8d.firebaseapp.com",
 
-        projectId: "sm-technician-d4b8d",
+            projectId: "sm-technician-d4b8d",
 
-        appId: "1:716505252423:web:fd557961c7c8eef03f6762"
+            appId: "1:716505252423:web:fd557961c7c8eef03f6762"
 
-      };
+        };
 
-      const app = initializeApp(firebaseConfig);
+        const app = initializeApp(firebaseConfig);
 
-      const auth = getAuth(app);
+        const auth = getAuth(app);
 
-      const db = getFirestore(app);
+        const db = getFirestore(app);
 
-      window.db = db;
+        window.db = db;
 
-      window.currentUserUid = null;
+        window.currentUserUid = null;
 
-      // ===== AUTH CHECK =====
+        // ===== AUTH CHECK =====
 
-      onAuthStateChanged(auth, async (user) => {
+        onAuthStateChanged(auth, async (user) => {
 
-        if (!user) {
+            if (!user) {
 
-          window.location.href = "login.html";
+                window.location.href = "login.html";
 
-          return;
-
-        }
-
-        window.currentUserUid = user.uid;
-
-        await loadUserData(user.uid);
-
-      });
-
-      // ===== LOAD USER DATA =====
-
-      async function loadUserData(uid) {
-
-        try {
-
-          const userRef = doc(db, "users", uid);
-
-          const snap = await getDoc(userRef);
-
-          if (snap.exists()) {
-
-            const data = snap.data();
-
-            // Rates load
-
-            if (data.rates) {
-
-              Object.assign(window.savedRates, data.rates);
-
-              localStorage.setItem('smRates', JSON.stringify(window.savedRates));
+                return;
 
             }
 
-            // History load
+            window.currentUserUid = user.uid;
 
-            if (data.history && Array.isArray(data.history)) {
-
-              window.billHistory = data.history;
-
-              localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
-
-            }
-
-          }
-
-        } catch (e) {
-
-          console.error("Load error:", e);
-
-        }
-
-      }
-
-      // ===== LOGOUT FUNCTION =====
-
-      window.logoutUser = function () {
-
-        showPopup("Logout karna chahte hain?", () => {
-
-          signOut(auth).then(() => {
-
-            window.location.href = "login.html";
-
-          });
+            await loadUserData(user.uid);
 
         });
 
-        return;
 
-      };
+
+
+        // ── Show user email in top-right ────────────────────────────────
+  const emailDisplay = document.getElementById("userEmailDisplay");
+  const badge = document.getElementById("userBadge");
+
+  if (user.email) {
+    // Shorten it (show only part before @ for cleaner look)
+    let shortEmail = user.email.split("@")[0];  // e.g., "hyper" from "hyper@example.com"
+    
+    // Optional: Limit length if email is too long
+    // if (shortEmail.length > 12) shortEmail = shortEmail.substring(0, 12) + "...";
+
+    emailDisplay.textContent = shortEmail;
+    badge.style.display = "inline-flex";  // Show the badge
+    badge.title = "Logged in as: " + user.email;  // Full email on hover
+  }
+
+        // ===== LOAD USER DATA =====
+
+        async function loadUserData(uid) {
+
+            try {
+
+                const userRef = doc(db, "users", uid);
+
+                const snap = await getDoc(userRef);
+
+                if (snap.exists()) {
+
+                    const data = snap.data();
+
+                    // Rates load
+
+                    if (data.rates) {
+
+                        Object.assign(window.savedRates, data.rates);
+
+                        localStorage.setItem('smRates', JSON.stringify(window.savedRates));
+
+                    }
+
+                    // History load
+
+                    if (data.history && Array.isArray(data.history)) {
+
+                        window.billHistory = data.history;
+
+                        localStorage.setItem("smHistory", JSON.stringify(window.billHistory));
+
+                    }
+
+                }
+
+            } catch (e) {
+
+                console.error("Load error:", e);
+
+            }
+
+        }
+
+        // ===== LOGOUT FUNCTION =====
+
+        window.logoutUser = function () {
+
+            showPopup("Logout karna chahte hain?", () => {
+
+                signOut(auth).then(() => {
+
+                    window.location.href = "login.html";
+
+                });
+
+            });
+
+            return;
+
+        };
 
     </script>
 
