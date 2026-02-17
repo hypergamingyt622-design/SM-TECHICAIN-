@@ -3210,14 +3210,7 @@ cursor:pointer;
 
             window.currentUserUid = user.uid;
 
-            await loadUserData(user.uid);
-
-        });
-
-
-
-
-        // ── Show user email in top-right ────────────────────────────────
+               // ── Show user email in top-right ────────────────────────────────
   const emailDisplay = document.getElementById("userEmailDisplay");
   const badge = document.getElementById("userBadge");
 
@@ -3232,6 +3225,15 @@ cursor:pointer;
     badge.style.display = "inline-flex";  // Show the badge
     badge.title = "Logged in as: " + user.email;  // Full email on hover
   }
+
+            await loadUserData(user.uid);
+
+        });
+
+
+
+
+     
 
         // ===== LOAD USER DATA =====
 
