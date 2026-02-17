@@ -1169,6 +1169,63 @@
     background: rgba(17, 17, 17, 0.94);
     backdrop-filter: none;     /* ← important: don't blur inside content */
 }
+
+
+/* ================== WHATSAPP BUTTON ================== */
+.whatsapp-btn {
+    background: #25D366;
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.whatsapp-btn:hover {
+    background: #20ba5a;
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-btn svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s;
+}
+
+.whatsapp-btn:hover svg {
+    transform: scale(1.2) rotate(12deg);
+}
+
+.whatsapp-btn:active {
+    animation: whatsappSend 0.6s ease;
+}
+
+@keyframes whatsappSend {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(0.9) rotate(-8deg); }
+    70%  { transform: scale(1.15) rotate(8deg); }
+    100% { transform: scale(1); }
+}
+
+/* Close button alag styling */
+.close-btn {
+    background: #ef4444 !important;
+    color: white !important;
+    padding: 14px 50px !important;
+    font-size: 17px !important;
+    border-radius: 12px !important;
+    margin-top: 25px !important;
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+}
+
+
+
   </style>
 
 </head>
@@ -1660,10 +1717,18 @@ cursor:pointer;
 
           <button onclick="downloadBillPDF()">Download PDF</button>
 
-          <button onclick="shareMaterialListOnWhatsApp()">Share on WhatsApp</button>
+          <button class="whatsapp-btn" onclick="shareMaterialListOnWhatsApp()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.485-.888-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                    <path d="M12 2C6.48 2 2 6.59 2 12.253c0 2.35.82 4.51 2.18 6.2L2 22l3.72-1.05c1.6.9 3.4 1.4 5.28 1.4 5.52 0 10-4.59 10-10.247C22 6.59 17.52 2 12 2zm0 18.2c-1.65 0-3.26-.45-4.65-1.3L4.5 20.3l1.35-3.95c-1.1-1.5-1.7-3.3-1.7-5.15C4.15 7.3 7.7 3.8 12 3.8c4.3 0 7.8 3.5 7.8 7.8 0 4.3-3.5 7.8-7.8 7.8z"/>
+                </svg>
+                Share on WhatsApp
+            </button>
 
-          <button onclick="closeBill()">Close</button>
+        </div>
 
+        <div style="text-align:center; margin-top:35px;">
+            <button onclick="closeBill()" class="close-btn">✕ Close</button>
         </div>
 
       </div>
@@ -2159,6 +2224,50 @@ cursor:pointer;
         // }
 
       }
+
+
+      // ================== WHATSAPP MATERIAL LIST SHARE ==================
+function shareMaterialListOnWhatsApp() {
+    const phone = document.getElementById("phone").value.trim();
+    if (!phone || phone.length < 9) {
+        alert("Customer ka mobile number sahi se daaliye (10 digit)");
+        return;
+    }
+
+    let waNumber = phone.replace(/\D/g, '');
+    if (waNumber.startsWith('0')) waNumber = waNumber.substring(1);
+    waNumber = '91' + waNumber;
+
+    const items = [];
+    document.querySelectorAll(".item").forEach(item => {
+        const qty = parseFloat(item.querySelector(".qty")?.value) || 0;
+        if (qty <= 0) return;
+
+        const nameEl = item.querySelector("span") || item.querySelector('input[type="text"]');
+        const name = nameEl ? (nameEl.value || nameEl.textContent).trim() : "";
+        if (name) items.push(`• ${name} × ${qty}`);
+    });
+
+    if (items.length === 0) {
+        alert("Koi material select nahi kiya!");
+        return;
+    }
+
+    const custName = document.getElementById("custName").value.trim() || "Customer";
+
+    const message = 
+        `*SM Technician – Material List*\n\n` +
+        `Namaste ${custName} ji 👋\n\n` +
+        `Aapka estimate material list:\n\n` +
+        items.join("\n") + "\n\n" +
+        `Total items: ${items.length}\n` +
+        `Koi change chahiye to turant batayein.\n\n` +
+        `Thanks & Regards\n` +
+        `SM Technician\n8935883863`;
+
+    const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+    window.open(waLink, "_blank");
+}
 
       function showHistory() {
 
