@@ -181,47 +181,6 @@ button:hover {
 }
      
 
-/* Form Inputs */
-input[type="email"], input[type="password"] {
-    transition: all 0.4s ease;
-}
-
-input[type="email"]:focus, input[type="password"]:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-}
-
-/* Auth Button */
-#authButton {
-    padding: 18px 35px;
-    font-size: 17px;
-    border-radius: 14px;
-    width: 100%;
-    background: var(--accent2);
-    color: #111;
-    border: none;
-    position: relative;
-    transition: all 0.4s ease;
-}
-
-#authButton:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 40px rgba(255, 234, 0, 0.8);
-}
-
-/* Toggle Link */
-#toggleAuth:hover {
-    text-decoration: underline;
-    color: var(--accent);
-}
-
-/* Mobile Adjustments */
-@media (max-width: 480px) {
-    #authForm {
-        width: 85%;
-    }
-}
-
     </style>
 </head>
 <body>
@@ -229,32 +188,16 @@ input[type="email"]:focus, input[type="password"]:focus {
 
     <div id="particles-js"></div>
     <div class="box">
-    <img src="logo.png" alt="SM Technician Logo" class="logo" onerror="this.style.display='none'">
-    <h2>SM Technician Login / Signup</h2>
-    <p style="margin-bottom: 25px; color: var(--accent2); font-size: 14px;">Secure access with your Google account or Email/Password</p>
-    
-    <!-- Google Button (Existing) -->
-    <button onclick="googleLogin()">
-        <span id="buttonText">Sign in with Google</span>
-        <div class="loading" id="loadingSpinner"></div>
-    </button>
-    
-    <!-- Email/Password Form (New) -->
-    <form id="authForm" style="margin-top: 30px; width: 320px;">
-        <input type="email" id="email" placeholder="Email" style="width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #444; background: #222; color: #fff; outline: none;">
-        <input type="password" id="password" placeholder="Password" style="width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #444; background: #222; color: #fff; outline: none;">
-        
-        <button type="button" id="authButton" onclick="handleAuth()">
-            <span id="authButtonText">Login</span>
-            <div class="loading" id="authLoadingSpinner" style="display: none;"></div>
+        <img src="logo.png" alt="SM Technician Logo" class="logo" onerror="this.style.display='none'">
+        <h2>SM Technician Login</h2>
+        <p style="margin-bottom: 25px; color: var(--accent2); font-size: 14px;">Secure access with your Google account</p>
+        <button onclick="googleLogin()">
+            <span id="buttonText">Sign in with Google</span>
+            <div class="loading" id="loadingSpinner"></div>
         </button>
-        
-        <p id="toggleAuth" style="text-align: center; margin-top: 10px; cursor: pointer; color: var(--accent2);" onclick="toggleAuthMode()">Don't have an account? Signup</p>
-    </form>
-    
-    <div id="errorMsg" class="error"></div>
-    <div id="successMsg" class="success"></div>
-</div>
+        <div id="errorMsg" class="error"></div>
+        <div id="successMsg" class="success"></div>
+    </div>
 
    <script type="module">
     // Firebase config (आपका पुराना config)
@@ -285,199 +228,129 @@ input[type="email"]:focus, input[type="password"]:focus {
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);          // ← Firestore initialize किया
-const provider = new GoogleAuthProvider();
+    const auth = getAuth(app);
+    const db = getFirestore(app);          // ← Firestore initialize किया
+    const provider = new GoogleAuthProvider();
 
-// Auto-redirect if already logged in
-onAuthStateChanged(auth, (user) => {
-    if (user) {
+    // Auto-redirect if already logged in
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            window.location.href = "index.html";
+        }
+    });
+
+    window.googleLogin = async function() {     // ← async function बनाया
+        const button = document.querySelector('button');
+        const buttonText = document.getElementById('buttonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const errorMsg = document.getElementById('errorMsg');
+        const successMsg = document.getElementById('successMsg');
+
+        // Reset messages
+        errorMsg.style.display = 'none';
+        successMsg.style.display = 'none';
+
+        // Show loading
+        buttonText.style.opacity = '0.5';
+        loadingSpinner.style.display = 'block';
+        button.disabled = true;
+
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            // Firestore में यूज़र डॉक्यूमेंट चेक + क्रिएट/अपडेट
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
+
+            if (!userSnap.exists()) {
+                // नया यूज़र → पहली बार लॉगिन → नया डॉक्यूमेंट बनाओ
+                await setDoc(userRef, {
+                    uid: user.uid,
+                    displayName: user.displayName || "Unknown",
+                    email: user.email,
+                    photoURL: user.photoURL || null,
+                    createdAt: new Date().toISOString(),
+                    lastLogin: new Date().toISOString(),
+                    // आप और फील्ड्स ऐड कर सकते हैं जैसे phone, role, technicianId आदि
+                    // role: "technician",
+                    // status: "active"
+                });
+                console.log("New user document created in Firestore");
+            } else {
+                // पुराना यूज़र → सिर्फ lastLogin अपडेट कर सकते हो (ऑप्शनल)
+                await setDoc(userRef, {
+                    lastLogin: new Date().toISOString()
+                }, { merge: true });
+                console.log("Existing user — last login updated");
+            }
+
+            // Success message
+            successMsg.textContent = `Welcome${user.displayName ? ', ' + user.displayName : ''}! Redirecting...`;
+            successMsg.style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1500);
+
+        } catch (error) {
+            let errorMessage = 'Login failed. Please try again.';
+            
+            if (error.code === 'auth/popup-closed-by-user') {
+                errorMessage = 'Login cancelled. Please try again.';
+            } else if (error.code === 'auth/network-request-failed') {
+                errorMessage = 'Network error. Check your connection.';
+            } else if (error.code === 'auth/too-many-requests') {
+                errorMessage = 'Too many attempts. Try again later.';
+            } else {
+                errorMessage = error.message;
+            }
+
+            errorMsg.textContent = errorMessage;
+            errorMsg.style.display = 'block';
+            console.error("Auth/Firestore error:", error);
+        } finally {
+            // Hide loading
+            buttonText.style.opacity = '1';
+            loadingSpinner.style.display = 'none';
+            button.disabled = false;
+        }
+    };
+
+    // Email Signup
+window.signup = async function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const userCred = await createUserWithEmailAndPassword(auth, email, password);
+        alert("Account Created!");
         window.location.href = "index.html";
+    } catch (error) {
+        alert(error.message);
     }
-});
+};
 
-// Google Login (Existing, no change)
-window.googleLogin = async function() {     // ← async function बनाया
-    const button = document.querySelector('button');
-    const buttonText = document.getElementById('buttonText');
-    const loadingSpinner = document.getElementById('loadingSpinner');
-    const errorMsg = document.getElementById('errorMsg');
-    const successMsg = document.getElementById('successMsg');
-
-    // Reset messages
-    errorMsg.style.display = 'none';
-    successMsg.style.display = 'none';
-
-    // Show loading
-    buttonText.style.opacity = '0.5';
-    loadingSpinner.style.display = 'block';
-    button.disabled = true;
+// Email Login
+window.login = async function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
     try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-
-        // Firestore में यूज़र डॉक्यूमेंट चेक + क्रिएट/अपडेट
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
-
-        if (!userSnap.exists()) {
-            // नया यूज़र → पहली बार लॉगिन → नया डॉक्यूमेंट बनाओ
-            await setDoc(userRef, {
-                uid: user.uid,
-                displayName: user.displayName || "Unknown",
-                email: user.email,
-                photoURL: user.photoURL || null,
-                createdAt: new Date().toISOString(),
-                lastLogin: new Date().toISOString(),
-                // आप और फील्ड्स ऐड कर सकते हैं जैसे phone, role, technicianId आदि
-                // role: "technician",
-                // status: "active"
-            });
-            console.log("New user document created in Firestore");
-        } else {
-            // पुराना यूज़र → सिर्फ lastLogin अपडेट कर सकते हो (ऑप्शनल)
-            await setDoc(userRef, {
-                lastLogin: new Date().toISOString()
-            }, { merge: true });
-            console.log("Existing user — last login updated");
-        }
-
-        // Success message
-        successMsg.textContent = `Welcome${user.displayName ? ', ' + user.displayName : ''}! Redirecting...`;
-        successMsg.style.display = 'block';
-
-        setTimeout(() => {
-            window.location.href = "index.html";
-        }, 1500);
-
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = "index.html";
     } catch (error) {
-        let errorMessage = 'Login failed. Please try again.';
-        
-        if (error.code === 'auth/popup-closed-by-user') {
-            errorMessage = 'Login cancelled. Please try again.';
-        } else if (error.code === 'auth/network-request-failed') {
-            errorMessage = 'Network error. Check your connection.';
-        } else if (error.code === 'auth/too-many-requests') {
-            errorMessage = 'Too many attempts. Try again later.';
-        } else {
-            errorMessage = error.message;
-        }
-
-        errorMsg.textContent = errorMessage;
-        errorMsg.style.display = 'block';
-        console.error("Auth/Firestore error:", error);
-    } finally {
-        // Hide loading
-        buttonText.style.opacity = '1';
-        loadingSpinner.style.display = 'none';
-        button.disabled = false;
+        alert(error.message);
     }
 };
 
-// New: Auth Mode (Login or Signup)
-let isLoginMode = true; // Default to Login
 
-window.toggleAuthMode = function() {
-    isLoginMode = !isLoginMode;
-    document.getElementById('authButtonText').textContent = isLoginMode ? 'Login' : 'Signup';
-    document.getElementById('toggleAuth').textContent = isLoginMode ? "Don't have an account? Signup" : "Already have an account? Login";
-};
-
-// New: Handle Login/Signup
-window.handleAuth = async function() {
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const button = document.getElementById('authButton');
-    const buttonText = document.getElementById('authButtonText');
-    const loadingSpinner = document.getElementById('authLoadingSpinner');
-    const errorMsg = document.getElementById('errorMsg');
-    const successMsg = document.getElementById('successMsg');
-
-    // Basic validation
-    if (!email || !password) {
-        errorMsg.textContent = 'Please enter email and password.';
-        errorMsg.style.display = 'block';
-        return;
-    }
-
-    // Reset messages
-    errorMsg.style.display = 'none';
-    successMsg.style.display = 'none';
-
-    // Show loading
-    buttonText.style.opacity = '0.5';
-    loadingSpinner.style.display = 'block';
-    button.disabled = true;
-
-    try {
-        let user;
-        if (isLoginMode) {
-            // Login
-            const userCred = await signInWithEmailAndPassword(auth, email, password);
-            user = userCred.user;
-        } else {
-            // Signup
-            const userCred = await createUserWithEmailAndPassword(auth, email, password);
-            user = userCred.user;
+    // Keyboard shortcut
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.target === document.body) {
+            googleLogin();
         }
-
-        // Firestore user doc (same as Google)
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
-
-        if (!userSnap.exists()) {
-            await setDoc(userRef, {
-                uid: user.uid,
-                displayName: user.displayName || "Unknown",
-                email: user.email,
-                photoURL: user.photoURL || null,
-                createdAt: new Date().toISOString(),
-                lastLogin: new Date().toISOString(),
-            });
-            console.log("New user document created in Firestore");
-        } else {
-            await setDoc(userRef, { lastLogin: new Date().toISOString() }, { merge: true });
-            console.log("Existing user — last login updated");
-        }
-
-        // Success
-        successMsg.textContent = `Welcome${user.displayName ? ', ' + user.displayName : ''}! Redirecting...`;
-        successMsg.style.display = 'block';
-
-        setTimeout(() => {
-            window.location.href = "index.html";
-        }, 1500);
-
-    } catch (error) {
-        let errorMessage = 'Authentication failed. Please try again.';
-        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-            errorMessage = 'Invalid email or password.';
-        } else if (error.code === 'auth/email-already-in-use') {
-            errorMessage = 'Email already in use.';
-        } else if (error.code === 'auth/weak-password') {
-            errorMessage = 'Password should be at least 6 characters.';
-        } else {
-            errorMessage = error.message;
-        }
-
-        errorMsg.textContent = errorMessage;
-        errorMsg.style.display = 'block';
-        console.error("Auth error:", error);
-    } finally {
-        // Hide loading
-        buttonText.style.opacity = '1';
-        loadingSpinner.style.display = 'none';
-        button.disabled = false;
-    }
-};
-
-// Keyboard shortcut (Existing)
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && e.target === document.body) {
-        googleLogin();
-    }
-});
+    });
 </script>
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
