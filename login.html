@@ -5,7 +5,6 @@
     <title>SM Technician Login</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #111;
@@ -182,22 +181,11 @@ button:hover {
 }
      
 
-/* Form Styling */
-#authForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.input-group {
-    position: relative;
+/* Form Inputs */
+#authForm input {
     width: 100%;
-    margin-bottom: 15px;
-}
-
-#email, #password {
-    width: 100%;
-    padding: 14px 40px 14px 14px; /* Space for eye icon */
+    padding: 14px;
     border-radius: 10px;
     border: 1px solid #444;
     background: #222;
@@ -206,25 +194,13 @@ button:hover {
     transition: all 0.4s ease;
 }
 
-#email:focus, #password:focus {
+#authForm input:focus {
     border-color: var(--accent);
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
 
-/* Eye Icon for Password Toggle */
-#togglePassword {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #aaa;
-    font-size: 16px;
-    transition: color 0.3s;
-}
-
-#togglePassword:hover {
-    color: var(--accent);
+#authForm input::placeholder {
+    color: var(--accent2);
 }
 
 /* Auth Button */
@@ -237,8 +213,8 @@ button:hover {
     color: #111;
     border: none;
     position: relative;
-    margin-top: 10px;
     transition: all 0.4s ease;
+    margin-top: 10px;
 }
 
 #authButton:hover {
@@ -246,10 +222,9 @@ button:hover {
     box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
 }
 
-/* Toggle Link */
-#toggleAuth:hover {
+/* Toggle and Forget Links */
+#toggleAuth:hover, #forgetPassword:hover {
     text-decoration: underline;
-    color: var(--accent);
 }
 
 /* Mobile Adjustments */
@@ -259,6 +234,20 @@ button:hover {
     }
 }
 
+/* Loading Spinner (Reuse existing, but position for auth button) */
+#authLoadingSpinner {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top: 2px solid #111; /* Match button color */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
 
     </style>
 </head>
@@ -266,19 +255,31 @@ button:hover {
 
 
     <div id="particles-js"></div>
-   <div class="box">
+    <div class="box">
     <img src="logo.png" alt="SM Technician Logo" class="logo" onerror="this.style.display='none'">
     <h2 id="formTitle">SM Technician Login</h2>
     <p style="margin-bottom: 25px; color: var(--accent2); font-size: 14px;">Secure access with your email and password</p>
     
     <!-- Email/Password Form -->
-    <form id="authForm" style="width: 320px;">
-        <div class="input-group">
+    <form id="authForm" style="width: 320px; text-align: center;">
+        <div style="position: relative; margin-bottom: 15px;">
             <input type="email" id="email" placeholder="Email" required>
         </div>
-        <div class="input-group">
-            <input type="password" id="password" placeholder="Password" required minlength="6">
-            <i class="fas fa-eye" id="togglePassword" onclick="togglePasswordVisibility()"></i>
+        <div style="position: relative; margin-bottom: 15px;">
+            <input type="password" id="password" placeholder="Password" required>
+            <span id="togglePassword" onclick="togglePasswordVisibility()" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--accent2);">
+                <!-- Eye Icon SVG (Show) -->
+                <svg id="eyeShow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <!-- Eye Icon SVG (Hide) - Hidden initially -->
+                <svg id="eyeHide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                    <path d="M3 3l18 18"/>
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+            </span>
         </div>
         
         <button type="button" id="authButton" onclick="handleAuth()">
@@ -286,7 +287,8 @@ button:hover {
             <div class="loading" id="authLoadingSpinner"></div>
         </button>
         
-        <p id="toggleAuth" style="text-align: center; margin-top: 15px; cursor: pointer; color: var(--accent2);" onclick="toggleAuthMode()">Don't have an account? Register Now</p>
+        <p id="toggleAuth" onclick="toggleAuthMode()" style="margin-top: 10px; cursor: pointer; color: var(--accent2);">Don't have an account? Register now</p>
+        <p id="forgetPassword" onclick="showForgetPassword()" style="margin-top: 5px; cursor: pointer; color: var(--danger);">Forgot password?</p>
     </form>
     
     <div id="errorMsg" class="error"></div>
@@ -294,32 +296,34 @@ button:hover {
 </div>
 
    <script type="module">
-    // Firebase config
-const firebaseConfig = {
-    apiKey: "AIzaSyBYTLHO7jZW1dHEHlW55Axpjs2duSiDMs4",
-    authDomain: "sm-technician-d4b8d.firebaseapp.com",
-    projectId: "sm-technician-d4b8d",
-    appId: "1:716505252423:web:fd557961c7c8eef03f6762"
-};
+    // Firebase config (आपका पुराना config)
+    const firebaseConfig = {
+        apiKey: "AIzaSyBYTLHO7jZW1dHEHlW55Axpjs2duSiDMs4",
+        authDomain: "sm-technician-d4b8d.firebaseapp.com",
+        projectId: "sm-technician-d4b8d",
+        appId: "1:716505252423:web:fd557961c7c8eef03f6762"
+    };
 
-// Firebase imports
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { 
-    getAuth, 
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    // Firebase imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { 
+        getAuth, 
+        signInWithPopup, 
+        GoogleAuthProvider, 
+        onAuthStateChanged,
+        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    
+    // Firestore imports
+    import { 
+        getFirestore, 
+        doc, 
+        setDoc, 
+        getDoc 
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// Firestore imports
-import { 
-    getFirestore, 
-    doc, 
-    setDoc, 
-    getDoc 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const app = initializeApp(firebaseConfig);
+    const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
@@ -331,13 +335,14 @@ onAuthStateChanged(auth, (user) => {
 });
 
 // Auth Mode (Login or Signup)
-let isLoginMode = true;
+let isLoginMode = true; // Default to Login
 
 window.toggleAuthMode = function() {
     isLoginMode = !isLoginMode;
     document.getElementById('formTitle').textContent = isLoginMode ? 'SM Technician Login' : 'SM Technician Signup';
     document.getElementById('authButtonText').textContent = isLoginMode ? 'Login' : 'Signup';
-    document.getElementById('toggleAuth').textContent = isLoginMode ? "Don't have an account? Register Now" : "Already have an account? Login";
+    document.getElementById('toggleAuth').textContent = isLoginMode ? "Don't have an account? Register now" : "Already have an account? Login";
+    document.getElementById('forgetPassword').style.display = isLoginMode ? 'block' : 'none'; // Hide forget password in signup mode
 };
 
 // Handle Login/Signup
@@ -390,7 +395,7 @@ window.handleAuth = async function() {
         if (!userSnap.exists()) {
             await setDoc(userRef, {
                 uid: user.uid,
-                displayName: "Unknown", // Can add name input later
+                displayName: "Unknown", // Can add name input later if needed
                 email: user.email,
                 photoURL: null,
                 createdAt: new Date().toISOString(),
@@ -411,7 +416,7 @@ window.handleAuth = async function() {
         }, 1500);
 
     } catch (error) {
-        let errorMessage = 'Authentication failed. Please try again.';
+        let errorMessage = 'Operation failed. Please try again.';
         if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
             errorMessage = 'Invalid email or password.';
         } else if (error.code === 'auth/email-already-in-use') {
@@ -433,23 +438,37 @@ window.handleAuth = async function() {
     }
 };
 
-// Password Show/Hide Toggle
+// Toggle Password Visibility
 window.togglePasswordVisibility = function() {
     const passwordInput = document.getElementById('password');
-    const toggleIcon = document.getElementById('togglePassword');
-    
+    const eyeShow = document.getElementById('eyeShow');
+    const eyeHide = document.getElementById('eyeHide');
+
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        toggleIcon.classList.remove('fa-eye');
-        toggleIcon.classList.add('fa-eye-slash');
+        eyeShow.style.display = 'none';
+        eyeHide.style.display = 'block';
     } else {
         passwordInput.type = 'password';
-        toggleIcon.classList.remove('fa-eye-slash');
-        toggleIcon.classList.add('fa-eye');
+        eyeShow.style.display = 'block';
+        eyeHide.style.display = 'none';
     }
 };
 
-// Keyboard shortcut for Enter key (submits form)
+// Forget Password
+window.showForgetPassword = async function() {
+    const email = prompt("Enter your email to reset password:");
+    if (!email) return;
+
+    try {
+        await sendPasswordResetEmail(auth, email);
+        alert("Password reset email sent! Check your inbox.");
+    } catch (error) {
+        alert("Error: " + error.message);
+    }
+};
+
+// Keyboard Enter for Submit
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         handleAuth();
