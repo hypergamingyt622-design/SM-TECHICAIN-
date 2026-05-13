@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>SM Technician - Full Estimate</title>
+
+    <!-- Favicon -->
+
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent: #FFD700;
+            --accent2: #FFEA00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #111;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 20px auto;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .header {
+            background: #111;
+            padding: 25px 15px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .header-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+        }
+
+        .header h1 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-top: 10px;
+        }
+
+        .info {
+            padding: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .info input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #444;
+            background: #222;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .big-title {
+            text-align: center;
+            padding: 18px;
+            font-size: 1.5rem;
+            background: #222;
+            color: var(--accent);
+            border-left: 6px solid var(--accent);
+            margin: 10px 0;
+        }
+
+        /* Room Card Styles */
+        .room-card {
+            margin: 20px 18px;
+            border-radius: 22px;
+            overflow: hidden;
+            background: #1a1a1a;
+            border: 2px solid #FFD70055;
+        }
+
+        .room-header {
+            background: linear-gradient(135deg, #111, #1f1f1f);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .room-header h2 {
+            color: #FFD700;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .delete-room-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            padding: 20px;
+        }
+
+        .room-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 14px;
+            transition: 0.35s;
+            animation: fadeUp 0.5s ease;
+        }
+
+        .room-field:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #FFD700;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15);
+        }
+
+        .room-field label {
+            display: block;
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .room-field input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid #444;
+            background: #111;
+            color: #fff;
+            font-size: 18px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .room-field input:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            transform: scale(1.03);
+        }
+
+        .add-room-btn {
+            width: calc(100% - 36px);
+            margin: 10px 18px 25px;
+            padding: 20px;
+            border: none;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #FFD700, #FFEA00);
+            color: #111;
+            font-size: 26px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        #generateBillBtn {
+            display: block;
+            margin: 30px auto;
+            padding: 16px 50px;
+            font-size: 20px;
+            font-weight: bold;
+            background: var(--accent);
+            color: #111;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--accent2);
+            font-size: 15px;
+        }
+
+        /* Mobile Responsive */
+        @media(max-width:1024px) {
+
+            .room-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media(max-width:768px) {
+
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .room-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .room-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .room-field {
+                padding: 12px;
+            }
+
+            .room-field label {
+                font-size: 13px;
+            }
+
+            .room-field input {
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            .add-room-btn {
+                font-size: 20px;
+                padding: 16px;
+            }
+
+            #generateBillBtn {
+                width: 90%;
+            }
+
+        }
+
+        @media(max-width:480px) {
+
+            .room-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .room-field {
+                border-radius: 14px;
+                padding: 10px;
+            }
+
+            .room-field input {
+                font-size: 15px;
+                padding: 10px;
+            }
+
+            .room-header h2 {
+                font-size: 20px;
+            }
+
+            .top-title {
+                font-size: 18px;
+            }
+
+        }
+
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: #111;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px solid #FFD70055;
+        }
+
+        .back-btn {
+            background: #FFD700;
+            color: #111;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .top-title {
+            color: #FFD700;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .room-card {
+            animation: cardPop 0.45s ease;
+            transition: 0.35s;
+        }
+
+        .room-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.12);
+        }
+
+        .add-room-btn,
+        .delete-room-btn,
+        .duplicate-room-btn,
+        #generateBillBtn {
+            transition: 0.3s;
+        }
+
+        .add-room-btn:hover,
+        .delete-room-btn:hover,
+        .duplicate-room-btn:hover,
+        #generateBillBtn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.25);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes cardPop {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .room-field input::-webkit-outer-spin-button,
+        .room-field input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="top-bar">
+
+        <button class="back-btn" onclick="goBack()">
+            ←
+        </button>
+
+        <div class="top-title">
+            SM Technician
+        </div>
+
+    </div>
+
+
+    <!-- Hamburger Icon -->
+
+    <div class="header"></div>
+
+
+
+    <!-- Sidebar Menu -->
+
+
+    <div class="container">
+
+        <div class="header">
+            <div style="text-align:center; position:relative;">
+                <!-- Add position:relative; here if not already present -->
+                <!-- ┌──────────────────────────────┐ -->
+                <!-- │     USER EMAIL BADGE         │ -->
+                <!-- └──────────────────────────────┘ -->
+                <div id="userBadge" style="position: absolute; 
+            top: -20px;               /* same top as hamburger */
+            right: -6px;             /* symmetric to left:20px of hamburger */
+            width: 45px;             /* same size as hamburger */
+            height: 45px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #FFD70066;
+            background: #222;
+            display: none;
+            cursor: help;
+            box-shadow: 0 4px 12px rgba(255,215,0,0.3);">
+
+                    <!-- Profile picture -->
+                    <img id="userAvatar" src="" alt="User"
+                        style="width:100%; height:100%; object-fit: cover; display:none;">
+
+                    <!-- Fallback initial -->
+                    <div id="userInitial" style="width:100%; height:100%; 
+              display:flex; align-items:center; justify-content:center; 
+              font-size:1.5rem; font-weight:bold; color:#FFEA00; 
+              background: linear-gradient(135deg, #FFD70022, #222);">
+                        ?
+                    </div>
+                </div>
+                <img src="logo.png" alt="SM Technician Logo" class="header-logo" onerror="this.style.display='none'">
+                <h1>SM Technician</h1>
+            </div>
+        </div>
+
+        <div class="info">
+
+            <div><label>Customer Name</label><input id="custName" type="text"></div>
+
+            <div><label>Address</label><input id="custAddress" type="text"></div>
+
+            <div><label>Mobile Number</label><input id="phone" type="tel" placeholder="Enter mobile number"></div>
+
+        </div>
+
+        <!-- ROOM / CLASS INFO SECTION -->
+
+        <div id="roomContainer">
+
+            <div class="room-card">
+
+                <div class="room-header">
+                    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+
+                        <select class="room-type" onchange="updateRoomTitle(this)" style="
+        padding:8px 12px;
+        border-radius:10px;
+        border:none;
+        background:#FFD700;
+        color:#111;
+        font-weight:600;
+        font-size:16px;
+    ">
+                            <option>Bedroom</option>
+                            <option>Kitchen</option>
+                            <option>Hall</option>
+                            <option>Bathroom</option>
+                            <option>Balcony</option>
+                            <option>Office</option>
+                            <option>Custom Room</option>
+                        </select>
+
+                        <h2>Bedroom 1</h2>
+
+                    </div>
+
+                    <div style="display:flex; gap:10px;">
+
+                        <button class="duplicate-room-btn" onclick="duplicateRoom(this)" style="
+            background:#22c55e;
+            color:white;
+            border:none;
+            padding:10px 18px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:500;
+        ">
+                            Duplicate
+                        </button>
+
+                        <button class="delete-room-btn" onclick="deleteRoom(this)">
+                            Delete Room
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="room-grid dynamic-room-fields">
+
+                    <div class="room-field">
+                        <label>Fan Points</label>
+                        <input type="number" value="0">
+                    </div>
+
+                    <div class="room-field">
+                        <label> LED Points</label>
+                        <input type="number" value="0">
+                    </div>
+
+                    <div class="room-field">
+                        <label>Tube Light</label>
+                        <input type="number" value="0">
+                    </div>
+
+                    <div class="room-field">
+                        <label>Night Bulb</label>
+                        <input type="number" value="0">
+                    </div>
+
+                    <div class="room-field">
+                        <label>6A Sockets</label>
+                        <input type="number" value="0">
+                    </div>
+
+                    <div class="room-field">
+                        <label>20A Sockets</label>
+                        <input type="number" value="0">
+                    </div>
+
+                    <div class="room-field">
+                        <label>2 Way Switch</label>
+                        <input type="number" value="0">
+                    </div>
+
+                    <div class="room-field">
+                        <label>Power Board / Extension</label>
+                        <input type="number" value="0">
+                    </div>
+                    <div class="room-field">
+                        <label>Conceal Light</label>
+                        <input type="number" value="0">
+                    </div>
+
+                    <div class="room-field">
+                        <label>Patti</label>
+                        <input type="number" value="0">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="add-room-btn" onclick="addRoom()">
+            + Add New Room
+        </button>
+
+
+
+
+        <button id="generateBillBtn" style="
+
+display:block;
+
+margin:30px auto;
+
+padding:15px 40px;
+
+font-size:18px;
+
+background:#2563eb;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+">
+
+            Generate Bill
+
+        </button>
+
+
+
+        <footer>SM Technician • 8935883863</footer>
+
+        <script>
+
+
+            function goBack() {
+
+                window.history.back();
+
+            }
+
+
+
+
+            // ================= ROOM SYSTEM =================
+
+            let roomCount = 1;
+
+            const ROOM_TEMPLATES = {
+
+                Bedroom: [
+
+                    "Led bulb",
+                    "Night bulb",
+                    "Tube light",
+                    "Fan",
+                    "2way fan or bulb",
+                    "Tv board",
+                    "Power board",
+                    "AC",
+                    "conceal light",
+                    "inverter",
+                    "Patti"
+
+                ],
+
+                "Normal room": [
+
+                    "Led bulb",
+                    "Night bulb",
+                    "Tube light",
+                    "Fan",
+                    "Power board",
+                    "conceal light",
+                    "Patti"
+
+                ],
+
+                Hall: [
+
+                    "Led bulb",
+                    "Night bulb",
+                    "Tube light",
+                    "Fan",
+                    "2way fan or bulb",
+                    "Tv board",
+                    "Power board",
+                    "AC",
+                    "conceal light",
+                    "inverter",
+                    "Patti"
+
+                ],
+
+                Kitchen: [
+
+                    "Led bulb",
+                    "Exhaust fan",
+                    "Induction board",
+                    "Fridge board",
+                    "Water filter",
+                    "conceal light",
+                    "Patti"
+
+                ],
+
+                Bathroom: [
+
+                    "Led bulb",
+                    "Geyser board",
+                    "conceal light",
+                    "Patti"
+
+                ],
+
+                MCB: [
+
+                    "Isolater",
+                    "Mcb Changer",
+                    "30ma RCCB",
+                    "6amp mcb",
+                    "10amp mcb",
+                    "16amp mcb",
+                    "20amp mcb",
+                    "25amp mcb",
+                    "32amp mcb",
+                    "40amp mcb",
+                    "63amp mcb"
+
+                ]
+
+            };
+
+            function addRoom() {
+
+                roomCount = document.querySelectorAll(".room-card").length + 1;
+
+                const roomHTML = `
+    
+    <div class="room-card">
+
+        <div class="room-header">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+
+    <select class="room-type" onchange="updateRoomTitle(this)" style="
+        padding:8px 12px;
+        border-radius:10px;
+        border:none;
+        background:#FFD700;
+        color:#111;
+        font-weight:600;
+        font-size:16px;
+    ">
+        <option>Bedroom</option>
+        <option>Kitchen</option>
+        <option>Hall</option>
+        <option>Bathroom</option>
+        <option>Normal room</option>
+        <option>MCB</option>
+    </select>
+
+    <h2>Bedroom ${roomCount}</h2>
+
+</div>
+
+    <div style="display:flex; gap:10px;">
+
+        <button class="duplicate-room-btn" onclick="duplicateRoom(this)" style="
+            background:#22c55e;
+            color:white;
+            border:none;
+            padding:10px 18px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:500;
+        ">
+            Duplicate
+        </button>
+
+        <button class="delete-room-btn" onclick="deleteRoom(this)">
+            Delete Room
+        </button>
+
+    </div>
+</div>
+
+        <div class="room-grid dynamic-room-fields">
+
+            <div class="room-field">
+                <label>Fan Points</label>
+                <input type="number" value="0">
+            </div>
+
+            <div class="room-field">
+                <label>Bulb / LED Points</label>
+                <input type="number" value="0">
+            </div>
+
+            <div class="room-field">
+                <label>Tube Light</label>
+                <input type="number" value="0">
+            </div>
+
+            <div class="room-field">
+                <label>Night Bulb / Indicator</label>
+                <input type="number" value="0">
+            </div>
+
+            <div class="room-field">
+                <label>6A / 10A Sockets</label>
+                <input type="number" value="0">
+            </div>
+
+            <div class="room-field">
+                <label>20A Power Sockets</label>
+                <input type="number" value="0">
+            </div>
+
+            <div class="room-field">
+                <label>2 Way Switch</label>
+                <input type="number" value="0">
+            </div>
+
+            <div class="room-field">
+                <label>Power Board / Extension</label>
+                <input type="number" value="0">
+            </div>
+            <div class="room-field">
+    <label>Conceal Light</label>
+    <input type="number" value="0">
+</div>
+
+<div class="room-field">
+    <label>Patti</label>
+    <input type="number" value="0">
+</div>
+
+        </div>
+
+    </div>
+    
+    `;
+
+                document.getElementById("roomContainer")
+                    .insertAdjacentHTML("beforeend", roomHTML);
+
+                const allRooms =
+                    document.querySelectorAll(".room-card");
+
+                const lastRoom =
+                    allRooms[allRooms.length - 1];
+
+                renderRoomFields(lastRoom);
+            }
+
+            function deleteRoom(btn) {
+
+                btn.closest(".room-card").remove();
+
+                updateRoomNumbers();
+            }
+
+            function updateRoomNumbers() {
+
+                const rooms = document.querySelectorAll(".room-card");
+
+                rooms.forEach((room, index) => {
+
+                    const type = room.querySelector(".room-type").value;
+
+                    room.querySelector("h2").innerText =
+                        `${type} ${index + 1}`;
+                });
+
+                roomCount = rooms.length;
+            }
+
+            function duplicateRoom(btn) {
+
+                const roomCard = btn.closest(".room-card");
+
+                const clone = roomCard.cloneNode(true);
+
+                document.getElementById("roomContainer")
+                    .appendChild(clone);
+
+                updateRoomNumbers();
+            }
+
+
+
+            // ================= MATERIAL MASTER =================
+
+            const MATERIALS = {
+                "6amp switch": 0,
+                "6amp Socket": 0,
+                "16amp switch": 0,
+                "16amp Socket": 0,
+                "two way switch": 0,
+                "regulator": 0,
+                "Junction box": 0,
+                "celling rose": 0,
+                "angle holder": 0,
+                "straight holder": 0,
+                "patti": 0,
+                "Flexible pipe": 0,
+                "35/8 skew": 0,
+                "gujja": 0,
+                "kala patch 1inch": 0,
+                "kala patch 2inch": 0,
+                "Tap": 0,
+                "blanker": 0,
+                "Plate 1 module": 0,
+                "Plate 2 module": 0,
+                "Plate 3 module": 0,
+                "Plate 4 module": 0,
+                "Plate 6 module": 0,
+                "Plate 8 module": 0,
+                "Plate 12 module": 0,
+                "Plate 16 module": 0,
+                "Plate 18 module": 0,
+                "Indicator": 0,
+                "Fuse": 0,
+                "Gujja Packet": 0,
+                "35/8 Packet": 0,
+                "0.4 washer": 0,
+                "2 pole mcb box": 0,
+                "4 pole mcb box": 0,
+                "6 pole mcb box": 0,
+                "8 pole mcb box": 0,
+                "10 pole mcb box": 0,
+                "12 pole mcb box": 0,
+                "14 pole mcb box": 0,
+                "16 pole mcb box": 0,
+                "18 pole mcb box": 0,
+                "20 pole mcb box": 0,
+                "22 pole mcb box": 0,
+                "24 pole mcb box": 0
+            };
+            // ================= GENERATE BILL =================
+
+            function generateBill(){
+
+    // ================= RESET =================
+
+    for(let key in MATERIALS){
+
+        MATERIALS[key] = 0;
+    }
+
+    let totalPole = 0;
+
+    // ================= ALL ROOMS =================
+
+    const rooms =
+        document.querySelectorAll(".room-card");
+
+    rooms.forEach(room => {
+
+        const roomType =
+            room.querySelector(".room-type").value;
+
+        const inputs =
+            room.querySelectorAll("input");
+
+        inputs.forEach(input => {
+
+            const qty =
+                parseInt(input.value) || 0;
+
+            const item =
+                input.dataset.item;
+
+            // ================= BEDROOM / HALL =================
+
+            if(
+                roomType === "Bedroom" ||
+                roomType === "Hall"
+            ){
+
+                // LED BULB
+
+                if(item === "Led bulb"){
+
+                    MATERIALS["angle holder"] += qty;
+                    MATERIALS["Junction box"] += qty;
+                    MATERIALS["gujja"] += qty;
+                    MATERIALS["kala patch 1inch"] += qty;
+                    MATERIALS["6amp switch"] += qty;
+                }
+
+                // FAN
+
+                if(item === "Fan"){
+
+                    MATERIALS["celling rose"] += qty;
+                    MATERIALS["Junction box"] += qty;
+                    MATERIALS["gujja"] += qty;
+                    MATERIALS["kala patch 1inch"] += qty;
+
+                    MATERIALS["6amp switch"] += qty;
+
+                    MATERIALS["regulator"] += qty;
+                }
+
+                // AC
+
+                if(item === "AC"){
+
+                    MATERIALS["2 module (board+plate)"] += qty;
+
+                    MATERIALS["32amp dp switch"] += qty;
+                }
+
+            }
+
+            // ================= KITCHEN =================
+
+            if(roomType === "Kitchen"){
+
+                if(item === "Fridge board"){
+
+                    MATERIALS["3 module (board+plate)"] += qty;
+
+                    MATERIALS["16amp switch"] += qty;
+
+                    MATERIALS["16amp Socket"] += qty;
+                }
+
+            }
+
+            // ================= BATHROOM =================
+
+            if(roomType === "Bathroom"){
+
+                if(item === "Geyser board"){
+
+                    MATERIALS["2 module (board+plate)"] += qty;
+
+                    MATERIALS["16amp switch"] += qty;
+
+                    MATERIALS["16amp Socket"] += qty;
+                }
+
+            }
+
+            // ================= MCB =================
+
+            if(roomType === "MCB"){
+
+                if(item === "Isolater"){
+
+                    totalPole += qty * 2;
+
+                    MATERIALS["Isolater"] =
+                        (MATERIALS["Isolater"] || 0)
+                        + qty;
+                }
+
+                if(item === "30ma RCCB"){
+
+                    totalPole += qty * 2;
+                }
+
+                if(item.includes("mcb")){
+
+                    totalPole += qty;
+                }
+
+            }
+
+        });
+
+    });
+
+    // ================= AUTO WASHER =================
+
+    MATERIALS["0.4 washer"] =
+        MATERIALS["kala patch 1inch"];
+
+    // ================= GUJJA PACKET =================
+
+    if(MATERIALS["gujja"] > 0){
+
+        MATERIALS["Gujja Packet"] =
+            Math.ceil(
+                MATERIALS["gujja"] / 40
+            );
+    }
+
+    // ================= 35/8 PACKET =================
+
+    if(MATERIALS["35/8 skew"] > 0){
+
+        MATERIALS["35/8 Packet"] =
+            Math.ceil(
+                MATERIALS["35/8 skew"] / 70
+            );
+    }
+
+    // ================= AUTO MCB BOX =================
+
+    selectMCBBox(totalPole);
+
+    // ================= SHOW BILL =================
+
+    showBill(MATERIALS);
+}
+
+            // ================= AUTO MODULE PLATE =================
+
+            function selectPlate(moduleNeed) {
+
+                const plates = [1, 2, 3, 4, 6, 8, 12, 16, 18];
+
+                for (let size of plates) {
+
+                    if (moduleNeed <= size) {
+
+                        MATERIALS[`Plate ${size} module`]++;
+
+                        let empty = size - moduleNeed;
+
+                        MATERIALS['blanker'] += empty;
+
+                        break;
+                    }
+                }
+            }
+
+
+            function selectMCBBox(totalPole) {
+
+                // 1 extra pole automatic
+                totalPole += 1;
+
+                // Available box sizes
+                const boxes = [
+                    2, 4, 6, 8, 10, 12,
+                    14, 16, 18, 20, 22, 24
+                ];
+
+                // Reset old boxes
+                boxes.forEach(size => {
+
+                    MATERIALS[
+                        `${size} pole mcb box`
+                    ] = 0;
+
+                });
+
+                // Best matching box
+                for (let size of boxes) {
+
+                    if (totalPole <= size) {
+
+                        MATERIALS[
+                            `${size} pole mcb box`
+                        ] = 1;
+
+                        break;
+                    }
+                }
+            }
+            // ================= SHOW BILL =================
+
+            function showBill(materials) {
+
+                let html = `
+    <div id="billModal" style="
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.8);
+        overflow:auto;
+        z-index:9999;
+        padding:20px;
+    ">
+
+    <div style="
+        max-width:900px;
+        margin:auto;
+        background:#111;
+        border:2px solid #FFD700;
+        border-radius:20px;
+        padding:25px;
+    ">
+
+    <h1 style="text-align:center;color:#FFD700;">SM Technician Material List</h1>
+
+    <table style="width:100%;margin-top:20px;border-collapse:collapse;">
+
+    <tr>
+        <th style="border:1px solid #444;padding:10px;">Material</th>
+        <th style="border:1px solid #444;padding:10px;">Quantity</th>
+    </tr>
+    `;
+
+                Object.keys(materials).forEach(item => {
+
+                    if (materials[item] > 0) {
+
+                        html += `
+            <tr>
+                <td style="border:1px solid #444;padding:10px;">${item}</td>
+                <td style="border:1px solid #444;padding:10px;text-align:center;">
+
+<input
+type="number"
+value="${materials[item]}"
+style="
+width:80px;
+padding:6px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:6px;
+text-align:center;
+font-size:16px;
+">
+
+</td>
+            </tr>
+            `;
+                    }
+                });
+
+                // ================= WIRE SECTION =================
+
+                html += `
+
+    <tr>
+        <td colspan="2" style="padding:15px;background:#222;color:#FFD700;font-size:20px;">
+            Wire Section
+        </td>
+    </tr>
+
+   <tr>
+<td>4mm wire</td>
+
+<td>
+
+<select style="
+padding:6px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+<option>Red🟥 & Black⬛</option>
+<option>Black⬛ & Yellow🟨</option>
+<option>Blue🟦 & Red🟥</option>
+<option>Yellow🟨 & Blue🟦</option>
+<option>Red🟥</option>
+<option>Black⬛</option>
+<option>Yellow🟨</option>
+<option>Blue🟦</option>
+<option>Green🟩</option>
+
+</select>
+
+<input
+type="number"
+placeholder="Qty"
+style="
+width:90px;
+padding:6px;
+margin-left:8px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+</td>
+</tr>
+
+
+<tr>
+<td>2.5mm wire</td>
+
+<td>
+
+<select style="
+padding:6px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+<option>Red🟥 & Black⬛</option>
+<option>Black⬛ & Yellow🟨</option>
+<option>Blue🟦 & Red🟥</option>
+<option>Yellow🟨 & Blue🟦</option>
+<option>Red🟥</option>
+<option>Black⬛</option>
+<option>Yellow🟨</option>
+<option>Blue🟦</option>
+<option>Green🟩</option>
+
+</select>
+
+<input
+type="number"
+placeholder="Qty"
+style="
+width:90px;
+padding:6px;
+margin-left:8px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+</td>
+</tr>
+
+
+<tr>
+<td>1.5mm wire</td>
+
+<td>
+
+<select style="
+padding:6px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+<option>Red🟥 & Black⬛</option>
+<option>Black⬛ & Yellow🟨</option>
+<option>Blue🟦 & Red🟥</option>
+<option>Yellow🟨 & Blue🟦</option>
+<option>Red🟥</option>
+<option>Black⬛</option>
+<option>Yellow🟨</option>
+<option>Blue🟦</option>
+<option>Green🟩</option>
+
+</select>
+
+<input
+type="number"
+placeholder="Qty"
+style="
+width:90px;
+padding:6px;
+margin-left:8px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+</td>
+</tr>
+
+
+<tr>
+<td>1mm wire</td>
+
+<td>
+
+<select style="
+padding:6px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+<option>Red🟥 & Black⬛</option>
+<option>Black⬛ & Yellow🟨</option>
+<option>Blue🟦 & Red🟥</option>
+<option>Yellow🟨 & Blue🟦</option>
+<option>Red🟥</option>
+<option>Black⬛</option>
+<option>Yellow🟨</option>
+<option>Blue🟦</option>
+<option>Green🟩</option>
+
+</select>
+
+<input
+type="number"
+placeholder="Qty"
+style="
+width:90px;
+padding:6px;
+margin-left:8px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+</td>
+</tr>
+
+
+<tr>
+<td>0.5mm wire</td>
+
+<td>
+
+<select style="
+padding:6px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+<option>Red🟥 & Black⬛</option>
+<option>Black⬛ & Yellow🟨</option>
+<option>Blue🟦 & Red🟥</option>
+<option>Yellow🟨 & Blue🟦</option>
+<option>Red🟥</option>
+<option>Black⬛</option>
+<option>Yellow🟨</option>
+<option>Blue🟦</option>
+<option>Green🟩</option>
+
+</select>
+
+<input
+type="number"
+placeholder="Qty"
+style="
+width:90px;
+padding:6px;
+margin-left:8px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2" style="
+padding:15px;
+background:#222;
+color:#FFD700;
+font-size:20px;
+">
+Extra Materials
+</td>
+</tr>
+
+
+<tr>
+<td>Flexible Pipe</td>
+
+<td>
+
+<input
+type="number"
+placeholder="Quantity"
+value="0"
+style="
+width:120px;
+padding:6px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+</td>
+</tr>
+
+
+<tr>
+<td>Tap</td>
+
+<td>
+
+<input
+type="number"
+placeholder="Quantity"
+value="0"
+style="
+width:120px;
+padding:6px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+</td>
+</tr>
+
+
+<tr>
+<td>Kala Patch 1inch</td>
+
+<td>
+
+<input
+type="number"
+placeholder="Quantity"
+value="0"
+style="
+width:120px;
+padding:6px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+</td>
+</tr>
+
+
+<tr>
+<td>Kala Patch 2inch</td>
+
+<td>
+
+<input
+type="number"
+placeholder="Quantity"
+value="0"
+style="
+width:120px;
+padding:6px;
+background:#222;
+color:white;
+border:1px solid #555;
+border-radius:5px;
+">
+
+</td>
+</tr>
+
+    `;
+                html += `
+    </table>
+
+    <div style="text-align:center;margin-top:25px;">
+
+    <button onclick="downloadPDF()" style="
+        background:#FFD700;
+        color:#111;
+        border:none;
+        padding:15px 30px;
+        border-radius:10px;
+        font-size:18px;
+        font-weight:bold;
+        cursor:pointer;
+    ">
+        Download PDF
+    </button>
+
+    <button onclick="closeBillModal()" style="
+        background:red;
+        color:white;
+        border:none;
+        padding:15px 30px;
+        border-radius:10px;
+        font-size:18px;
+        font-weight:bold;
+        cursor:pointer;
+        margin-left:10px;
+    ">
+        Close
+    </button>
+
+    </div>
+
+    </div>
+    </div>
+    `;
+
+                document.body.insertAdjacentHTML('beforeend', html);
+            }
+
+            // ================= CLOSE MODAL =================
+
+            function closeBillModal() {
+
+                const modal = document.getElementById('billModal');
+
+                if (modal) {
+                    modal.remove();
+                }
+            }
+            // ================= PDF DOWNLOAD =================
+
+            function downloadPDF() {
+
+                const { jsPDF } = window.jspdf;
+
+                const pdf = new jsPDF();
+
+                // ================= TITLE =================
+
+                // ================= LOGO =================
+
+                try {
+
+                    pdf.addImage(
+                        document.querySelector(".header-logo"),
+                        "PNG",
+                        14,
+                        8,
+                        24,
+                        24
+                    );
+
+                } catch (err) {
+
+                    console.log("Logo not found");
+
+                }
+
+                // ================= COMPANY NAME =================
+
+                pdf.setFontSize(22);
+
+                pdf.setTextColor(255, 140, 0);
+
+                pdf.text(
+                    "SM Technician",
+                    45,
+                    18
+                );
+
+                // ================= MOBILE =================
+
+                pdf.setFontSize(12);
+
+                pdf.setTextColor(80);
+
+                pdf.text(
+                    "8935883863",
+                    45,
+                    26
+                );
+
+                // ================= TITLE =================
+
+                pdf.setFontSize(16);
+
+                pdf.setTextColor(0);
+
+                pdf.text(
+                    "Electrical Material Estimate",
+                    14,
+                    42
+                );
+
+                // ================= CUSTOMER INFO =================
+
+                const customer = document.getElementById('custName').value || '-';
+
+                const address = document.getElementById('custAddress').value || '-';
+
+                const phone = document.getElementById('phone').value || '-';
+
+                pdf.setFontSize(12);
+
+                pdf.text(`Customer : ${customer}`, 14, 35);
+
+                pdf.text(`Address : ${address}`, 14, 43);
+
+                pdf.text(`Phone : ${phone}`, 14, 51);
+
+                // ================= TABLE DATA =================
+
+                const rows = [];
+
+                const tableRows = document.querySelectorAll('#billModal table tr');
+
+                tableRows.forEach((row, index) => {
+
+                    if (index === 0) return;
+
+                    const cols = row.querySelectorAll('td');
+
+                    if (cols.length >= 2) {
+
+                        const material = cols[0].innerText.trim();
+
+                        let qty = '';
+
+                        const input = cols[1].querySelector('input');
+
+                        if (input) {
+
+                            qty = input.value;
+                        }
+                        else {
+
+                            qty = cols[1].innerText.trim();
+                        }
+
+                        rows.push([material, qty]);
+                    }
+                });
+
+                // ================= PDF TABLE =================
+
+                pdf.autoTable({
+
+                    startY: 72,
+
+                    head: [['Material', 'Quantity']],
+
+                    body: rows,
+
+                    theme: 'grid',
+
+                    styles: {
+                        fontSize: 11
+                    },
+
+                    headStyles: {
+                        fillColor: [255, 215, 0]
+                    }
+                });
+
+
+                // ================= FOOTER =================
+
+                const pageHeight =
+                    pdf.internal.pageSize.height;
+
+                pdf.setFontSize(10);
+
+                pdf.setTextColor(120);
+
+                pdf.text(
+                    "SM Technician • 8935883863",
+                    14,
+                    pageHeight - 10
+                );
+
+                // ================= SAVE PDF =================
+
+                pdf.save('SM-Technician-Material-List.pdf');
+            }
+
+            // ================= BUTTON CONNECT =================
+
+            document.getElementById('generateBillBtn').onclick = generateBill;
+
+            renderRoomFields(
+                document.querySelector(".room-card")
+            );
+
+
+            function renderRoomFields(roomCard) {
+
+                // Room type ka naam lena
+                const type =
+                    roomCard.querySelector(".room-type").value;
+
+                // Grid area lena
+                const grid =
+                    roomCard.querySelector(".dynamic-room-fields");
+
+                // Template items lena
+                const items =
+                    ROOM_TEMPLATES[type];
+
+                // Empty html
+                let html = "";
+
+                // Sab item banana
+                items.forEach(item => {
+
+                    html += `
+
+        <div class="room-field">
+
+            <label>${item}</label>
+
+            <input
+                type="number"
+                value="0"
+                data-item="${item}"
+            >
+
+        </div>
+
+        `;
+                });
+
+                // Agar MCB select hua
+                if (type === "MCB") {
+
+                    html += `
+
+        <div class="room-field">
+
+            <label>MCB Volt</label>
+
+            <select class="mcb-volt" style="
+                width:100%;
+                padding:14px;
+                border-radius:14px;
+                background:#111;
+                color:white;
+                border:1px solid #444;
+                font-size:16px;
+            ">
+
+                <option>40A</option>
+                <option>63A</option>
+
+            </select>
+
+        </div>
+
+        `;
+                }
+
+                // HTML show karna
+                grid.innerHTML = html;
+            }
+
+
+            function updateRoomTitle(selectEl) {
+
+                const roomCard =
+                    selectEl.closest(".room-card");
+
+                renderRoomFields(roomCard);
+
+                updateRoomNumbers();
+            }
+
+
+            document.addEventListener("focusin", function (e) {
+
+                if (
+                    e.target.tagName === "INPUT" &&
+                    e.target.type === "number"
+                ) {
+
+                    if (e.target.value === "0") {
+                        e.target.value = "";
+                    }
+
+                }
+
+            });
+
+            document.addEventListener("focusout", function (e) {
+
+                if (
+                    e.target.tagName === "INPUT" &&
+                    e.target.type === "number"
+                ) {
+
+                    if (e.target.value.trim() === "") {
+                        e.target.value = "0";
+                    }
+
+                }
+
+            });
+
+
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+        <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+
+
+
+</body>
+
+</html>
