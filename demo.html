@@ -470,9 +470,8 @@
                             <option>Kitchen</option>
                             <option>Hall</option>
                             <option>Bathroom</option>
-                            <option>Balcony</option>
-                            <option>Office</option>
-                            <option>Custom Room</option>
+                            <option>Normal room</option>
+                            <option>MCB</option>
                         </select>
 
                         <h2>Bedroom 1</h2>
@@ -903,173 +902,173 @@ cursor:pointer;
             };
             // ================= GENERATE BILL =================
 
-            function generateBill(){
+            function generateBill() {
 
-    // ================= RESET =================
+                // ================= RESET =================
 
-    for(let key in MATERIALS){
+                for (let key in MATERIALS) {
 
-        MATERIALS[key] = 0;
-    }
-
-    let totalPole = 0;
-
-    // ================= ALL ROOMS =================
-
-    const rooms =
-        document.querySelectorAll(".room-card");
-
-    rooms.forEach(room => {
-
-        const roomType =
-            room.querySelector(".room-type").value;
-
-        const inputs =
-            room.querySelectorAll("input");
-
-        inputs.forEach(input => {
-
-            const qty =
-                parseInt(input.value) || 0;
-
-            const item =
-                input.dataset.item;
-
-            // ================= BEDROOM / HALL =================
-
-            if(
-                roomType === "Bedroom" ||
-                roomType === "Hall"
-            ){
-
-                // LED BULB
-
-                if(item === "Led bulb"){
-
-                    MATERIALS["angle holder"] += qty;
-                    MATERIALS["Junction box"] += qty;
-                    MATERIALS["gujja"] += qty;
-                    MATERIALS["kala patch 1inch"] += qty;
-                    MATERIALS["6amp switch"] += qty;
+                    MATERIALS[key] = 0;
                 }
 
-                // FAN
+                let totalPole = 0;
 
-                if(item === "Fan"){
+                // ================= ALL ROOMS =================
 
-                    MATERIALS["celling rose"] += qty;
-                    MATERIALS["Junction box"] += qty;
-                    MATERIALS["gujja"] += qty;
-                    MATERIALS["kala patch 1inch"] += qty;
+                const rooms =
+                    document.querySelectorAll(".room-card");
 
-                    MATERIALS["6amp switch"] += qty;
+                rooms.forEach(room => {
 
-                    MATERIALS["regulator"] += qty;
+                    const roomType =
+                        room.querySelector(".room-type").value;
+
+                    const inputs =
+                        room.querySelectorAll("input");
+
+                    inputs.forEach(input => {
+
+                        const qty =
+                            parseInt(input.value) || 0;
+
+                        const item =
+                            input.dataset.item;
+
+                        // ================= BEDROOM / HALL =================
+
+                        if (
+                            roomType === "Bedroom" ||
+                            roomType === "Hall"
+                        ) {
+
+                            // LED BULB
+
+                            if (item === "Led bulb") {
+
+                                MATERIALS["angle holder"] += qty;
+                                MATERIALS["Junction box"] += qty;
+                                MATERIALS["gujja"] += qty;
+                                MATERIALS["kala patch 1inch"] += qty;
+                                MATERIALS["6amp switch"] += qty;
+                            }
+
+                            // FAN
+
+                            if (item === "Fan") {
+
+                                MATERIALS["celling rose"] += qty;
+                                MATERIALS["Junction box"] += qty;
+                                MATERIALS["gujja"] += qty;
+                                MATERIALS["kala patch 1inch"] += qty;
+
+                                MATERIALS["6amp switch"] += qty;
+
+                                MATERIALS["regulator"] += qty;
+                            }
+
+                            // AC
+
+                            if (item === "AC") {
+
+                                MATERIALS["2 module (board+plate)"] += qty;
+
+                                MATERIALS["32amp dp switch"] += qty;
+                            }
+
+                        }
+
+                        // ================= KITCHEN =================
+
+                        if (roomType === "Kitchen") {
+
+                            if (item === "Fridge board") {
+
+                                MATERIALS["3 module (board+plate)"] += qty;
+
+                                MATERIALS["16amp switch"] += qty;
+
+                                MATERIALS["16amp Socket"] += qty;
+                            }
+
+                        }
+
+                        // ================= BATHROOM =================
+
+                        if (roomType === "Bathroom") {
+
+                            if (item === "Geyser board") {
+
+                                MATERIALS["2 module (board+plate)"] += qty;
+
+                                MATERIALS["16amp switch"] += qty;
+
+                                MATERIALS["16amp Socket"] += qty;
+                            }
+
+                        }
+
+                        // ================= MCB =================
+
+                        if (roomType === "MCB") {
+
+                            if (item === "Isolater") {
+
+                                totalPole += qty * 2;
+
+                                MATERIALS["Isolater"] =
+                                    (MATERIALS["Isolater"] || 0)
+                                    + qty;
+                            }
+
+                            if (item === "30ma RCCB") {
+
+                                totalPole += qty * 2;
+                            }
+
+                            if (item.includes("mcb")) {
+
+                                totalPole += qty;
+                            }
+
+                        }
+
+                    });
+
+                });
+
+                // ================= AUTO WASHER =================
+
+                MATERIALS["0.4 washer"] =
+                    MATERIALS["kala patch 1inch"];
+
+                // ================= GUJJA PACKET =================
+
+                if (MATERIALS["gujja"] > 0) {
+
+                    MATERIALS["Gujja Packet"] =
+                        Math.ceil(
+                            MATERIALS["gujja"] / 40
+                        );
                 }
 
-                // AC
+                // ================= 35/8 PACKET =================
 
-                if(item === "AC"){
+                if (MATERIALS["35/8 skew"] > 0) {
 
-                    MATERIALS["2 module (board+plate)"] += qty;
-
-                    MATERIALS["32amp dp switch"] += qty;
+                    MATERIALS["35/8 Packet"] =
+                        Math.ceil(
+                            MATERIALS["35/8 skew"] / 70
+                        );
                 }
 
+                // ================= AUTO MCB BOX =================
+
+                selectMCBBox(totalPole);
+
+                // ================= SHOW BILL =================
+
+                showBill(MATERIALS);
             }
-
-            // ================= KITCHEN =================
-
-            if(roomType === "Kitchen"){
-
-                if(item === "Fridge board"){
-
-                    MATERIALS["3 module (board+plate)"] += qty;
-
-                    MATERIALS["16amp switch"] += qty;
-
-                    MATERIALS["16amp Socket"] += qty;
-                }
-
-            }
-
-            // ================= BATHROOM =================
-
-            if(roomType === "Bathroom"){
-
-                if(item === "Geyser board"){
-
-                    MATERIALS["2 module (board+plate)"] += qty;
-
-                    MATERIALS["16amp switch"] += qty;
-
-                    MATERIALS["16amp Socket"] += qty;
-                }
-
-            }
-
-            // ================= MCB =================
-
-            if(roomType === "MCB"){
-
-                if(item === "Isolater"){
-
-                    totalPole += qty * 2;
-
-                    MATERIALS["Isolater"] =
-                        (MATERIALS["Isolater"] || 0)
-                        + qty;
-                }
-
-                if(item === "30ma RCCB"){
-
-                    totalPole += qty * 2;
-                }
-
-                if(item.includes("mcb")){
-
-                    totalPole += qty;
-                }
-
-            }
-
-        });
-
-    });
-
-    // ================= AUTO WASHER =================
-
-    MATERIALS["0.4 washer"] =
-        MATERIALS["kala patch 1inch"];
-
-    // ================= GUJJA PACKET =================
-
-    if(MATERIALS["gujja"] > 0){
-
-        MATERIALS["Gujja Packet"] =
-            Math.ceil(
-                MATERIALS["gujja"] / 40
-            );
-    }
-
-    // ================= 35/8 PACKET =================
-
-    if(MATERIALS["35/8 skew"] > 0){
-
-        MATERIALS["35/8 Packet"] =
-            Math.ceil(
-                MATERIALS["35/8 skew"] / 70
-            );
-    }
-
-    // ================= AUTO MCB BOX =================
-
-    selectMCBBox(totalPole);
-
-    // ================= SHOW BILL =================
-
-    showBill(MATERIALS);
-}
 
             // ================= AUTO MODULE PLATE =================
 
