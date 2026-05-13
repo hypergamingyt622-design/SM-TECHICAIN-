@@ -127,16 +127,26 @@
 
         .room-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
             padding: 20px;
         }
 
-        .room-field {
-            background: #222;
-            border-radius: 14px;
-            padding: 16px;
-        }
+        .room-field{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,215,0,0.15);
+    backdrop-filter:blur(10px);
+    border-radius:18px;
+    padding:14px;
+    transition:0.35s;
+    animation:fadeUp 0.5s ease;
+}
+
+.room-field:hover{
+    transform:translateY(-5px) scale(1.02);
+    border-color:#FFD700;
+    box-shadow:0 10px 25px rgba(255,215,0,0.15);
+}
 
         .room-field label {
             display: block;
@@ -145,15 +155,23 @@
             font-weight: 500;
         }
 
-        .room-field input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #444;
-            background: #111;
-            color: #fff;
-            font-size: 17px;
-        }
+        .room-field input{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:1px solid #444;
+    background:#111;
+    color:#fff;
+    font-size:18px;
+    outline:none;
+    transition:0.3s;
+}
+
+.room-field input:focus{
+    border-color:#FFD700;
+    box-shadow:0 0 15px rgba(255,215,0,0.3);
+    transform:scale(1.03);
+}
 
         .add-room-btn {
             width: calc(100% - 36px);
@@ -189,52 +207,168 @@
         }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .room-header {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
+        @media(max-width:1024px){
 
-            .add-room-btn {
-                font-size: 22px;
-                padding: 18px;
-            }
-        }
+    .room-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
 
-        .top-bar{
-    position:sticky;
-    top:0;
-    z-index:999;
-    background:#111;
-    padding:15px 20px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    border-bottom:2px solid #FFD70055;
 }
 
-.back-btn{
-    background:#FFD700;
-    color:#111;
-    border:none;
-    width:45px;
-    height:45px;
-    border-radius:12px;
-    font-size:24px;
-    font-weight:bold;
-    cursor:pointer;
+@media(max-width:768px){
+
+    .container{
+        margin:0;
+        border-radius:0;
+    }
+
+    .room-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .room-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .room-field{
+        padding:12px;
+    }
+
+    .room-field label{
+        font-size:13px;
+    }
+
+    .room-field input{
+        font-size:16px;
+        padding:12px;
+    }
+
+    .add-room-btn{
+        font-size:20px;
+        padding:16px;
+    }
+
+    #generateBillBtn{
+        width:90%;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .room-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .room-field{
+        border-radius:14px;
+        padding:10px;
+    }
+
+    .room-field input{
+        font-size:15px;
+        padding:10px;
+    }
+
+    .room-header h2{
+        font-size:20px;
+    }
+
+    .top-title{
+        font-size:18px;
+    }
+
+}
+
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: #111;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px solid #FFD70055;
+        }
+
+        .back-btn {
+            background: #FFD700;
+            color: #111;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .top-title {
+            color: #FFD700;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .room-card{
+    animation:cardPop 0.45s ease;
+    transition:0.35s;
+}
+
+.room-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(255,215,0,0.12);
+}
+
+.add-room-btn,
+.delete-room-btn,
+.duplicate-room-btn,
+#generateBillBtn{
     transition:0.3s;
 }
 
-.back-btn:hover{
-    transform:scale(1.05);
+.add-room-btn:hover,
+.delete-room-btn:hover,
+.duplicate-room-btn:hover,
+#generateBillBtn:hover{
+    transform:translateY(-3px) scale(1.04);
+    box-shadow:0 10px 25px rgba(255,215,0,0.25);
 }
 
-.top-title{
-    color:#FFD700;
-    font-size:22px;
-    font-weight:600;
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes cardPop{
+    from{
+        opacity:0;
+        transform:scale(0.9);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.room-field input::-webkit-outer-spin-button,
+.room-field input::-webkit-inner-spin-button{
+    -webkit-appearance:none;
+    margin:0;
 }
     </style>
 
@@ -244,15 +378,15 @@
 
     <div class="top-bar">
 
-    <button class="back-btn" onclick="goBack()">
-        ←
-    </button>
+        <button class="back-btn" onclick="goBack()">
+            ←
+        </button>
 
-    <div class="top-title">
-        SM Technician
+        <div class="top-title">
+            SM Technician
+        </div>
+
     </div>
-
-</div>
 
 
     <!-- Hamburger Icon -->
@@ -319,11 +453,49 @@
             <div class="room-card">
 
                 <div class="room-header">
-                    <h2>Room 1</h2>
+                    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
 
-                    <button class="delete-room-btn" onclick="deleteRoom(this)">
-                        Delete Room
-                    </button>
+                        <select class="room-type" onchange="updateRoomTitle(this)" style="
+        padding:8px 12px;
+        border-radius:10px;
+        border:none;
+        background:#FFD700;
+        color:#111;
+        font-weight:600;
+        font-size:16px;
+    ">
+                            <option>Bedroom</option>
+                            <option>Kitchen</option>
+                            <option>Hall</option>
+                            <option>Bathroom</option>
+                            <option>Balcony</option>
+                            <option>Office</option>
+                            <option>Custom Room</option>
+                        </select>
+
+                        <h2>Bedroom 1</h2>
+
+                    </div>
+
+                    <div style="display:flex; gap:10px;">
+
+                        <button class="duplicate-room-btn" onclick="duplicateRoom(this)" style="
+            background:#22c55e;
+            color:white;
+            border:none;
+            padding:10px 18px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:500;
+        ">
+                            Duplicate
+                        </button>
+
+                        <button class="delete-room-btn" onclick="deleteRoom(this)">
+                            Delete Room
+                        </button>
+
+                    </div>
                 </div>
 
                 <div class="room-grid">
@@ -423,11 +595,11 @@ cursor:pointer;
         <script>
 
 
-function goBack(){
+            function goBack() {
 
-    window.history.back();
+                window.history.back();
 
-}
+            }
 
 
 
@@ -438,19 +610,57 @@ function goBack(){
 
             function addRoom() {
 
-                roomCount++;
+                roomCount = document.querySelectorAll(".room-card").length + 1;
 
                 const roomHTML = `
     
     <div class="room-card">
 
         <div class="room-header">
-            <h2>Room ${roomCount}</h2>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
 
-            <button class="delete-room-btn" onclick="deleteRoom(this)">
-                Delete Room
-            </button>
-        </div>
+    <select class="room-type" onchange="updateRoomTitle(this)" style="
+        padding:8px 12px;
+        border-radius:10px;
+        border:none;
+        background:#FFD700;
+        color:#111;
+        font-weight:600;
+        font-size:16px;
+    ">
+        <option>Bedroom</option>
+        <option>Kitchen</option>
+        <option>Hall</option>
+        <option>Bathroom</option>
+        <option>Balcony</option>
+        <option>Office</option>
+        <option>Custom Room</option>
+    </select>
+
+    <h2>Bedroom ${roomCount}</h2>
+
+</div>
+
+    <div style="display:flex; gap:10px;">
+
+        <button class="duplicate-room-btn" onclick="duplicateRoom(this)" style="
+            background:#22c55e;
+            color:white;
+            border:none;
+            padding:10px 18px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:500;
+        ">
+            Duplicate
+        </button>
+
+        <button class="delete-room-btn" onclick="deleteRoom(this)">
+            Delete Room
+        </button>
+
+    </div>
+</div>
 
         <div class="room-grid">
 
@@ -516,6 +726,35 @@ function goBack(){
             function deleteRoom(btn) {
 
                 btn.closest(".room-card").remove();
+
+                updateRoomNumbers();
+            }
+
+            function updateRoomNumbers() {
+
+                const rooms = document.querySelectorAll(".room-card");
+
+                rooms.forEach((room, index) => {
+
+                    const type = room.querySelector(".room-type").value;
+
+                    room.querySelector("h2").innerText =
+                        `${type} ${index + 1}`;
+                });
+
+                roomCount = rooms.length;
+            }
+
+            function duplicateRoom(btn) {
+
+                const roomCard = btn.closest(".room-card");
+
+                const clone = roomCard.cloneNode(true);
+
+                document.getElementById("roomContainer")
+                    .appendChild(clone);
+
+                updateRoomNumbers();
             }
 
 
@@ -1218,10 +1457,41 @@ border-radius:5px;
 
 
 
+            function updateRoomTitle(selectEl) {
+
+                updateRoomNumbers();
+            }
 
 
+document.addEventListener("focusin", function(e){
 
+    if(
+        e.target.tagName === "INPUT" &&
+        e.target.type === "number"
+    ){
 
+        if(e.target.value === "0"){
+            e.target.value = "";
+        }
+
+    }
+
+});
+
+document.addEventListener("focusout", function(e){
+
+    if(
+        e.target.tagName === "INPUT" &&
+        e.target.type === "number"
+    ){
+
+        if(e.target.value.trim() === ""){
+            e.target.value = "0";
+        }
+
+    }
+
+});
 
 
         </script>
