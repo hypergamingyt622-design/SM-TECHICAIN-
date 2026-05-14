@@ -611,20 +611,28 @@ cursor:pointer;
 
             const ROOM_TEMPLATES = {
 
-                Bedroom: [
+                "Bedroom": [
 
                     "Led bulb",
                     "Night bulb",
                     "Tube light",
                     "Fan",
-                    "2way fan or bulb",
+
+
                     "Tv board",
                     "Power board",
                     "AC",
                     "conceal light",
                     "inverter",
-                    "Patti"
+                    "6A Sockets",
+                    "16A Sockets",
 
+                    "Patti",
+
+
+                    "2way F",
+                    "2way B",
+                    "2way F&B",
                 ],
 
                 "Normal room": [
@@ -633,54 +641,76 @@ cursor:pointer;
                     "Night bulb",
                     "Tube light",
                     "Fan",
+                    "6A Sockets",
+                    "16A Sockets",
+
                     "Power board",
                     "conceal light",
                     "Patti"
-
                 ],
 
-                Hall: [
+                "Hall": [
 
                     "Led bulb",
                     "Night bulb",
                     "Tube light",
                     "Fan",
-                    "2way fan or bulb",
+
+
+
                     "Tv board",
                     "Power board",
                     "AC",
                     "conceal light",
                     "inverter",
-                    "Patti"
 
+                    "Patti",
+
+                    "2way F",
+                    "2way B",
+                    "2way F&B"
                 ],
 
-                Kitchen: [
+
+                "Kitchen": [
 
                     "Led bulb",
                     "Exhaust fan",
+                    "Tube light",
+
+                    "6A Sockets",
+                    "16A Sockets",
+
                     "Induction board",
                     "Fridge board",
                     "Water filter",
+
                     "conceal light",
                     "Patti"
-
                 ],
 
-                Bathroom: [
 
-                    "Led bulb",
+                "Bathroom": [
+
+                    "Led bulb batten",
+                    "Tube light",
                     "Geyser board",
+
                     "conceal light",
                     "Patti"
-
                 ],
 
                 MCB: [
 
-                    "Isolater",
-                    "Mcb Changer",
-                    "30ma RCCB",
+                    "Isolater 40A",
+                    "Isolater 63A",
+
+                    "Mcb Changer 40A",
+                    "Mcb Changer 63A",
+
+                    "30ma RCCB 40A",
+                    "30ma RCCB 63A",
+
                     "6amp mcb",
                     "10amp mcb",
                     "16amp mcb",
@@ -688,7 +718,20 @@ cursor:pointer;
                     "25amp mcb",
                     "32amp mcb",
                     "40amp mcb",
-                    "63amp mcb"
+                    "63amp mcb",
+
+                    "2 way mcb box",
+                    "4 way mcb box",
+                    "6 way mcb box",
+                    "8 way mcb box",
+                    "10 way mcb box",
+                    "12 way mcb box",
+                    "14 way mcb box",
+                    "16 way mcb box",
+                    "18 way mcb box",
+                    "20 way mcb box",
+                    "22 way mcb box",
+                    "24 way mcb box"
 
                 ]
 
@@ -865,6 +908,7 @@ cursor:pointer;
                 "celling rose": 0,
                 "angle holder": 0,
                 "straight holder": 0,
+                "batten holder": 0,
                 "patti": 0,
                 "Flexible pipe": 0,
                 "35/8 skew": 0,
@@ -873,258 +917,358 @@ cursor:pointer;
                 "kala patch 2inch": 0,
                 "Tap": 0,
                 "blanker": 0,
-                "Plate 1 module": 0,
-                "Plate 2 module": 0,
-                "Plate 3 module": 0,
-                "Plate 4 module": 0,
-                "Plate 6 module": 0,
-                "Plate 8 module": 0,
-                "Plate 12 module": 0,
-                "Plate 16 module": 0,
-                "Plate 18 module": 0,
+                "1 module (board+plate)": 0,
+                "2 module (board+plate)": 0,
+                "3 module (board+plate)": 0,
+                "4 module (board+plate)": 0,
+                "6 module (board+plate)": 0,
+                "8 module (board+plate)": 0,
+                "12 module (board+plate)": 0,
+                "16 module (board+plate)": 0,
+                "18 module (board+plate)": 0,
                 "Indicator": 0,
                 "Fuse": 0,
                 "Gujja Packet": 0,
                 "35/8 Packet": 0,
                 "0.4 washer": 0,
-                "2 pole mcb box": 0,
-                "4 pole mcb box": 0,
-                "6 pole mcb box": 0,
-                "8 pole mcb box": 0,
-                "10 pole mcb box": 0,
-                "12 pole mcb box": 0,
-                "14 pole mcb box": 0,
-                "16 pole mcb box": 0,
-                "18 pole mcb box": 0,
-                "20 pole mcb box": 0,
-                "22 pole mcb box": 0,
-                "24 pole mcb box": 0
+                "2 way mcb box": 0,
+                "4 way mcb box": 0,
+                "6 way mcb box": 0,
+                "8 way mcb box": 0,
+                "10 way mcb box": 0,
+                "12 way mcb box": 0,
+                "14 way mcb box": 0,
+                "16 way mcb box": 0,
+                "18 way mcb box": 0,
+                "20 way mcb box": 0,
+                "22 way mcb box": 0,
+                "24 way mcb box": 0,
+                "Isolater 40A": 0,
+                "Isolater 63A": 0,
+
+                "Mcb Changer 40A": 0,
+                "Mcb Changer 63A": 0,
+
+                "30ma RCCB 40A": 0,
+                "30ma RCCB 63A": 0,
+
+                "6amp mcb": 0,
+                "10amp mcb": 0,
+                "16amp mcb": 0,
+                "20amp mcb": 0,
+                "25amp mcb": 0,
+                "32amp mcb": 0,
+                "40amp mcb": 0,
+                "63amp mcb": 0,
+                '1.5"kala patch': 0,
+                "32amp dp switch": 0,
+                "conceal light": 0,
+                "Led bulb": 0,
+                "Night bulb": 0,
+                "Tube light": 0,
+                "Fan": 0,
+                "Fuse": 0,
+                "Indicator": 0,
+                "0.4 washer": 0,
+                "Gujja Packet": 0,
+                "35/8 Packet": 0,
+                "6A Sockets": 0,
+                "16A Sockets": 0,
+                "batten holder": 0,
+                '1.5"kala patch': 0,
+                "32amp dp switch": 0,
+                "conceal light": 0,
+                "Led bulb": 0,
+                "Night bulb": 0,
+                "Tube light": 0,
+                "Fan": 0,
             };
+
+
             // ================= GENERATE BILL =================
 
-            function generateBill() {
-
-                // ================= RESET =================
-
-                for (let key in MATERIALS) {
-
-                    MATERIALS[key] = 0;
-                }
-
-                let totalPole = 0;
-
-                // ================= ALL ROOMS =================
-
-                const rooms =
-                    document.querySelectorAll(".room-card");
-
-                rooms.forEach(room => {
-
-                    const roomType =
-                        room.querySelector(".room-type").value;
-
-                    const inputs =
-                        room.querySelectorAll("input");
-
-                    inputs.forEach(input => {
-
-                        const qty =
-                            parseInt(input.value) || 0;
-
-                        const item =
-                            input.dataset.item;
-
-                        // ================= BEDROOM / HALL =================
-
-                        if (
-                            roomType === "Bedroom" ||
-                            roomType === "Hall"
-                        ) {
-
-                            // LED BULB
-
-                            if (item === "Led bulb") {
-
-                                MATERIALS["angle holder"] += qty;
-                                MATERIALS["Junction box"] += qty;
-                                MATERIALS["gujja"] += qty;
-                                MATERIALS["kala patch 1inch"] += qty;
-                                MATERIALS["6amp switch"] += qty;
-                            }
-
-                            // FAN
-
-                            if (item === "Fan") {
-
-                                MATERIALS["celling rose"] += qty;
-                                MATERIALS["Junction box"] += qty;
-                                MATERIALS["gujja"] += qty;
-                                MATERIALS["kala patch 1inch"] += qty;
-
-                                MATERIALS["6amp switch"] += qty;
-
-                                MATERIALS["regulator"] += qty;
-                            }
-
-                            // AC
-
-                            if (item === "AC") {
-
-                                MATERIALS["2 module (board+plate)"] += qty;
-
-                                MATERIALS["32amp dp switch"] += qty;
-                            }
-
-                        }
-
-                        // ================= KITCHEN =================
-
-                        if (roomType === "Kitchen") {
-
-                            if (item === "Fridge board") {
-
-                                MATERIALS["3 module (board+plate)"] += qty;
-
-                                MATERIALS["16amp switch"] += qty;
-
-                                MATERIALS["16amp Socket"] += qty;
-                            }
-
-                        }
-
-                        // ================= BATHROOM =================
-
-                        if (roomType === "Bathroom") {
-
-                            if (item === "Geyser board") {
-
-                                MATERIALS["2 module (board+plate)"] += qty;
-
-                                MATERIALS["16amp switch"] += qty;
-
-                                MATERIALS["16amp Socket"] += qty;
-                            }
-
-                        }
-
-                        // ================= MCB =================
-
-                        if (roomType === "MCB") {
-
-                            if (item === "Isolater") {
-
-                                totalPole += qty * 2;
-
-                                MATERIALS["Isolater"] =
-                                    (MATERIALS["Isolater"] || 0)
-                                    + qty;
-                            }
-
-                            if (item === "30ma RCCB") {
-
-                                totalPole += qty * 2;
-                            }
-
-                            if (item.includes("mcb")) {
-
-                                totalPole += qty;
-                            }
-
-                        }
-
-                    });
-
-                });
-
-                // ================= AUTO WASHER =================
-
-                MATERIALS["0.4 washer"] =
-                    MATERIALS["kala patch 1inch"];
-
-                // ================= GUJJA PACKET =================
-
-                if (MATERIALS["gujja"] > 0) {
-
-                    MATERIALS["Gujja Packet"] =
-                        Math.ceil(
-                            MATERIALS["gujja"] / 40
-                        );
-                }
-
-                // ================= 35/8 PACKET =================
-
-                if (MATERIALS["35/8 skew"] > 0) {
-
-                    MATERIALS["35/8 Packet"] =
-                        Math.ceil(
-                            MATERIALS["35/8 skew"] / 70
-                        );
-                }
-
-                // ================= AUTO MCB BOX =================
-
-                selectMCBBox(totalPole);
-
-                // ================= SHOW BILL =================
-
-                showBill(MATERIALS);
+         // ================= GENERATE BILL =================
+function generateBill() {
+
+    // RESET ALL MATERIALS
+    for (let key in MATERIALS) {
+        MATERIALS[key] = 0;
+    }
+
+    const rooms = document.querySelectorAll(".room-card");
+
+    rooms.forEach(room => {
+        const roomType = room.querySelector(".room-type").value;
+        const inputs = room.querySelectorAll("input");
+
+        let roomModule = 0;
+        let hasAnyItem = false;
+
+        // Check if room has any items
+        inputs.forEach(input => {
+            if (parseInt(input.value) > 0) hasAnyItem = true;
+        });
+
+        // ================= FUSE + INDICATOR (Same Board) =================
+        if (roomType !== "MCB" && hasAnyItem) {
+            MATERIALS["Fuse"] += 1;
+            MATERIALS["Indicator"] += 1;
+            roomModule += 2;        // 2 modules in same board
+        }
+
+        // Process all items
+        inputs.forEach(input => {
+            const qty = parseInt(input.value) || 0;
+            const item = input.dataset.item;
+            if (!qty) return;
+
+            // ================= ITEM CALCULATIONS =================
+
+            if (item === "Led bulb" || item === "Night bulb") {
+                MATERIALS[item] += qty;
+                MATERIALS["angle holder"] += qty;
+                MATERIALS["Junction box"] += qty;
+                MATERIALS["gujja"] += qty;
+                MATERIALS['1.5"kala patch'] += qty;
+                MATERIALS["6amp switch"] += qty;
+                roomModule += qty * 1;
             }
+
+            if (item === "Tube light") {
+                MATERIALS["Tube light"] += qty;
+                MATERIALS["celling rose"] += qty;
+                MATERIALS["Junction box"] += qty;
+                MATERIALS["gujja"] += qty;
+                MATERIALS['1.5"kala patch'] += qty;
+                MATERIALS["6amp switch"] += qty;
+                roomModule += qty * 1;
+            }
+
+            if (item === "conceal light") {
+                MATERIALS["conceal light"] += qty;
+                MATERIALS["6amp switch"] += qty;
+                roomModule += qty * 1;
+            }
+
+            if (item === "Fan") {
+                MATERIALS["Fan"] += qty;
+                MATERIALS["celling rose"] += qty;
+                MATERIALS["Junction box"] += qty;
+                MATERIALS["gujja"] += qty;
+                MATERIALS['1.5"kala patch'] += qty;
+                MATERIALS["6amp switch"] += qty;
+                MATERIALS["regulator"] += qty;
+                roomModule += qty * 2;
+            }
+
+            if (item === "Exhaust fan") {
+                MATERIALS["celling rose"] += qty;
+                MATERIALS["Junction box"] += qty;
+                MATERIALS["gujja"] += qty;
+                MATERIALS['1.5"kala patch'] += qty;
+                MATERIALS["6amp switch"] += qty;
+                roomModule += qty * 1;
+            }
+
+            if (item === "Tv board") {
+                MATERIALS["6amp Socket"] += qty * 3;
+                MATERIALS["6amp switch"] += qty * 3;
+                MATERIALS["gujja"] += qty * 8;
+                MATERIALS['1.5"kala patch'] += qty * 8;
+                MATERIALS["6 module (board+plate)"] += qty;
+                MATERIALS["3 module (board+plate)"] += qty;
+                roomModule += qty * 9;
+            }
+
+            if (item === "Power board") {
+                MATERIALS["16amp switch"] += qty;
+                MATERIALS["16amp Socket"] += qty;
+                MATERIALS["gujja"] += qty * 8;
+                MATERIALS['1.5"kala patch'] += qty * 8;
+                MATERIALS["3 module (board+plate)"] += qty;
+                roomModule += qty * 3;
+            }
+
+            if (item === "AC") {
+                MATERIALS["32amp dp switch"] += qty;
+                MATERIALS["16amp Socket"] += qty;
+                MATERIALS["gujja"] += qty * 4;
+                MATERIALS['1.5"kala patch'] += qty * 4;
+                roomModule += qty * 2;
+            }
+
+            if (item === "inverter") {
+                MATERIALS["16amp switch"] += qty * 2;
+                MATERIALS["16amp Socket"] += qty * 2;
+                MATERIALS["6amp Socket"] += qty;
+                MATERIALS["gujja"] += qty * 4;
+                MATERIALS['1.5"kala patch'] += qty * 4;
+                roomModule += qty * 6;
+            }
+
+            if (item === "Patti") {
+                MATERIALS["patti"] += qty;
+                MATERIALS["35/8 skew"] += qty * 7;
+                MATERIALS["gujja"] += qty * 7;
+                MATERIALS["0.4 washer"] += qty * 7;
+            }
+
+            if (item === "Induction board") {
+                MATERIALS["16amp switch"] += qty * 2;
+                MATERIALS["16amp Socket"] += qty * 2;
+                MATERIALS["gujja"] += qty * 4;
+                MATERIALS['1.5"kala patch'] += qty * 4;
+                MATERIALS["6 module (board+plate)"] += qty;
+                roomModule += qty * 6;
+            }
+
+            if (item === "Fridge board") {
+                MATERIALS["16amp switch"] += qty;
+                MATERIALS["16amp Socket"] += qty;
+                MATERIALS["gujja"] += qty * 4;
+                MATERIALS['1.5"kala patch'] += qty * 4;
+                MATERIALS["3 module (board+plate)"] += qty;
+                roomModule += qty * 3;
+            }
+
+            if (item === "Water filter") {
+                MATERIALS["6amp switch"] += qty;
+                MATERIALS["6amp Socket"] += qty;
+                MATERIALS["gujja"] += qty * 4;
+                MATERIALS['1.5"kala patch'] += qty * 4;
+                MATERIALS["2 module (board+plate)"] += qty;
+                roomModule += qty * 2;
+            }
+
+            if (item === "Geyser board") {
+                MATERIALS["16amp switch"] += qty;
+                MATERIALS["16amp Socket"] += qty;
+                MATERIALS["gujja"] += qty * 4;
+                MATERIALS['1.5"kala patch'] += qty * 4;
+                MATERIALS["2 module (board+plate)"] += qty;
+                roomModule += qty * 2;
+            }
+
+            if (item === "Led bulb batten") {
+                MATERIALS["Led bulb"] += qty;
+                MATERIALS["batten holder"] += qty;
+                MATERIALS["Junction box"] += qty;
+                MATERIALS["gujja"] += qty;
+                MATERIALS['1.5"kala patch'] += qty;
+                MATERIALS["6amp switch"] += qty;
+                roomModule += qty * 1;
+            }
+
+            if (item === "2way F") {
+                MATERIALS["two way switch"] += qty * 2;
+                MATERIALS["6amp switch"] += qty;
+                MATERIALS["6amp Socket"] += qty;
+                MATERIALS["regulator"] += qty;
+                MATERIALS["gujja"] += qty * 4;
+                MATERIALS['1.5"kala patch'] += qty * 4;
+                roomModule += qty * 4;
+            }
+
+            if (item === "2way B") {
+                MATERIALS["two way switch"] += qty * 2;
+                MATERIALS["6amp switch"] += qty;
+                MATERIALS["6amp Socket"] += qty;
+                MATERIALS["gujja"] += qty * 4;
+                MATERIALS['1.5"kala patch'] += qty * 4;
+                roomModule += qty * 3;
+            }
+
+            if (item === "2way F&B") {
+                MATERIALS["two way switch"] += qty * 4;
+                MATERIALS["6amp switch"] += qty;
+                MATERIALS["6amp Socket"] += qty;
+                MATERIALS["regulator"] += qty;
+                MATERIALS["gujja"] += qty * 4;
+                MATERIALS['1.5"kala patch'] += qty * 4;
+                MATERIALS["blanker"] += qty;
+                roomModule += qty * 6;
+            }
+
+            if (item === "6A Sockets") {
+                MATERIALS["6amp switch"] += qty;
+                MATERIALS["6amp Socket"] += qty;
+                roomModule += qty * 3;
+            }
+
+            if (item === "16A Sockets") {
+                MATERIALS["16amp switch"] += qty;
+                MATERIALS["16amp Socket"] += qty;
+                roomModule += qty * 3;
+            }
+
+            // MCB Section
+            if (roomType === "MCB") {
+                if (item.includes("Isolater") || item.includes("Mcb Changer") || item.includes("RCCB")) {
+                    MATERIALS[item] += qty;
+                }
+                if (["6amp mcb","10amp mcb","16amp mcb","20amp mcb","25amp mcb","32amp mcb","40amp mcb","63amp mcb"].includes(item)) {
+                    MATERIALS[item] += qty;
+                }
+                if (item.includes("way mcb box")) {
+                    MATERIALS[item] += qty;
+                }
+            }
+        });
+
+        // ================= FINAL PLATE SELECTION (One Plate per Room) =================
+        if (roomType !== "MCB" && roomModule > 0) {
+            const plateSize = getPlateSize(roomModule);
+            MATERIALS[`${plateSize} module (board+plate)`] += 1;
+
+            const emptySpace = plateSize - roomModule;
+            MATERIALS["blanker"] += emptySpace + 4;   // Extra 4 blankers
+        }
+    });
+
+    // Final Calculations
+    MATERIALS["0.4 washer"] = MATERIALS["gujja"];           // As per your last version
+    MATERIALS["Gujja Packet"] = Math.ceil(MATERIALS["gujja"] / 40);
+    MATERIALS["35/8 Packet"] = Math.ceil(MATERIALS["35/8 skew"] / 70);
+
+    showBill(MATERIALS);
+}
+
+// Helper Function
+function getPlateSize(moduleCount) {
+    if (moduleCount <= 1) return 1;
+    if (moduleCount <= 2) return 2;
+    if (moduleCount <= 3) return 3;
+    if (moduleCount <= 4) return 4;
+    if (moduleCount <= 6) return 6;
+    if (moduleCount <= 8) return 8;
+    if (moduleCount <= 12) return 12;
+    if (moduleCount <= 16) return 16;
+    return 18;
+}
 
             // ================= AUTO MODULE PLATE =================
 
-            function selectPlate(moduleNeed) {
+            function selectPlate(moduleCount) {
 
-                const plates = [1, 2, 3, 4, 6, 8, 12, 16, 18];
+                let plateSize = 0;
 
-                for (let size of plates) {
+                if (moduleCount <= 1) plateSize = 1;
+                else if (moduleCount <= 2) plateSize = 2;
+                else if (moduleCount <= 3) plateSize = 3;
+                else if (moduleCount <= 4) plateSize = 4;
+                else if (moduleCount <= 6) plateSize = 6;
+                else if (moduleCount <= 8) plateSize = 8;
+                else if (moduleCount <= 12) plateSize = 12;
+                else if (moduleCount <= 16) plateSize = 16;
+                else plateSize = 18;
 
-                    if (moduleNeed <= size) {
+                MATERIALS[`${plateSize} module (board+plate)`] += 1;
 
-                        MATERIALS[`Plate ${size} module`]++;
-
-                        let empty = size - moduleNeed;
-
-                        MATERIALS['blanker'] += empty;
-
-                        break;
-                    }
-                }
+                return plateSize;
             }
 
 
-            function selectMCBBox(totalPole) {
 
-                // 1 extra pole automatic
-                totalPole += 1;
-
-                // Available box sizes
-                const boxes = [
-                    2, 4, 6, 8, 10, 12,
-                    14, 16, 18, 20, 22, 24
-                ];
-
-                // Reset old boxes
-                boxes.forEach(size => {
-
-                    MATERIALS[
-                        `${size} pole mcb box`
-                    ] = 0;
-
-                });
-
-                // Best matching box
-                for (let size of boxes) {
-
-                    if (totalPole <= size) {
-
-                        MATERIALS[
-                            `${size} pole mcb box`
-                        ] = 1;
-
-                        break;
-                    }
-                }
-            }
             // ================= SHOW BILL =================
 
             function showBill(materials) {
@@ -1761,34 +1905,7 @@ border-radius:5px;
         `;
                 });
 
-                // Agar MCB select hua
-                if (type === "MCB") {
 
-                    html += `
-
-        <div class="room-field">
-
-            <label>MCB Volt</label>
-
-            <select class="mcb-volt" style="
-                width:100%;
-                padding:14px;
-                border-radius:14px;
-                background:#111;
-                color:white;
-                border:1px solid #444;
-                font-size:16px;
-            ">
-
-                <option>40A</option>
-                <option>63A</option>
-
-            </select>
-
-        </div>
-
-        `;
-                }
 
                 // HTML show karna
                 grid.innerHTML = html;
