@@ -407,9 +407,6 @@
                 transform: translateX(0);
             }
         }
-
-
-        
     </style>
 
 </head>
@@ -1380,7 +1377,11 @@ cursor:pointer;
                         MATERIALS[`${plateSize} module (board+plate)`] += 1;
 
                         const emptySpace = plateSize - roomModule;
-                        MATERIALS["blanker"] += emptySpace + 4;
+
+                        // Only add actual empty spaces as blankers (remove +4)
+                        if (emptySpace > 0) {
+                            MATERIALS["blanker"] += emptySpace;
+                        }
                     }
                 });
 
