@@ -372,6 +372,41 @@
             -webkit-appearance: none;
             margin: 0;
         }
+
+        /* MODULE ALERT */
+        .module-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff1e1e, #b30000);
+            color: white;
+            padding: 18px 22px;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 600;
+            z-index: 99999;
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+            animation: slideIn 0.4s ease;
+            max-width: 320px;
+            border-left: 5px solid yellow;
+        }
+
+        .module-alert span {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
     </style>
 
 </head>
@@ -613,19 +648,24 @@ cursor:pointer;
 
                 "Bedroom": [
 
+                    "Fuse",
+                    "Indicator",
+
                     "Led bulb",
                     "Night bulb",
                     "Tube light",
                     "Fan",
 
+                    "Exhaust fan",
 
                     "Tv board",
                     "Power board",
                     "AC",
                     "conceal light",
-                    "inverter",
+                    "Inverter",
                     "6A Sockets",
                     "16A Sockets",
+
 
                     "Patti",
 
@@ -636,6 +676,10 @@ cursor:pointer;
                 ],
 
                 "Normal room": [
+
+
+                    "Fuse",
+                    "Indicator",
 
                     "Led bulb",
                     "Night bulb",
@@ -651,10 +695,15 @@ cursor:pointer;
 
                 "Hall": [
 
+                    "Fuse",
+                    "Indicator",
+
                     "Led bulb",
                     "Night bulb",
                     "Tube light",
                     "Fan",
+
+                    "Exhaust fan",
 
 
 
@@ -662,7 +711,7 @@ cursor:pointer;
                     "Power board",
                     "AC",
                     "conceal light",
-                    "inverter",
+                    "Inverter",
 
                     "Patti",
 
@@ -673,6 +722,9 @@ cursor:pointer;
 
 
                 "Kitchen": [
+
+                    "Fuse",
+                    "Indicator",
 
                     "Led bulb",
                     "Exhaust fan",
@@ -691,6 +743,11 @@ cursor:pointer;
 
 
                 "Bathroom": [
+
+                    "Fuse",
+                    "Indicator",
+
+                    "Exhaust fan",
 
                     "Led bulb batten",
                     "Tube light",
@@ -909,10 +966,10 @@ cursor:pointer;
                 "angle holder": 0,
                 "straight holder": 0,
                 "batten holder": 0,
-                "patti": 0,
+                "Patti": 0,
                 "Flexible pipe": 0,
                 "35/8 skew": 0,
-                "gujja": 0,
+                "Gujja": 0,
                 "kala patch 1inch": 0,
                 "kala patch 2inch": 0,
                 "Tap": 0,
@@ -930,7 +987,7 @@ cursor:pointer;
                 "Fuse": 0,
                 "Gujja Packet": 0,
                 "35/8 Packet": 0,
-                "0.4 washer": 0,
+                "0.4 mm washer": 0,
                 "2 way mcb box": 0,
                 "4 way mcb box": 0,
                 "6 way mcb box": 0,
@@ -969,7 +1026,7 @@ cursor:pointer;
                 "Fan": 0,
                 "Fuse": 0,
                 "Indicator": 0,
-                "0.4 washer": 0,
+                "0.4 mm washer": 0,
                 "Gujja Packet": 0,
                 "35/8 Packet": 0,
                 "6A Sockets": 0,
@@ -982,269 +1039,376 @@ cursor:pointer;
                 "Night bulb": 0,
                 "Tube light": 0,
                 "Fan": 0,
+                "6amp top": 0,
+                "16amp top": 0,
             };
 
 
             // ================= GENERATE BILL =================
+            // ================= GENERATE BILL =================
+            function generateBill() {
 
-         // ================= GENERATE BILL =================
-function generateBill() {
-
-    // RESET ALL MATERIALS
-    for (let key in MATERIALS) {
-        MATERIALS[key] = 0;
-    }
-
-    const rooms = document.querySelectorAll(".room-card");
-
-    rooms.forEach(room => {
-        const roomType = room.querySelector(".room-type").value;
-        const inputs = room.querySelectorAll("input");
-
-        let roomModule = 0;
-        let hasAnyItem = false;
-
-        // Check if room has any items
-        inputs.forEach(input => {
-            if (parseInt(input.value) > 0) hasAnyItem = true;
-        });
-
-        // ================= FUSE + INDICATOR (Same Board) =================
-        if (roomType !== "MCB" && hasAnyItem) {
-            MATERIALS["Fuse"] += 1;
-            MATERIALS["Indicator"] += 1;
-            roomModule += 2;        // 2 modules in same board
-        }
-
-        // Process all items
-        inputs.forEach(input => {
-            const qty = parseInt(input.value) || 0;
-            const item = input.dataset.item;
-            if (!qty) return;
-
-            // ================= ITEM CALCULATIONS =================
-
-            if (item === "Led bulb" || item === "Night bulb") {
-                MATERIALS[item] += qty;
-                MATERIALS["angle holder"] += qty;
-                MATERIALS["Junction box"] += qty;
-                MATERIALS["gujja"] += qty;
-                MATERIALS['1.5"kala patch'] += qty;
-                MATERIALS["6amp switch"] += qty;
-                roomModule += qty * 1;
-            }
-
-            if (item === "Tube light") {
-                MATERIALS["Tube light"] += qty;
-                MATERIALS["celling rose"] += qty;
-                MATERIALS["Junction box"] += qty;
-                MATERIALS["gujja"] += qty;
-                MATERIALS['1.5"kala patch'] += qty;
-                MATERIALS["6amp switch"] += qty;
-                roomModule += qty * 1;
-            }
-
-            if (item === "conceal light") {
-                MATERIALS["conceal light"] += qty;
-                MATERIALS["6amp switch"] += qty;
-                roomModule += qty * 1;
-            }
-
-            if (item === "Fan") {
-                MATERIALS["Fan"] += qty;
-                MATERIALS["celling rose"] += qty;
-                MATERIALS["Junction box"] += qty;
-                MATERIALS["gujja"] += qty;
-                MATERIALS['1.5"kala patch'] += qty;
-                MATERIALS["6amp switch"] += qty;
-                MATERIALS["regulator"] += qty;
-                roomModule += qty * 2;
-            }
-
-            if (item === "Exhaust fan") {
-                MATERIALS["celling rose"] += qty;
-                MATERIALS["Junction box"] += qty;
-                MATERIALS["gujja"] += qty;
-                MATERIALS['1.5"kala patch'] += qty;
-                MATERIALS["6amp switch"] += qty;
-                roomModule += qty * 1;
-            }
-
-            if (item === "Tv board") {
-                MATERIALS["6amp Socket"] += qty * 3;
-                MATERIALS["6amp switch"] += qty * 3;
-                MATERIALS["gujja"] += qty * 8;
-                MATERIALS['1.5"kala patch'] += qty * 8;
-                MATERIALS["6 module (board+plate)"] += qty;
-                MATERIALS["3 module (board+plate)"] += qty;
-                roomModule += qty * 9;
-            }
-
-            if (item === "Power board") {
-                MATERIALS["16amp switch"] += qty;
-                MATERIALS["16amp Socket"] += qty;
-                MATERIALS["gujja"] += qty * 8;
-                MATERIALS['1.5"kala patch'] += qty * 8;
-                MATERIALS["3 module (board+plate)"] += qty;
-                roomModule += qty * 3;
-            }
-
-            if (item === "AC") {
-                MATERIALS["32amp dp switch"] += qty;
-                MATERIALS["16amp Socket"] += qty;
-                MATERIALS["gujja"] += qty * 4;
-                MATERIALS['1.5"kala patch'] += qty * 4;
-                roomModule += qty * 2;
-            }
-
-            if (item === "inverter") {
-                MATERIALS["16amp switch"] += qty * 2;
-                MATERIALS["16amp Socket"] += qty * 2;
-                MATERIALS["6amp Socket"] += qty;
-                MATERIALS["gujja"] += qty * 4;
-                MATERIALS['1.5"kala patch'] += qty * 4;
-                roomModule += qty * 6;
-            }
-
-            if (item === "Patti") {
-                MATERIALS["patti"] += qty;
-                MATERIALS["35/8 skew"] += qty * 7;
-                MATERIALS["gujja"] += qty * 7;
-                MATERIALS["0.4 washer"] += qty * 7;
-            }
-
-            if (item === "Induction board") {
-                MATERIALS["16amp switch"] += qty * 2;
-                MATERIALS["16amp Socket"] += qty * 2;
-                MATERIALS["gujja"] += qty * 4;
-                MATERIALS['1.5"kala patch'] += qty * 4;
-                MATERIALS["6 module (board+plate)"] += qty;
-                roomModule += qty * 6;
-            }
-
-            if (item === "Fridge board") {
-                MATERIALS["16amp switch"] += qty;
-                MATERIALS["16amp Socket"] += qty;
-                MATERIALS["gujja"] += qty * 4;
-                MATERIALS['1.5"kala patch'] += qty * 4;
-                MATERIALS["3 module (board+plate)"] += qty;
-                roomModule += qty * 3;
-            }
-
-            if (item === "Water filter") {
-                MATERIALS["6amp switch"] += qty;
-                MATERIALS["6amp Socket"] += qty;
-                MATERIALS["gujja"] += qty * 4;
-                MATERIALS['1.5"kala patch'] += qty * 4;
-                MATERIALS["2 module (board+plate)"] += qty;
-                roomModule += qty * 2;
-            }
-
-            if (item === "Geyser board") {
-                MATERIALS["16amp switch"] += qty;
-                MATERIALS["16amp Socket"] += qty;
-                MATERIALS["gujja"] += qty * 4;
-                MATERIALS['1.5"kala patch'] += qty * 4;
-                MATERIALS["2 module (board+plate)"] += qty;
-                roomModule += qty * 2;
-            }
-
-            if (item === "Led bulb batten") {
-                MATERIALS["Led bulb"] += qty;
-                MATERIALS["batten holder"] += qty;
-                MATERIALS["Junction box"] += qty;
-                MATERIALS["gujja"] += qty;
-                MATERIALS['1.5"kala patch'] += qty;
-                MATERIALS["6amp switch"] += qty;
-                roomModule += qty * 1;
-            }
-
-            if (item === "2way F") {
-                MATERIALS["two way switch"] += qty * 2;
-                MATERIALS["6amp switch"] += qty;
-                MATERIALS["6amp Socket"] += qty;
-                MATERIALS["regulator"] += qty;
-                MATERIALS["gujja"] += qty * 4;
-                MATERIALS['1.5"kala patch'] += qty * 4;
-                roomModule += qty * 4;
-            }
-
-            if (item === "2way B") {
-                MATERIALS["two way switch"] += qty * 2;
-                MATERIALS["6amp switch"] += qty;
-                MATERIALS["6amp Socket"] += qty;
-                MATERIALS["gujja"] += qty * 4;
-                MATERIALS['1.5"kala patch'] += qty * 4;
-                roomModule += qty * 3;
-            }
-
-            if (item === "2way F&B") {
-                MATERIALS["two way switch"] += qty * 4;
-                MATERIALS["6amp switch"] += qty;
-                MATERIALS["6amp Socket"] += qty;
-                MATERIALS["regulator"] += qty;
-                MATERIALS["gujja"] += qty * 4;
-                MATERIALS['1.5"kala patch'] += qty * 4;
-                MATERIALS["blanker"] += qty;
-                roomModule += qty * 6;
-            }
-
-            if (item === "6A Sockets") {
-                MATERIALS["6amp switch"] += qty;
-                MATERIALS["6amp Socket"] += qty;
-                roomModule += qty * 3;
-            }
-
-            if (item === "16A Sockets") {
-                MATERIALS["16amp switch"] += qty;
-                MATERIALS["16amp Socket"] += qty;
-                roomModule += qty * 3;
-            }
-
-            // MCB Section
-            if (roomType === "MCB") {
-                if (item.includes("Isolater") || item.includes("Mcb Changer") || item.includes("RCCB")) {
-                    MATERIALS[item] += qty;
+                // RESET ALL MATERIALS
+                for (let key in MATERIALS) {
+                    MATERIALS[key] = 0;
                 }
-                if (["6amp mcb","10amp mcb","16amp mcb","20amp mcb","25amp mcb","32amp mcb","40amp mcb","63amp mcb"].includes(item)) {
-                    MATERIALS[item] += qty;
-                }
-                if (item.includes("way mcb box")) {
-                    MATERIALS[item] += qty;
-                }
+
+                const rooms = document.querySelectorAll(".room-card");
+
+                rooms.forEach(room => {
+                    const roomType = room.querySelector(".room-type").value;
+                    const inputs = room.querySelectorAll("input");
+
+                    let roomModule = 0;
+                    let hasAnyItem = false;
+
+                    // Check if room has any items
+                    inputs.forEach(input => {
+                        if (parseInt(input.value) > 0) hasAnyItem = true;
+                    });
+
+
+
+                    // Process all items
+                    inputs.forEach(input => {
+                        const qty = parseInt(input.value) || 0;
+                        const item = input.dataset.item;
+                        if (!qty) return;
+
+
+
+
+
+                        // ================= FUSE =================
+                        if (item === "Fuse") {
+
+                            MATERIALS["Fuse"] += qty;
+
+                            roomModule += qty * 1;
+                        }
+
+
+                        // ================= INDICATOR =================
+                        if (item === "Indicator") {
+
+                            MATERIALS["Indicator"] += qty;
+
+                            roomModule += qty * 1;
+                        }
+
+                        // ================= ITEM CALCULATIONS =================
+
+                        if (item === "Led bulb" || item === "Night bulb") {
+                            MATERIALS[item] += qty;
+                            MATERIALS["angle holder"] += qty;
+                            MATERIALS["Junction box"] += qty;
+                            MATERIALS["Gujja"] += qty;
+                            MATERIALS['1.5"kala patch'] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            roomModule += qty * 1;
+                        }
+
+                        if (item === "Tube light") {
+                            MATERIALS["Tube light"] += qty;
+                            MATERIALS["celling rose"] += qty;
+                            MATERIALS["Junction box"] += qty;
+                            MATERIALS["Gujja"] += qty;
+                            MATERIALS['1.5"kala patch'] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            roomModule += qty * 1;
+                        }
+
+                        if (item === "conceal light") {
+                            MATERIALS["conceal light"] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            roomModule += qty * 1;
+                        }
+
+                        if (item === "Fan") {
+                            MATERIALS["Fan"] += qty;
+                            MATERIALS["celling rose"] += qty;
+                            MATERIALS["Junction box"] += qty;
+                            MATERIALS["Gujja"] += qty;
+                            MATERIALS['1.5"kala patch'] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            MATERIALS["regulator"] += qty;
+                            roomModule += qty * 2;
+                        }
+
+                        if (item === "Exhaust fan") {
+                            MATERIALS["celling rose"] += qty;
+                            MATERIALS["Junction box"] += qty;
+                            MATERIALS["Gujja"] += qty;
+                            MATERIALS['1.5"kala patch'] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            roomModule += qty * 1;
+                        }
+
+                        if (item === "Led bulb batten") {
+                            MATERIALS["Led bulb"] += qty;
+                            MATERIALS["batten holder"] += qty;
+                            MATERIALS["Junction box"] += qty;
+                            MATERIALS["Gujja"] += qty;
+                            MATERIALS['1.5"kala patch'] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            roomModule += qty * 1;
+                        }
+
+                        // ================= 2WAY SWITCHES =================
+
+                        // 2WAY F
+                        if (item === "2way F") {
+
+                            MATERIALS["4 module (board+plate)"] += qty;
+
+                            MATERIALS["regulator"] += qty;
+
+                            MATERIALS["Gujja"] += qty * 5;
+
+                            MATERIALS['1.5"kala patch'] += qty * 5;
+
+                            MATERIALS["0.4 mm washer"] += qty * 5;
+
+                            MATERIALS["Junction box"] += qty;
+
+                            MATERIALS["Fan"] += qty;
+
+                            MATERIALS["celling rose"] += qty;
+
+                            MATERIALS["two way switch"] += qty * 2;
+
+                            MATERIALS["6amp switch"] += qty;
+
+                            MATERIALS["6amp Socket"] += qty;
+
+                            roomModule += qty * 2;
+                        }
+
+
+                        // 2WAY B
+                        if (item === "2way B") {
+
+                            MATERIALS["4 module (board+plate)"] += qty;
+
+                            MATERIALS["Gujja"] += qty * 5;
+
+                            MATERIALS['1.5"kala patch'] += qty * 5;
+
+                            MATERIALS["0.4 mm washer"] += qty * 5;
+
+                            MATERIALS["Led bulb"] += qty;
+
+                            MATERIALS["angle holder"] += qty;
+
+                            MATERIALS["Junction box"] += qty;
+
+                            MATERIALS["two way switch"] += qty * 2;
+
+                            MATERIALS["6amp switch"] += qty;
+
+                            MATERIALS["6amp Socket"] += qty;
+
+                            roomModule += qty * 1;
+                        }
+
+
+                        // 2WAY F&B
+                        if (item === "2way F&B") {
+
+                            MATERIALS["6 module (board+plate)"] += qty;
+
+                            MATERIALS["Gujja"] += qty * 6;
+
+                            MATERIALS['1.5"kala patch'] += qty * 6;
+
+                            MATERIALS["0.4 mm washer"] += qty * 6;
+
+                            MATERIALS["two way switch"] += qty * 4;
+
+                            MATERIALS["6amp switch"] += qty;
+
+                            MATERIALS["6amp Socket"] += qty;
+
+                            MATERIALS["regulator"] += qty;
+
+                            MATERIALS["Led bulb"] += qty;
+
+                            MATERIALS["Fan"] += qty;
+
+                            MATERIALS["angle holder"] += qty;
+
+                            MATERIALS["blanker"] += qty;
+
+                            MATERIALS["Junction box"] += qty * 2;
+
+                            MATERIALS["celling rose"] += qty;
+
+                            roomModule += qty * 3;
+                        }
+
+                        if (item === "6A Sockets") {
+                            MATERIALS["6amp switch"] += qty;
+                            MATERIALS["6amp Socket"] += qty;
+                            roomModule += qty * 3;
+                        }
+
+                        if (item === "16A Sockets") {
+                            MATERIALS["16amp switch"] += qty;
+                            MATERIALS["16amp Socket"] += qty;
+                            roomModule += qty * 3;
+                        }
+
+                        // ================= BIG BOARDS - NO roomModule addition =================
+                        if (item === "Tv board") {
+                            MATERIALS["6amp Socket"] += qty * 3;
+                            MATERIALS["6amp switch"] += qty * 3;
+                            MATERIALS["Gujja"] += qty * 8;
+                            MATERIALS['1.5"kala patch'] += qty * 8;
+                            MATERIALS["6 module (board+plate)"] += qty;
+                            MATERIALS["3 module (board+plate)"] += qty;
+                            // No roomModule += 
+                        }
+
+                        if (item === "Power board") {
+                            MATERIALS["16amp switch"] += qty;
+                            MATERIALS["16amp Socket"] += qty;
+                            MATERIALS["Gujja"] += qty * 8;
+                            MATERIALS['1.5"kala patch'] += qty * 8;
+                            MATERIALS["3 module (board+plate)"] += qty;
+                            // No roomModule +=
+                        }
+
+                        if (item === "AC") {
+                            MATERIALS["32amp dp switch"] += qty;
+                            MATERIALS["16amp Socket"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            roomModule += qty * 2;   // AC still uses main board space
+                        }
+
+                        if (item === "Inverter") {
+                            MATERIALS["16amp switch"] += qty * 2;
+                            MATERIALS["16amp Socket"] += qty * 2;
+                            MATERIALS["6amp top"] += qty;
+                            MATERIALS["16amp top"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["6 module (board+plate)"] += qty;
+                            // No roomModule +=
+                        }
+
+                        if (item === "Induction board") {
+                            MATERIALS["16amp switch"] += qty * 2;
+                            MATERIALS["16amp Socket"] += qty * 2;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["6 module (board+plate)"] += qty;
+                            // No roomModule +=
+                        }
+
+                        if (item === "Fridge board") {
+                            MATERIALS["16amp switch"] += qty;
+                            MATERIALS["16amp Socket"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["3 module (board+plate)"] += qty;
+                            // No roomModule +=
+                        }
+
+                        if (item === "Water filter") {
+                            MATERIALS["6amp switch"] += qty;
+                            MATERIALS["6amp Socket"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["2 module (board+plate)"] += qty;
+                            // No roomModule +=
+                        }
+
+                        if (item === "Geyser board") {
+                            MATERIALS["16amp switch"] += qty;
+                            MATERIALS["16amp Socket"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["2 module (board+plate)"] += qty;
+                            roomModule += qty * 2;   // Geyser still uses main board
+                        }
+
+                        if (item === "Patti") {
+                            MATERIALS["Patti"] += qty;
+                            MATERIALS["35/8 skew"] += qty * 7;
+                            MATERIALS["Gujja"] += qty * 7;
+                            MATERIALS["0.4 mm washer"] += qty * 7;
+                        }
+
+                        // MCB Section
+                        if (roomType === "MCB") {
+                            if (item.includes("Isolater") || item.includes("Mcb Changer") || item.includes("RCCB")) {
+                                MATERIALS[item] += qty;
+                            }
+                            if (["6amp mcb", "10amp mcb", "16amp mcb", "20amp mcb", "25amp mcb", "32amp mcb", "40amp mcb", "63amp mcb"].includes(item)) {
+                                MATERIALS[item] += qty;
+                            }
+                            if (item.includes("way mcb box")) {
+                                MATERIALS[item] += qty;
+                            }
+                        }
+                    });
+
+                    // ================= MODULE LIMIT CHECK =================
+
+                    if (roomType !== "MCB" && roomModule > 18) {
+
+                        const roomName =
+                            room.querySelector("h2").innerText;
+
+                        showModuleAlert(roomName, roomModule);
+
+                        return; // BILL GENERATE STOP
+                    }
+
+                    // ================= FINAL MAIN ROOM PLATE =================
+                    if (roomType !== "MCB" && roomModule > 0) {
+                        const plateSize = getPlateSize(roomModule);
+                        MATERIALS[`${plateSize} module (board+plate)`] += 1;
+
+                        const emptySpace = plateSize - roomModule;
+                        MATERIALS["blanker"] += emptySpace + 4;
+                    }
+                });
+
+                // Final Calculations
+                MATERIALS["0.4 mm washer"] = MATERIALS["Gujja"];
+                MATERIALS["Gujja Packet"] = Math.ceil(MATERIALS["Gujja"] / 40);
+                MATERIALS["35/8 Packet"] = Math.ceil(MATERIALS["35/8 skew"] / 70);
+
+                showBill(MATERIALS);
             }
-        });
 
-        // ================= FINAL PLATE SELECTION (One Plate per Room) =================
-        if (roomType !== "MCB" && roomModule > 0) {
-            const plateSize = getPlateSize(roomModule);
-            MATERIALS[`${plateSize} module (board+plate)`] += 1;
+            // Helper Function
+            function getPlateSize(moduleCount) {
+                if (moduleCount <= 1) return 1;
+                if (moduleCount <= 2) return 2;
+                if (moduleCount <= 3) return 3;
+                if (moduleCount <= 4) return 4;
+                if (moduleCount <= 6) return 6;
+                if (moduleCount <= 8) return 8;
+                if (moduleCount <= 12) return 12;
+                if (moduleCount <= 16) return 16;
+                return 18;
+            }
 
-            const emptySpace = plateSize - roomModule;
-            MATERIALS["blanker"] += emptySpace + 4;   // Extra 4 blankers
-        }
-    });
-
-    // Final Calculations
-    MATERIALS["0.4 washer"] = MATERIALS["gujja"];           // As per your last version
-    MATERIALS["Gujja Packet"] = Math.ceil(MATERIALS["gujja"] / 40);
-    MATERIALS["35/8 Packet"] = Math.ceil(MATERIALS["35/8 skew"] / 70);
-
-    showBill(MATERIALS);
-}
-
-// Helper Function
-function getPlateSize(moduleCount) {
-    if (moduleCount <= 1) return 1;
-    if (moduleCount <= 2) return 2;
-    if (moduleCount <= 3) return 3;
-    if (moduleCount <= 4) return 4;
-    if (moduleCount <= 6) return 6;
-    if (moduleCount <= 8) return 8;
-    if (moduleCount <= 12) return 12;
-    if (moduleCount <= 16) return 16;
-    return 18;
-}
+            // Helper Function
+            function getPlateSize(moduleCount) {
+                if (moduleCount <= 1) return 1;
+                if (moduleCount <= 2) return 2;
+                if (moduleCount <= 3) return 3;
+                if (moduleCount <= 4) return 4;
+                if (moduleCount <= 6) return 6;
+                if (moduleCount <= 8) return 8;
+                if (moduleCount <= 12) return 12;
+                if (moduleCount <= 16) return 16;
+                return 18;
+            }
 
             // ================= AUTO MODULE PLATE =================
 
@@ -1952,6 +2116,31 @@ border-radius:5px;
                 }
 
             });
+
+            function showModuleAlert(roomName, moduleCount) {
+
+                const oldAlert = document.querySelector(".module-alert");
+
+                if (oldAlert) {
+                    oldAlert.remove();
+                }
+
+                const alertBox = document.createElement("div");
+
+                alertBox.className = "module-alert";
+
+                alertBox.innerHTML = `
+        ⚠️ <span>${roomName}</span><br>
+        Module Count: ${moduleCount}<br><br>
+        18 se zyada module allowed nahi hai.
+    `;
+
+                document.body.appendChild(alertBox);
+
+                setTimeout(() => {
+                    alertBox.remove();
+                }, 5000);
+            }
 
 
         </script>
