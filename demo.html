@@ -1027,6 +1027,7 @@ cursor:pointer;
                 "Night bulb": 0,
                 "Tube light": 0,
                 "Fan": 0,
+                "Fan box round Sheet": 0,
                 "Fuse": 0,
                 "Indicator": 0,
                 "0.4 mm washer": 0,
@@ -1131,6 +1132,7 @@ cursor:pointer;
                             MATERIALS["celling rose"] += qty;
                             MATERIALS["3/3 Junction box"] += qty;
                             MATERIALS["Gujja"] += qty;
+                            MATERIALS["Fan box round Sheet"] += qty;
                             MATERIALS['1.5"kala patch'] += qty;
                             MATERIALS["6amp switch"] += qty;
                             MATERIALS["regulator"] += qty;
@@ -1438,442 +1440,187 @@ cursor:pointer;
 
             // ================= SHOW BILL =================
 
-            function showBill(materials) {
+function showBill(materials) {
+    const unitMap = {
+        // Wires
 
-                let html = `
-    <div id="billModal" style="
-        position:fixed;
-        inset:0;
-        background:rgba(0,0,0,0.8);
-        overflow:auto;
-        z-index:9999;
-        padding:20px;
-    ">
+        "6mm wire": "Coil",
+        "4mm wire": "Coil",
+        "2.5mm wire": "Coil",
+        "1.5mm wire": "Coil",
+        "1mm wire": "Coil",
+        "0.5mm wire": "Coil",
 
-    <div style="
-        max-width:900px;
-        margin:auto;
-        background:#111;
-        border:2px solid #FFD700;
-        border-radius:20px;
-        padding:25px;
-    ">
+        // Common Items
+        "Flexible Pipe": "Ft",
+        "Tap": "Pic",
+        "35/8 skew": "Pic",
+        "35/8 katti": "Pic",
+        "0.4 mm washer": "Pic",
+        "6amp switch": "Pic",
+        "6amp Socket": "Pic",
+        "16amp switch": "Pic",
+        "16amp Socket": "Pic",
+        "two way switch": "Pic",
+        "regulator": "Pic",
+        "3/3 Junction box": "Pic",
+        "celling rose": "Pic",
+        "angle holder": "Pic",
+        "straight holder": "Pic",
+        "batten holder": "Pic",
+        "Patti": "Pic",
+        "Gujja": "Pic",
+        "kala patch 1inch": "Pic",
+        "kala patch 2inch": "Pic",
+        '1.5"kala patch': "Pic",
+        "32amp dp switch": "Pic",
+        "conceal light": "Pic",
+        "Led bulb": "Pic",
+        "Night bulb": "Pic",
+        "Tube light": "Pic",
+        "Fan": "Pic",
+        "blanker": "Pic",
+        "Indicator": "Pic",
+        "Fuse": "Pic",
 
-    <h1 style="text-align:center;color:#FFD700;">SM Technician Material List</h1>
+        // Boards & Plates
+        "1 module (board+plate)": "Pic",
+        "2 module (board+plate)": "Pic",
+        "3 module (board+plate)": "Pic",
+        "4 module (board+plate)": "Pic",
+        "6 module (board+plate)": "Pic",
+        "8 module (board+plate)": "Pic",
+        "12 module (board+plate)": "Pic",
+        "16 module (board+plate)": "Pic",
+        "18 module (board+plate)": "Pic",
 
-    <table style="width:100%;margin-top:20px;border-collapse:collapse;">
+        // MCB Items
+        "Isolater 40A": "Pic",
+        "Isolater 63A": "Pic",
+        "Mcb Changer 40A": "Pic",
+        "Mcb Changer 63A": "Pic",
+        "30ma RCCB 40A": "Pic",
+        "30ma RCCB 63A": "Pic",
+        "6amp mcb": "Pic",
+        "10amp mcb": "Pic",
+        "16amp mcb": "Pic",
+        "20amp mcb": "Pic",
+        "25amp mcb": "Pic",
+        "32amp mcb": "Pic",
+        "40amp mcb": "Pic",
+        "63amp mcb": "Pic",
+        "2 way mcb box": "Pic",
+        "4 way mcb box": "Pic",
+        "6 way mcb box": "Pic",
+        "8 way mcb box": "Pic",
+        "10 way mcb box": "Pic",
+        "12 way mcb box": "Pic",
+        "14 way mcb box": "Pic",
+        "16 way mcb box": "Pic",
+        "18 way mcb box": "Pic",
+        "20 way mcb box": "Pic",
+        "22 way mcb box": "Pic",
+        "24 way mcb box": "Pic",
 
-    <tr>
-        <th style="border:1px solid #444;padding:10px;">Material</th>
-        <th style="border:1px solid #444;padding:10px;">Quantity</th>
-    </tr>
+        // Default
+        "default": "Pic"
+    };
+
+    let html = `
+    <div id="billModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); overflow:auto; z-index:9999; padding:20px;">
+        <div style="max-width:1000px; margin:auto; background:#111; border:2px solid #FFD700; border-radius:20px; padding:25px;">
+            
+            <h1 style="text-align:center; color:#FFD700; margin-bottom:20px;">SM Technician Material List</h1>
+            
+            <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+                <tr style="background:#222;">
+                    <th style="border:1px solid #444; padding:12px; text-align:left;">Material</th>
+                    <th style="border:1px solid #444; padding:12px; text-align:center;">Quantity</th>
+                    <th style="border:1px solid #444; padding:12px; text-align:center;">Unit</th>
+                </tr>
     `;
 
-                Object.keys(materials).forEach(item => {
-
-                    if (materials[item] > 0) {
-
-                        html += `
-            <tr>
-                <td style="border:1px solid #444;padding:10px;">${item}</td>
-                <td style="border:1px solid #444;padding:10px;text-align:center;">
-
-<input
-type="number"
-value="${materials[item]}"
-style="
-width:80px;
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:6px;
-text-align:center;
-font-size:16px;
-">
-
-</td>
-            </tr>
+    Object.keys(materials).forEach(item => {
+        if (materials[item] > 0) {
+            const unit = unitMap[item] || unitMap["default"];
+            html += `
+                <tr>
+                    <td style="border:1px solid #444; padding:12px;">${item}</td>
+                    <td style="border:1px solid #444; padding:12px; text-align:center;">
+                        <input type="number" value="${materials[item]}" 
+                            style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:6px; text-align:center;">
+                    </td>
+                    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700; font-weight:500;">${unit}</td>
+                </tr>
             `;
-                    }
-                });
+        }
+    });
 
-                // ================= WIRE SECTION =================
-
-                html += `
-
+    // Wire Section
+    html += `
     <tr>
-        <td colspan="2" style="padding:15px;background:#222;color:#FFD700;font-size:20px;">
+        <td colspan="3" style="padding:15px; background:#222; color:#FFD700; font-size:20px; text-align:center;">
             Wire Section
         </td>
     </tr>
-
-   <tr>
-<td>4mm wire</td>
-
-<td>
-
-<select style="
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-<option>Red & Black</option>
-<option>Black & Yellow</option>
-<option>Blue & Red</option>
-<option>Yellow & Blue</option>
-<option>Red</option>
-<option>Black</option>
-<option>Yellow</option>
-<option>Blue</option>
-<option>Green</option>
-
-</select>
-
-<input
-type="number"
-placeholder="Qty"
-style="
-width:90px;
-padding:6px;
-margin-left:8px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>2.5mm wire</td>
-
-<td>
-
-<select style="
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-<option>Red & Black</option>
-<option>Black & Yellow</option>
-<option>Blue & Red</option>
-<option>Yellow & Blue</option>
-<option>Red</option>
-<option>Black</option>
-<option>Yellow</option>
-<option>Blue</option>
-<option>Green</option>
-
-</select>
-
-<input
-type="number"
-placeholder="Qty"
-style="
-width:90px;
-padding:6px;
-margin-left:8px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>1.5mm wire</td>
-
-<td>
-
-<select style="
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-<option>Red & Black</option>
-<option>Black & Yellow</option>
-<option>Blue & Red</option>
-<option>Yellow & Blue</option>
-<option>Red</option>
-<option>Black</option>
-<option>Yellow</option>
-<option>Blue</option>
-<option>Green</option>
-
-</select>
-
-<input
-type="number"
-placeholder="Qty"
-style="
-width:90px;
-padding:6px;
-margin-left:8px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>1mm wire</td>
-
-<td>
-
-<select style="
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-<option>Red & Black</option>
-<option>Black & Yellow</option>
-<option>Blue & Red</option>
-<option>Yellow & Blue</option>
-<option>Red</option>
-<option>Black</option>
-<option>Yellow</option>
-<option>Blue</option>
-<option>Green</option>
-
-</select>
-
-<input
-type="number"
-placeholder="Qty"
-style="
-width:90px;
-padding:6px;
-margin-left:8px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>0.5mm wire</td>
-
-<td>
-
-<select style="
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-<option>Red & Black</option>
-<option>Black & Yellow</option>
-<option>Blue & Red</option>
-<option>Yellow & Blue</option>
-<option>Red</option>
-<option>Black</option>
-<option>Yellow</option>
-<option>Blue</option>
-<option>Green</option>
-
-</select>
-
-<input
-type="number"
-placeholder="Qty"
-style="
-width:90px;
-padding:6px;
-margin-left:8px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-
-<tr>
-<td colspan="2" style="
-padding:15px;
-background:#222;
-color:#FFD700;
-font-size:20px;
-">
-Extra Materials
-</td>
-</tr>
-
-
-<tr>
-<td>Flexible Pipe</td>
-
-<td>
-
-<input
-type="number"
-placeholder="Quantity"
-value="0"
-style="
-width:120px;
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>Tap</td>
-
-<td>
-
-<input
-type="number"
-placeholder="Quantity"
-value="0"
-style="
-width:120px;
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>Kala Patch 1inch</td>
-
-<td>
-
-<input
-type="number"
-placeholder="Quantity"
-value="0"
-style="
-width:120px;
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>Kala Patch 2inch</td>
-
-<td>
-
-<input
-type="number"
-placeholder="Quantity"
-value="0"
-style="
-width:120px;
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-    `;
-                html += `
-    </table>
-
-       <div style="text-align:center;margin-top:25px;">
-
-    <button onclick="downloadPDF()" style="
-        background:#FFD700;
-        color:#111;
-        border:none;
-        padding:15px 30px;
-        border-radius:10px;
-        font-size:18px;
-        font-weight:bold;
-        cursor:pointer;
-        margin: 0 8px;
-    ">
-        📥 Download PDF
-    </button>
-
-    <button onclick="shareOnWhatsApp()" style="
-        background:#25D366;
-        color:white;
-        border:none;
-        padding:15px 30px;
-        border-radius:10px;
-        font-size:18px;
-        font-weight:bold;
-        cursor:pointer;
-        margin: 0 8px;
-    ">
-        💬 Share on WhatsApp
-    </button>
-
-    <button onclick="closeBillModal()" style="
-        background:red;
-        color:white;
-        border:none;
-        padding:15px 30px;
-        border-radius:10px;
-        font-size:18px;
-        font-weight:bold;
-        cursor:pointer;
-        margin: 0 8px;
-    ">
-        Close
-    </button>
-
-    </div>
-
-    </div>
-    </div>
     `;
 
-                document.body.insertAdjacentHTML('beforeend', html);
-            }
+    const wireTypes = ["mm wire", "4mm wire", "2.5mm wire", "1.5mm wire", "1mm wire", "0.5mm wire"];
+    wireTypes.forEach(wire => {
+        html += `
+        <tr>
+            <td style="border:1px solid #444; padding:12px;">${wire}</td>
+            <td style="border:1px solid #444; padding:12px; text-align:center;">
+                <select style="padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+                    <option>Red & Black</option>
+                    <option>Black & Yellow</option>
+                    <option>Blue & Red</option>
+                    <option>Yellow & Blue</option>
+                    <option>Red</option>
+                    <option>Black</option>
+                    <option>Yellow</option>
+                    <option>Blue</option>
+                    <option>Green</option>
+                </select>
+                <input type="number" placeholder="Qty" style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+            </td>
+            <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Coil</td>
+        </tr>`;
+    });
+
+    // Extra Materials
+    html += `
+    <tr>
+        <td colspan="3" style="padding:15px; background:#222; color:#FFD700; font-size:20px; text-align:center;">
+            Extra Materials
+        </td>
+    </tr>
+    <tr>
+        <td style="border:1px solid #444; padding:12px;">Flexible Pipe</td>
+        <td style="border:1px solid #444; padding:12px; text-align:center;"><input type="number" value="0" style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;"></td>
+        <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Ft</td>
+    </tr>
+    `;
+
+    html += `</table>`;
+
+    // Buttons
+    html += `
+       <div style="text-align:center; margin-top:30px;">
+            <button onclick="downloadPDF()" style="background:#FFD700; color:#111; border:none; padding:15px 30px; border-radius:10px; font-size:18px; font-weight:bold; cursor:pointer; margin:0 8px;">
+                📥 Download PDF
+            </button>
+            <button onclick="shareOnWhatsApp()" style="background:#25D366; color:white; border:none; padding:15px 30px; border-radius:10px; font-size:18px; font-weight:bold; cursor:pointer; margin:0 8px;">
+                💬 Share on WhatsApp
+            </button>
+            <button onclick="closeBillModal()" style="background:red; color:white; border:none; padding:15px 30px; border-radius:10px; font-size:18px; font-weight:bold; cursor:pointer; margin:0 8px;">
+                Close
+            </button>
+        </div>
+    </div></div>`;
+
+    document.body.insertAdjacentHTML('beforeend', html);
+}
 
             // ================= CLOSE MODAL =================
 
