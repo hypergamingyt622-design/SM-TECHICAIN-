@@ -1031,8 +1031,7 @@ cursor:pointer;
                 "Fuse": 0,
                 "Indicator": 0,
                 "0.4 mm washer": 0,
-                "Gujja Packet": 0,
-                "35/8 Packet": 0,
+
                 "6A Sockets": 0,
                 "16A Sockets": 0,
                 "batten holder": 0,
@@ -1374,14 +1373,20 @@ cursor:pointer;
                     // ================= FINAL MAIN ROOM PLATE =================
                     if (roomType !== "MCB" && roomModule > 0) {
                         const plateSize = getPlateSize(roomModule);
+
+                        // Add Main Board + Plate
                         MATERIALS[`${plateSize} module (board+plate)`] += 1;
 
+                        // Blankers for empty modules
                         const emptySpace = plateSize - roomModule;
-
-                        // Only add actual empty spaces as blankers (remove +4)
                         if (emptySpace > 0) {
                             MATERIALS["blanker"] += emptySpace;
                         }
+
+                        // Extra Fixing Hardware for each Main Plate
+                        MATERIALS["0.4 mm washer"] += 4;
+                        MATERIALS['1.5"kala patch'] += 4;
+                        MATERIALS["Gujja"] += 4;
                     }
                 });
 
