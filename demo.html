@@ -407,6 +407,67 @@
                 transform: translateX(0);
             }
         }
+
+
+        /* MOBILE RESPONSIVE */
+
+@media screen and (max-width: 768px) {
+
+    #billModal {
+        padding: 10px !important;
+        overflow-x: auto;
+    }
+
+    #billModal table {
+        width: 100% !important;
+        min-width: 600px;
+        border-collapse: collapse;
+    }
+
+    #billModal td,
+    #billModal th {
+        font-size: 13px !important;
+        padding: 8px !important;
+    }
+
+    #billModal input {
+        width: 100% !important;
+        min-width: unset !important;
+        font-size: 13px !important;
+        padding: 8px !important;
+        box-sizing: border-box;
+    }
+
+    #billModal button {
+        font-size: 13px !important;
+        padding: 10px 14px !important;
+    }
+
+    /* Extra Material Row */
+
+    .extra-material-row td div {
+        flex-direction: column;
+        gap: 6px !important;
+    }
+
+    .extra-material-row button {
+        width: 100% !important;
+        border-radius: 8px !important;
+    }
+
+    /* Generate PDF Buttons */
+
+    .pdf-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .pdf-buttons button {
+        width: 100%;
+    }
+
+}
     </style>
 
 </head>
@@ -988,8 +1049,8 @@ cursor:pointer;
                 "18 module (board+plate)": 0,
                 "Indicator": 0,
                 "Fuse": 0,
-                "Gujja Packet": 0,
-                "35/8 Packet": 0,
+
+
                 "0.4 mm washer": 0,
                 "2 way mcb box": 0,
                 "4 way mcb box": 0,
@@ -1383,8 +1444,6 @@ cursor:pointer;
 
                 // Final Calculations
                 MATERIALS["0.4 mm washer"] = MATERIALS["Gujja"];
-                MATERIALS["Gujja Packet"] = Math.ceil(MATERIALS["Gujja"] / 40);
-                MATERIALS["35/8 Packet"] = Math.ceil(MATERIALS["35/8 skew"] / 70);
 
                 showBill(MATERIALS);
             }
@@ -1438,95 +1497,156 @@ cursor:pointer;
 
 
 
+
+            function addExtraMaterialRow() {
+
+                const table = document.querySelector('#billModal table');
+
+                const row = document.createElement("tr");
+
+                row.classList.add("extra-material-row");
+
+                row.innerHTML = `
+    
+    <td style="border:1px solid #444; padding:12px;">
+        <input type="text" placeholder="Extra Material Name"
+        style="width:100%; padding:8px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" placeholder="Qty"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        
+        <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
+
+            <input type="text" placeholder="Unit"
+            style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+
+            <button onclick="deleteExtraMaterial(this)" style="
+                background:red;
+                color:white;
+                border:none;
+                width:32px;
+                height:32px;
+                border-radius:50%;
+                cursor:pointer;
+                font-size:18px;
+                font-weight:bold;
+            ">
+                ×
+            </button>
+
+        </div>
+
+    </td>
+    `;
+
+                table.appendChild(row);
+
+            }
+
+
+
+            function deleteExtraMaterial(btn) {
+
+                btn.closest("tr").remove();
+
+            }
+
+
+
             // ================= SHOW BILL =================
 
-function showBill(materials) {
-    const unitMap = {
-        // Wires
+            function showBill(materials) {
+                const unitMap = {
+                    // Wires
 
-        "6mm wire": "Coil",
-        "4mm wire": "Coil",
-        "2.5mm wire": "Coil",
-        "1.5mm wire": "Coil",
-        "1mm wire": "Coil",
-        "0.5mm wire": "Coil",
+                    "6mm wire": "Coil",
+                    "4mm wire": "Coil",
+                    "2.5mm wire": "Coil",
+                    "1.5mm wire": "Coil",
+                    "1mm wire": "Coil",
+                    "0.5mm wire": "Coil",
 
-        // Common Items
-        "Flexible Pipe": "Ft",
-        "Tap": "Pic",
-        "35/8 skew": "Pic",
-        "35/8 katti": "Pic",
-        "0.4 mm washer": "Pic",
-        "6amp switch": "Pic",
-        "6amp Socket": "Pic",
-        "16amp switch": "Pic",
-        "16amp Socket": "Pic",
-        "two way switch": "Pic",
-        "regulator": "Pic",
-        "3/3 Junction box": "Pic",
-        "celling rose": "Pic",
-        "angle holder": "Pic",
-        "straight holder": "Pic",
-        "batten holder": "Pic",
-        "Patti": "Pic",
-        "Gujja": "Pic",
-        "kala patch 1inch": "Pic",
-        "kala patch 2inch": "Pic",
-        '1.5"kala patch': "Pic",
-        "32amp dp switch": "Pic",
-        "conceal light": "Pic",
-        "Led bulb": "Pic",
-        "Night bulb": "Pic",
-        "Tube light": "Pic",
-        "Fan": "Pic",
-        "blanker": "Pic",
-        "Indicator": "Pic",
-        "Fuse": "Pic",
+                    // Common Items
+                    "Flexible Pipe": "Ft",
+                    "Tap": "Pic",
+                    "35/8 skew": "Pic",
+                    "35/8 katti": "Pic",
+                    "0.4 mm washer": "Pic",
+                    "6amp switch": "Pic",
+                    "6amp Socket": "Pic",
+                    "16amp switch": "Pic",
+                    "16amp Socket": "Pic",
+                    "two way switch": "Pic",
+                    "regulator": "Pic",
+                    "3/3 Junction box": "Pic",
+                    "celling rose": "Pic",
+                    "angle holder": "Pic",
+                    "straight holder": "Pic",
+                    "batten holder": "Pic",
+                    "Patti": "Pic",
+                    "Gujja": "Pic",
+                    "kala patch 1inch": "Pic",
+                    "kala patch 2inch": "Pic",
+                    '1.5"kala patch': "Pic",
+                    "32amp dp switch": "Pic",
+                    "conceal light": "Pic",
+                    "Led bulb": "Pic",
+                    "Night bulb": "Pic",
+                    "Tube light": "Pic",
+                    "Fan": "Pic",
+                    "blanker": "Pic",
+                    "Indicator": "Pic",
+                    "Fuse": "Pic",
 
-        // Boards & Plates
-        "1 module (board+plate)": "Pic",
-        "2 module (board+plate)": "Pic",
-        "3 module (board+plate)": "Pic",
-        "4 module (board+plate)": "Pic",
-        "6 module (board+plate)": "Pic",
-        "8 module (board+plate)": "Pic",
-        "12 module (board+plate)": "Pic",
-        "16 module (board+plate)": "Pic",
-        "18 module (board+plate)": "Pic",
+                    // Boards & Plates
+                    "1 module (board+plate)": "Pic",
+                    "2 module (board+plate)": "Pic",
+                    "3 module (board+plate)": "Pic",
+                    "4 module (board+plate)": "Pic",
+                    "6 module (board+plate)": "Pic",
+                    "8 module (board+plate)": "Pic",
+                    "12 module (board+plate)": "Pic",
+                    "16 module (board+plate)": "Pic",
+                    "18 module (board+plate)": "Pic",
 
-        // MCB Items
-        "Isolater 40A": "Pic",
-        "Isolater 63A": "Pic",
-        "Mcb Changer 40A": "Pic",
-        "Mcb Changer 63A": "Pic",
-        "30ma RCCB 40A": "Pic",
-        "30ma RCCB 63A": "Pic",
-        "6amp mcb": "Pic",
-        "10amp mcb": "Pic",
-        "16amp mcb": "Pic",
-        "20amp mcb": "Pic",
-        "25amp mcb": "Pic",
-        "32amp mcb": "Pic",
-        "40amp mcb": "Pic",
-        "63amp mcb": "Pic",
-        "2 way mcb box": "Pic",
-        "4 way mcb box": "Pic",
-        "6 way mcb box": "Pic",
-        "8 way mcb box": "Pic",
-        "10 way mcb box": "Pic",
-        "12 way mcb box": "Pic",
-        "14 way mcb box": "Pic",
-        "16 way mcb box": "Pic",
-        "18 way mcb box": "Pic",
-        "20 way mcb box": "Pic",
-        "22 way mcb box": "Pic",
-        "24 way mcb box": "Pic",
+                    // MCB Items
+                    "Isolater 40A": "Pic",
+                    "Isolater 63A": "Pic",
+                    "Mcb Changer 40A": "Pic",
+                    "Mcb Changer 63A": "Pic",
+                    "30ma RCCB 40A": "Pic",
+                    "30ma RCCB 63A": "Pic",
+                    "6amp mcb": "Pic",
+                    "10amp mcb": "Pic",
+                    "16amp mcb": "Pic",
+                    "20amp mcb": "Pic",
+                    "25amp mcb": "Pic",
+                    "32amp mcb": "Pic",
+                    "40amp mcb": "Pic",
+                    "63amp mcb": "Pic",
+                    "2 way mcb box": "Pic",
+                    "4 way mcb box": "Pic",
+                    "6 way mcb box": "Pic",
+                    "8 way mcb box": "Pic",
+                    "10 way mcb box": "Pic",
+                    "12 way mcb box": "Pic",
+                    "14 way mcb box": "Pic",
+                    "16 way mcb box": "Pic",
+                    "18 way mcb box": "Pic",
+                    "20 way mcb box": "Pic",
+                    "22 way mcb box": "Pic",
+                    "24 way mcb box": "Pic",
 
-        // Default
-        "default": "Pic"
-    };
+                    // Default
+                    "default": "Pic"
+                };
 
-    let html = `
+                let html = `
     <div id="billModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); overflow:auto; z-index:9999; padding:20px;">
         <div style="max-width:1000px; margin:auto; background:#111; border:2px solid #FFD700; border-radius:20px; padding:25px;">
             
@@ -1540,10 +1660,10 @@ function showBill(materials) {
                 </tr>
     `;
 
-    Object.keys(materials).forEach(item => {
-        if (materials[item] > 0) {
-            const unit = unitMap[item] || unitMap["default"];
-            html += `
+                Object.keys(materials).forEach(item => {
+                    if (materials[item] > 0) {
+                        const unit = unitMap[item] || unitMap["default"];
+                        html += `
                 <tr>
                     <td style="border:1px solid #444; padding:12px;">${item}</td>
                     <td style="border:1px solid #444; padding:12px; text-align:center;">
@@ -1553,11 +1673,11 @@ function showBill(materials) {
                     <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700; font-weight:500;">${unit}</td>
                 </tr>
             `;
-        }
-    });
+                    }
+                });
 
-    // Wire Section
-    html += `
+                // Wire Section
+                html += `
     <tr>
         <td colspan="3" style="padding:15px; background:#222; color:#FFD700; font-size:20px; text-align:center;">
             Wire Section
@@ -1565,9 +1685,9 @@ function showBill(materials) {
     </tr>
     `;
 
-    const wireTypes = ["6mm wire", "4mm wire", "2.5mm wire", "1.5mm wire", "1mm wire", "0.5mm wire"];
-    wireTypes.forEach(wire => {
-        html += `
+                const wireTypes = ["6mm wire", "4mm wire", "2.5mm wire", "1.5mm wire", "1mm wire", "0.5mm wire"];
+                wireTypes.forEach(wire => {
+                    html += `
         <tr>
             <td style="border:1px solid #444; padding:12px;">${wire}</td>
             <td style="border:1px solid #444; padding:12px; text-align:center;">
@@ -1586,26 +1706,90 @@ function showBill(materials) {
             </td>
             <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Coil</td>
         </tr>`;
-    });
+                });
 
-    // Extra Materials
-    html += `
-    <tr>
-        <td colspan="3" style="padding:15px; background:#222; color:#FFD700; font-size:20px; text-align:center;">
-            Extra Materials
-        </td>
-    </tr>
-    <tr>
-        <td style="border:1px solid #444; padding:12px;">Flexible Pipe</td>
-        <td style="border:1px solid #444; padding:12px; text-align:center;"><input type="number" value="0" style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;"></td>
-        <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Ft</td>
-    </tr>
-    `;
+                // Extra Materials
+                html += `
+<tr>
+    <td colspan="3" style="padding:15px; background:#222; color:#FFD700; font-size:20px; text-align:center;">
+        Extra Materials
+    </td>
+</tr>
 
-    html += `</table>`;
+<tr>
+    <td style="border:1px solid #444; padding:12px;">1" Flexible Pipe</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Ft</td>
+</tr>
 
-    // Buttons
-    html += `
+<tr>
+    <td style="border:1px solid #444; padding:12px;">3/4" Flexible Pipe</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Ft</td>
+</tr>
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Zip Tie 5"</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Zip Tie 10"</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">7/4 Plane Box</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+<!-- Custom Extra Material Add Option -->
+
+
+
+
+<tr>
+    <td colspan="3" style="padding:15px; text-align:center; border:1px solid #444;">
+        
+        <button onclick="addExtraMaterialRow()" style="
+            background:#FFD700;
+            color:#111;
+            border:none;
+            padding:12px 25px;
+            border-radius:10px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        ">
+            + Add Extra Material
+        </button>
+
+    </td>
+</tr>
+`;
+
+                html += `</table>`;
+
+                // Buttons
+                html += `
        <div style="text-align:center; margin-top:30px;">
             <button onclick="downloadPDF()" style="background:#FFD700; color:#111; border:none; padding:15px 30px; border-radius:10px; font-size:18px; font-weight:bold; cursor:pointer; margin:0 8px;">
                 📥 Download PDF
@@ -1619,8 +1803,8 @@ function showBill(materials) {
         </div>
     </div></div>`;
 
-    document.body.insertAdjacentHTML('beforeend', html);
-}
+                document.body.insertAdjacentHTML('beforeend', html);
+            }
 
             // ================= CLOSE MODAL =================
 
@@ -1688,7 +1872,14 @@ function showBill(materials) {
                     const cols = row.querySelectorAll('td');
                     if (cols.length < 2) return;
 
-                    const material = cols[0].innerText.trim();
+                    let material = cols[0].innerText.trim();
+
+                    // Custom Extra Material Input Detect
+                    const materialInput = cols[0].querySelector('input');
+
+                    if (materialInput && materialInput.value.trim() !== '') {
+                        material = materialInput.value.trim();
+                    }
 
                     // Special handling for Wire Section
                     if (material.includes("mm wire")) {
@@ -1703,14 +1894,33 @@ function showBill(materials) {
                         }
                     }
                     else {
-                        // Normal materials
-                        let qty = '';
-                        const input = cols[1].querySelector('input');
-                        if (input) qty = input.value;
-                        else qty = cols[1].innerText.trim();
 
-                        if (material && parseInt(qty) > 0) {
-                            rows.push([serial++, material, qty, 'Pic']);
+                        let qty = '';
+                        let unit = 'Pic';
+
+                        const qtyInput = cols[1].querySelector('input');
+
+                        if (qtyInput) {
+                            qty = qtyInput.value;
+                        } else {
+                            qty = cols[1].innerText.trim();
+                        }
+
+                        // Unit Input Detect
+                        const unitInput = cols[2].querySelector('input');
+
+                        if (unitInput && unitInput.value.trim() !== '') {
+                            unit = unitInput.value.trim();
+                        } else {
+                            unit = cols[2].innerText.trim();
+                        }
+
+                        if (
+                            material &&
+                            material !== "Extra Materials" &&
+                            parseInt(qty) > 0
+                        ) {
+                            rows.push([serial++, material, qty, unit]);
                         }
                     }
                 });
@@ -1867,41 +2077,41 @@ function showBill(materials) {
 
 
 
-// ================= SHARE ON WHATSAPP =================
-function shareOnWhatsApp() {
-    const customerName = document.getElementById('custName').value.trim() || "Customer";
-    const phone = document.getElementById('phone').value.trim();
+            // ================= SHARE ON WHATSAPP =================
+            function shareOnWhatsApp() {
+                const customerName = document.getElementById('custName').value.trim() || "Customer";
+                const phone = document.getElementById('phone').value.trim();
 
-    if (!phone) {
-        alert("Please enter Customer Mobile Number!");
-        return;
-    }
+                if (!phone) {
+                    alert("Please enter Customer Mobile Number!");
+                    return;
+                }
 
-    // Clean Phone Number
-    let cleanPhone = phone.replace(/[^0-9]/g, '');
-    if (cleanPhone.length === 10) {
-        cleanPhone = '91' + cleanPhone;
-    }
+                // Clean Phone Number
+                let cleanPhone = phone.replace(/[^0-9]/g, '');
+                if (cleanPhone.length === 10) {
+                    cleanPhone = '91' + cleanPhone;
+                }
 
-    const message = encodeURIComponent(
-        `Hello ${customerName},\n\n` +
-        `Please find attached your Electrical Material Estimate.\n\n` +
-        `SM Technician\n` +
-        `8935883863\n\n` +
-        `Thank you! 🙏`
-    );
+                const message = encodeURIComponent(
+                    `Hello ${customerName},\n\n` +
+                    `Please find attached your Electrical Material Estimate.\n\n` +
+                    `SM Technician\n` +
+                    `8935883863\n\n` +
+                    `Thank you! 🙏`
+                );
 
-    // First Download PDF
-    downloadPDF();
+                // First Download PDF
+                downloadPDF();
 
-    // Then open WhatsApp with message
-    setTimeout(() => {
-        const whatsappURL = `https://wa.me/${cleanPhone}?text=${message}`;
-        window.open(whatsappURL, '_blank');
-        
-        alert("✅ PDF Downloaded!\n\nNow you can attach the downloaded PDF in WhatsApp.");
-    }, 800);
-}
+                // Then open WhatsApp with message
+                setTimeout(() => {
+                    const whatsappURL = `https://wa.me/${cleanPhone}?text=${message}`;
+                    window.open(whatsappURL, '_blank');
+
+                    alert("✅ PDF Downloaded!\n\nNow you can attach the downloaded PDF in WhatsApp.");
+                }, 800);
+            }
 
 
         </script>
