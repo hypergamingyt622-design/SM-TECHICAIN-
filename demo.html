@@ -705,6 +705,9 @@ cursor:pointer;
 
                     "Exhaust fan",
 
+                    "6A Sockets",
+                    "16A Sockets",
+
 
 
                     "Tv board",
@@ -1045,7 +1048,6 @@ cursor:pointer;
 
 
             // ================= GENERATE BILL =================
-            // ================= GENERATE BILL =================
             function generateBill() {
 
                 // RESET ALL MATERIALS
@@ -1283,6 +1285,7 @@ cursor:pointer;
                             MATERIALS["16amp Socket"] += qty;
                             MATERIALS["Gujja"] += qty * 4;
                             MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["2 module (board+plate)"] += qty;
                             roomModule += qty * 2;   // AC still uses main board space
                         }
 
