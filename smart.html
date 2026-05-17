@@ -132,21 +132,21 @@
             padding: 20px;
         }
 
-        .room-field{
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,215,0,0.15);
-    backdrop-filter:blur(10px);
-    border-radius:18px;
-    padding:14px;
-    transition:0.35s;
-    animation:fadeUp 0.5s ease;
-}
+        .room-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 14px;
+            transition: 0.35s;
+            animation: fadeUp 0.5s ease;
+        }
 
-.room-field:hover{
-    transform:translateY(-5px) scale(1.02);
-    border-color:#FFD700;
-    box-shadow:0 10px 25px rgba(255,215,0,0.15);
-}
+        .room-field:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #FFD700;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15);
+        }
 
         .room-field label {
             display: block;
@@ -155,23 +155,23 @@
             font-weight: 500;
         }
 
-        .room-field input{
-    width:100%;
-    padding:14px;
-    border-radius:14px;
-    border:1px solid #444;
-    background:#111;
-    color:#fff;
-    font-size:18px;
-    outline:none;
-    transition:0.3s;
-}
+        .room-field input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid #444;
+            background: #111;
+            color: #fff;
+            font-size: 18px;
+            outline: none;
+            transition: 0.3s;
+        }
 
-.room-field input:focus{
-    border-color:#FFD700;
-    box-shadow:0 0 15px rgba(255,215,0,0.3);
-    transform:scale(1.03);
-}
+        .room-field input:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            transform: scale(1.03);
+        }
 
         .add-room-btn {
             width: calc(100% - 36px);
@@ -207,81 +207,81 @@
         }
 
         /* Mobile Responsive */
-        @media(max-width:1024px){
+        @media(max-width:1024px) {
 
-    .room-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
+            .room-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
 
-}
+        }
 
-@media(max-width:768px){
+        @media(max-width:768px) {
 
-    .container{
-        margin:0;
-        border-radius:0;
-    }
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
 
-    .room-header{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:15px;
-    }
+            .room-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
 
-    .room-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
+            .room-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-    .room-field{
-        padding:12px;
-    }
+            .room-field {
+                padding: 12px;
+            }
 
-    .room-field label{
-        font-size:13px;
-    }
+            .room-field label {
+                font-size: 13px;
+            }
 
-    .room-field input{
-        font-size:16px;
-        padding:12px;
-    }
+            .room-field input {
+                font-size: 16px;
+                padding: 12px;
+            }
 
-    .add-room-btn{
-        font-size:20px;
-        padding:16px;
-    }
+            .add-room-btn {
+                font-size: 20px;
+                padding: 16px;
+            }
 
-    #generateBillBtn{
-        width:90%;
-    }
+            #generateBillBtn {
+                width: 90%;
+            }
 
-}
+        }
 
-@media(max-width:480px){
+        @media(max-width:480px) {
 
-    .room-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:10px;
-    }
+            .room-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
 
-    .room-field{
-        border-radius:14px;
-        padding:10px;
-    }
+            .room-field {
+                border-radius: 14px;
+                padding: 10px;
+            }
 
-    .room-field input{
-        font-size:15px;
-        padding:10px;
-    }
+            .room-field input {
+                font-size: 15px;
+                padding: 10px;
+            }
 
-    .room-header h2{
-        font-size:20px;
-    }
+            .room-header h2 {
+                font-size: 20px;
+            }
 
-    .top-title{
-        font-size:18px;
-    }
+            .top-title {
+                font-size: 18px;
+            }
 
-}
+        }
 
         .top-bar {
             position: sticky;
@@ -318,58 +318,95 @@
             font-weight: 600;
         }
 
-        .room-card{
-    animation:cardPop 0.45s ease;
-    transition:0.35s;
-}
+        .room-card {
+            animation: cardPop 0.45s ease;
+            transition: 0.35s;
+        }
 
-.room-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 15px 35px rgba(255,215,0,0.12);
-}
+        .room-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.12);
+        }
 
-.add-room-btn,
-.delete-room-btn,
-.duplicate-room-btn,
-#generateBillBtn{
-    transition:0.3s;
-}
+        .add-room-btn,
+        .delete-room-btn,
+        .duplicate-room-btn,
+        #generateBillBtn {
+            transition: 0.3s;
+        }
 
-.add-room-btn:hover,
-.delete-room-btn:hover,
-.duplicate-room-btn:hover,
-#generateBillBtn:hover{
-    transform:translateY(-3px) scale(1.04);
-    box-shadow:0 10px 25px rgba(255,215,0,0.25);
-}
+        .add-room-btn:hover,
+        .delete-room-btn:hover,
+        .duplicate-room-btn:hover,
+        #generateBillBtn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.25);
+        }
 
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
 
-@keyframes cardPop{
-    from{
-        opacity:0;
-        transform:scale(0.9);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.room-field input::-webkit-outer-spin-button,
-.room-field input::-webkit-inner-spin-button{
-    -webkit-appearance:none;
-    margin:0;
-}
+        @keyframes cardPop {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .room-field input::-webkit-outer-spin-button,
+        .room-field input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* MODULE ALERT */
+        .module-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff1e1e, #b30000);
+            color: white;
+            padding: 18px 22px;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 600;
+            z-index: 99999;
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+            animation: slideIn 0.4s ease;
+            max-width: 320px;
+            border-left: 5px solid yellow;
+        }
+
+        .module-alert span {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
     </style>
 
 </head>
@@ -468,9 +505,8 @@
                             <option>Kitchen</option>
                             <option>Hall</option>
                             <option>Bathroom</option>
-                            <option>Balcony</option>
-                            <option>Office</option>
-                            <option>Custom Room</option>
+                            <option>Normal room</option>
+                            <option>MCB</option>
                         </select>
 
                         <h2>Bedroom 1</h2>
@@ -498,7 +534,7 @@
                     </div>
                 </div>
 
-                <div class="room-grid">
+                <div class="room-grid dynamic-room-fields">
 
                     <div class="room-field">
                         <label>Fan Points</label>
@@ -608,6 +644,161 @@ cursor:pointer;
 
             let roomCount = 1;
 
+            const ROOM_TEMPLATES = {
+
+                "Bedroom": [
+
+                    "Fuse",
+                    "Indicator",
+
+                    "Led bulb",
+                    "Night bulb",
+                    "Tube light",
+                    "Fan",
+
+                    "Exhaust fan",
+
+                    "Tv board",
+                    "Power board",
+                    "AC",
+                    "conceal light",
+                    "Inverter",
+                    "6A Sockets",
+                    "16A Sockets",
+
+
+                    "Patti",
+
+
+                    "2way F",
+                    "2way B",
+                    "2way F&B",
+                ],
+
+                "Normal room": [
+
+
+                    "Fuse",
+                    "Indicator",
+
+                    "Led bulb",
+                    "Night bulb",
+                    "Tube light",
+                    "Fan",
+                    "6A Sockets",
+                    "16A Sockets",
+
+                    "Power board",
+                    "conceal light",
+                    "Patti"
+                ],
+
+                "Hall": [
+
+                    "Fuse",
+                    "Indicator",
+
+                    "Led bulb",
+                    "Night bulb",
+                    "Tube light",
+                    "Fan",
+
+                    "Exhaust fan",
+
+                    "6A Sockets",
+                    "16A Sockets",
+
+
+
+                    "Tv board",
+                    "Power board",
+                    "AC",
+                    "conceal light",
+                    "Inverter",
+
+                    "Patti",
+
+                    "2way F",
+                    "2way B",
+                    "2way F&B"
+                ],
+
+
+                "Kitchen": [
+
+                    "Fuse",
+                    "Indicator",
+
+                    "Led bulb",
+                    "Exhaust fan",
+                    "Tube light",
+
+                    "6A Sockets",
+                    "16A Sockets",
+
+                    "Induction board",
+                    "Fridge board",
+                    "Water filter",
+
+                    "conceal light",
+                    "Patti"
+                ],
+
+
+                "Bathroom": [
+
+                    "Fuse",
+                    "Indicator",
+
+                    "Exhaust fan",
+
+                    "Led bulb batten",
+                    "Tube light",
+                    "Geyser board",
+                    "6A Sockets",
+                    "16A Sockets",
+
+                    "conceal light",
+                    "Patti"
+                ],
+
+                MCB: [
+
+                    "Isolater 40A",
+                    "Isolater 63A",
+
+                    "Mcb Changer 40A",
+                    "Mcb Changer 63A",
+
+                    "30ma RCCB 40A",
+                    "30ma RCCB 63A",
+
+                    "6amp mcb",
+                    "10amp mcb",
+                    "16amp mcb",
+                    "20amp mcb",
+                    "25amp mcb",
+                    "32amp mcb",
+                    "40amp mcb",
+                    "63amp mcb",
+
+                    "2 way mcb box",
+                    "4 way mcb box",
+                    "6 way mcb box",
+                    "8 way mcb box",
+                    "10 way mcb box",
+                    "12 way mcb box",
+                    "14 way mcb box",
+                    "16 way mcb box",
+                    "18 way mcb box",
+                    "20 way mcb box",
+                    "22 way mcb box",
+                    "24 way mcb box"
+
+                ]
+
+            };
+
             function addRoom() {
 
                 roomCount = document.querySelectorAll(".room-card").length + 1;
@@ -632,9 +823,8 @@ cursor:pointer;
         <option>Kitchen</option>
         <option>Hall</option>
         <option>Bathroom</option>
-        <option>Balcony</option>
-        <option>Office</option>
-        <option>Custom Room</option>
+        <option>Normal room</option>
+        <option>MCB</option>
     </select>
 
     <h2>Bedroom ${roomCount}</h2>
@@ -662,7 +852,7 @@ cursor:pointer;
     </div>
 </div>
 
-        <div class="room-grid">
+        <div class="room-grid dynamic-room-fields">
 
             <div class="room-field">
                 <label>Fan Points</label>
@@ -721,6 +911,14 @@ cursor:pointer;
 
                 document.getElementById("roomContainer")
                     .insertAdjacentHTML("beforeend", roomHTML);
+
+                const allRooms =
+                    document.querySelectorAll(".room-card");
+
+                const lastRoom =
+                    allRooms[allRooms.length - 1];
+
+                renderRoomFields(lastRoom);
             }
 
             function deleteRoom(btn) {
@@ -768,584 +966,813 @@ cursor:pointer;
                 "16amp Socket": 0,
                 "two way switch": 0,
                 "regulator": 0,
-                "Junction box": 0,
+                "3/3 Junction box": 0,
                 "celling rose": 0,
                 "angle holder": 0,
                 "straight holder": 0,
-                "patti": 0,
+                "batten holder": 0,
+                "Patti": 0,
                 "Flexible pipe": 0,
-                "35/8 skew": 0,
-                "gujja": 0,
+                "35/8 Screw": 0,
+                "Gujja": 0,
                 "kala patch 1inch": 0,
                 "kala patch 2inch": 0,
                 "Tap": 0,
                 "blanker": 0,
-                "Plate 1 module": 0,
-                "Plate 2 module": 0,
-                "Plate 3 module": 0,
-                "Plate 4 module": 0,
-                "Plate 6 module": 0,
-                "Plate 8 module": 0,
-                "Plate 12 module": 0,
-                "Plate 16 module": 0,
-                "Plate 18 module": 0,
+                "1 module (board+plate)": 0,
+                "2 module (board+plate)": 0,
+                "3 module (board+plate)": 0,
+                "4 module (board+plate)": 0,
+                "6 module (board+plate)": 0,
+                "8 module (board+plate)": 0,
+                "12 module (board+plate)": 0,
+                "16 module (board+plate)": 0,
+                "18 module (board+plate)": 0,
                 "Indicator": 0,
-                "Fuse": 0
-            };
-            // ================= GENERATE BILL =================
+                "Fuse": 0,
 
+
+                "0.4 mm washer": 0,
+                "2 way mcb box": 0,
+                "4 way mcb box": 0,
+                "6 way mcb box": 0,
+                "8 way mcb box": 0,
+                "10 way mcb box": 0,
+                "12 way mcb box": 0,
+                "14 way mcb box": 0,
+                "16 way mcb box": 0,
+                "18 way mcb box": 0,
+                "20 way mcb box": 0,
+                "22 way mcb box": 0,
+                "24 way mcb box": 0,
+                "Isolater 40A": 0,
+                "Isolater 63A": 0,
+
+                "Mcb Changer 40A": 0,
+                "Mcb Changer 63A": 0,
+
+                "30ma RCCB 40A": 0,
+                "30ma RCCB 63A": 0,
+
+                "6amp mcb": 0,
+                "10amp mcb": 0,
+                "16amp mcb": 0,
+                "20amp mcb": 0,
+                "25amp mcb": 0,
+                "32amp mcb": 0,
+                "40amp mcb": 0,
+                "63amp mcb": 0,
+                '1.5"kala patch': 0,
+                "32amp dp switch": 0,
+                "conceal light": 0,
+                "Led bulb": 0,
+                "Night bulb": 0,
+                "Tube light 20W": 0,
+                "Fan": 0,
+                "Fan box round Sheet": 0,
+                "Fuse": 0,
+                "Indicator": 0,
+                "0.4 mm washer": 0,
+
+                "6A Sockets": 0,
+                "16A Sockets": 0,
+                "batten holder": 0,
+                '1.5"kala patch': 0,
+                "32amp dp switch": 0,
+                "conceal light": 0,
+                "Led bulb": 0,
+                "Night bulb": 0,
+                "Tube light": 0,
+                "Fan": 0,
+                "6amp top": 0,
+                "16amp top": 0,
+            };
+
+
+            // ================= GENERATE BILL =================
             function generateBill() {
 
-
-                const rooms = document.querySelectorAll('.room-card');
-
-                // Reset all
-                Object.keys(MATERIALS).forEach(key => {
+                // RESET ALL MATERIALS
+                for (let key in MATERIALS) {
                     MATERIALS[key] = 0;
-                });
+                }
 
+                const rooms = document.querySelectorAll(".room-card");
 
                 rooms.forEach(room => {
+                    const roomType = room.querySelector(".room-type").value;
+                    const inputs = room.querySelectorAll("input");
+
                     let roomModule = 0;
+                    let hasAnyItem = false;
 
-                    const inputs = room.querySelectorAll('input');
+                    // Check if room has any items
+                    inputs.forEach(input => {
+                        if (parseInt(input.value) > 0) hasAnyItem = true;
+                    });
 
-                    const fan = parseInt(inputs[0].value) || 0;
-                    const led = parseInt(inputs[1].value) || 0;
-                    const tube = parseInt(inputs[2].value) || 0;
-                    const night = parseInt(inputs[3].value) || 0;
-                    const socket10 = parseInt(inputs[4].value) || 0;
-                    const socket20 = parseInt(inputs[5].value) || 0;
-                    const twoWay = parseInt(inputs[6].value) || 0;
-                    const powerBoard = parseInt(inputs[7].value) || 0;
-                    const conceal = parseInt(inputs[8].value) || 0;
-                    const patti = parseInt(inputs[9].value) || 0;
 
-                    // ================= FAN =================
 
-                    MATERIALS['6amp switch'] += fan;
-                    MATERIALS['regulator'] += fan;
-                    MATERIALS['Junction box'] += fan;
-                    MATERIALS['celling rose'] += fan;
+                    // Process all items
+                    inputs.forEach(input => {
+                        const qty = parseInt(input.value) || 0;
+                        const item = input.dataset.item;
+                        if (!qty) return;
 
-                    roomModule += fan * 3;
 
-                    // ================= LED =================
 
-                    MATERIALS['6amp switch'] += led;
-                    MATERIALS['Junction box'] += led;
-                    MATERIALS['angle holder'] += led;
 
-                    roomModule += led;
 
-                    // ================= TUBE =================
+                        // ================= FUSE =================
+                        if (item === "Fuse") {
 
-                    MATERIALS['6amp switch'] += tube;
-                    MATERIALS['Junction box'] += tube;
-                    MATERIALS['celling rose'] += tube;
+                            MATERIALS["Fuse"] += qty;
 
-                    roomModule += tube;
-
-                    // ================= NIGHT BULB =================
-
-                    MATERIALS['6amp switch'] += night;
-                    MATERIALS['Junction box'] += night;
-                    MATERIALS['angle holder'] += night;
-
-                    roomModule += night;
-                    // ================= 10A SOCKET =================
-
-                    MATERIALS['6amp switch'] += socket10;
-                    MATERIALS['6amp Socket'] += socket10;
-
-                    roomModule += socket10 * 3;
-
-                    // ================= 20A SOCKET =================
-
-                    MATERIALS['16amp switch'] += socket20;
-                    MATERIALS['16amp Socket'] += socket20;
-
-                    roomModule += socket20 * 3;
-
-                    // ================= TWO WAY =================
-
-                    if (twoWay > 0) {
-
-                        MATERIALS['two way switch'] += (twoWay * 2);
-
-                        MATERIALS['6amp switch'] += 1;
-
-                        MATERIALS['6amp Socket'] += 1;
-
-                        if (twoWay === 1) {
-
-                            MATERIALS['Plate 4 module'] += 1;
-
+                            roomModule += qty * 1;
                         }
 
-                        else if (twoWay === 2) {
 
-                            MATERIALS['Plate 6 module'] += 1;
+                        // ================= INDICATOR =================
+                        if (item === "Indicator") {
 
-                            MATERIALS['blanker'] += 1;
+                            MATERIALS["Indicator"] += qty;
 
+                            roomModule += qty * 1;
                         }
 
+                        // ================= ITEM CALCULATIONS =================
+
+                        if (item === "Led bulb" || item === "Night bulb") {
+                            MATERIALS[item] += qty;
+                            MATERIALS["angle holder"] += qty;
+                            MATERIALS["3/3 Junction box"] += qty;
+                            MATERIALS["Gujja"] += qty;
+                            MATERIALS['1.5"kala patch'] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            roomModule += qty * 1;
+                        }
+
+                        if (item === "Tube light") {
+                            MATERIALS["Tube light 20W"] += qty;
+                            MATERIALS["celling rose"] += qty;
+                            MATERIALS["3/3 Junction box"] += qty;
+                            MATERIALS["Gujja"] += qty;
+                            MATERIALS['1.5"kala patch'] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            roomModule += qty * 1;
+                        }
+
+                        if (item === "conceal light") {
+                            MATERIALS["conceal light"] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            roomModule += qty * 1;
+                        }
+
+                        if (item === "Fan") {
+                            MATERIALS["Fan"] += qty;
+                            MATERIALS["celling rose"] += qty;
+                            MATERIALS["3/3 Junction box"] += qty;
+                            MATERIALS["Gujja"] += qty;
+                            MATERIALS["Fan box round Sheet"] += qty;
+                            MATERIALS['1.5"kala patch'] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            MATERIALS["regulator"] += qty;
+                            roomModule += qty * 2;
+                        }
+
+                        if (item === "Exhaust fan") {
+                            MATERIALS["celling rose"] += qty;
+                            MATERIALS["3/3 Junction box"] += qty;
+                            MATERIALS["Gujja"] += qty;
+                            MATERIALS['1.5"kala patch'] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            roomModule += qty * 1;
+                        }
+
+                        if (item === "Led bulb batten") {
+                            MATERIALS["Led bulb"] += qty;
+                            MATERIALS["batten holder"] += qty;
+                            MATERIALS["3/3 Junction box"] += qty;
+                            MATERIALS["Gujja"] += qty;
+                            MATERIALS['1.5"kala patch'] += qty;
+                            MATERIALS["6amp switch"] += qty;
+                            roomModule += qty * 1;
+                        }
+
+                        // ================= 2WAY SWITCHES =================
+
+                        // 2WAY F
+                        if (item === "2way F") {
+
+                            MATERIALS["4 module (board+plate)"] += qty;
+
+                            MATERIALS["regulator"] += qty;
+
+                            MATERIALS["Gujja"] += qty * 5;
+
+                            MATERIALS['1.5"kala patch'] += qty * 5;
+
+                            MATERIALS["0.4 mm washer"] += qty * 5;
+
+                            MATERIALS["3/3 Junction box"] += qty;
+
+                            MATERIALS["Fan"] += qty;
+
+                            MATERIALS["celling rose"] += qty;
+
+                            MATERIALS["two way switch"] += qty * 2;
+
+                            MATERIALS["6amp switch"] += qty;
+
+                            MATERIALS["6amp Socket"] += qty;
+
+                            roomModule += qty * 2;
+                        }
+
+
+                        // 2WAY B
+                        if (item === "2way B") {
+
+                            MATERIALS["4 module (board+plate)"] += qty;
+
+                            MATERIALS["Gujja"] += qty * 5;
+
+                            MATERIALS['1.5"kala patch'] += qty * 5;
+
+                            MATERIALS["0.4 mm washer"] += qty * 5;
+
+                            MATERIALS["Led bulb"] += qty;
+
+                            MATERIALS["angle holder"] += qty;
+
+                            MATERIALS["3/3 Junction box"] += qty;
+
+                            MATERIALS["two way switch"] += qty * 2;
+
+                            MATERIALS["6amp switch"] += qty;
+
+                            MATERIALS["6amp Socket"] += qty;
+
+                            roomModule += qty * 1;
+                        }
+
+
+                        // 2WAY F&B
+                        if (item === "2way F&B") {
+
+                            MATERIALS["6 module (board+plate)"] += qty;
+
+                            MATERIALS["Gujja"] += qty * 6;
+
+                            MATERIALS['1.5"kala patch'] += qty * 6;
+
+                            MATERIALS["0.4 mm washer"] += qty * 6;
+
+                            MATERIALS["two way switch"] += qty * 4;
+
+                            MATERIALS["6amp switch"] += qty;
+
+                            MATERIALS["6amp Socket"] += qty;
+
+                            MATERIALS["regulator"] += qty;
+
+                            MATERIALS["Led bulb"] += qty;
+
+                            MATERIALS["Fan"] += qty;
+
+                            MATERIALS["angle holder"] += qty;
+
+                            MATERIALS["blanker"] += qty;
+
+                            MATERIALS["3/3 Junction box"] += qty * 2;
+
+                            MATERIALS["celling rose"] += qty;
+
+                            roomModule += qty * 3;
+                        }
+
+                        if (item === "6A Sockets") {
+                            MATERIALS["6amp switch"] += qty;
+                            MATERIALS["6amp Socket"] += qty;
+                            roomModule += qty * 3;
+                        }
+
+                        if (item === "16A Sockets") {
+                            MATERIALS["16amp switch"] += qty;
+                            MATERIALS["16amp Socket"] += qty;
+                            roomModule += qty * 3;
+                        }
+
+                        // ================= BIG BOARDS - NO roomModule addition =================
+                        if (item === "Tv board") {
+                            MATERIALS["6amp Socket"] += qty * 3;
+                            MATERIALS["6amp switch"] += qty * 3;
+                            MATERIALS["Gujja"] += qty * 8;
+                            MATERIALS['1.5"kala patch'] += qty * 8;
+                            MATERIALS["6 module (board+plate)"] += qty;
+                            MATERIALS["3 module (board+plate)"] += qty;
+                            // No roomModule += 
+                        }
+
+                        if (item === "Power board") {
+                            MATERIALS["16amp switch"] += qty;
+                            MATERIALS["16amp Socket"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["3 module (board+plate)"] += qty;
+                            // No roomModule +=
+                        }
+
+                        if (item === "AC") {
+                            MATERIALS["32amp dp switch"] += qty;
+                            MATERIALS["16amp Socket"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["2 module (board+plate)"] += qty;
+                            roomModule += qty * 2;   // AC still uses main board space
+                        }
+
+                        if (item === "Inverter") {
+                            MATERIALS["16amp switch"] += qty * 2;
+                            MATERIALS["16amp Socket"] += qty * 2;
+                            MATERIALS["6amp top"] += qty;
+                            MATERIALS["16amp top"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["6 module (board+plate)"] += qty;
+                            // No roomModule +=
+                        }
+
+                        if (item === "Induction board") {
+                            MATERIALS["16amp switch"] += qty * 2;
+                            MATERIALS["16amp Socket"] += qty * 2;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["6 module (board+plate)"] += qty;
+                            // No roomModule +=
+                        }
+
+                        if (item === "Fridge board") {
+                            MATERIALS["16amp switch"] += qty;
+                            MATERIALS["16amp Socket"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["3 module (board+plate)"] += qty;
+                            // No roomModule +=
+                        }
+
+                        if (item === "Water filter") {
+                            MATERIALS["6amp switch"] += qty;
+                            MATERIALS["6amp Socket"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["2 module (board+plate)"] += qty;
+                            // No roomModule +=
+                        }
+
+                        if (item === "Geyser board") {
+                            MATERIALS["16amp switch"] += qty;
+                            MATERIALS["16amp Socket"] += qty;
+                            MATERIALS["Gujja"] += qty * 4;
+                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS["2 module (board+plate)"] += qty;
+                            roomModule += qty * 2;   // Geyser still uses main board
+                        }
+
+                        if (item === "Patti") {
+                            MATERIALS["Patti"] += qty;
+                            MATERIALS["35/8 Screw"] += qty * 7;
+                            MATERIALS["Gujja"] += qty * 7;
+                            MATERIALS["0.4 mm washer"] += qty * 7;
+                        }
+
+                        // MCB Section
+                        if (roomType === "MCB") {
+                            if (item.includes("Isolater") || item.includes("Mcb Changer") || item.includes("RCCB")) {
+                                MATERIALS[item] += qty;
+                            }
+                            if (["6amp mcb", "10amp mcb", "16amp mcb", "20amp mcb", "25amp mcb", "32amp mcb", "40amp mcb", "63amp mcb"].includes(item)) {
+                                MATERIALS[item] += qty;
+                            }
+                            if (item.includes("way mcb box")) {
+                                MATERIALS[item] += qty;
+                            }
+                        }
+                    });
+
+                    // ================= MODULE LIMIT CHECK =================
+
+                    if (roomType !== "MCB" && roomModule > 18) {
+
+                        const roomName =
+                            room.querySelector("h2").innerText;
+
+                        showModuleAlert(roomName, roomModule);
+
+                        return; // BILL GENERATE STOP
                     }
 
-                    // ================= CONCEAL LIGHT =================
+                    // ================= FINAL MAIN ROOM PLATE =================
+                    if (roomType !== "MCB" && roomModule > 0) {
+                        const plateSize = getPlateSize(roomModule);
 
-                    MATERIALS['6amp switch'] += conceal;
+                        // Add Main Board + Plate
+                        MATERIALS[`${plateSize} module (board+plate)`] += 1;
 
-                    roomModule += conceal;
+                        // Blankers for empty modules
+                        const emptySpace = plateSize - roomModule;
+                        if (emptySpace > 0) {
+                            MATERIALS["blanker"] += emptySpace;
+                        }
 
-                    // ================= POWER BOARD =================
-
-                    MATERIALS['16amp switch'] += powerBoard;
-                    MATERIALS['16amp Socket'] += powerBoard;
-
-                    // ================= PATTI =================
-
-                    MATERIALS['patti'] += patti;
-                    MATERIALS['35/8 skew'] += patti * 7;
-                    MATERIALS['gujja'] += patti * 7;
-
-                    // ================= AUTO INDICATOR + FUSE =================
-
-                    MATERIALS['Indicator'] += 1;
-                    MATERIALS['Fuse'] += 1;
-
-                    roomModule += 2;
-
-                    // ================= ROOM MODULE PLATE =================
-
-                    selectPlate(roomModule);
-
+                        // Extra Fixing Hardware for each Main Plate
+                        MATERIALS["0.4 mm washer"] += 4;
+                        MATERIALS['1.5"kala patch'] += 4;
+                        MATERIALS["Gujja"] += 4;
+                    }
                 });
 
-
-
-                // ================= SHOW RESULT =================
+                // Final Calculations
+                MATERIALS["0.4 mm washer"] = MATERIALS["Gujja"];
 
                 showBill(MATERIALS);
             }
 
+            // Helper Function
+            function getPlateSize(moduleCount) {
+                if (moduleCount <= 1) return 1;
+                if (moduleCount <= 2) return 2;
+                if (moduleCount <= 3) return 3;
+                if (moduleCount <= 4) return 4;
+                if (moduleCount <= 6) return 6;
+                if (moduleCount <= 8) return 8;
+                if (moduleCount <= 12) return 12;
+                if (moduleCount <= 16) return 16;
+                return 18;
+            }
+
+            // Helper Function
+            function getPlateSize(moduleCount) {
+                if (moduleCount <= 1) return 1;
+                if (moduleCount <= 2) return 2;
+                if (moduleCount <= 3) return 3;
+                if (moduleCount <= 4) return 4;
+                if (moduleCount <= 6) return 6;
+                if (moduleCount <= 8) return 8;
+                if (moduleCount <= 12) return 12;
+                if (moduleCount <= 16) return 16;
+                return 18;
+            }
+
             // ================= AUTO MODULE PLATE =================
 
-            function selectPlate(moduleNeed) {
+            function selectPlate(moduleCount) {
 
-                const plates = [1, 2, 3, 4, 6, 8, 12, 16, 18];
+                let plateSize = 0;
 
-                for (let size of plates) {
+                if (moduleCount <= 1) plateSize = 1;
+                else if (moduleCount <= 2) plateSize = 2;
+                else if (moduleCount <= 3) plateSize = 3;
+                else if (moduleCount <= 4) plateSize = 4;
+                else if (moduleCount <= 6) plateSize = 6;
+                else if (moduleCount <= 8) plateSize = 8;
+                else if (moduleCount <= 12) plateSize = 12;
+                else if (moduleCount <= 16) plateSize = 16;
+                else plateSize = 18;
 
-                    if (moduleNeed <= size) {
+                MATERIALS[`${plateSize} module (board+plate)`] += 1;
 
-                        MATERIALS[`Plate ${size} module`]++;
-
-                        let empty = size - moduleNeed;
-
-                        MATERIALS['blanker'] += empty;
-
-                        break;
-                    }
-                }
+                return plateSize;
             }
+
+
+
+
+            function addExtraMaterialRow() {
+
+                const table = document.querySelector('#billModal table');
+
+                const row = document.createElement("tr");
+
+                row.classList.add("extra-material-row");
+
+                row.innerHTML = `
+    
+    <td style="border:1px solid #444; padding:12px;">
+        <input type="text" placeholder="Extra Material Name"
+        style="width:100%; padding:8px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" placeholder="Qty"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        
+        <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
+
+            <input type="text" placeholder="Unit"
+            style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+
+            <button onclick="deleteExtraMaterial(this)" style="
+                background:red;
+                color:white;
+                border:none;
+                width:32px;
+                height:32px;
+                border-radius:50%;
+                cursor:pointer;
+                font-size:18px;
+                font-weight:bold;
+            ">
+                ×
+            </button>
+
+        </div>
+
+    </td>
+    `;
+
+                table.appendChild(row);
+
+            }
+
+
+
+            function deleteExtraMaterial(btn) {
+
+                btn.closest("tr").remove();
+
+            }
+
+
 
             // ================= SHOW BILL =================
 
             function showBill(materials) {
+                const unitMap = {
+                    // Wires
+
+                    "6mm wire": "Coil",
+                    "4mm wire": "Coil",
+                    "2.5mm wire": "Coil",
+                    "1.5mm wire": "Coil",
+                    "1mm wire": "Coil",
+                    "0.5mm wire": "Coil",
+
+                    // Common Items
+                    "Flexible Pipe": "Ft",
+                    "Tap": "Pic",
+                    "35/8 Screw": "pkt",
+                    "35/8 katti": "pkt",
+                    "0.4 mm washer": "Pic",
+                    "6amp switch": "Pic",
+                    "6amp Socket": "Pic",
+                    "16amp switch": "Pic",
+                    "16amp Socket": "Pic",
+                    "two way switch": "Pic",
+                    "regulator": "Pic",
+                    "3/3 Junction box": "Pic",
+                    "celling rose": "Pic",
+                    "angle holder": "Pic",
+                    "straight holder": "Pic",
+                    "batten holder": "Pic",
+                    "Patti": "Pic",
+                    "Gujja": "Pkt",
+                    "kala patch 1inch": "Pic",
+                    "kala patch 2inch": "Pic",
+                    '1.5"kala patch': "Pic",
+                    "32amp dp switch": "Pic",
+                    "conceal light": "Pic",
+                    "Led bulb": "Pic",
+                    "Night bulb": "Pic",
+                    "Tube light": "Pic",
+                    "Fan": "Pic",
+                    "blanker": "Pic",
+                    "Indicator": "Pic",
+                    "Fuse": "Pic",
+
+                    // Boards & Plates
+                    "1 module (board+plate)": "Pic",
+                    "2 module (board+plate)": "Pic",
+                    "3 module (board+plate)": "Pic",
+                    "4 module (board+plate)": "Pic",
+                    "6 module (board+plate)": "Pic",
+                    "8 module (board+plate)": "Pic",
+                    "12 module (board+plate)": "Pic",
+                    "16 module (board+plate)": "Pic",
+                    "18 module (board+plate)": "Pic",
+
+                    // MCB Items
+                    "Isolater 40A": "Pic",
+                    "Isolater 63A": "Pic",
+                    "Mcb Changer 40A": "Pic",
+                    "Mcb Changer 63A": "Pic",
+                    "30ma RCCB 40A": "Pic",
+                    "30ma RCCB 63A": "Pic",
+                    "6amp mcb": "Pic",
+                    "10amp mcb": "Pic",
+                    "16amp mcb": "Pic",
+                    "20amp mcb": "Pic",
+                    "25amp mcb": "Pic",
+                    "32amp mcb": "Pic",
+                    "40amp mcb": "Pic",
+                    "63amp mcb": "Pic",
+                    "2 way mcb box": "Pic",
+                    "4 way mcb box": "Pic",
+                    "6 way mcb box": "Pic",
+                    "8 way mcb box": "Pic",
+                    "10 way mcb box": "Pic",
+                    "12 way mcb box": "Pic",
+                    "14 way mcb box": "Pic",
+                    "16 way mcb box": "Pic",
+                    "18 way mcb box": "Pic",
+                    "20 way mcb box": "Pic",
+                    "22 way mcb box": "Pic",
+                    "24 way mcb box": "Pic",
+
+                    // Default
+                    "default": "Pic"
+                };
 
                 let html = `
-    <div id="billModal" style="
-        position:fixed;
-        inset:0;
-        background:rgba(0,0,0,0.8);
-        overflow:auto;
-        z-index:9999;
-        padding:20px;
-    ">
-
-    <div style="
-        max-width:900px;
-        margin:auto;
-        background:#111;
-        border:2px solid #FFD700;
-        border-radius:20px;
-        padding:25px;
-    ">
-
-    <h1 style="text-align:center;color:#FFD700;">SM Technician Material List</h1>
-
-    <table style="width:100%;margin-top:20px;border-collapse:collapse;">
-
-    <tr>
-        <th style="border:1px solid #444;padding:10px;">Material</th>
-        <th style="border:1px solid #444;padding:10px;">Quantity</th>
-    </tr>
+    <div id="billModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); overflow:auto; z-index:9999; padding:20px;">
+        <div style="max-width:1000px; margin:auto; background:#111; border:2px solid #FFD700; border-radius:20px; padding:25px;">
+            
+            <h1 style="text-align:center; color:#FFD700; margin-bottom:20px;">SM Technician Material List</h1>
+            
+            <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+                <tr style="background:#222;">
+                    <th style="border:1px solid #444; padding:12px; text-align:left;">Material</th>
+                    <th style="border:1px solid #444; padding:12px; text-align:center;">Quantity</th>
+                    <th style="border:1px solid #444; padding:12px; text-align:center;">Unit</th>
+                </tr>
     `;
 
                 Object.keys(materials).forEach(item => {
-
                     if (materials[item] > 0) {
+                        const unit = unitMap[item] || unitMap["default"];
+                        let displayQty = materials[item];
 
+// ================= GUJJA PKT LOGIC =================
+if (item === "Gujja") {
+
+    if (displayQty <= 40) {
+        displayQty = 1;
+    } else {
+        displayQty = Math.ceil(displayQty / 40);
+    }
+}
+
+// ================= 35/8 SCREW PKT LOGIC =================
+if (item === "35/8 Screw") {
+
+    if (displayQty <= 70) {
+        displayQty = 1;
+    } else {
+        displayQty = Math.ceil(displayQty / 70);
+    }
+}
                         html += `
-            <tr>
-                <td style="border:1px solid #444;padding:10px;">${item}</td>
-                <td style="border:1px solid #444;padding:10px;text-align:center;">
-
-<input
-type="number"
-value="${materials[item]}"
-style="
-width:80px;
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:6px;
-text-align:center;
-font-size:16px;
-">
-
-</td>
-            </tr>
+                <tr>
+                    <td style="border:1px solid #444; padding:12px;">${item}</td>
+                    <td style="border:1px solid #444; padding:12px; text-align:center;">
+                        <input type="number" value="${displayQty}"
+                            style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:6px; text-align:center;">
+                    </td>
+                    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700; font-weight:500;">${unit}</td>
+                </tr>
             `;
                     }
                 });
 
-                // ================= WIRE SECTION =================
-
+                // Wire Section
                 html += `
-
     <tr>
-        <td colspan="2" style="padding:15px;background:#222;color:#FFD700;font-size:20px;">
+        <td colspan="3" style="padding:15px; background:#222; color:#FFD700; font-size:20px; text-align:center;">
             Wire Section
         </td>
     </tr>
-
-   <tr>
-<td>4mm wire</td>
-
-<td>
-
-<select style="
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-<option>1 Core</option>
-<option>2 Core</option>
-<option>3 Core</option>
-<option>4 Core</option>
-
-</select>
-
-<input
-type="number"
-placeholder="Qty"
-style="
-width:90px;
-padding:6px;
-margin-left:8px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>2.5mm wire</td>
-
-<td>
-
-<select style="
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-<option>1 Core</option>
-<option>2 Core</option>
-<option>3 Core</option>
-<option>4 Core</option>
-
-</select>
-
-<input
-type="number"
-placeholder="Qty"
-style="
-width:90px;
-padding:6px;
-margin-left:8px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>1.5mm wire</td>
-
-<td>
-
-<select style="
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-<option>1 Core</option>
-<option>2 Core</option>
-<option>3 Core</option>
-<option>4 Core</option>
-
-</select>
-
-<input
-type="number"
-placeholder="Qty"
-style="
-width:90px;
-padding:6px;
-margin-left:8px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>1mm wire</td>
-
-<td>
-
-<select style="
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-<option>1 Core</option>
-<option>2 Core</option>
-<option>3 Core</option>
-<option>4 Core</option>
-
-</select>
-
-<input
-type="number"
-placeholder="Qty"
-style="
-width:90px;
-padding:6px;
-margin-left:8px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>0.5mm wire</td>
-
-<td>
-
-<select style="
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-<option>1 Core</option>
-<option>2 Core</option>
-<option>3 Core</option>
-<option>4 Core</option>
-
-</select>
-
-<input
-type="number"
-placeholder="Qty"
-style="
-width:90px;
-padding:6px;
-margin-left:8px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-
-<tr>
-<td colspan="2" style="
-padding:15px;
-background:#222;
-color:#FFD700;
-font-size:20px;
-">
-Extra Materials
-</td>
-</tr>
-
-
-<tr>
-<td>Flexible Pipe</td>
-
-<td>
-
-<input
-type="number"
-placeholder="Quantity"
-value="0"
-style="
-width:120px;
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>Tap</td>
-
-<td>
-
-<input
-type="number"
-placeholder="Quantity"
-value="0"
-style="
-width:120px;
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>Kala Patch 1inch</td>
-
-<td>
-
-<input
-type="number"
-placeholder="Quantity"
-value="0"
-style="
-width:120px;
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
-
-<tr>
-<td>Kala Patch 2inch</td>
-
-<td>
-
-<input
-type="number"
-placeholder="Quantity"
-value="0"
-style="
-width:120px;
-padding:6px;
-background:#222;
-color:white;
-border:1px solid #555;
-border-radius:5px;
-">
-
-</td>
-</tr>
-
     `;
+
+                const wireTypes = ["6mm wire", "4mm wire", "2.5mm wire", "1.5mm wire", "1mm wire", "0.5mm wire"];
+                wireTypes.forEach(wire => {
+                    html += `
+        <tr>
+            <td style="border:1px solid #444; padding:12px;">${wire}</td>
+            <td style="border:1px solid #444; padding:12px; text-align:center;">
+                <select style="padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+                    <option>Red & Black</option>
+                    <option>Black & Yellow</option>
+                    <option>Blue & Red</option>
+                    <option>Yellow & Blue</option>
+                    <option>Red</option>
+                    <option>Black</option>
+                    <option>Yellow</option>
+                    <option>Blue</option>
+                    <option>Green</option>
+                </select>
+                <input type="number" placeholder="Qty" style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+            </td>
+            <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Coil</td>
+        </tr>`;
+                });
+
+                // Extra Materials
                 html += `
-    </table>
+<tr>
+    <td colspan="3" style="padding:15px; background:#222; color:#FFD700; font-size:20px; text-align:center;">
+        Extra Materials
+    </td>
+</tr>
 
-    <div style="text-align:center;margin-top:25px;">
+<tr>
+    <td style="border:1px solid #444; padding:12px;">1" Flexible Pipe</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Ft</td>
+</tr>
 
-    <button onclick="downloadPDF()" style="
-        background:#FFD700;
-        color:#111;
-        border:none;
-        padding:15px 30px;
-        border-radius:10px;
-        font-size:18px;
-        font-weight:bold;
-        cursor:pointer;
-    ">
-        Download PDF
-    </button>
+<tr>
+    <td style="border:1px solid #444; padding:12px;">3/4" Flexible Pipe</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Ft</td>
+</tr>
 
-    <button onclick="closeBillModal()" style="
-        background:red;
-        color:white;
-        border:none;
-        padding:15px 30px;
-        border-radius:10px;
-        font-size:18px;
-        font-weight:bold;
-        cursor:pointer;
-        margin-left:10px;
-    ">
-        Close
-    </button>
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Zip Tie 5"</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
 
-    </div>
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Zip Tie 10"</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
 
-    </div>
-    </div>
-    `;
+<tr>
+    <td style="border:1px solid #444; padding:12px;">7/4 Plane Box</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+<!-- Custom Extra Material Add Option -->
+
+
+
+
+<tr>
+    <td colspan="3" style="padding:15px; text-align:center; border:1px solid #444;">
+        
+        <button onclick="addExtraMaterialRow()" style="
+            background:#FFD700;
+            color:#111;
+            border:none;
+            padding:12px 25px;
+            border-radius:10px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        ">
+            + Add Extra Material
+        </button>
+
+    </td>
+</tr>
+`;
+
+                html += `</table>`;
+
+                // Buttons
+                html += `
+       <div style="text-align:center; margin-top:30px;">
+            <button onclick="downloadPDF()" style="background:#FFD700; color:#111; border:none; padding:15px 30px; border-radius:10px; font-size:18px; font-weight:bold; cursor:pointer; margin:0 8px;">
+                📥 Download PDF
+            </button>
+            <button onclick="shareOnWhatsApp()" style="background:#25D366; color:white; border:none; padding:15px 30px; border-radius:10px; font-size:18px; font-weight:bold; cursor:pointer; margin:0 8px;">
+                💬 Share on WhatsApp
+            </button>
+            <button onclick="closeBillModal()" style="background:red; color:white; border:none; padding:15px 30px; border-radius:10px; font-size:18px; font-weight:bold; cursor:pointer; margin:0 8px;">
+                Close
+            </button>
+        </div>
+    </div></div>`;
 
                 document.body.insertAdjacentHTML('beforeend', html);
             }
@@ -1362,136 +1789,300 @@ border-radius:5px;
             }
             // ================= PDF DOWNLOAD =================
 
+            // ================= PDF DOWNLOAD =================
             function downloadPDF() {
 
                 const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'pt', 'a4');
 
-                const pdf = new jsPDF();
+                const customerName = document.getElementById('custName').value.trim() || "Customer";
+                const address = document.getElementById('custAddress').value.trim() || "-";
+                const phone = document.getElementById('phone').value.trim() || "-";
 
-                // ================= TITLE =================
+                // ================= HEADER =================
+                pdf.setFillColor(0, 123, 255);
+                pdf.rect(0, 0, 595, 70, "F");
 
-                pdf.setFontSize(20);
+                try {
+                    const logo = document.querySelector(".header-logo");
+                    if (logo) pdf.addImage(logo, "PNG", 40, 15, 55, 55);
+                } catch (e) { }
 
-                pdf.text("SM Technician Material List", 14, 20);
-
-                // ================= CUSTOMER INFO =================
-
-                const customer = document.getElementById('custName').value || '-';
-
-                const address = document.getElementById('custAddress').value || '-';
-
-                const phone = document.getElementById('phone').value || '-';
+                pdf.setTextColor(255, 255, 255);
+                pdf.setFontSize(24);
+                pdf.text("SM Technician", 120, 35);
 
                 pdf.setFontSize(12);
+                pdf.text("8935883863", 120, 55);
 
-                pdf.text(`Customer : ${customer}`, 14, 35);
+                const today = new Date();
+                pdf.setTextColor(0);
+                pdf.setFontSize(11);
+                pdf.text(`Date: ${today.toLocaleDateString('en-IN')}`, 400, 40);
 
-                pdf.text(`Address : ${address}`, 14, 43);
+                // ================= CUSTOMER INFO =================
+                pdf.setFontSize(12);
+                pdf.text("Customer :", 40, 100);
+                pdf.text(customerName, 140, 100);
 
-                pdf.text(`Phone : ${phone}`, 14, 51);
+                pdf.text("Address :", 40, 120);
+                pdf.text(address, 140, 120);
+
+                pdf.text("Mobile :", 40, 140);
+                pdf.text(phone, 140, 140);
+
+                pdf.line(40, 160, 555, 160);
 
                 // ================= TABLE DATA =================
-
                 const rows = [];
+                let serial = 1;
 
                 const tableRows = document.querySelectorAll('#billModal table tr');
 
-                tableRows.forEach((row, index) => {
-
-                    if (index === 0) return;
-
+                tableRows.forEach((row) => {
                     const cols = row.querySelectorAll('td');
+                    if (cols.length < 2) return;
 
-                    if (cols.length >= 2) {
+                    let material = cols[0].innerText.trim();
 
-                        const material = cols[0].innerText.trim();
+                    // Custom Extra Material Input Detect
+                    const materialInput = cols[0].querySelector('input');
+
+                    if (materialInput && materialInput.value.trim() !== '') {
+                        material = materialInput.value.trim();
+                    }
+
+                    // Special handling for Wire Section
+                    if (material.includes("mm wire")) {
+                        const select = cols[1].querySelector('select');
+                        const qtyInput = cols[1].querySelector('input');
+
+                        const color = select ? select.value : '';
+                        const qty = qtyInput ? qtyInput.value : '0';
+
+                        if (parseInt(qty) > 0) {
+                            rows.push([serial++, `${material} - ${color}`, qty, 'Pic']);
+                        }
+                    }
+                    else {
 
                         let qty = '';
+                        let unit = 'Pic';
 
-                        const input = cols[1].querySelector('input');
+                        const qtyInput = cols[1].querySelector('input');
 
-                        if (input) {
-
-                            qty = input.value;
-                        }
-                        else {
-
+                        if (qtyInput) {
+                            qty = qtyInput.value;
+                        } else {
                             qty = cols[1].innerText.trim();
                         }
 
-                        rows.push([material, qty]);
+                        // Unit Input Detect
+                        const unitInput = cols[2].querySelector('input');
+
+                        if (unitInput && unitInput.value.trim() !== '') {
+                            unit = unitInput.value.trim();
+                        } else {
+                            unit = cols[2].innerText.trim();
+                        }
+
+                        if (
+                            material &&
+                            material !== "Extra Materials" &&
+                            parseInt(qty) > 0
+                        ) {
+                            rows.push([serial++, material, qty, unit]);
+                        }
                     }
                 });
 
-                // ================= PDF TABLE =================
-
+                // Generate Table
                 pdf.autoTable({
-
-                    startY: 60,
-
-                    head: [['Material', 'Quantity']],
-
+                    startY: 180,
+                    head: [['S.No.', 'Item Description', 'Quantity', 'Unit']],
                     body: rows,
-
                     theme: 'grid',
-
-                    styles: {
-                        fontSize: 11
-                    },
-
-                    headStyles: {
-                        fillColor: [255, 215, 0]
+                    styles: { fontSize: 11, cellPadding: 6 },
+                    headStyles: { fillColor: [0, 123, 255], textColor: 255, fontStyle: 'bold' },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    columnStyles: {
+                        0: { cellWidth: 45 },
+                        1: { cellWidth: 320 },
+                        2: { cellWidth: 60, halign: 'center' },
+                        3: { cellWidth: 50, halign: 'center' }
                     }
                 });
 
-                // ================= SAVE PDF =================
+                // Footer
+                const pageHeight = pdf.internal.pageSize.height;
+                pdf.setFontSize(10);
+                pdf.text("SM Technician • 8935883863", 40, pageHeight - 30);
+                pdf.text("Thank you for choosing SM Technician!", 40, pageHeight - 15);
 
-                pdf.save('SM-Technician-Material-List.pdf');
+                // Save PDF with Customer Name
+                const fileName = `${customerName.replace(/[^a-zA-Z0-9 ]/g, '_')}_Electrical_Estimate.pdf`;
+                pdf.save(fileName);
             }
 
             // ================= BUTTON CONNECT =================
 
             document.getElementById('generateBillBtn').onclick = generateBill;
 
+            renderRoomFields(
+                document.querySelector(".room-card")
+            );
 
 
+            function renderRoomFields(roomCard) {
+
+                // Room type ka naam lena
+                const type =
+                    roomCard.querySelector(".room-type").value;
+
+                // Grid area lena
+                const grid =
+                    roomCard.querySelector(".dynamic-room-fields");
+
+                // Template items lena
+                const items =
+                    ROOM_TEMPLATES[type];
+
+                // Empty html
+                let html = "";
+
+                // Sab item banana
+                items.forEach(item => {
+
+                    html += `
+
+        <div class="room-field">
+
+            <label>${item}</label>
+
+            <input
+                type="number"
+                value="0"
+                data-item="${item}"
+            >
+
+        </div>
+
+        `;
+                });
+
+
+
+                // HTML show karna
+                grid.innerHTML = html;
+            }
 
 
             function updateRoomTitle(selectEl) {
+
+                const roomCard =
+                    selectEl.closest(".room-card");
+
+                renderRoomFields(roomCard);
 
                 updateRoomNumbers();
             }
 
 
-document.addEventListener("focusin", function(e){
+            document.addEventListener("focusin", function (e) {
 
-    if(
-        e.target.tagName === "INPUT" &&
-        e.target.type === "number"
-    ){
+                if (
+                    e.target.tagName === "INPUT" &&
+                    e.target.type === "number"
+                ) {
 
-        if(e.target.value === "0"){
-            e.target.value = "";
-        }
+                    if (e.target.value === "0") {
+                        e.target.value = "";
+                    }
 
-    }
+                }
 
-});
+            });
 
-document.addEventListener("focusout", function(e){
+            document.addEventListener("focusout", function (e) {
 
-    if(
-        e.target.tagName === "INPUT" &&
-        e.target.type === "number"
-    ){
+                if (
+                    e.target.tagName === "INPUT" &&
+                    e.target.type === "number"
+                ) {
 
-        if(e.target.value.trim() === ""){
-            e.target.value = "0";
-        }
+                    if (e.target.value.trim() === "") {
+                        e.target.value = "0";
+                    }
 
-    }
+                }
 
-});
+            });
+
+            function showModuleAlert(roomName, moduleCount) {
+
+                const oldAlert = document.querySelector(".module-alert");
+
+                if (oldAlert) {
+                    oldAlert.remove();
+                }
+
+                const alertBox = document.createElement("div");
+
+                alertBox.className = "module-alert";
+
+                alertBox.innerHTML = `
+        ⚠️ <span>${roomName}</span><br>
+        Module Count: ${moduleCount}<br><br>
+        18 se zyada module allowed nahi hai.
+    `;
+
+                document.body.appendChild(alertBox);
+
+                setTimeout(() => {
+                    alertBox.remove();
+                }, 5000);
+            }
+
+
+
+
+
+
+            // ================= SHARE ON WHATSAPP =================
+            function shareOnWhatsApp() {
+                const customerName = document.getElementById('custName').value.trim() || "Customer";
+                const phone = document.getElementById('phone').value.trim();
+
+                if (!phone) {
+                    alert("Please enter Customer Mobile Number!");
+                    return;
+                }
+
+                // Clean Phone Number
+                let cleanPhone = phone.replace(/[^0-9]/g, '');
+                if (cleanPhone.length === 10) {
+                    cleanPhone = '91' + cleanPhone;
+                }
+
+                const message = encodeURIComponent(
+                    `Hello ${customerName},\n\n` +
+                    `Please find attached your Electrical Material Estimate.\n\n` +
+                    `SM Technician\n` +
+                    `8935883863\n\n` +
+                    `Thank you! 🙏`
+                );
+
+                // First Download PDF
+                downloadPDF();
+
+                // Then open WhatsApp with message
+                setTimeout(() => {
+                    const whatsappURL = `https://wa.me/${cleanPhone}?text=${message}`;
+                    window.open(whatsappURL, '_blank');
+
+                    alert("✅ PDF Downloaded!\n\nNow you can attach the downloaded PDF in WhatsApp.");
+                }, 800);
+            }
 
 
         </script>
