@@ -932,12 +932,22 @@ cursor:pointer;
 
                 const rooms = document.querySelectorAll(".room-card");
 
-                rooms.forEach((room, index) => {
+                // alag-alag room type ka counter
+                const roomCounters = {};
+
+                rooms.forEach((room) => {
 
                     const type = room.querySelector(".room-type").value;
 
+                    // agar pehli baar mila to 0 se start
+                    if (!roomCounters[type]) {
+                        roomCounters[type] = 1;
+                    } else {
+                        roomCounters[type]++;
+                    }
+
                     room.querySelector("h2").innerText =
-                        `${type} ${index + 1}`;
+                        `${type} ${roomCounters[type]}`;
                 });
 
                 roomCount = rooms.length;
@@ -1027,7 +1037,7 @@ cursor:pointer;
                 "conceal light": 0,
                 "Led bulb": 0,
                 "Night bulb": 0,
-                "Tube light": 0,
+                "Tube light 20W": 0,
                 "Fan": 0,
                 "Fan box round Sheet": 0,
                 "Fuse": 0,
@@ -1046,6 +1056,104 @@ cursor:pointer;
                 "Fan": 0,
                 "6amp top": 0,
                 "16amp top": 0,
+            };
+
+
+            const PRICE_LIST = {
+                "kala patch 2inch": 78,
+                "Electric Tap": 122,
+                "Brown Tap": 43,
+                "blanker": 344,
+                "1 module (board+plate)": 3434,
+                "2 module (board+plate)": 45,
+                "3 module (board+plate)": 54,
+                "4 module (board+plate)": 455,
+                "6 module (board+plate)": 534,
+                "8 module (board+plate)": 353,
+                "12 module (board+plate)": 53,
+                "16 module (board+plate)": 353,
+                "18 module (board+plate)": 535,
+                "Indicator": 53,
+                "Fuse": 353,
+
+                "2 way mcb box": 5335,
+                "4 way mcb box": 53,
+                "6 way mcb box": 535,
+                "8 way mcb box": 353,
+                "10 way mcb box": 353,
+                "12 way mcb box": 533,
+                "14 way mcb box": 233,
+                "16 way mcb box": 323,
+                "18 way mcb box": 433,
+                "20 way mcb box": 343,
+                "22 way mcb box": 3434,
+                "24 way mcb box": 543,
+
+                "Isolater 40A": 34353,
+                "Isolater 63A": 342,
+
+                "Mcb Changer 40A": 324,
+                "Mcb Changer 63A": 53533,
+
+                "30ma RCCB 40A": 353,
+                "30ma RCCB 63A": 54,
+
+                "6amp mcb": 43,
+                "10amp mcb": 45,
+                "16amp mcb": 433,
+                "20amp mcb": 453,
+                "25amp mcb": 345,
+                "32amp mcb": 3453,
+                "40amp mcb": 3453,
+                "63amp mcb": 346,
+
+                '1.5"kala patch': 64,
+
+                "Night bulb": 768,
+
+
+                "Tube light 20W": 234,
+                "Fan": 243,
+                "Fan box round Sheet": 32,
+                "0.4 mm washer": 434,
+                "batten holder": 53,
+                "32amp dp switch": 453,
+                "conceal light": 345,
+                "Led bulb": 346,
+                "Tube light": 8965,
+                "6amp top": 567,
+                "16amp top": 5670,
+                "4M Footer Light": 650,
+                "3M Footer Light": 456,
+                "Round Sheet": 45,
+                "1 inc Sadel katti": 4564,
+                "1inc HDPE Conduit Pipe": 234,
+                "0.75inc HDPE Conduit Pipe": 435,
+                "1inc PVC Conduit Pipe": 43534,
+                "0.75inc PVC Conduit Pipe": 34534,
+                "Juction box": 345,
+                "Fan Box": 9867,
+                "Conceal Box": 678,
+                "1inc PVC Bend": 6778,
+                "0.75inc PVC Bend": 345,
+
+                "6mm wire": 2342,
+                "4mm wire": 23423,
+                "2.5mm wire": 2342342,
+                "1.5mm wire": 345,
+                "1mm wire": 3452,
+                "0.75mm wire": 234,
+
+
+
+                "1 inc Flexible Pipe": 20,
+                "3/4 inc Flexible Pipe": 15,
+                "Zip Tie 5 inc": 50,
+                "Zip Tie 10 inc": 90,
+                "7/4 Plane Box": 60,
+
+                "Electric Tap": 30,
+                "Brown Tap": 50,
             };
 
 
@@ -1113,7 +1221,7 @@ cursor:pointer;
                         }
 
                         if (item === "Tube light") {
-                            MATERIALS["Tube light"] += qty;
+                            MATERIALS["Tube light 20W"] += qty;
                             MATERIALS["celling rose"] += qty;
                             MATERIALS["3/3 Junction box"] += qty;
                             MATERIALS["Gujja"] += qty;
@@ -1457,9 +1565,13 @@ cursor:pointer;
                 row.classList.add("extra-material-row");
 
                 row.innerHTML = `
+
+                <tr class="extra-material-row">
     
     <td style="border:1px solid #444; padding:12px;">
-        <input type="text" placeholder="Extra Material Name"
+        <input type="text"
+placeholder="Material Name"
+class="extra-name"
         style="width:100%; padding:8px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
     </td>
 
@@ -1472,26 +1584,38 @@ cursor:pointer;
         
         <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
 
-            <input type="text" placeholder="Unit"
-            style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+            <td style="border:1px solid #444; padding:12px; text-align:center;">
+    
+    <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
 
-            <button onclick="deleteExtraMaterial(this)" style="
-                background:red;
-                color:white;
-                border:none;
-                width:32px;
-                height:32px;
-                border-radius:50%;
-                cursor:pointer;
-                font-size:18px;
-                font-weight:bold;
-            ">
-                ×
-            </button>
+        <input type="number"
+placeholder="Price"
+class="extra-price"
+oninput="updateApproxPrice()"
+style="width:90px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
 
-        </div>
+        <input type="text" placeholder="Unit"
+        style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
 
-    </td>
+        <button onclick="deleteExtraMaterial(this)" style="
+            background:red;
+            color:white;
+            border:none;
+            width:32px;
+            height:32px;
+            border-radius:50%;
+            cursor:pointer;
+            font-size:18px;
+            font-weight:bold;
+        ">
+            ×
+        </button>
+
+    </div>
+
+</td>
+</tr>
+
     `;
 
                 table.appendChild(row);
@@ -1519,13 +1643,13 @@ cursor:pointer;
                     "2.5mm wire": "Coil",
                     "1.5mm wire": "Coil",
                     "1mm wire": "Coil",
-                    "0.5mm wire": "Coil",
+                    "0.75mm wire": "Coil",
 
                     // Common Items
                     "Flexible Pipe": "Ft",
                     "Tap": "Pic",
-                    "35/8 Screw": "Pic",
-                    "35/8 katti": "Pic",
+                    "35/8 Screw": "pkt",
+                    "35/8 katti": "pkt",
                     "0.4 mm washer": "Pic",
                     "6amp switch": "Pic",
                     "6amp Socket": "Pic",
@@ -1539,7 +1663,7 @@ cursor:pointer;
                     "straight holder": "Pic",
                     "batten holder": "Pic",
                     "Patti": "Pic",
-                    "Gujja": "Pic",
+                    "Gujja": "Pkt",
                     "kala patch 1inch": "Pic",
                     "kala patch 2inch": "Pic",
                     '1.5"kala patch': "Pic",
@@ -1596,6 +1720,9 @@ cursor:pointer;
                     "default": "Pic"
                 };
 
+
+                let totalApproxPrice = 0;
+
                 let html = `
     <div id="billModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); overflow:auto; z-index:9999; padding:20px;">
         <div style="max-width:1000px; margin:auto; background:#111; border:2px solid #FFD700; border-radius:20px; padding:25px;">
@@ -1613,12 +1740,41 @@ cursor:pointer;
                 Object.keys(materials).forEach(item => {
                     if (materials[item] > 0) {
                         const unit = unitMap[item] || unitMap["default"];
+                        let displayQty = materials[item];
+
+                        const itemPrice = PRICE_LIST[item] || 0;
+
+                        const totalItemPrice = itemPrice * displayQty;
+
+                        totalApproxPrice += totalItemPrice;
+
+                        // ================= GUJJA PKT LOGIC =================
+                        if (item === "Gujja") {
+
+                            if (displayQty <= 40) {
+                                displayQty = 1;
+                            } else {
+                                displayQty = Math.ceil(displayQty / 40);
+                            }
+                        }
+
+                        // ================= 35/8 SCREW PKT LOGIC =================
+                        if (item === "35/8 Screw") {
+
+                            if (displayQty <= 70) {
+                                displayQty = 1;
+                            } else {
+                                displayQty = Math.ceil(displayQty / 70);
+                            }
+                        }
                         html += `
                 <tr>
                     <td style="border:1px solid #444; padding:12px;">${item}</td>
                     <td style="border:1px solid #444; padding:12px; text-align:center;">
-                        <input type="number" value="${materials[item]}" 
-                            style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:6px; text-align:center;">
+                        <input type="number"
+    value="${displayQty}"
+    oninput="updateApproxPrice()"
+    style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:6px; text-align:center;">
                     </td>
                     <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700; font-weight:500;">${unit}</td>
                 </tr>
@@ -1635,7 +1791,7 @@ cursor:pointer;
     </tr>
     `;
 
-                const wireTypes = ["6mm wire", "4mm wire", "2.5mm wire", "1.5mm wire", "1mm wire", "0.5mm wire"];
+                const wireTypes = ["6mm wire", "4mm wire", "2.5mm wire", "1.5mm wire", "1mm wire", "0.75mm wire"];
                 wireTypes.forEach(wire => {
                     html += `
         <tr>
@@ -1652,7 +1808,12 @@ cursor:pointer;
                     <option>Blue</option>
                     <option>Green</option>
                 </select>
-                <input type="number" placeholder="Qty" style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+               <input type="number"
+placeholder="Qty"
+class="extra-qty"
+oninput="updateApproxPrice()"
+
+style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
             </td>
             <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Coil</td>
         </tr>`;
@@ -1667,7 +1828,7 @@ cursor:pointer;
 </tr>
 
 <tr>
-    <td style="border:1px solid #444; padding:12px;">1" Flexible Pipe</td>
+    <td style="border:1px solid #444; padding:12px;">1 inc Flexible Pipe</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
@@ -1676,7 +1837,7 @@ cursor:pointer;
 </tr>
 
 <tr>
-    <td style="border:1px solid #444; padding:12px;">3/4" Flexible Pipe</td>
+    <td style="border:1px solid #444; padding:12px;">3/4 inc Flexible Pipe</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
@@ -1685,7 +1846,7 @@ cursor:pointer;
 </tr>
 
 <tr>
-    <td style="border:1px solid #444; padding:12px;">Zip Tie 5"</td>
+    <td style="border:1px solid #444; padding:12px;">Zip Tie 5 inc</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
@@ -1694,7 +1855,7 @@ cursor:pointer;
 </tr>
 
 <tr>
-    <td style="border:1px solid #444; padding:12px;">Zip Tie 10"</td>
+    <td style="border:1px solid #444; padding:12px;">Zip Tie 10 inc</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
@@ -1737,6 +1898,46 @@ cursor:pointer;
 `;
 
                 html += `</table>`;
+
+
+                html += `
+
+<div style="
+    margin-top:25px;
+    background:#1f2937;
+    border:2px solid #FFD700;
+    border-radius:16px;
+    padding:20px;
+    text-align:center;
+">
+
+    <h2 style="
+        color:#FFD700;
+        margin-bottom:10px;
+    ">
+        Approx Material Price
+    </h2>
+
+    <div id="approxTotalPrice" style="
+    font-size:32px;
+    font-weight:bold;
+    color:#22c55e;
+">
+    ₹ ${totalApproxPrice.toLocaleString('en-IN')}
+</div>
+
+    <div style="
+        margin-top:8px;
+        color:#aaa;
+        font-size:14px;
+    ">
+        Approx price only • Final market rate may vary
+    </div>
+
+</div>
+
+`;
+
 
                 // Buttons
                 html += `
@@ -2061,6 +2262,90 @@ cursor:pointer;
 
                     alert("✅ PDF Downloaded!\n\nNow you can attach the downloaded PDF in WhatsApp.");
                 }, 800);
+            }
+
+
+            function updateApproxPrice() {
+
+                let total = 0;
+
+                // MAIN MATERIAL TABLE
+                document.querySelectorAll('#billModal table tr').forEach(row => {
+
+                    const cols = row.querySelectorAll('td');
+
+                    if (cols.length < 3) return;
+
+                    let item = cols[0].innerText.trim();
+
+                    const qtyInput = cols[1].querySelector('input');
+
+                    if (!qtyInput) return;
+
+                    const qty = parseFloat(qtyInput.value) || 0;
+
+                    const price = PRICE_LIST[item] || 0;
+
+                    total += qty * price;
+
+                });
+
+
+
+                // EXTRA MATERIAL SECTION
+                document.querySelectorAll('.extra-material-row').forEach(row => {
+
+                    const itemInput = row.querySelector('.extra-name');
+                    const qtyInput = row.querySelector('.extra-qty');
+                    const priceInput = row.querySelector('.extra-price');
+
+                    if (!itemInput || !qtyInput || !priceInput) return;
+
+                    const qty = parseFloat(qtyInput.value) || 0;
+
+                    let price = parseFloat(priceInput.value);
+
+                    // agar manual price nahi diya to PRICE_LIST se uthao
+                    if (isNaN(price)) {
+
+                        const itemName = itemInput.value.trim();
+
+                        price = PRICE_LIST[itemName] || 0;
+                    }
+
+                    total += qty * price;
+
+                });
+
+
+
+                // WIRE SECTION
+                document.querySelectorAll('.wire-row').forEach(row => {
+
+                    const wireName = row.querySelector('.wire-name');
+
+                    const qtyInput = row.querySelector('.wire-qty');
+
+                    if (!wireName || !qtyInput) return;
+
+                    const qty = parseFloat(qtyInput.value) || 0;
+
+                    const price = PRICE_LIST[wireName.value] || 0;
+
+                    total += qty * price;
+
+                });
+
+
+
+                // SHOW TOTAL
+                const totalBox = document.getElementById('approxTotalPrice');
+
+                if (totalBox) {
+
+                    totalBox.innerText =
+                        "₹ " + total.toLocaleString('en-IN');
+                }
             }
 
 
