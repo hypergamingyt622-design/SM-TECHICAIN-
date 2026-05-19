@@ -507,6 +507,7 @@
                             <option>Bathroom</option>
                             <option>Normal room</option>
                             <option>MCB</option>
+                            <option>Rooftop</option>
                         </select>
 
                         <h2>Bedroom 1</h2>
@@ -667,7 +668,7 @@ cursor:pointer;
                     "3M Footer Light",
                     "4M Footer Light",
 
-                     
+
                     "1 inc pipe",
 
 
@@ -716,8 +717,8 @@ cursor:pointer;
                     "AC",
                     "conceal light",
                     "Inverter",
-                     "4M Footer Light",
-                     "3M Footer Light",
+                    "4M Footer Light",
+                    "3M Footer Light",
 
                     "1 inc pipe",
 
@@ -742,8 +743,8 @@ cursor:pointer;
                     "Induction board",
                     "Fridge board",
                     "Water filter",
-                     "4M Footer Light",
-                     "3M Footer Light",
+                    "4M Footer Light",
+                    "3M Footer Light",
 
                     "conceal light",
                     "1 inc pipe"
@@ -800,7 +801,23 @@ cursor:pointer;
                     "22 way mcb box",
                     "24 way mcb box"
 
+                ],
+
+
+                Rooftop: [
+                    "1inc HDPE Conduit Pipe",
+                    "0.75inc HDPE Conduit Pipe",
+                    "1inc PVC Conduit Pipe",
+                    "0.75inc PVC Conduit Pipe",
+                    "Juction box",
+
+                    "Fan Box",
+                    "Conceal Box",
+                    "1inc PVC Bend",
+                    "0.75inc PVC Bend"
                 ]
+
+
 
             };
 
@@ -830,6 +847,7 @@ cursor:pointer;
         <option>Bathroom</option>
         <option>Normal room</option>
         <option>MCB</option>
+        <option>Rooftop</option>
     </select>
 
     <h2>Bedroom ${roomCount}</h2>
@@ -937,12 +955,22 @@ cursor:pointer;
 
                 const rooms = document.querySelectorAll(".room-card");
 
-                rooms.forEach((room, index) => {
+                // alag-alag room type ka counter
+                const roomCounters = {};
+
+                rooms.forEach((room) => {
 
                     const type = room.querySelector(".room-type").value;
 
+                    // agar pehli baar mila to 0 se start
+                    if (!roomCounters[type]) {
+                        roomCounters[type] = 1;
+                    } else {
+                        roomCounters[type]++;
+                    }
+
                     room.querySelector("h2").innerText =
-                        `${type} ${index + 1}`;
+                        `${type} ${roomCounters[type]}`;
                 });
 
                 roomCount = rooms.length;
@@ -982,7 +1010,8 @@ cursor:pointer;
                 "Gujja": 0,
                 "kala patch 1inch": 0,
                 "kala patch 2inch": 0,
-                "Tap": 0,
+                "Electric Tap": 0,
+                "Brown Tap": 0,
                 "blanker": 0,
                 "1 module (metal box+plate)": 0,
                 "2 module (metal box+plate)": 0,
@@ -997,7 +1026,7 @@ cursor:pointer;
                 "Fuse": 0,
 
 
-               
+
                 "2 way mcb box": 0,
                 "4 way mcb box": 0,
                 "6 way mcb box": 0,
@@ -1027,7 +1056,7 @@ cursor:pointer;
                 "32amp mcb": 0,
                 "40amp mcb": 0,
                 "63amp mcb": 0,
-                '1.5"kala patch': 0,
+                '1.5 inc kala patch': 0,
                 "32amp dp switch": 0,
                 "conceal light": 0,
                 "Led bulb": 0,
@@ -1042,7 +1071,7 @@ cursor:pointer;
                 "6A Sockets": 0,
                 "16A Sockets": 0,
                 "batten holder": 0,
-                '1.5"kala patch': 0,
+                '1.5 inc kala patch': 0,
                 "32amp dp switch": 0,
                 "conceal light": 0,
                 "Led bulb": 0,
@@ -1055,7 +1084,144 @@ cursor:pointer;
                 "3M Footer Light": 0,
                 "Round Sheet": 0,
                 "1 inc Sadel katti": 0,
-            
+                "1inc HDPE Conduit Pipe": 0,
+                "0.75inc HDPE Conduit Pipe": 0,
+                "1inc PVC Conduit Pipe": 0,
+                "0.75inc PVC Conduit Pipe": 0,
+                "Juction box": 0,
+                "Fan Box": 0,
+                "Conceal Box": 0,
+                "1inc PVC Bend": 0,
+                "0.75inc PVC Bend": 0,
+
+
+            };
+
+
+
+            const PRICE_LIST = {
+                "6amp switch": 10,
+                "6amp Socket": 50,
+                "16amp switch": 56,
+                "16amp Socket": 65,
+                "two way switch": 56,
+                "regulator": 6,
+                "Pipe Junction box": 56,
+                "celling rose": 5,
+                "angle holder": 89,
+                "straight holder": 12,
+                "1 inc pipe": 56,
+                "Flexible pipe": 78,
+                "35/8 Screw": 87,
+                "Gujja": 78,
+                "1.5 inc kala patch": 8,
+
+
+                "kala patch 1inch": 78,
+                "kala patch 2inch": 78,
+                "Electric Tap": 122,
+                "Brown Tap": 43,
+                "blanker": 344,
+                "1 module (metal box+plate)": 3434,
+                "2 module (metal box+plate)": 45,
+                "3 module (metal box+plate)": 54,
+                "4 module (metal box+plate)": 455,
+                "6 module (metal box+plate)": 534,
+                "8 module (metal box+plate)": 353,
+                "12 module (metal box+plate)": 53,
+                "16 module (metal box+plate)": 353,
+                "18 module (metal box+plate)": 535,
+                "Indicator": 53,
+                "Fuse": 353,
+
+                "2 way mcb box": 5335,
+                "4 way mcb box": 53,
+                "6 way mcb box": 535,
+                "8 way mcb box": 353,
+                "10 way mcb box": 353,
+                "12 way mcb box": 533,
+                "14 way mcb box": 233,
+                "16 way mcb box": 323,
+                "18 way mcb box": 433,
+                "20 way mcb box": 343,
+                "22 way mcb box": 3434,
+                "24 way mcb box": 543,
+
+                "Isolater 40A": 34353,
+                "Isolater 63A": 342,
+
+                "Mcb Changer 40A": 324,
+                "Mcb Changer 63A": 53533,
+
+                "30ma RCCB 40A": 353,
+                "30ma RCCB 63A": 54,
+
+                "6amp mcb": 43,
+                "10amp mcb": 45,
+                "16amp mcb": 433,
+                "20amp mcb": 453,
+                "25amp mcb": 345,
+                "32amp mcb": 3453,
+                "40amp mcb": 3453,
+                "63amp mcb": 346,
+
+                '1.5 inc kala patch': 64,
+
+                "Night bulb": 768,
+                "Tube light 20W": 234,
+                "Fan": 243,
+                "Fan box round Sheet": 32,
+
+                "0.4 mm washer": 434,
+                "batten holder": 53,
+
+                "32amp dp switch": 453,
+                "conceal light": 345,
+                "Led bulb": 346,
+
+                "Tube light": 8965,
+
+                "6amp top": 567,
+                "16amp top": 5670,
+
+                "4M Footer Light": 650,
+                "3M Footer Light": 456,
+
+                "Round Sheet": 45,
+                "1 inc Sadel katti": 4564,
+
+                "1inc HDPE Conduit Pipe": 234,
+                "0.75inc HDPE Conduit Pipe": 435,
+                "1inc PVC Conduit Pipe": 43534,
+                "0.75inc PVC Conduit Pipe": 34534,
+
+                "Juction box": 345,
+                "Fan Box": 9867,
+                "Conceal Box": 678,
+
+                "6mm wire": 4500,
+                "4mm wire": 3200,
+                "2.5mm wire": 2500,
+                "1.5mm wire": 1800,
+                "1mm wire": 1200,
+                "0.75mm wire": 900,
+
+
+
+
+                "1 inc Flexible Pipe": 20,
+                "3/4 inc Flexible Pipe": 15,
+                "Zip Tie 5 inc": 50,
+                "Zip Tie 10 inc": 90,
+                "7/4 Plane Box": 60,
+                "Gujja": 40,
+                "0.4 mm washer": 2,
+                "1.5 inc kala patch": 5,
+                "Electric Tap": 30,
+                "Brown Tap": 50,
+
+                "1inc PVC Bend": 6778,
+                "0.75inc PVC Bend": 345
             };
 
 
@@ -1093,6 +1259,46 @@ cursor:pointer;
 
 
 
+
+
+                        // ================= Rooftop =================
+
+                        if (item === "1inc HDPE Conduit Pipe") {
+                            MATERIALS["1inc HDPE Conduit Pipe"] += qty;
+                        }
+                        if (item === "0.75inc HDPE Conduit Pipe") {
+                            MATERIALS["0.75inc HDPE Conduit Pipe"] += qty;
+                        }
+                        if (item === "1inc PVC Conduit Pipe") {
+                            MATERIALS["1inc PVC Conduit Pipe"] += qty;
+                        }
+                        if (item === "1inc PVC Bend") {
+                            MATERIALS["1inc PVC Bend"] += qty;
+                        }
+                        if (item === "0.75inc PVC Bend") {
+                            MATERIALS["0.75inc PVC Bend"] += qty;
+                        }
+
+
+
+                        if (item === "0.75inc PVC Conduit Pipe") {
+                            MATERIALS["0.75inc PVC Conduit Pipe"] += qty;
+                        }
+                        if (item === "Juction box") {
+                            MATERIALS["Juction box"] += qty;
+                        }
+                        if (item === "Fan Box") {
+                            MATERIALS["Fan Box"] += qty;
+                        }
+                        if (item === "Conceal Box") {
+                            MATERIALS["Conceal Box"] += qty;
+                        }
+
+
+
+
+
+
                         // ================= FUSE =================
                         if (item === "Fuse") {
 
@@ -1117,8 +1323,8 @@ cursor:pointer;
                             MATERIALS["angle holder"] += qty;
                             MATERIALS["Pipe Junction box"] += qty;
                             MATERIALS["Round Sheet"] += qty;
-                            MATERIALS['1.5"kala patch'] += qty * 2;
-                            
+                            MATERIALS['1.5 inc kala patch'] += qty * 2;
+
                             MATERIALS["6amp switch"] += qty;
                             roomModule += qty * 1;
                         }
@@ -1128,8 +1334,8 @@ cursor:pointer;
                             MATERIALS["celling rose"] += qty;
                             MATERIALS["Pipe Junction box"] += qty;
                             MATERIALS["Round Sheet"] += qty;
-                            MATERIALS['1.5"kala patch'] += qty * 2;
-                            
+                            MATERIALS['1.5 inc kala patch'] += qty * 2;
+
                             MATERIALS["6amp switch"] += qty;
                             roomModule += qty * 1;
                         }
@@ -1145,8 +1351,8 @@ cursor:pointer;
                             MATERIALS["celling rose"] += qty;
                             MATERIALS["Pipe Junction box"] += qty;
                             MATERIALS["Round Sheet"] += qty;
-                            MATERIALS['1.5"kala patch'] += qty * 2;
-                           
+                            MATERIALS['1.5 inc kala patch'] += qty * 2;
+
                             MATERIALS["6amp switch"] += qty;
                             MATERIALS["regulator"] += qty;
                             roomModule += qty * 2;
@@ -1156,8 +1362,8 @@ cursor:pointer;
                             MATERIALS["celling rose"] += qty;
                             MATERIALS["Pipe Junction box"] += qty;
                             MATERIALS["Round Sheet"] += qty;
-                            MATERIALS['1.5"kala patch'] += qty * 2;
-                            
+                            MATERIALS['1.5 inc kala patch'] += qty * 2;
+
                             MATERIALS["6amp switch"] += qty;
                             roomModule += qty * 1;
                         }
@@ -1167,12 +1373,12 @@ cursor:pointer;
                             MATERIALS["batten holder"] += qty;
                             MATERIALS["Pipe Junction box"] += qty;
                             MATERIALS["Round Sheet"] += qty;
-                            MATERIALS['1.5"kala patch'] += qty * 2;
-                         
+                            MATERIALS['1.5 inc kala patch'] += qty * 2;
+
                             MATERIALS["6amp switch"] += qty;
                             roomModule += qty * 1;
                         }
-                        
+
 
                         // ================= 2WAY SWITCHES =================
 
@@ -1183,11 +1389,11 @@ cursor:pointer;
 
                             MATERIALS["regulator"] += qty;
 
-                           MATERIALS["Round Sheet"] += qty;
-                           MATERIALS['1.5"kala patch'] += qty * 2;
+                            MATERIALS["Round Sheet"] += qty;
+                            MATERIALS['1.5 inc kala patch'] += qty * 2;
 
 
-                        
+
 
                             MATERIALS["Pipe Junction box"] += qty;
 
@@ -1211,7 +1417,7 @@ cursor:pointer;
                             MATERIALS["4 module (metal box+plate)"] += qty;
 
                             MATERIALS["Round Sheet"] += qty;
-                            MATERIALS['1.5"kala patch'] += qty * 2;
+                            MATERIALS['1.5 inc kala patch'] += qty * 2;
 
 
 
@@ -1238,9 +1444,9 @@ cursor:pointer;
 
 
                             MATERIALS["two way switch"] += qty * 4;
-                            
+
                             MATERIALS["Round Sheet"] += qty * 2;
-                            MATERIALS['1.5"kala patch'] += qty * 4;
+                            MATERIALS['1.5 inc kala patch'] += qty * 4;
 
                             MATERIALS["6amp switch"] += qty;
 
@@ -1279,7 +1485,7 @@ cursor:pointer;
                         if (item === "Tv board") {
                             MATERIALS["6amp Socket"] += qty * 3;
                             MATERIALS["6amp switch"] += qty * 3;
-                           
+
                             MATERIALS["6 module (metal box+plate)"] += qty;
                             MATERIALS["3 module (metal box+plate)"] += qty;
                             // No roomModule += 
@@ -1291,24 +1497,24 @@ cursor:pointer;
                             MATERIALS["3 module (metal box+plate)"] += qty;
                             MATERIALS["6amp switch"] += qty;
                             roomModule += qty * 1;
-                        
-                           
+
+
                         }
 
-                    
+
                         if (item === "4M Footer Light") {
                             MATERIALS["4M Footer Light"] += qty;
                             MATERIALS["4 module (metal box+plate)"] += qty;
                             MATERIALS["6amp switch"] += qty;
                             roomModule += qty * 1;
-                        
-                            
+
+
                         }
 
                         if (item === "Power board") {
                             MATERIALS["16amp switch"] += qty;
                             MATERIALS["16amp Socket"] += qty;
-                           
+
                             MATERIALS["3 module (metal box+plate)"] += qty;
                             // No roomModule +=
                         }
@@ -1316,7 +1522,7 @@ cursor:pointer;
                         if (item === "AC") {
                             MATERIALS["32amp dp switch"] += qty;
                             MATERIALS["16amp Socket"] += qty;
-                            
+
                             MATERIALS["2 module (metal box+plate)"] += qty;
                             roomModule += qty * 2;   // AC still uses main board space
                         }
@@ -1326,7 +1532,7 @@ cursor:pointer;
                             MATERIALS["16amp Socket"] += qty * 2;
                             MATERIALS["6amp top"] += qty;
                             MATERIALS["16amp top"] += qty;
-                            
+
                             MATERIALS["6 module (metal box+plate)"] += qty;
                             // No roomModule +=
                         }
@@ -1334,7 +1540,7 @@ cursor:pointer;
                         if (item === "Induction board") {
                             MATERIALS["16amp switch"] += qty * 2;
                             MATERIALS["16amp Socket"] += qty * 2;
-                            
+
                             MATERIALS["6 module (metal box+plate)"] += qty;
                             // No roomModule +=
                         }
@@ -1342,7 +1548,7 @@ cursor:pointer;
                         if (item === "Fridge board") {
                             MATERIALS["16amp switch"] += qty;
                             MATERIALS["16amp Socket"] += qty;
-                            
+
                             MATERIALS["3 module (metal box+plate)"] += qty;
                             // No roomModule +=
                         }
@@ -1350,7 +1556,7 @@ cursor:pointer;
                         if (item === "Water filter") {
                             MATERIALS["6amp switch"] += qty;
                             MATERIALS["6amp Socket"] += qty;
-                            
+
                             MATERIALS["2 module (metal box+plate)"] += qty;
                             // No roomModule +=
                         }
@@ -1359,7 +1565,7 @@ cursor:pointer;
                             MATERIALS["16amp switch"] += qty;
                             MATERIALS["16amp Socket"] += qty;
                             MATERIALS["Gujja"] += qty * 4;
-                            MATERIALS['1.5"kala patch'] += qty * 2;
+                            MATERIALS['1.5 inc kala patch'] += qty * 2;
                             MATERIALS["2 module (metal box+plate)"] += qty;
                             roomModule += qty * 2;   // Geyser still uses main board
                         }
@@ -1367,7 +1573,7 @@ cursor:pointer;
                         if (item === "1 inc pipe") {
                             MATERIALS["1 inc pipe"] += qty;
                             MATERIALS["1 inc Sadel katti"] += qty * 8;
-                           
+
                         }
 
                         // MCB Section
@@ -1410,9 +1616,9 @@ cursor:pointer;
                         }
 
                         // Extra Fixing Hardware for each Main Plate
-            
-                        MATERIALS['1.5"kala patch'] += 4;
-                        
+
+                        MATERIALS['1.5 inc kala patch'] += 4;
+
                     }
                 });
 
@@ -1494,26 +1700,37 @@ cursor:pointer;
         
         <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
 
-            <input type="text" placeholder="Unit"
-            style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+           <td style="border:1px solid #444; padding:12px; text-align:center;">
+    
+    <div style="display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;">
 
-            <button onclick="deleteExtraMaterial(this)" style="
-                background:red;
-                color:white;
-                border:none;
-                width:32px;
-                height:32px;
-                border-radius:50%;
-                cursor:pointer;
-                font-size:18px;
-                font-weight:bold;
-            ">
-                ×
-            </button>
+        <input type="number"
+        placeholder="Price"
+        class="extra-price"
+        oninput="updateApproxPrice()"
+        style="width:90px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
 
-        </div>
+        <input type="text"
+        placeholder="Unit"
+        style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
 
-    </td>
+        <button onclick="deleteExtraMaterial(this)" style="
+            background:red;
+            color:white;
+            border:none;
+            width:32px;
+            height:32px;
+            border-radius:50%;
+            cursor:pointer;
+            font-size:18px;
+            font-weight:bold;
+        ">
+            ×
+        </button>
+
+    </div>
+
+</td>
     `;
 
                 table.appendChild(row);
@@ -1541,11 +1758,12 @@ cursor:pointer;
                     "2.5mm wire": "Coil",
                     "1.5mm wire": "Coil",
                     "1mm wire": "Coil",
-                    "0.5mm wire": "Coil",
+                    "0.75mm wire": "Coil",
 
                     // Common Items
                     "Flexible Pipe": "Ft",
-                    "Tap": "Pic",
+                    "Electric Tap": "Pic",
+                    "Brown Tap": "Pic",
                     "35/8 Screw": "pkt",
                     "35/8 katti": "pkt",
                     "0.4 mm washer": "Pic",
@@ -1564,7 +1782,7 @@ cursor:pointer;
                     "Gujja": "Pkt",
                     "kala patch 1inch": "Pic",
                     "kala patch 2inch": "Pic",
-                    '1.5"kala patch': "Pic",
+                    '1.5 inc kala patch': "Pic",
                     "32amp dp switch": "Pic",
                     "conceal light": "Pic",
                     "Led bulb": "Pic",
@@ -1574,6 +1792,23 @@ cursor:pointer;
                     "blanker": "Pic",
                     "Indicator": "Pic",
                     "Fuse": "Pic",
+
+
+
+                    "1inc HDPE Conduit Pipe": "Roll",
+                    "0.75inc HDPE Conduit Pipe": "Roll",
+                    "1inc PVC Conduit Pipe": "Pic",
+                    "0.75inc PVC Conduit Pipe": "Pic",
+                    "Juction box": "Pic",
+                    "Fan Box": "Pic",
+                    "Conceal Box": "Pic",
+                    "1inc PVC Bend": "Pic",
+                    "0.75inc PVC Bend": "Pic",
+
+
+
+
+
 
                     // Boards & Plates
                     "1 module (metal box+plate)": "Pic",
@@ -1618,6 +1853,8 @@ cursor:pointer;
                     "default": "Pic"
                 };
 
+                let totalApproxPrice = 0;
+
                 let html = `
     <div id="billModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); overflow:auto; z-index:9999; padding:20px;">
         <div style="max-width:1000px; margin:auto; background:#111; border:2px solid #FFD700; border-radius:20px; padding:25px;">
@@ -1637,31 +1874,39 @@ cursor:pointer;
                         const unit = unitMap[item] || unitMap["default"];
                         let displayQty = materials[item];
 
-// ================= GUJJA PKT LOGIC =================
-if (item === "Gujja") {
+                        const itemPrice = PRICE_LIST[item] || 0;
 
-    if (displayQty <= 40) {
-        displayQty = 1;
-    } else {
-        displayQty = Math.ceil(displayQty / 40);
-    }
-}
+                        const totalItemPrice = itemPrice * displayQty;
 
-// ================= 35/8 SCREW PKT LOGIC =================
-if (item === "35/8 Screw") {
+                        totalApproxPrice += totalItemPrice;
 
-    if (displayQty <= 70) {
-        displayQty = 1;
-    } else {
-        displayQty = Math.ceil(displayQty / 70);
-    }
-}
+                        // ================= GUJJA PKT LOGIC =================
+                        if (item === "Gujja") {
+
+                            if (displayQty <= 40) {
+                                displayQty = 1;
+                            } else {
+                                displayQty = Math.ceil(displayQty / 40);
+                            }
+                        }
+
+                        // ================= 35/8 SCREW PKT LOGIC =================
+                        if (item === "35/8 Screw") {
+
+                            if (displayQty <= 70) {
+                                displayQty = 1;
+                            } else {
+                                displayQty = Math.ceil(displayQty / 70);
+                            }
+                        }
                         html += `
                 <tr>
                     <td style="border:1px solid #444; padding:12px;">${item}</td>
                     <td style="border:1px solid #444; padding:12px; text-align:center;">
-                        <input type="number" value="${displayQty}"
-                            style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:6px; text-align:center;">
+                        <input type="number"
+    value="${displayQty}"
+    oninput="updateApproxPrice()"
+    style="width:80px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:6px; text-align:center;">
                     </td>
                     <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700; font-weight:500;">${unit}</td>
                 </tr>
@@ -1678,7 +1923,7 @@ if (item === "35/8 Screw") {
     </tr>
     `;
 
-                const wireTypes = ["6mm wire", "4mm wire", "2.5mm wire", "1.5mm wire", "1mm wire", "0.5mm wire"];
+                const wireTypes = ["6mm wire", "4mm wire", "2.5mm wire", "1.5mm wire", "1mm wire", "0.75mm wire"];
                 wireTypes.forEach(wire => {
                     html += `
         <tr>
@@ -1695,7 +1940,10 @@ if (item === "35/8 Screw") {
                     <option>Blue</option>
                     <option>Green</option>
                 </select>
-                <input type="number" placeholder="Qty" style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+                <input type="number"
+placeholder="Qty"
+oninput="updateApproxPrice()"
+style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
             </td>
             <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Coil</td>
         </tr>`;
@@ -1710,7 +1958,7 @@ if (item === "35/8 Screw") {
 </tr>
 
 <tr>
-    <td style="border:1px solid #444; padding:12px;">1" Flexible Pipe</td>
+    <td style="border:1px solid #444; padding:12px;">1 inc Flexible Pipe</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
@@ -1719,7 +1967,7 @@ if (item === "35/8 Screw") {
 </tr>
 
 <tr>
-    <td style="border:1px solid #444; padding:12px;">3/4" Flexible Pipe</td>
+    <td style="border:1px solid #444; padding:12px;">3/4 inc  Flexible Pipe</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
@@ -1728,7 +1976,7 @@ if (item === "35/8 Screw") {
 </tr>
 
 <tr>
-    <td style="border:1px solid #444; padding:12px;">Zip Tie 5"</td>
+    <td style="border:1px solid #444; padding:12px;">Zip Tie 5 inc</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
@@ -1737,7 +1985,7 @@ if (item === "35/8 Screw") {
 </tr>
 
 <tr>
-    <td style="border:1px solid #444; padding:12px;">Zip Tie 10"</td>
+    <td style="border:1px solid #444; padding:12px;">Zip Tie 10 inc</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
@@ -1769,16 +2017,34 @@ if (item === "35/8 Screw") {
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
     </td>
-    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">PiC</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
 </tr>
 
 <tr>
-    <td style="border:1px solid #444; padding:12px;">1.5"kala patch</td>
+    <td style="border:1px solid #444; padding:12px;">1.5 inc kala patch</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
     </td>
     <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pkt</td>
+</tr>
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Electric Tap</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Brown Tap</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
 </tr>
 
 
@@ -1808,6 +2074,45 @@ if (item === "35/8 Screw") {
 `;
 
                 html += `</table>`;
+
+
+                html += `
+
+<div style="
+    margin-top:25px;
+    background:#1f2937;
+    border:2px solid #FFD700;
+    border-radius:16px;
+    padding:20px;
+    text-align:center;
+">
+
+    <h2 style="
+        color:#FFD700;
+        margin-bottom:10px;
+    ">
+        Approx Material Price
+    </h2>
+
+    <div id="approxTotalPrice" style="
+    font-size:32px;
+    font-weight:bold;
+    color:#22c55e;
+">
+    ₹ ${totalApproxPrice.toLocaleString('en-IN')}
+</div>
+
+    <div style="
+        margin-top:8px;
+        color:#aaa;
+        font-size:14px;
+    ">
+        Approx price only • Final market rate may vary
+    </div>
+
+</div>
+
+`;
 
                 // Buttons
                 html += `
@@ -2132,6 +2437,46 @@ if (item === "35/8 Screw") {
 
                     alert("✅ PDF Downloaded!\n\nNow you can attach the downloaded PDF in WhatsApp.");
                 }, 800);
+            }
+
+
+
+            function updateApproxPrice() {
+
+                let total = 0;
+
+                document.querySelectorAll('#billModal table tr').forEach(row => {
+
+                    const cols = row.querySelectorAll('td');
+
+                    if (cols.length < 3) return;
+
+                    let item = cols[0].innerText.trim();
+
+                    const qtyInput = cols[1].querySelector('input');
+
+                    if (!qtyInput) return;
+
+                    const qty = parseFloat(qtyInput.value) || 0;
+
+                    const price = PRICE_LIST[item] || 0;
+
+                    total += qty * price;
+
+                    const extraPriceInput = row.querySelector('.extra-price');
+
+                    if (extraPriceInput) {
+                        const extraPrice = parseFloat(extraPriceInput.value) || 0;
+                        total += qty * extraPrice;
+                    }
+
+                });
+
+                const totalBox = document.getElementById('approxTotalPrice');
+
+                if (totalBox) {
+                    totalBox.innerText = "₹ " + total.toLocaleString('en-IN');
+                }
             }
 
 
