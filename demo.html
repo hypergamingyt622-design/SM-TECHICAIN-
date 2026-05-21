@@ -1797,7 +1797,7 @@ style="width:90px; padding:6px; background:#222; color:white; border:1px solid #
         <tr>
             <td style="border:1px solid #444; padding:12px;">${wire}</td>
             <td style="border:1px solid #444; padding:12px; text-align:center;">
-                <select style="padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+                <select class="wire-color" style="padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
                     <option>Red & Black</option>
                     <option>Black & Yellow</option>
                     <option>Blue & Red</option>
@@ -1970,139 +1970,354 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
             // ================= PDF DOWNLOAD =================
 
             // ================= PDF DOWNLOAD =================
-            function downloadPDF() {
+        
+            // ================= PDF DOWNLOAD =================
+               function downloadPDF() {
 
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('p', 'pt', 'a4');
+    const { jsPDF } = window.jspdf;
 
-                const customerName = document.getElementById('custName').value.trim() || "Customer";
-                const address = document.getElementById('custAddress').value.trim() || "-";
-                const phone = document.getElementById('phone').value.trim() || "-";
+    const pdf = new jsPDF('p', 'pt', 'a4');
 
-                // ================= HEADER =================
-                pdf.setFillColor(0, 123, 255);
-                pdf.rect(0, 0, 595, 70, "F");
+    // ================= CUSTOMER DETAILS =================
 
-                try {
-                    const logo = document.querySelector(".header-logo");
-                    if (logo) pdf.addImage(logo, "PNG", 40, 15, 55, 55);
-                } catch (e) { }
+    const customerName =
+        document.getElementById('custName')?.value.trim() || "Customer";
 
-                pdf.setTextColor(255, 255, 255);
-                pdf.setFontSize(24);
-                pdf.text("SM Technician", 120, 35);
+    const address =
+        document.getElementById('custAddress')?.value.trim() || "-";
 
-                pdf.setFontSize(12);
-                pdf.text("8935883863", 120, 55);
+    const phone =
+        document.getElementById('phone')?.value.trim() || "-";
 
-                const today = new Date();
-                pdf.setTextColor(0);
-                pdf.setFontSize(11);
-                pdf.text(`Date: ${today.toLocaleDateString('en-IN')}`, 400, 40);
+    const today = new Date();
 
-                // ================= CUSTOMER INFO =================
-                pdf.setFontSize(12);
-                pdf.text("Customer :", 40, 100);
-                pdf.text(customerName, 140, 100);
+    // ================= PAGE SIZE =================
 
-                pdf.text("Address :", 40, 120);
-                pdf.text(address, 140, 120);
+    const pageWidth = pdf.internal.pageSize.width;
+    const pageHeight = pdf.internal.pageSize.height;
 
-                pdf.text("Mobile :", 40, 140);
-                pdf.text(phone, 140, 140);
+    // ================= HEADER =================
 
-                pdf.line(40, 160, 555, 160);
+    pdf.setFillColor(0, 102, 204);
 
-                // ================= TABLE DATA =================
-                const rows = [];
-                let serial = 1;
+    pdf.rect(0, 0, pageWidth, 90, "F");
 
-                const tableRows = document.querySelectorAll('#billModal table tr');
+    // ================= LOGO =================
 
-                tableRows.forEach((row) => {
-                    const cols = row.querySelectorAll('td');
-                    if (cols.length < 2) return;
+    try {
 
-                    let material = cols[0].innerText.trim();
+        const logo = document.querySelector(".header-logo");
 
-                    // Custom Extra Material Input Detect
-                    const materialInput = cols[0].querySelector('input');
+        if (logo) {
 
-                    if (materialInput && materialInput.value.trim() !== '') {
-                        material = materialInput.value.trim();
-                    }
+            pdf.addImage(
+                logo,
+                "PNG",
+                30,
+                15,
+                55,
+                55
+            );
+        }
 
-                    // Special handling for Wire Section
-                    if (material.includes("mm wire")) {
-                        const select = cols[1].querySelector('select');
-                        const qtyInput = cols[1].querySelector('input');
+    } catch (e) {
+        console.log(e);
+    }
 
-                        const color = select ? select.value : '';
-                        const qty = qtyInput ? qtyInput.value : '0';
+    // ================= COMPANY NAME =================
 
-                        if (parseInt(qty) > 0) {
-                            rows.push([serial++, `${material} - ${color}`, qty, 'Pic']);
-                        }
-                    }
-                    else {
+    pdf.setTextColor(255, 255, 255);
 
-                        let qty = '';
-                        let unit = 'Pic';
+    pdf.setFontSize(24);
 
-                        const qtyInput = cols[1].querySelector('input');
+    pdf.setFont(undefined, "bold");
 
-                        if (qtyInput) {
-                            qty = qtyInput.value;
-                        } else {
-                            qty = cols[1].innerText.trim();
-                        }
+    pdf.text("SM Technician", 105, 35);
 
-                        // Unit Input Detect
-                        const unitInput = cols[2].querySelector('input');
 
-                        if (unitInput && unitInput.value.trim() !== '') {
-                            unit = unitInput.value.trim();
-                        } else {
-                            unit = cols[2].innerText.trim();
-                        }
+    // ================= ELECTRICIAN NAME =================
 
-                        if (
-                            material &&
-                            material !== "Extra Materials" &&
-                            parseInt(qty) > 0
-                        ) {
-                            rows.push([serial++, material, qty, unit]);
-                        }
-                    }
-                });
+pdf.setFontSize(12);
 
-                // Generate Table
-                pdf.autoTable({
-                    startY: 180,
-                    head: [['S.No.', 'Item Description', 'Quantity', 'Unit']],
-                    body: rows,
-                    theme: 'grid',
-                    styles: { fontSize: 11, cellPadding: 6 },
-                    headStyles: { fillColor: [0, 123, 255], textColor: 255, fontStyle: 'bold' },
-                    alternateRowStyles: { fillColor: [245, 245, 245] },
-                    columnStyles: {
-                        0: { cellWidth: 45 },
-                        1: { cellWidth: 320 },
-                        2: { cellWidth: 60, halign: 'center' },
-                        3: { cellWidth: 50, halign: 'center' }
-                    }
-                });
+pdf.setFont(undefined, "normal");
 
-                // Footer
-                const pageHeight = pdf.internal.pageSize.height;
-                pdf.setFontSize(10);
-                pdf.text("SM Technician • 8935883863", 40, pageHeight - 30);
-                pdf.text("Thank you for choosing SM Technician!", 40, pageHeight - 15);
+pdf.text(
+    "Electrician - Sonu and Manoj",
+    105,
+    55
+);
 
-                // Save PDF with Customer Name
-                const fileName = `${customerName.replace(/[^a-zA-Z0-9 ]/g, '_')}_Electrical_Estimate.pdf`;
-                pdf.save(fileName);
+// ================= MOBILE =================
+
+pdf.text(
+    "Mobile : 6202346561, 8935883863",
+    105,
+    72
+);
+
+    // ================= DATE =================
+
+    pdf.text(
+        `Date : ${today.toLocaleDateString('en-IN')}`,
+        420,
+        45
+    );
+
+    // ================= TITLE =================
+
+    pdf.setTextColor(0);
+
+    pdf.setFontSize(18);
+
+    pdf.setFont(undefined, "bold");
+
+    pdf.text(
+        "Electrical Material Estimate",
+        160,
+        125
+    );
+
+    // ================= LINE =================
+
+    pdf.setDrawColor(180);
+
+    pdf.line(40, 135, 555, 135);
+
+    // ================= CUSTOMER INFO =================
+
+    pdf.setFontSize(12);
+
+    // Customer
+
+    pdf.setFont(undefined, "bold");
+
+    pdf.text("Customer Name :", 40, 165);
+
+    pdf.setFont(undefined, "normal");
+
+    pdf.text(customerName, 170, 165);
+
+    // Address
+
+    pdf.setFont(undefined, "bold");
+
+    pdf.text("Address :", 40, 190);
+
+    pdf.setFont(undefined, "normal");
+
+    pdf.text(address, 170, 190);
+
+    // Mobile
+
+    pdf.setFont(undefined, "bold");
+
+    pdf.text("Mobile :", 40, 215);
+
+    pdf.setFont(undefined, "normal");
+
+    pdf.text(phone, 170, 215);
+
+    // ================= TABLE DATA =================
+
+    const rows = [];
+
+    let serial = 1;
+
+    const tableRows =
+        document.querySelectorAll('#billModal table tr');
+
+    tableRows.forEach((row) => {
+
+        const cols = row.querySelectorAll('td');
+
+        if (cols.length < 2) return;
+
+        // ================= MATERIAL =================
+
+        let material =
+            cols[0].innerText.trim();
+
+        const materialInput =
+            cols[0].querySelector('input');
+
+        if (
+            materialInput &&
+            materialInput.value.trim() !== ''
+        ) {
+            material = materialInput.value.trim();
+        }
+
+        // ================= QTY =================
+
+        let qty = '';
+
+        const qtyInput =
+            cols[1].querySelector('input');
+
+        if (qtyInput) {
+
+            qty = qtyInput.value;
+
+        } else {
+
+            qty = cols[1].innerText.trim();
+        }
+
+        // ================= UNIT =================
+
+        let unit = "Pic";
+
+        if (cols[2]) {
+            unit = cols[2].innerText.trim();
+        }
+
+        // ================= WIRE COLOUR =================
+
+        let wireColor = "";
+
+        const colorSelect =
+            row.querySelector(".wire-color");
+
+        if (
+            colorSelect &&
+            colorSelect.value
+        ) {
+
+            wireColor =
+                " (" + colorSelect.value + ")";
+        }
+
+        // ================= PUSH DATA =================
+
+        if (
+            material &&
+            parseInt(qty) > 0 &&
+            material !== "Extra Materials"
+        ) {
+
+            rows.push([
+
+                serial++,
+
+                material + wireColor,
+
+                qty,
+
+                unit
+            ]);
+        }
+
+    });
+
+    // ================= TABLE =================
+
+    pdf.autoTable({
+
+        startY: 245,
+
+        head: [[
+            'S.No',
+            'Material Name',
+            'Qty',
+            'Unit'
+        ]],
+
+        body: rows,
+
+        theme: 'grid',
+
+        styles: {
+
+            fontSize: 11,
+
+            cellPadding: 6,
+
+            valign: 'middle'
+        },
+
+        headStyles: {
+
+            fillColor: [0, 102, 204],
+
+            textColor: 255,
+
+            fontStyle: 'bold',
+
+            halign: 'center'
+        },
+
+        alternateRowStyles: {
+
+            fillColor: [245, 245, 245]
+        },
+
+        columnStyles: {
+
+            0: {
+                cellWidth: 45,
+                halign: 'center'
+            },
+
+            1: {
+                cellWidth: 300
+            },
+
+            2: {
+                cellWidth: 70,
+                halign: 'center'
+            },
+
+            3: {
+                cellWidth: 70,
+                halign: 'center'
             }
+        },
+
+        didDrawPage: function (data) {
+
+            // ================= FOOTER =================
+
+            pdf.setFontSize(10);
+
+            pdf.setTextColor(120);
+
+            pdf.text(
+                "SM Technician • 8935883863",
+                40,
+                pageHeight - 30
+            );
+
+            pdf.text(
+                "Thank you for choosing SM Technician",
+                40,
+                pageHeight - 15
+            );
+
+            // ================= PAGE NUMBER =================
+
+            const pageNumber =
+                pdf.internal.getNumberOfPages();
+
+            pdf.text(
+                `Page ${pageNumber}`,
+                pageWidth - 80,
+                pageHeight - 20
+            );
+        }
+
+    });
+
+    // ================= SAVE PDF =================
+
+    const fileName =
+        `${customerName}_Estimate.pdf`;
+
+    pdf.save(fileName);
+}
+
+
+
+
 
             // ================= BUTTON CONNECT =================
 
