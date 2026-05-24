@@ -506,6 +506,7 @@
                             <option>Hall</option>
                             <option>Bathroom</option>
                             <option>Normal room</option>
+                            <option>Stair</option>
                             <option>MCB</option>
                         </select>
 
@@ -538,51 +539,51 @@
 
                     <div class="room-field">
                         <label>Fan Points</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label> LED Points</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>Tube Light</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>Night Bulb</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>6A Sockets</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>20A Sockets</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>2 Way Switch</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>Power Board / Extension</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
                     <div class="room-field">
                         <label>Conceal Light</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>Patti</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                 </div>
@@ -762,6 +763,45 @@ cursor:pointer;
                     "Patti"
                 ],
 
+
+                "Stair": [
+
+                    "2way B",
+
+                    "Led bulb",
+
+                    "Led bulb batten",
+                    "Tube light",
+                    "Strip Light Controller",
+                    "Strip Led Driver/smps",
+                    "COB Strip Led light",
+                    "Foot Light/ Step Light",
+                    "Conceal Stair Light",
+
+                    "conceal light",
+                    "Patti"
+                ],
+
+
+                "Earthing": [
+
+                    "Copper/GI Earthing Pipe 10ft",
+
+                    "Copper/GI Earthing Plate",
+
+                    "Copper/GI strip",
+                    "Earthing Clamp",
+                    "Saddle Clamp",
+                    "Earth bus bar",
+                    "Earthing Chemical",
+                    "COB Strip Led light",
+                    "Earthing Bolt Nut",
+                    "Conceal Stair Light",
+
+                    
+                    "Patti"
+                ],
+
                 MCB: [
 
                     "Isolater 40A",
@@ -793,7 +833,9 @@ cursor:pointer;
                     "18 way mcb box",
                     "20 way mcb box",
                     "22 way mcb box",
-                    "24 way mcb box"
+                    "24 way mcb box",
+                    "OVER UNDER VOLTAGE PROTECTOR",
+                    "32A CHANGER OVER"
 
                 ]
 
@@ -824,6 +866,7 @@ cursor:pointer;
         <option>Hall</option>
         <option>Bathroom</option>
         <option>Normal room</option>
+        <option>Stair</option>
         <option>MCB</option>
     </select>
 
@@ -856,51 +899,51 @@ cursor:pointer;
 
             <div class="room-field">
                 <label>Fan Points</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>Bulb / LED Points</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>Tube Light</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>Night Bulb / Indicator</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>6A / 10A Sockets</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>20A Power Sockets</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>2 Way Switch</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>Power Board / Extension</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
             <div class="room-field">
     <label>Conceal Light</label>
-    <input type="number" value="0">
+    <input type="number" value="0" min="0">
 </div>
 
 <div class="room-field">
     <label>Patti</label>
-    <input type="number" value="0">
+    <input type="number" value="0" min="0">
 </div>
 
         </div>
@@ -1017,6 +1060,8 @@ cursor:pointer;
                 "24 way mcb box": 0,
                 "Isolater 40A": 0,
                 "Isolater 63A": 0,
+                "OVER UNDER VOLTAGE PROTECTOR": 0,
+                "32A CHANGER OVER": 0,
 
                 "Mcb Changer 40A": 0,
                 "Mcb Changer 63A": 0,
@@ -1093,6 +1138,8 @@ cursor:pointer;
 
                 "Isolater 40A": 450,
                 "Isolater 63A": 650,
+                "OVER UNDER VOLTAGE PROTECTOR": 1500,
+                "32A CHANGER OVER": 1000,
 
                 "Mcb Changer 40A": 2200,
                 "Mcb Changer 63A": 3200,
@@ -1706,6 +1753,8 @@ style="width:90px; padding:6px; background:#222; color:white; border:1px solid #
                     // MCB Items
                     "Isolater 40A": "Pic",
                     "Isolater 63A": "Pic",
+                    "OVER UNDER VOLTAGE PROTECTOR": "Pic",
+                    "32A CHANGER OVER": "Pic",
                     "Mcb Changer 40A": "Pic",
                     "Mcb Changer 63A": "Pic",
                     "30ma RCCB 40A": "Pic",
@@ -1878,6 +1927,7 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
     <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
 </tr>
 
+
 <tr>
     <td style="border:1px solid #444; padding:12px;">7/4 Plane Box</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
@@ -1886,6 +1936,86 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
     </td>
     <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
 </tr>
+
+
+
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Coulper</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+
+
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Elbow Joint</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+
+
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">T-Joint</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+
+
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Doctor joint</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+
+
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Internaae Bend</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+
+
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">Extraman Bend</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+
+
+
+
+
+
+
 
 <!-- Custom Extra Material Add Option -->
 
@@ -2398,8 +2528,26 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
                 }
             }
 
+            // ================= NEGATIVE VALUE BLOCK =================
+            
+            document.addEventListener("input", function (e) {
+            
+                if (e.target.type === "number") {
+            
+                    let value = parseInt(e.target.value);
+            
+                    // Agar negative hai to 0 kar do
+                    if (value < 0 || isNaN(value)) {
+                        e.target.value = 0;
+                    }
+            
+                }
+            
+            });
 
         </script>
+
+
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 

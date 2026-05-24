@@ -506,8 +506,10 @@
                             <option>Hall</option>
                             <option>Bathroom</option>
                             <option>Normal room</option>
-                            <option>MCB</option>
                             <option>Rooftop</option>
+                            <option>Earthing</option>
+                            <option>Stair</option>
+                            <option>MCB</option>
                         </select>
 
                         <h2>Bedroom 1</h2>
@@ -799,7 +801,9 @@ cursor:pointer;
                     "18 way mcb box",
                     "20 way mcb box",
                     "22 way mcb box",
-                    "24 way mcb box"
+                    "24 way mcb box",
+                    "OVER UNDER VOLTAGE PROTECTOR",
+                    "32A CHANGER OVER"
 
                 ],
 
@@ -846,8 +850,10 @@ cursor:pointer;
         <option>Hall</option>
         <option>Bathroom</option>
         <option>Normal room</option>
-        <option>MCB</option>
         <option>Rooftop</option>
+        <option>Earthing</option>
+        <option>Stair</option>
+        <option>MCB</option>
     </select>
 
     <h2>Bedroom ${roomCount}</h2>
@@ -1011,7 +1017,8 @@ cursor:pointer;
                 "kala patch 1inch": 0,
                 "kala patch 2inch": 0,
                 "Electric Tap": 0,
-                "Brown Tap": 0,
+                "4 inch Brown Tap": 0,
+                "5 inch cutting Blade": 0,
                 "blanker": 0,
                 "1 module (metal box+plate)": 0,
                 "2 module (metal box+plate)": 0,
@@ -1041,6 +1048,8 @@ cursor:pointer;
                 "24 way mcb box": 0,
                 "Isolater 40A": 0,
                 "Isolater 63A": 0,
+                "OVER UNDER VOLTAGE PROTECTOR": 0,
+                "32A CHANGER OVER": 0,
 
                 "Mcb Changer 40A": 0,
                 "Mcb Changer 63A": 0,
@@ -1099,6 +1108,13 @@ cursor:pointer;
 
 
 
+
+
+
+
+
+
+
             const PRICE_LIST = {
                 "6amp switch": 45,
                 "6amp Socket": 95,
@@ -1124,7 +1140,8 @@ cursor:pointer;
                 "kala patch 2inch": 5,
 
                 "Electric Tap": 30,
-                "Brown Tap": 50,
+                "4 inch Brown Tap": 50,
+                "5 inch cutting Blade": 150,
 
                 "blanker": 20,
 
@@ -1156,6 +1173,9 @@ cursor:pointer;
 
                 "Isolater 40A": 450,
                 "Isolater 63A": 650,
+                "OVER UNDER VOLTAGE PROTECTOR": 1500,
+                "32A CHANGER OVER": 1000,
+
 
                 "Mcb Changer 40A": 2200,
                 "Mcb Changer 63A": 3200,
@@ -1769,7 +1789,8 @@ cursor:pointer;
                     // Common Items
                     "Flexible Pipe": "Ft",
                     "Electric Tap": "Pic",
-                    "Brown Tap": "Pic",
+                    "4 inch Brown Tap": "Pic",
+                    "5 inch cutting Blade": "Pic",
                     "35/8 Screw": "pkt",
                     "35/8 katti": "pkt",
                     "0.4 mm washer": "Pic",
@@ -1830,6 +1851,8 @@ cursor:pointer;
                     // MCB Items
                     "Isolater 40A": "Pic",
                     "Isolater 63A": "Pic",
+                    "OVER UNDER VOLTAGE PROTECTOR": "Pic",
+                    "32A CHANGER OVER": "Pic",
                     "Mcb Changer 40A": "Pic",
                     "Mcb Changer 63A": "Pic",
                     "30ma RCCB 40A": "Pic",
@@ -2044,8 +2067,18 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
     <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
 </tr>
 
+
 <tr>
-    <td style="border:1px solid #444; padding:12px;">Brown Tap</td>
+    <td style="border:1px solid #444; padding:12px;">5 inch cutting Blade</td>
+    <td style="border:1px solid #444; padding:12px; text-align:center;">
+        <input type="number" value="0"
+        style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
+    </td>
+    <td style="border:1px solid #444; padding:12px; text-align:center; color:#FFD700;">Pic</td>
+</tr>
+
+<tr>
+    <td style="border:1px solid #444; padding:12px;">4 inch Brown Tap</td>
     <td style="border:1px solid #444; padding:12px; text-align:center;">
         <input type="number" value="0"
         style="width:120px; padding:6px; background:#222; color:white; border:1px solid #555; border-radius:5px;">
@@ -2149,177 +2182,206 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
                 }
             }
             // ================= PDF DOWNLOAD =================
+            function downloadPDF() {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'pt', 'a4');
 
-            // ================= PDF DOWNLOAD =================
-function downloadPDF() {
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('p', 'pt', 'a4');
+                const customerName = document.getElementById('custName')?.value.trim() || "Customer";
+                const address = document.getElementById('custAddress')?.value.trim() || "-";
+                const phone = document.getElementById('phone')?.value.trim() || "-";
+                const today = new Date();
 
-    const customerName = document.getElementById('custName')?.value.trim() || "Customer";
-    const address = document.getElementById('custAddress')?.value.trim() || "-";
-    const phone = document.getElementById('phone')?.value.trim() || "-";
-    const today = new Date();
+                const pageWidth = pdf.internal.pageSize.width;
+                const pageHeight = pdf.internal.pageSize.height;
 
-    const pageWidth = pdf.internal.pageSize.width;
-    const pageHeight = pdf.internal.pageSize.height;
+                // Header
+                pdf.setFillColor(0, 102, 204);
+                pdf.rect(0, 0, pageWidth, 90, "F");
 
-    // Header
-    pdf.setFillColor(0, 102, 204);
-    pdf.rect(0, 0, pageWidth, 90, "F");
+                try {
+                    const logo = document.querySelector(".header-logo");
+                    if (logo) pdf.addImage(logo, "PNG", 30, 15, 55, 55);
+                } catch (e) { console.log(e); }
 
-    try {
-        const logo = document.querySelector(".header-logo");
-        if (logo) pdf.addImage(logo, "PNG", 30, 15, 55, 55);
-    } catch (e) { console.log(e); }
+                pdf.setTextColor(255, 255, 255);
+                pdf.setFontSize(24);
+                pdf.setFont(undefined, "bold");
+                pdf.text("SM Technician", 105, 35);
 
-    pdf.setTextColor(255, 255, 255);
-    pdf.setFontSize(24);
-    pdf.setFont(undefined, "bold");
-    pdf.text("SM Technician", 105, 35);
+                pdf.setFontSize(12);
+                pdf.setFont(undefined, "normal");
+                pdf.text("Electrician - Sonu and Manoj", 105, 55);
+                pdf.text("Mobile : 6202346561, 8935883863", 105, 72);
+                pdf.text(`Date : ${today.toLocaleDateString('en-IN')}`, 420, 45);
 
-    pdf.setFontSize(12);
-    pdf.setFont(undefined, "normal");
-    pdf.text("Electrician - Sonu and Manoj", 105, 55);
-    pdf.text("Mobile : 6202346561, 8935883863", 105, 72);
-    pdf.text(`Date : ${today.toLocaleDateString('en-IN')}`, 420, 45);
+                pdf.setTextColor(0);
+                pdf.setFontSize(18);
+                pdf.setFont(undefined, "bold");
+                pdf.text("Electrical Material Estimate", 160, 125);
 
-    pdf.setTextColor(0);
-    pdf.setFontSize(18);
-    pdf.setFont(undefined, "bold");
-    pdf.text("Electrical Material Estimate", 160, 125);
+                pdf.setDrawColor(180);
+                pdf.line(40, 135, 555, 135);
 
-    pdf.setDrawColor(180);
-    pdf.line(40, 135, 555, 135);
+                // Customer Info
+                pdf.setFontSize(12);
+                pdf.setFont(undefined, "bold");
+                pdf.text("Customer Name :", 40, 165);
+                pdf.setFont(undefined, "normal");
+                pdf.text(customerName, 170, 165);
 
-    // Customer Info
-    pdf.setFontSize(12);
-    pdf.setFont(undefined, "bold");
-    pdf.text("Customer Name :", 40, 165);
-    pdf.setFont(undefined, "normal");
-    pdf.text(customerName, 170, 165);
+                pdf.setFont(undefined, "bold");
+                pdf.text("Address :", 40, 190);
+                pdf.setFont(undefined, "normal");
+                pdf.text(address, 170, 190);
 
-    pdf.setFont(undefined, "bold");
-    pdf.text("Address :", 40, 190);
-    pdf.setFont(undefined, "normal");
-    pdf.text(address, 170, 190);
+                pdf.setFont(undefined, "bold");
+                pdf.text("Mobile :", 40, 215);
+                pdf.setFont(undefined, "normal");
+                pdf.text(phone, 170, 215);
 
-    pdf.setFont(undefined, "bold");
-    pdf.text("Mobile :", 40, 215);
-    pdf.setFont(undefined, "normal");
-    pdf.text(phone, 170, 215);
+                // ================= TABLE DATA =================
+                const section1 = [];
+                const section2 = [];
 
-    // ================= TABLE DATA =================
-    const rows = [];
-    let serial = 1;
+                let serial1 = 1;
+                let serial2 = 1;
 
-    const tableRows = document.querySelectorAll('#billModal table tr');
+                const secondSectionItems = [
+                    "2 way mcb box", "4 way mcb box", "6 way mcb box", "8 way mcb box",
+                    "10 way mcb box", "12 way mcb box", "14 way mcb box", "16 way mcb box",
+                    "18 way mcb box", "20 way mcb box", "22 way mcb box", "24 way mcb box",
 
-    tableRows.forEach((row) => {
-        const cols = row.querySelectorAll('td');
-        if (cols.length < 2) return;
+                    "1inc HDPE Conduit Pipe", "0.75inc HDPE Conduit Pipe",
+                    "1inc PVC Conduit Pipe", "0.75inc PVC Conduit Pipe",
+                    "1inc PVC Bend", "0.75inc PVC Bend",
+                    "Juction box", "Fan Box", "Conceal Box", "Pipe Junction box",
+                    "1 inc pipe", "1 inc Sadel katti",
 
-        // Material Name
-        let material = cols[0].innerText.trim();
-        const nameInput = cols[0].querySelector('input[type="text"]');
-        if (nameInput && nameInput.value.trim() !== "") {
-            material = nameInput.value.trim();
-        }
+                    "1 Module metal box", "2 Module metal box", "3 Module metal box",
+                    "4 Module metal box", "6 Module metal box", "8 Module metal box",
+                    "12 Module metal box", "16 Module metal box", "18 Module metal box",
+                    "1 Module Metal Box", "2 Module Metal Box", "3 Module Metal Box",
+                    "4 Module Metal Box", "6 Module Metal Box", "8 Module Metal Box",
+                    "12 Module Metal Box", "16 Module Metal Box", "18 Module Metal Box",
+                    "4 inch Brown Tap",
+                    "5 inch cutting Blade"
+                ];
 
-        // Quantity
-        let qty = '0';
-        const qtyInput = cols[1].querySelector('input[type="number"]');
-        if (qtyInput) {
-            qty = qtyInput.value || '0';
-        }
+                const tableRows = document.querySelectorAll('#billModal table tr');
 
-        // ================= UNIT EXTRACTION (Fixed for Extra Materials) =================
-        let unit = "Pic";
-        
-        // Check for unit in 3rd column
-        if (cols[2]) {
-            const unitText = cols[2].innerText.trim();
-            if (unitText && unitText !== "") {
-                unit = unitText;
+                tableRows.forEach((row) => {
+                    const cols = row.querySelectorAll('td');
+                    if (cols.length < 2) return;
+
+                    let material = cols[0].innerText.trim();
+                    const nameInput = cols[0].querySelector('input[type="text"]');
+                    if (nameInput && nameInput.value.trim() !== "") {
+                        material = nameInput.value.trim();
+                    }
+
+                    const qtyInput = cols[1].querySelector('input[type="number"]');
+                    let qty = qtyInput ? (qtyInput.value || '0') : '0';
+
+                    let unit = "Pic";
+                    if (cols[2]) {
+                        const unitText = cols[2].innerText.trim();
+                        if (unitText) unit = unitText;
+                    }
+
+                    const unitInput = row.querySelector('input[placeholder="Unit"]');
+                    if (unitInput && unitInput.value.trim() !== "") {
+                        unit = unitInput.value.trim();
+                    }
+
+                    let wireColor = "";
+                    const colorSelect = row.querySelector(".wire-color");
+                    if (colorSelect && colorSelect.value) {
+                        wireColor = " (" + colorSelect.value + ")";
+                    }
+
+                    if (
+                        material.includes("Wire Section") ||
+                        material.includes("Extra Materials") ||
+                        material === "Material" ||
+                        parseInt(qty) <= 0
+                    ) {
+                        return;
+                    }
+
+                    // Handle Module Box + Plate Split
+                    if (material.match(/^\d+ module \(metal box\+plate\)$/)) {
+                        const match = material.match(/^(\d+) module/);
+                        if (match) {
+                            const moduleNum = match[1];
+                            section2.push([serial2++, `${moduleNum} Module Metal Box`, qty, "Pic"]);
+                            section1.push([serial1++, `${moduleNum} Module Plate`, qty, "Pic"]);
+                            return;
+                        }
+                    }
+
+                    const rowData = [
+                        secondSectionItems.includes(material) ? serial2++ : serial1++,
+                        material + wireColor,
+                        qty,
+                        unit
+                    ];
+
+                    if (secondSectionItems.includes(material)) {
+                        section2.push(rowData);
+                    } else {
+                        section1.push(rowData);
+                    }
+                });
+
+                // ================= FIRST TABLE: SECTION 2 (PVC/BOX/MCB) - ON TOP =================
+                if (section2.length > 0) {
+                    pdf.setFontSize(16);
+                    pdf.setFont(undefined, "bold");
+                    pdf.text("WALL CUTTING MATERIALS", 40, 245);
+
+                    pdf.autoTable({
+                        startY: 265,
+                        head: [['S.No', 'Material Name', 'Qty', 'Unit']],
+                        body: section2,
+                        theme: 'grid',
+                        styles: { fontSize: 11, cellPadding: 6 },
+                        headStyles: { fillColor: [220, 120, 0], textColor: 255, fontStyle: 'bold' },
+                        columnStyles: {
+                            0: { cellWidth: 45, halign: 'center' },
+                            1: { cellWidth: 300 },
+                            2: { cellWidth: 70, halign: 'center' },
+                            3: { cellWidth: 70, halign: 'center' }
+                        }
+                    });
+                }
+
+                // ================= SECOND TABLE: SECTION 1 (Other Materials) =================
+                const nextStartY = section2.length > 0 ? pdf.lastAutoTable.finalY + 40 : 245;
+
+                if (section1.length > 0) {
+                    pdf.setFontSize(16);
+                    pdf.setFont(undefined, "bold");
+                    pdf.text("OTHER MATERIALS", 40, nextStartY);
+
+                    pdf.autoTable({
+                        startY: nextStartY + 20,
+                        head: [['S.No', 'Material', 'Qty', 'Unit']],
+                        body: section1,
+                        theme: 'grid',
+                        styles: { fontSize: 11, cellPadding: 6 },
+                        headStyles: { fillColor: [0, 102, 204], textColor: 255, fontStyle: 'bold' },
+                        columnStyles: {
+                            0: { cellWidth: 45, halign: 'center' },
+                            1: { cellWidth: 300 },
+                            2: { cellWidth: 70, halign: 'center' },
+                            3: { cellWidth: 70, halign: 'center' }
+                        }
+                    });
+                }
+
+                const fileName = `${customerName}_Estimate.pdf`;
+                pdf.save(fileName);
             }
-        }
-
-        // Also check inside extra material row if unit input exists
-        const unitInput = row.querySelector('input[placeholder="Unit"]');
-        if (unitInput && unitInput.value.trim() !== "") {
-            unit = unitInput.value.trim();
-        }
-
-        // Wire Color
-        let wireColor = "";
-        const colorSelect = row.querySelector(".wire-color");
-        if (colorSelect && colorSelect.value) {
-            wireColor = " (" + colorSelect.value + ")";
-        }
-
-        // Split Module Box + Plate
-        if (material.match(/^\d+ module \(metal box\+plate\)$/)) {
-            const match = material.match(/^(\d+) module/);
-            if (match && parseInt(qty) > 0) {
-                const moduleNum = match[1];
-                rows.push([serial++, `${moduleNum} Module Metal Box`, qty, "Pic"]);
-                rows.push([serial++, `${moduleNum} Module Plate`, qty, "Pic"]);
-                return;
-            }
-        }
-
-        // Add row if valid
-        if (material && parseInt(qty) > 0) {
-            if (material.includes("Wire Section") || 
-                material.includes("Extra Materials") || 
-                material === "Material") {
-                return;
-            }
-
-            rows.push([
-                serial++,
-                material + wireColor,
-                qty,
-                unit
-            ]);
-        }
-    });
-
-    // Generate Table
-    pdf.autoTable({
-        startY: 245,
-        head: [['S.No', 'Material Name', 'Qty', 'Unit']],
-        body: rows,
-        theme: 'grid',
-        styles: { fontSize: 11, cellPadding: 6, valign: 'middle' },
-        headStyles: { 
-            fillColor: [0, 102, 204], 
-            textColor: 255, 
-            fontStyle: 'bold', 
-            halign: 'center' 
-        },
-        alternateRowStyles: { fillColor: [245, 245, 245] },
-        columnStyles: {
-            0: { cellWidth: 45, halign: 'center' },
-            1: { cellWidth: 300 },
-            2: { cellWidth: 70, halign: 'center' },
-            3: { cellWidth: 70, halign: 'center' }
-        },
-        didDrawPage: function (data) {
-            pdf.setFontSize(10);
-            pdf.setTextColor(120);
-            pdf.text("SM Technician • 8935883863", 40, pageHeight - 30);
-            pdf.text("Thank you for choosing SM Technician", 40, pageHeight - 15);
-            pdf.text(`Page ${pdf.internal.getNumberOfPages()}`, pageWidth - 80, pageHeight - 20);
-        }
-    });
-
-    const fileName = `${customerName}_Estimate.pdf`;
-    pdf.save(fileName);
-}
-
-
-
-
 
 
             // ================= BUTTON CONNECT =================
