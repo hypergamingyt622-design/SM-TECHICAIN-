@@ -541,51 +541,51 @@
 
                     <div class="room-field">
                         <label>Fan Points</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label> LED Points</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>Tube Light</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>Night Bulb</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>6A Sockets</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>20A Sockets</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>2 Way Switch</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>Power Board / Extension</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
                     <div class="room-field">
                         <label>Conceal Light</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                     <div class="room-field">
                         <label>1 inc pipe</label>
-                        <input type="number" value="0">
+                        <input type="number" value="0" min="0">
                     </div>
 
                 </div>
@@ -770,6 +770,47 @@ cursor:pointer;
                     "1 inc pipe"
                 ],
 
+
+                 "Stair": [
+
+                    "2way B",
+
+                    "Led bulb",
+
+                    "Led bulb batten",
+                    "Tube light",
+                    "Strip Light Controller",
+                    "Strip Led Driver/smps",
+                    "COB Strip Led light",
+                    "Foot Light/ Step Light",
+                    "Conceal Stair Light",
+
+                    "conceal light",
+                    "Patti"
+                ],
+
+
+                "Earthing": [
+
+                    "Copper/GI Earthing Pipe 10ft",
+
+                    "Copper/GI Earthing Plate",
+
+                    "Copper/GI strip",
+                    "Earthing Clamp",
+                    "Saddle Clamp",
+                    "Earth bus bar",
+                    "Earthing Chemical",
+                    "COB Strip Led light",
+                    "Earthing Bolt Nut",
+                    "Conceal Stair Light",
+
+                    
+                    "Patti"
+                ],
+
+
+
                 MCB: [
 
                     "Isolater 40A",
@@ -807,6 +848,7 @@ cursor:pointer;
 
                 ],
 
+               
 
                 Rooftop: [
                     "1inc HDPE Conduit Pipe",
@@ -885,51 +927,51 @@ cursor:pointer;
 
             <div class="room-field">
                 <label>Fan Points</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>Bulb / LED Points</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>Tube Light</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>Night Bulb / Indicator</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>6A / 10A Sockets</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>20A Power Sockets</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>2 Way Switch</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
 
             <div class="room-field">
                 <label>Power Board / Extension</label>
-                <input type="number" value="0">
+                <input type="number" value="0" min="0">
             </div>
             <div class="room-field">
     <label>Conceal Light</label>
-    <input type="number" value="0">
+    <input type="number" value="0" min="0">
 </div>
 
 <div class="room-field">
     <label>1 inc pipe</label>
-    <input type="number" value="0">
+    <input type="number" value="0" min="0">
 </div>
 
         </div>
@@ -1884,6 +1926,74 @@ cursor:pointer;
 
                 let totalApproxPrice = 0;
 
+                // ================= TOTAL POINT CALCULATION =================
+
+const POINT_MAP = {
+
+    "6amp switch": 1,
+    "6amp Socket": 1,
+
+    "16amp switch": 1,
+    "16amp Socket": 2,
+
+    "two way switch": 2,
+
+    "regulator": 1,
+
+    "32amp dp switch": 2,
+
+    "Indicator": 1,
+    "Fuse": 1,
+
+    "Isolater 40A": 4,
+    "Isolater 63A": 4,
+
+    "OVER UNDER VOLTAGE PROTECTOR": 4,
+
+    "32A CHANGER OVER": 4,
+
+    "Mcb Changer 40A": 4,
+    "Mcb Changer 63A": 4,
+
+    "30ma RCCB 40A": 4,
+    "30ma RCCB 63A": 4,
+
+    "6amp mcb": 2,
+    "10amp mcb": 2,
+    "16amp mcb": 2,
+    "20amp mcb": 2,
+    "25amp mcb": 2,
+    "32amp mcb": 2,
+    "40amp mcb": 2,
+    "63amp mcb": 2,
+
+    "2 way mcb box": 2,
+    "4 way mcb box": 2,
+    "6 way mcb box": 2,
+    "8 way mcb box": 2,
+    "10 way mcb box": 2,
+    "12 way mcb box": 2,
+    "14 way mcb box": 2,
+    "16 way mcb box": 2,
+    "18 way mcb box": 2,
+    "20 way mcb box": 2,
+    "22 way mcb box": 2,
+    "24 way mcb box": 2
+};
+
+let totalPoints = 0;
+
+// Total Point Calculate
+Object.keys(materials).forEach(item => {
+
+    if (materials[item] > 0 && POINT_MAP[item]) {
+
+        totalPoints += materials[item] * POINT_MAP[item];
+
+    }
+
+});
+
                 let html = `
     <div id="billModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); overflow:auto; z-index:9999; padding:20px;">
         <div style="max-width:1000px; margin:auto; background:#111; border:2px solid #FFD700; border-radius:20px; padding:25px;">
@@ -2153,6 +2263,49 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
 
 `;
 
+
+html += `
+
+<div style="
+    margin-top:20px;
+    background:#111827;
+    border:2px solid #22c55e;
+    border-radius:18px;
+    padding:22px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(34,197,94,0.3);
+">
+
+    <h2 style="
+        color:#22c55e;
+        margin-bottom:12px;
+        font-size:28px;
+    ">
+        Total Point
+    </h2>
+
+    <div id="totalPointBox" style="
+        font-size:42px;
+        font-weight:bold;
+        color:#FFD700;
+    ">
+        ${totalPoints}
+    </div>
+
+    <div style="
+        margin-top:10px;
+        color:#aaa;
+        font-size:15px;
+    ">
+        Total calculated electrical points
+    </div>
+
+</div>
+
+`;
+
+
+
                 // Buttons
                 html += `
        <div style="text-align:center; margin-top:30px;">
@@ -2238,6 +2391,10 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
                 pdf.text("Mobile :", 40, 215);
                 pdf.setFont(undefined, "normal");
                 pdf.text(phone, 170, 215);
+
+
+
+
 
                 // ================= TABLE DATA =================
                 const section1 = [];
@@ -2546,43 +2703,169 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
 
 
 
-            function updateApproxPrice() {
+   function updateApproxPrice() {
 
-                let total = 0;
+    let total = 0;
 
-                document.querySelectorAll('#billModal table tr').forEach(row => {
+    // ================= PRICE TOTAL =================
 
-                    const cols = row.querySelectorAll('td');
+    const rows = document.querySelectorAll("#billModal table tr");
 
-                    if (cols.length < 3) return;
+    rows.forEach(row => {
 
-                    let item = cols[0].innerText.trim();
+        const materialCell = row.children[0];
 
-                    const qtyInput = cols[1].querySelector('input');
+        if (!materialCell) return;
 
-                    if (!qtyInput) return;
+        const materialName = materialCell.innerText.trim();
 
-                    const qty = parseFloat(qtyInput.value) || 0;
+        const qtyInput = row.querySelector('input[type="number"]');
 
-                    const price = PRICE_LIST[item] || 0;
+        if (!qtyInput) return;
 
-                    total += qty * price;
+        const qty = parseFloat(qtyInput.value) || 0;
 
-                    const extraPriceInput = row.querySelector('.extra-price');
+        const price = PRICE_LIST[materialName] || 0;
 
-                    if (extraPriceInput) {
-                        const extraPrice = parseFloat(extraPriceInput.value) || 0;
-                        total += qty * extraPrice;
+        total += qty * price;
+
+    });
+
+    // ================= UPDATE PRICE =================
+
+    const priceBox = document.getElementById("approxTotalPrice");
+
+    if (priceBox) {
+
+        priceBox.innerText =
+            "₹ " + total.toLocaleString('en-IN');
+
+    }
+
+    // ================= POINT MAP =================
+
+    const POINT_MAP = {
+
+        "6amp switch": 1,
+        "6amp Socket": 1,
+
+        "16amp switch": 1,
+        "16amp Socket": 2,
+
+        "two way switch": 2,
+
+        "regulator": 1,
+
+        "32amp dp switch": 2,
+
+        "Indicator": 1,
+        "Fuse": 1,
+
+        "Isolater 40A": 4,
+        "Isolater 63A": 4,
+
+        "OVER UNDER VOLTAGE PROTECTOR": 4,
+
+        "32A CHANGER OVER": 4,
+
+        "Mcb Changer 40A": 4,
+        "Mcb Changer 63A": 4,
+
+        "30ma RCCB 40A": 4,
+        "30ma RCCB 63A": 4,
+
+        "6amp mcb": 2,
+        "10amp mcb": 2,
+        "16amp mcb": 2,
+        "20amp mcb": 2,
+        "25amp mcb": 2,
+        "32amp mcb": 2,
+        "40amp mcb": 2,
+        "63amp mcb": 2,
+
+        "2 way mcb box": 2,
+        "4 way mcb box": 2,
+        "6 way mcb box": 2,
+        "8 way mcb box": 2,
+        "10 way mcb box": 2,
+        "12 way mcb box": 2,
+        "14 way mcb box": 2,
+        "16 way mcb box": 2,
+        "18 way mcb box": 2,
+        "20 way mcb box": 2,
+        "22 way mcb box": 2,
+        "24 way mcb box": 2
+    };
+
+    // ================= TOTAL POINT =================
+
+    let totalPoints = 0;
+
+    rows.forEach(row => {
+
+        const materialCell = row.children[0];
+
+        if (!materialCell) return;
+
+        const materialName = materialCell.innerText.trim();
+
+        const qtyInput = row.querySelector('input[type="number"]');
+
+        if (!qtyInput) return;
+
+        const qty = parseFloat(qtyInput.value) || 0;
+
+        if (POINT_MAP[materialName]) {
+
+            totalPoints += qty * POINT_MAP[materialName];
+
+        }
+
+    });
+
+    // ================= UPDATE POINT BOX =================
+
+    const pointBox = document.getElementById("totalPointBox");
+
+    if (pointBox) {
+
+        pointBox.innerText = totalPoints;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // ================= NEGATIVE VALUE BLOCK =================
+
+            document.addEventListener("input", function (e) {
+
+                if (e.target.type === "number") {
+
+                    let value = parseInt(e.target.value);
+
+                    // Agar negative hai to 0 kar do
+                    if (value < 0 || isNaN(value)) {
+                        e.target.value = 0;
                     }
 
-                });
-
-                const totalBox = document.getElementById('approxTotalPrice');
-
-                if (totalBox) {
-                    totalBox.innerText = "₹ " + total.toLocaleString('en-IN');
                 }
-            }
+
+            });
 
 
         </script>
