@@ -771,7 +771,10 @@ cursor:pointer;
                 ],
 
 
-                 "Stair": [
+                "Stair": [
+
+                    "Fuse",
+                    "Indicator",
 
                     "2way B",
 
@@ -786,7 +789,7 @@ cursor:pointer;
                     "Conceal Stair Light",
 
                     "conceal light",
-                    "Patti"
+                    "1 inc pipe"
                 ],
 
 
@@ -805,8 +808,7 @@ cursor:pointer;
                     "Earthing Bolt Nut",
                     "Conceal Stair Light",
 
-                    
-                    "Patti"
+                    "1 inc pipe"
                 ],
 
 
@@ -848,7 +850,7 @@ cursor:pointer;
 
                 ],
 
-               
+
 
                 Rooftop: [
                     "1inc HDPE Conduit Pipe",
@@ -1073,6 +1075,19 @@ cursor:pointer;
                 "18 module (metal box+plate)": 0,
                 "Indicator": 0,
                 "Fuse": 0,
+                "Strip Light Controller": 0,
+                "Strip Led Driver/smps": 0,
+                "COB Strip Led light": 0,
+                "Foot Light/ Step Light": 0,
+                "Conceal Stair Light": 0,
+                "Copper/GI Earthing Pipe 10ft": 0,
+                "Copper/GI Earthing Plate": 0,
+                "Copper/GI stri": 0,
+                "Earthing Clamp": 0,
+                "Saddle Clamp": 0,
+                "Earth bus bar": 0,
+                "Earthing Chemical": 0,
+                "Earthing Bolt Nut": 0,
 
 
 
@@ -1364,6 +1379,76 @@ cursor:pointer;
 
 
 
+
+
+                        if (item === "Strip Light Controller") {
+
+                            MATERIALS["Strip Light Controller"] += qty;
+
+                        }
+
+
+                        if (item === "Strip Led Driver/smps") {
+
+                            MATERIALS["Strip Led Driver/smps"] += qty;
+
+
+                        }
+
+
+                        if (item === "COB Strip Led light") {
+
+                            MATERIALS["COB Strip Led light"] += qty;
+
+                            roomModule += qty * 1;
+
+                        }
+
+                        if (item === "Foot Light/ Step Light") {
+
+                            MATERIALS["Foot Light/ Step Light"] += qty;
+
+                            roomModule += qty * 1;
+                        }
+
+
+                        if (item === "Copper/GI Earthing Pipe 10ft") {
+
+                            MATERIALS["Copper/GI Earthing Pipe 10ft"] += qty;
+
+
+                        }
+
+                        if (item === "Earthing Clamp") {
+
+                            MATERIALS["Earthing Clamp"] += qty;
+
+
+                        }
+                        if (item === "Saddle Clamp") {
+
+                            MATERIALS["Saddle Clamp"] += qty;
+
+
+                        }
+                        if (item === "Earth bus bar") {
+
+                            MATERIALS["Earth bus bar"] += qty;
+
+
+                        }
+                        if (item === "Earthing Chemical") {
+
+                            MATERIALS["Earthing Chemical"] += qty;
+
+
+                        }
+                        if (item === "Earthing Bolt Nut") {
+
+                            MATERIALS["Earthing Bolt Nut"] += qty;
+
+
+                        }
 
 
 
@@ -1861,6 +1946,19 @@ cursor:pointer;
                     "blanker": "Pic",
                     "Indicator": "Pic",
                     "Fuse": "Pic",
+                    "Strip Light Controller": "Pic",
+"Strip Led Driver/smps":"Pic",
+"COB Strip Led light": "Pic",
+"Foot Light/ Step Light": "Pic",
+"Conceal Stair Light": "Pic",
+"Copper/GI Earthing Pipe 10ft": "Pic",
+"Copper/GI Earthing Plate": "Pic",
+"Copper/GI stri": "Pic",
+"Earthing Clamp": "Pic",
+"Saddle Clamp": "Pic",
+"Earth bus bar": "Pic",
+"Earthing Chemical": "Pic",
+"Earthing Bolt Nut": "Pic",
 
 
 
@@ -1928,71 +2026,71 @@ cursor:pointer;
 
                 // ================= TOTAL POINT CALCULATION =================
 
-const POINT_MAP = {
+                const POINT_MAP = {
 
-    "6amp switch": 1,
-    "6amp Socket": 1,
+                    "6amp switch": 1,
+                    "6amp Socket": 1,
 
-    "16amp switch": 1,
-    "16amp Socket": 2,
+                    "16amp switch": 1,
+                    "16amp Socket": 2,
 
-    "two way switch": 2,
+                    "two way switch": 2,
 
-    "regulator": 1,
+                    "regulator": 1,
 
-    "32amp dp switch": 2,
+                    "32amp dp switch": 2,
 
-    "Indicator": 1,
-    "Fuse": 1,
+                    "Indicator": 1,
+                    "Fuse": 1,
 
-    "Isolater 40A": 4,
-    "Isolater 63A": 4,
+                    "Isolater 40A": 4,
+                    "Isolater 63A": 4,
 
-    "OVER UNDER VOLTAGE PROTECTOR": 4,
+                    "OVER UNDER VOLTAGE PROTECTOR": 4,
 
-    "32A CHANGER OVER": 4,
+                    "32A CHANGER OVER": 4,
 
-    "Mcb Changer 40A": 4,
-    "Mcb Changer 63A": 4,
+                    "Mcb Changer 40A": 4,
+                    "Mcb Changer 63A": 4,
 
-    "30ma RCCB 40A": 4,
-    "30ma RCCB 63A": 4,
+                    "30ma RCCB 40A": 4,
+                    "30ma RCCB 63A": 4,
 
-    "6amp mcb": 2,
-    "10amp mcb": 2,
-    "16amp mcb": 2,
-    "20amp mcb": 2,
-    "25amp mcb": 2,
-    "32amp mcb": 2,
-    "40amp mcb": 2,
-    "63amp mcb": 2,
+                    "6amp mcb": 2,
+                    "10amp mcb": 2,
+                    "16amp mcb": 2,
+                    "20amp mcb": 2,
+                    "25amp mcb": 2,
+                    "32amp mcb": 2,
+                    "40amp mcb": 2,
+                    "63amp mcb": 2,
 
-    "2 way mcb box": 2,
-    "4 way mcb box": 2,
-    "6 way mcb box": 2,
-    "8 way mcb box": 2,
-    "10 way mcb box": 2,
-    "12 way mcb box": 2,
-    "14 way mcb box": 2,
-    "16 way mcb box": 2,
-    "18 way mcb box": 2,
-    "20 way mcb box": 2,
-    "22 way mcb box": 2,
-    "24 way mcb box": 2
-};
+                    "2 way mcb box": 2,
+                    "4 way mcb box": 2,
+                    "6 way mcb box": 2,
+                    "8 way mcb box": 2,
+                    "10 way mcb box": 2,
+                    "12 way mcb box": 2,
+                    "14 way mcb box": 2,
+                    "16 way mcb box": 2,
+                    "18 way mcb box": 2,
+                    "20 way mcb box": 2,
+                    "22 way mcb box": 2,
+                    "24 way mcb box": 2
+                };
 
-let totalPoints = 0;
+                let totalPoints = 0;
 
-// Total Point Calculate
-Object.keys(materials).forEach(item => {
+                // Total Point Calculate
+                Object.keys(materials).forEach(item => {
 
-    if (materials[item] > 0 && POINT_MAP[item]) {
+                    if (materials[item] > 0 && POINT_MAP[item]) {
 
-        totalPoints += materials[item] * POINT_MAP[item];
+                        totalPoints += materials[item] * POINT_MAP[item];
 
-    }
+                    }
 
-});
+                });
 
                 let html = `
     <div id="billModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); overflow:auto; z-index:9999; padding:20px;">
@@ -2264,7 +2362,7 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
 `;
 
 
-html += `
+                html += `
 
 <div style="
     margin-top:20px;
@@ -2703,137 +2801,149 @@ html += `
 
 
 
-   function updateApproxPrice() {
+            function updateApproxPrice() {
 
-    let total = 0;
+                let total = 0;
 
-    // ================= PRICE TOTAL =================
+                // ================= PRICE TOTAL =================
 
-    const rows = document.querySelectorAll("#billModal table tr");
+                const rows = document.querySelectorAll("#billModal table tr");
 
-    rows.forEach(row => {
+                rows.forEach(row => {
 
-        const materialCell = row.children[0];
+                    const materialCell = row.children[0];
 
-        if (!materialCell) return;
+                    if (!materialCell) return;
 
-        const materialName = materialCell.innerText.trim();
+                    const materialName = materialCell.innerText.trim();
 
-        const qtyInput = row.querySelector('input[type="number"]');
+                    const qtyInput = row.querySelector('input[type="number"]');
 
-        if (!qtyInput) return;
+                    if (!qtyInput) return;
 
-        const qty = parseFloat(qtyInput.value) || 0;
+                    const qty = parseFloat(qtyInput.value) || 0;
 
-        const price = PRICE_LIST[materialName] || 0;
+                    const price = PRICE_LIST[materialName] || 0;
 
-        total += qty * price;
+                    total += qty * price;
 
-    });
+                });
 
-    // ================= UPDATE PRICE =================
+                // ================= UPDATE PRICE =================
 
-    const priceBox = document.getElementById("approxTotalPrice");
+                const priceBox = document.getElementById("approxTotalPrice");
 
-    if (priceBox) {
+                if (priceBox) {
 
-        priceBox.innerText =
-            "₹ " + total.toLocaleString('en-IN');
+                    priceBox.innerText =
+                        "₹ " + total.toLocaleString('en-IN');
 
-    }
+                }
 
-    // ================= POINT MAP =================
+                // ================= POINT MAP =================
 
-    const POINT_MAP = {
+                const POINT_MAP = {
 
-        "6amp switch": 1,
-        "6amp Socket": 1,
+                    "6amp switch": 1,
+                    "6amp Socket": 1,
 
-        "16amp switch": 1,
-        "16amp Socket": 2,
+                    "16amp switch": 1,
+                    "16amp Socket": 2,
 
-        "two way switch": 2,
+                    "two way switch": 2,
 
-        "regulator": 1,
+                    "regulator": 1,
 
-        "32amp dp switch": 2,
+                    "32amp dp switch": 2,
 
-        "Indicator": 1,
-        "Fuse": 1,
+                    "Indicator": 1,
+                    "6amp switch": 1,
 
-        "Isolater 40A": 4,
-        "Isolater 63A": 4,
+                    "16amp switch": 1,
+                    "16amp Socket": 1,
 
-        "OVER UNDER VOLTAGE PROTECTOR": 4,
+                    "two way switch": 2,
 
-        "32A CHANGER OVER": 4,
+                    "regulator": 1,
 
-        "Mcb Changer 40A": 4,
-        "Mcb Changer 63A": 4,
+                    "32amp dp switch": 2,
 
-        "30ma RCCB 40A": 4,
-        "30ma RCCB 63A": 4,
+                    "Indicator": 1,
+                    "Fuse": 1,
 
-        "6amp mcb": 2,
-        "10amp mcb": 2,
-        "16amp mcb": 2,
-        "20amp mcb": 2,
-        "25amp mcb": 2,
-        "32amp mcb": 2,
-        "40amp mcb": 2,
-        "63amp mcb": 2,
+                    "Isolater 40A": 4,
+                    "Isolater 63A": 4,
 
-        "2 way mcb box": 2,
-        "4 way mcb box": 2,
-        "6 way mcb box": 2,
-        "8 way mcb box": 2,
-        "10 way mcb box": 2,
-        "12 way mcb box": 2,
-        "14 way mcb box": 2,
-        "16 way mcb box": 2,
-        "18 way mcb box": 2,
-        "20 way mcb box": 2,
-        "22 way mcb box": 2,
-        "24 way mcb box": 2
-    };
+                    "OVER UNDER VOLTAGE PROTECTOR": 4,
 
-    // ================= TOTAL POINT =================
+                    "32A CHANGER OVER": 4,
 
-    let totalPoints = 0;
+                    "Mcb Changer 40A": 4,
+                    "Mcb Changer 63A": 4,
 
-    rows.forEach(row => {
+                    "30ma RCCB 40A": 4,
+                    "30ma RCCB 63A": 4,
 
-        const materialCell = row.children[0];
+                    "6amp mcb": 2,
+                    "10amp mcb": 2,
+                    "16amp mcb": 2,
+                    "20amp mcb": 2,
+                    "25amp mcb": 2,
+                    "32amp mcb": 2,
+                    "40amp mcb": 2,
+                    "63amp mcb": 2,
 
-        if (!materialCell) return;
+                    "2 way mcb box": 2,
+                    "4 way mcb box": 2,
+                    "6 way mcb box": 2,
+                    "8 way mcb box": 2,
+                    "10 way mcb box": 2,
+                    "12 way mcb box": 2,
+                    "14 way mcb box": 2,
+                    "16 way mcb box": 2,
+                    "18 way mcb box": 2,
+                    "20 way mcb box": 2,
+                    "22 way mcb box": 2,
+                    "24 way mcb box": 2
+                };
 
-        const materialName = materialCell.innerText.trim();
+                // ================= TOTAL POINT =================
 
-        const qtyInput = row.querySelector('input[type="number"]');
+                let totalPoints = 0;
 
-        if (!qtyInput) return;
+                rows.forEach(row => {
 
-        const qty = parseFloat(qtyInput.value) || 0;
+                    const materialCell = row.children[0];
 
-        if (POINT_MAP[materialName]) {
+                    if (!materialCell) return;
 
-            totalPoints += qty * POINT_MAP[materialName];
+                    const materialName = materialCell.innerText.trim();
 
-        }
+                    const qtyInput = row.querySelector('input[type="number"]');
 
-    });
+                    if (!qtyInput) return;
 
-    // ================= UPDATE POINT BOX =================
+                    const qty = parseFloat(qtyInput.value) || 0;
 
-    const pointBox = document.getElementById("totalPointBox");
+                    if (POINT_MAP[materialName]) {
 
-    if (pointBox) {
+                        totalPoints += qty * POINT_MAP[materialName];
 
-        pointBox.innerText = totalPoints;
+                    }
 
-    }
+                });
 
-}
+                // ================= UPDATE POINT BOX =================
+
+                const pointBox = document.getElementById("totalPointBox");
+
+                if (pointBox) {
+
+                    pointBox.innerText = totalPoints;
+
+                }
+
+            }
 
 
 
