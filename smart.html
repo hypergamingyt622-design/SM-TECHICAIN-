@@ -425,6 +425,241 @@
         @media (max-width: 600px) {
             .room-module-info { font-size: 12px; padding: 7px 9px; }
         }
+
+
+/* =====================================================
+   SM TECHNICIAN - MOBILE OPTIMIZATION
+   ===================================================== */
+@media (max-width: 600px) {
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+    }
+
+    .header {
+        padding: 16px 10px;
+    }
+
+    .header-logo {
+        width: 72px;
+        height: 72px;
+    }
+
+    .header h1 {
+        font-size: 1.45rem;
+        margin-top: 8px;
+    }
+
+    .info {
+        padding: 12px;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .info input {
+        min-height: 46px;
+        padding: 11px 12px;
+        font-size: 16px;
+    }
+
+    .big-title {
+        margin: 8px 0;
+        padding: 12px 10px;
+        font-size: 1.15rem;
+    }
+
+    .room-card {
+        margin: 12px 8px;
+        border-radius: 16px;
+    }
+
+    .room-header {
+        width: 100%;
+        padding: 12px;
+        gap: 10px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .room-header > div:first-child {
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px !important;
+        align-items: center;
+    }
+
+    .room-header .room-type {
+        width: 100%;
+        min-width: 0;
+        min-height: 44px;
+        padding: 8px 10px !important;
+        font-size: 15px !important;
+    }
+
+    .room-header h2 {
+        min-width: 0;
+        margin: 0;
+        font-size: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .room-header > div:last-child {
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px !important;
+        align-items: stretch;
+    }
+
+    .room-header > div:last-child button,
+    .room-header > div:last-child .room-module-info {
+        width: 100%;
+        min-width: 0;
+        min-height: 42px;
+        padding: 7px 5px !important;
+        border-radius: 9px;
+        font-size: 11px !important;
+        line-height: 1.15;
+        white-space: normal;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .room-header > div:last-child .room-module-info {
+        order: 2;
+    }
+
+    .room-header > div:last-child .duplicate-room-btn {
+        order: 1;
+    }
+
+    .room-header > div:last-child .delete-room-btn {
+        order: 4;
+    }
+
+    .room-header > div:last-child .default-room-btn {
+        order: 3;
+    }
+
+    .room-grid {
+        width: 100%;
+        padding: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+    }
+
+    .room-field {
+        min-width: 0;
+        padding: 9px;
+        border-radius: 12px;
+    }
+
+    .room-field label {
+        min-height: 34px;
+        margin-bottom: 5px;
+        font-size: 12px;
+        line-height: 1.25;
+        display: flex;
+        align-items: center;
+    }
+
+    .room-field input {
+        width: 100%;
+        min-height: 44px;
+        padding: 9px 7px;
+        font-size: 17px;
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    .add-room-btn {
+        width: calc(100% - 16px);
+        margin: 8px 8px 18px;
+        min-height: 50px;
+        padding: 13px 10px;
+        border-radius: 14px;
+        font-size: 18px;
+    }
+
+    #generateBillBtn {
+        width: calc(100% - 24px);
+        min-height: 52px;
+        margin: 18px 12px;
+        padding: 13px 12px;
+        font-size: 17px;
+    }
+
+    .top-bar {
+        padding: 9px 10px;
+        gap: 10px;
+    }
+
+    .back-btn {
+        width: 42px;
+        height: 42px;
+        flex: 0 0 42px;
+    }
+
+    .top-title {
+        font-size: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    footer {
+        padding: 14px 10px;
+        font-size: 12px;
+    }
+
+    /* Prevent generated bill tables/modals from breaking the phone width. */
+    #billModal {
+        padding: 8px !important;
+    }
+
+    #billModal > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 12px !important;
+        border-radius: 14px !important;
+        overflow-x: auto;
+    }
+
+    #billModal table {
+        min-width: 620px;
+    }
+}
+
+@media (max-width: 380px) {
+    .room-header > div:last-child {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .room-header > div:last-child button,
+    .room-header > div:last-child .room-module-info {
+        font-size: 12px !important;
+    }
+
+    .room-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
 </style>
 
 </head>
@@ -2794,7 +3029,7 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
             // ================= LIVE ROOM BOARD / MODULE DISPLAY =================
             // Rooftop, Earthing aur MCB ko intentionally exclude kiya gaya hai.
             const ROOM_MODULE_MAP = {
-                "Fuse": 1, "Indicator": 1, "Led bulb": 1, "conceal light": 1,"Night bulb": 1,
+                "Fuse": 1, "Indicator": 1, "Led bulb": 1, "Night bulb": 1,
                 "Tube light": 1, "Fan": 2, "Exhaust fan": 1, "Led bulb batten": 1,
                 "2way F": 2, "2way B": 1, "2way F&B": 3,
                 "6A Sockets": 3, "16A Sockets": 3,
