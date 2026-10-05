@@ -407,7 +407,25 @@
                 transform: translateX(0);
             }
         }
-    </style>
+    
+        .room-module-info {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: #111;
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            font-weight: 700;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        @media (max-width: 600px) {
+            .room-module-info { font-size: 12px; padding: 7px 9px; }
+        }
+</style>
 
 </head>
 
@@ -528,6 +546,18 @@
             font-weight:500;
         ">
                             Duplicate
+                        </button>
+
+                        <button class="default-room-btn" onclick="applyRoomDefault(this)" style="
+            background:#FFD700;
+            color:#111;
+            border:none;
+            padding:10px 18px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:700;
+        ">
+                            Default
                         </button>
 
                         <button class="delete-room-btn" onclick="deleteRoom(this)">
@@ -676,7 +706,9 @@ cursor:pointer;
 
                     "2way F",
                     "2way B",
-                    "2way F&B",
+                    "2way F&B",,
+
+                    "blanker"
                 ],
 
                 "Normal room": [
@@ -694,7 +726,9 @@ cursor:pointer;
 
                     "Power board",
                     "conceal light",
-                    "1 inc pipe"
+                    "1 inc pipe",
+
+                    "blanker"
                 ],
 
                 "Hall": [
@@ -726,7 +760,9 @@ cursor:pointer;
 
                     "2way F",
                     "2way B",
-                    "2way F&B"
+                    "2way F&B",
+
+                    "blanker"
                 ],
 
 
@@ -749,7 +785,9 @@ cursor:pointer;
                     "3M Footer Light",
 
                     "conceal light",
-                    "1 inc pipe"
+                    "1 inc pipe",
+
+                    "blanker"
                 ],
 
 
@@ -767,7 +805,9 @@ cursor:pointer;
                     "16A Sockets",
 
                     "conceal light",
-                    "1 inc pipe"
+                    "1 inc pipe",
+
+                    "blanker"
                 ],
 
 
@@ -789,7 +829,9 @@ cursor:pointer;
                     "Conceal Stair Light",
 
                     "conceal light",
-                    "1 inc pipe"
+                    "1 inc pipe",
+
+                    "blanker"
                 ],
 
 
@@ -871,6 +913,9 @@ cursor:pointer;
 
             function addRoom() {
 
+                // Add New Room hamesha Bedroom se start hoga,
+                // lekin Bedroom ki numbering sirf Bedroom sections ke hisaab se hogi.
+                const nextBedroomNumber = getNextRoomNumber("Bedroom");
                 roomCount = document.querySelectorAll(".room-card").length + 1;
 
                 const roomHTML = `
@@ -900,7 +945,7 @@ cursor:pointer;
         <option>MCB</option>
     </select>
 
-    <h2>Bedroom ${roomCount}</h2>
+    <h2>Bedroom ${nextBedroomNumber}</h2>
 
 </div>
 
@@ -992,6 +1037,7 @@ cursor:pointer;
                     allRooms[allRooms.length - 1];
 
                 renderRoomFields(lastRoom);
+                updateRoomModuleDisplay(lastRoom);
             }
 
             function deleteRoom(btn) {
@@ -999,43 +1045,134 @@ cursor:pointer;
                 btn.closest(".room-card").remove();
 
                 updateRoomNumbers();
+
+                document.querySelectorAll(".room-card").forEach(room => {
+                    updateRoomModuleDisplay(room);
+                });
+            }
+
+            // Kisi room type ka next number nikalna.
+            // Isse MCB ki counting Bedroom/Kitchen/Hall ki counting ko affect nahi karegi.
+            function getNextRoomNumber(type) {
+
+                const rooms = document.querySelectorAll(".room-card");
+                let count = 0;
+
+                rooms.forEach((room) => {
+                    const select = room.querySelector(".room-type");
+                    if (select && select.value === type) {
+                        count++;
+                    }
+                });
+
+                return count + 1;
             }
 
             function updateRoomNumbers() {
 
                 const rooms = document.querySelectorAll(".room-card");
-
-                // alag-alag room type ka counter
                 const roomCounters = {};
 
                 rooms.forEach((room) => {
 
-                    const type = room.querySelector(".room-type").value;
+                    const select = room.querySelector(".room-type");
+                    const title = room.querySelector("h2");
 
-                    // agar pehli baar mila to 0 se start
+                    if (!select || !title) return;
+
+                    const type = select.value;
+
                     if (!roomCounters[type]) {
                         roomCounters[type] = 1;
                     } else {
                         roomCounters[type]++;
                     }
 
-                    room.querySelector("h2").innerText =
-                        `${type} ${roomCounters[type]}`;
+                    title.innerText = `${type} ${roomCounters[type]}`;
                 });
 
+                // roomCount sirf total cards ke liye hai; kisi room title ke liye use nahi hoga.
                 roomCount = rooms.length;
             }
+
+            // ================= ROOM DEFAULT =================
+            // Default button: normal room sections mein common basic quantity set karega.
+            // Rooftop, Earthing aur MCB ko intentionally skip kiya gaya hai.
+            function applyRoomDefault(btn) {
+
+                const roomCard = btn.closest(".room-card");
+                if (!roomCard) return;
+
+                const roomType = roomCard.querySelector(".room-type")?.value || "";
+
+                if (["Rooftop", "Earthing", "MCB"].includes(roomType)) {
+                    return;
+                }
+
+                const defaultValues = {
+                    "Led bulb": 1,
+                    "Night bulb": 1,
+                    "Fuse": 1,
+                    "Indicator": 1,
+                    "Fan": 1,
+                    "Tube light": 1,
+                    "conceal light": 2,
+                    "6A Sockets": 1,
+                    "16A Sockets": 1
+                };
+
+                // Pehle is room ki sab existing quantity ko zero karo.
+                roomCard.querySelectorAll("input[data-item]").forEach(input => {
+                    input.value = "0";
+                });
+
+                // Phir requested default quantities apply karo.
+                Object.entries(defaultValues).forEach(([item, qty]) => {
+                    const input = roomCard.querySelector(`input[data-item="${item}"]`);
+                    if (input) {
+                        input.value = String(qty);
+                    }
+                });
+
+                // Live module display turant refresh karo.
+                updateRoomModuleDisplay(roomCard);
+
+                // Existing input listeners ko bhi notify karo.
+                roomCard.querySelectorAll("input[data-item]").forEach(input => {
+                    input.dispatchEvent(new Event("input", { bubbles: true }));
+                });
+            }
+
 
             function duplicateRoom(btn) {
 
                 const roomCard = btn.closest(".room-card");
 
+                // Jis section ko duplicate kar rahe hain uska type pehle save karein.
+                // Example: MCB -> MCB, Hall -> Hall, Bedroom -> Bedroom.
+                const sourceTypeSelect = roomCard.querySelector(".room-type");
+                const sourceType = sourceTypeSelect ? sourceTypeSelect.value : "Bedroom";
+
                 const clone = roomCard.cloneNode(true);
+                const cloneTypeSelect = clone.querySelector(".room-type");
+
+                if (cloneTypeSelect) {
+                    cloneTypeSelect.value = sourceType;
+
+                    // Selected option ko explicitly set karein, taaki browser/default
+                    // option ki wajah se MCB duplicate Bedroom na ban jaye.
+                    Array.from(cloneTypeSelect.options).forEach((option) => {
+                        option.selected = option.value === sourceType;
+                    });
+                }
 
                 document.getElementById("roomContainer")
                     .appendChild(clone);
 
+                // Ab type-wise numbering hogi:
+                // MCB 1 -> MCB 2, Hall 1 -> Hall 2, Bedroom 1 -> Bedroom 2.
                 updateRoomNumbers();
+                updateRoomModuleDisplay(clone);
             }
 
 
@@ -1721,6 +1858,13 @@ cursor:pointer;
                             MATERIALS['1.5 inc kala patch'] += qty * 2;
                             MATERIALS["2 module (metal box+plate)"] += qty;
                             roomModule += qty * 2;   // Geyser still uses main board
+                        }
+
+                        // ================= BLANKER =================
+                        // 1 Blanker = 1 module. Rooftop, Earthing aur MCB mein nahi.
+                        if (item === "blanker" && !["Rooftop", "Earthing", "MCB"].includes(roomType)) {
+                            MATERIALS["blanker"] += qty;
+                            roomModule += qty * 1;
                         }
 
                         if (item === "1 inc pipe") {
@@ -2643,10 +2787,75 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
 
             document.getElementById('generateBillBtn').onclick = generateBill;
 
-            renderRoomFields(
-                document.querySelector(".room-card")
-            );
+            const firstRoomCard = document.querySelector(".room-card");
+            renderRoomFields(firstRoomCard);
 
+
+            // ================= LIVE ROOM BOARD / MODULE DISPLAY =================
+            // Rooftop, Earthing aur MCB ko intentionally exclude kiya gaya hai.
+            const ROOM_MODULE_MAP = {
+                "Fuse": 1, "Indicator": 1, "Led bulb": 1, "conceal light": 1,"Night bulb": 1,
+                "Tube light": 1, "Fan": 2, "Exhaust fan": 1, "Led bulb batten": 1,
+                "2way F": 2, "2way B": 1, "2way F&B": 3,
+                "6A Sockets": 3, "16A Sockets": 3,
+                "3M Footer Light": 1, "4M Footer Light": 1,
+                "AC": 2, "Geyser board": 2,
+                "COB Strip Led light": 1, "Foot Light/ Step Light": 1,
+                "blanker": 1
+            };
+
+            function calculateRoomModules(roomCard) {
+                const type = roomCard.querySelector(".room-type")?.value || "Bedroom";
+                if (["Rooftop", "Earthing", "MCB"].includes(type)) return null;
+                let total = 0;
+                roomCard.querySelectorAll("input[data-item]").forEach(input => {
+                    const qty = parseInt(input.value, 10) || 0;
+                    total += qty * (ROOM_MODULE_MAP[input.dataset.item] || 0);
+                });
+                return total;
+            }
+
+            function updateRoomModuleDisplay(roomCard) {
+                if (!roomCard) return;
+                const type = roomCard.querySelector(".room-type")?.value || "Bedroom";
+                const headerButtons = roomCard.querySelector(".room-header > div:last-child");
+                if (!headerButtons) return;
+                let badge = headerButtons.querySelector(".room-module-info");
+                if (["Rooftop", "Earthing", "MCB"].includes(type)) {
+                    if (badge) badge.remove();
+                    return;
+                }
+                if (!badge) {
+                    badge = document.createElement("span");
+                    badge.className = "room-module-info";
+                    headerButtons.insertBefore(badge, headerButtons.querySelector(".delete-room-btn"));
+                }
+                const moduleCount = calculateRoomModules(roomCard) || 0;
+                if (moduleCount > 18) {
+                    badge.textContent = `Module: ${moduleCount} | Board: 18+ Module (Limit)`;
+                } else {
+                    badge.textContent = `Module: ${moduleCount} | Board: ${getPlateSize(moduleCount)} Module`;
+                }
+            }
+
+            document.addEventListener("input", function (e) {
+                if (e.target.matches(".room-card input[data-item]")) {
+                    updateRoomModuleDisplay(e.target.closest(".room-card"));
+                }
+            });
+
+            // Quantity field par click/tap karte hi 0 hata do.
+            // Isse mobile aur desktop dono par quantity directly type ki ja sakti hai.
+            document.addEventListener("click", function (e) {
+                if (e.target.matches(".room-card input[type=number][data-item]")) {
+                    if (e.target.value === "0") {
+                        e.target.value = "";
+                    }
+                }
+            });
+
+            // Initial room ka live module display ab map/function ready hone ke baad.
+            updateRoomModuleDisplay(firstRoomCard);
 
             function renderRoomFields(roomCard) {
 
@@ -2700,6 +2909,7 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
                 renderRoomFields(roomCard);
 
                 updateRoomNumbers();
+                updateRoomModuleDisplay(roomCard);
             }
 
 
@@ -2729,6 +2939,7 @@ style="width:90px; padding:6px; margin-left:8px; background:#222; color:white; b
                         e.target.value = "0";
                     }
 
+                    updateRoomModuleDisplay(e.target.closest(".room-card"));
                 }
 
             });
